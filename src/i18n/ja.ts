@@ -6,6 +6,8 @@ export const ja = {
   'home.description': '経歴・スキル・個人開発プロジェクトを紹介するポートフォリオサイトです。',
   'about.title': '経歴',
   'about.description': 'これまでの経歴を紹介します。',
+  'about.section.profile': 'プロフィール',
+  'about.section.career': '経歴',
   'skills.title': 'スキル',
   'skills.description': '扱える技術とスキルを紹介します。',
   'projects.title': 'プロジェクト',

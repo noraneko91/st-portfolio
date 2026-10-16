@@ -1,0 +1,55 @@
+---
+interface Props {
+  // 01, 02 … の通し番号 / 01, 02 … 일련번호
+  index: number;
+  label: string;
+  id: string;
+}
+
+const { index, label, id } = Astro.props;
+const number = String(index).padStart(2, '0');
+---
+
+{/* 誌面型: 広い画面では左に見出し、右に本文の2段組 / 지면형: 넓은 화면에서는 왼쪽에 제목, 오른쪽에 본문의 2단 구성 */}
+<section class="section" aria-labelledby={id}>
+  <h2 id={id} class="section-label">
+    {/* 番号と区切りは装飾なので読み上げない / 번호와 구분 기호는 장식이므로 읽지 않는다 */}
+    <span class="font-mono" aria-hidden="true">{number} —</span>
+    {label}
+  </h2>
+  <div class="section-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    display: grid;
+    gap: 1rem;
+    padding-block: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* HTML 圧縮で要素間の空白が消えるため、間隔は gap で取る / HTML 압축으로 요소 사이 공백이 사라지므로 간격은 gap으로 준다 */
+  .section-label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .section-body {
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 48rem) {
+    .section {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 2rem;
+      padding-block: 3.5rem;
+    }
+  }
+</style>

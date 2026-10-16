@@ -1,4 +1,5 @@
 ---
+import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 
@@ -11,7 +12,20 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout lang={lang} title={t('about.title')} description={t('about.description')}>
-  <main>
-    <h1>{t('about.title')}</h1>
-  </main>
+  <h1 class="text-title mb-10">{t('about.title')}</h1>
+
+  {/* 仮: レイアウト確認用。4-2 で本文に置き換える / 임시: 레이아웃 확인용. 4-2에서 본문으로 교체한다 */}
+  <Section index={1} label={t('about.section.profile')} id="profile">
+    <div class="placeholder" aria-hidden="true"></div>
+  </Section>
+  <Section index={2} label={t('about.section.career')} id="career">
+    <div class="placeholder" aria-hidden="true"></div>
+  </Section>
 </BaseLayout>
+
+<style>
+  .placeholder {
+    height: 8rem;
+    border: 1px dashed var(--border);
+  }
+</style>

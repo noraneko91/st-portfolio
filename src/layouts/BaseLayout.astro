@@ -34,6 +34,14 @@ const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
   </head>
   <body>
     <Header lang={lang} />
-    <slot />
+    <main id="main" class="wrapper page-main">
+      <slot />
+    </main>
   </body>
 </html>
+
+<style>
+  .page-main {
+    padding-block: clamp(2.5rem, 1.5rem + 5vw, 5rem) 5rem;
+  }
+</style>

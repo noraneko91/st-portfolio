@@ -7,6 +7,8 @@ export const zh: Translation = {
   'home.description': '介绍我的经历、技能和个人开发项目的作品集网站。',
   'about.title': '经历',
   'about.description': '介绍我至今的工作经历。',
+  'about.section.profile': '个人简介',
+  'about.section.career': '工作经历',
   'skills.title': '技能',
   'skills.description': '介绍我掌握的技术与技能。',
   'projects.title': '项目',

@@ -7,6 +7,8 @@ export const ko: Translation = {
   'home.description': '경력·스킬·개인 개발 프로젝트를 소개하는 포트폴리오 사이트입니다.',
   'about.title': '경력',
   'about.description': '지금까지의 경력을 소개합니다.',
+  'about.section.profile': '프로필',
+  'about.section.career': '경력',
   'skills.title': '스킬',
   'skills.description': '다룰 수 있는 기술과 스킬을 소개합니다.',
   'projects.title': '프로젝트',

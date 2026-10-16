@@ -7,6 +7,8 @@ export const en: Translation = {
   'home.description': 'A portfolio introducing my career, skills, and personal projects.',
   'about.title': 'About',
   'about.description': 'An overview of my career so far.',
+  'about.section.profile': 'Profile',
+  'about.section.career': 'Career',
   'skills.title': 'Skills',
   'skills.description': 'The technologies and skills I work with.',
   'projects.title': 'Projects',
