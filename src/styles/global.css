@@ -103,8 +103,11 @@
     text-wrap: balance;
   }
 
+  /* 色だけに頼らずリンクと分かるよう下線を付ける (ナビ等は各コンポーネントで外す) / 색에만 의존하지 않고 링크임을 알 수 있도록 밑줄을 붙인다 (내비 등은 각 컴포넌트에서 뺀다) */
   a {
     color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
   }
 
