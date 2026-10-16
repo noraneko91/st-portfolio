@@ -43,7 +43,7 @@
 | 言語 | TypeScript（strict） | — |
 | フレームワーク | Astro | [0002](adr/0002-astro.md) |
 | スタイル | Tailwind CSS | — |
-| ホスティング | Cloudflare（GitHub への push で自動デプロイ） | [0001](adr/0001-static-site.md) |
+| ホスティング | Cloudflare Workers（GitHub への push で自動デプロイ） | [0001](adr/0001-static-site.md)・[0004](adr/0004-cloudflare-workers.md) |
 | 多言語 | 言語別パス（/ja/ /en/ /zh/ /ko/） | [0003](adr/0003-i18n-path-routing.md) |
 
 バージョンはリポジトリ直下の `CLAUDE.md`「버전 기록」に記録している。
@@ -54,7 +54,7 @@
 |---|---|---|---|
 | 1 | スキャフォールディング | Astro + TypeScript strict + Tailwind CSS、Node.js のバージョン固定 | 完了 |
 | 2 | 多言語基盤 | 翻訳ファイルと型チェック、言語別ルーティング、言語切替、ルートのリダイレクト | 完了 |
-| 3 | デプロイ | Cloudflare への自動デプロイ設定 | 未着手 |
+| 3 | デプロイ | Cloudflare への自動デプロイ設定 | 完了 |
 | 4 | ページ実装 | Home / About / Skills / Projects / Contact | 未着手 |
 | 5 | 翻訳 | ja を原文として en / zh / ko を作成 | 未着手 |
 | 6 | 品質 | Lighthouse 各項目 90 点以上（特に Performance・Accessibility） | 未着手 |
