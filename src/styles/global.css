@@ -37,6 +37,42 @@
   html {
     background-color: var(--bg);
     color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /*
+   * 漢字の字形は言語ごとに異なるため、lang に合うフォントを先に指定する。Web フォントは使わず、リクエストを増やさない (Lighthouse 対策)
+   * 한자 자형은 언어마다 다르므로 lang에 맞는 폰트를 먼저 지정한다. 웹폰트는 쓰지 않아 요청을 늘리지 않는다 (Lighthouse 대책)
+   */
+  html[lang="ja"] {
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, "Noto Sans CJK JP", sans-serif;
+  }
+
+  html[lang="ko"] {
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR", sans-serif;
+  }
+
+  html[lang="zh-Hans"] {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  }
+
+  /* CJK は字面が大きく詰まって見えるため、行間を広めにする / CJK는 글자면이 커서 빽빽해 보이므로 줄 간격을 넓게 한다 */
+  html[lang="ja"],
+  html[lang="ko"],
+  html[lang="zh-Hans"] {
+    line-height: 1.85;
+  }
+
+  /* 文節の途中で改行しない (対応ブラウザのみ) / 문절 중간에서 줄바꿈하지 않는다 (지원 브라우저만) */
+  html[lang="ja"] {
+    word-break: auto-phrase;
+  }
+
+  /* 韓国語は単語（分かち書き）単位で改行する / 한국어는 띄어쓰기 단위로 줄바꿈한다 */
+  html[lang="ko"] {
+    word-break: keep-all;
   }
 
   a {
