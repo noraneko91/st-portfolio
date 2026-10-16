@@ -1,0 +1,191 @@
+---
+import { htmlLang, languageNames, locales, type Lang } from '../i18n/config';
+import { getAlternatePath, useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const pathname = Astro.url.pathname;
+---
+
+{/* JS なしでは言語リンクの一覧として表示し、JS で WAI-ARIA の Menu Button に拡張する / JS 없이는 언어 링크 목록으로 표시하고, JS로 WAI-ARIA Menu Button으로 확장한다 */}
+<div class="relative" data-lang-picker>
+  <button
+    type="button"
+    id="lang-button"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    aria-controls="lang-menu"
+    data-lang-button
+    hidden
+  >
+    <span>{lang.toUpperCase()}</span>
+    <span class="sr-only">{t('lang.label')}</span>
+    <span aria-hidden="true">▾</span>
+  </button>
+  <ul id="lang-menu" class="flex flex-wrap gap-x-3" data-lang-menu>
+    {
+      locales.map((l) => (
+        <li>
+          <a
+            href={getAlternatePath(l, pathname)}
+            hreflang={htmlLang[l]}
+            lang={htmlLang[l]}
+            aria-current={l === lang ? 'true' : undefined}
+            data-lang={l}
+          >
+            <span aria-hidden="true">{l.toUpperCase()}</span> {languageNames[l]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  /* 位置と色は最小限。デザインは後の段階で行う / 위치와 색은 최소한. 디자인은 나중 단계에서 */
+  [data-enhanced] [data-lang-menu] {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    flex-direction: column;
+    min-width: max-content;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0;
+    border: 1px solid;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  [data-enhanced] [data-lang-menu] a {
+    display: block;
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* 選択状態は aria-checked で伝わるので、記号は読み上げない / 선택 상태는 aria-checked로 전달되므로 기호는 읽지 않는다 */
+  [role='menuitemradio']::before {
+    content: '○' / '';
+    margin-right: 0.5rem;
+  }
+
+  [role='menuitemradio'][aria-checked='true']::before {
+    content: '●' / '';
+  }
+</style>
+
+<script>
+  import { isLang, LANG_STORAGE_KEY } from '../i18n/config';
+
+  function setup(root: HTMLElement) {
+    const button = root.querySelector<HTMLButtonElement>('[data-lang-button]');
+    const menu = root.querySelector<HTMLElement>('[data-lang-menu]');
+    if (!button || !menu) return;
+    const items = Array.from(menu.querySelectorAll<HTMLAnchorElement>('a[data-lang]'));
+
+    // ロールは JS で付ける。JS なしでメニューのロールだけ残るとキーボード操作と矛盾するため / 롤은 JS로 붙인다. JS 없이 메뉴 롤만 남으면 키보드 조작과 맞지 않기 때문
+    menu.setAttribute('role', 'menu');
+    menu.setAttribute('aria-labelledby', button.id);
+    for (const li of menu.querySelectorAll('li')) li.setAttribute('role', 'none');
+    for (const item of items) {
+      item.setAttribute('role', 'menuitemradio');
+      item.setAttribute('aria-checked', String(item.hasAttribute('aria-current')));
+      item.removeAttribute('aria-current');
+      item.tabIndex = -1;
+    }
+    menu.hidden = true;
+    button.hidden = false;
+    root.dataset.enhanced = '';
+
+    const checkedIndex = Math.max(
+      0,
+      items.findIndex((item) => item.getAttribute('aria-checked') === 'true'),
+    );
+
+    const focusItem = (index: number) => {
+      items[(index + items.length) % items.length]?.focus();
+    };
+
+    const open = (index: number) => {
+      menu.hidden = false;
+      button.setAttribute('aria-expanded', 'true');
+      focusItem(index);
+    };
+
+    const close = (returnFocus: boolean) => {
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      if (returnFocus) button.focus();
+    };
+
+    button.addEventListener('click', () => {
+      if (menu.hidden) open(checkedIndex);
+      else close(false);
+    });
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        open(checkedIndex);
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        open(items.length - 1);
+      }
+    });
+
+    menu.addEventListener('keydown', (event) => {
+      const index = items.findIndex((item) => item === document.activeElement);
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          focusItem(index + 1);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          focusItem(index - 1);
+          break;
+        case 'Home':
+          event.preventDefault();
+          focusItem(0);
+          break;
+        case 'End':
+          event.preventDefault();
+          focusItem(items.length - 1);
+          break;
+        case 'Escape':
+          event.preventDefault();
+          close(true);
+          break;
+        case 'Tab':
+          close(false);
+          break;
+        // リンクは Enter でしか動かないため、メニュー項目として Space でも選択できるようにする / 링크는 Enter로만 동작하므로 메뉴 항목으로서 Space로도 선택할 수 있게 한다
+        case ' ':
+          event.preventDefault();
+          items[index]?.click();
+          break;
+      }
+    });
+
+    for (const item of items) {
+      item.addEventListener('click', () => {
+        const lang = item.dataset.lang;
+        if (!isLang(lang)) return;
+        try {
+          localStorage.setItem(LANG_STORAGE_KEY, lang);
+        } catch {
+          // 保存できない環境（プライベートモード等）でも遷移は続ける / 저장할 수 없는 환경(프라이빗 모드 등)에서도 이동은 계속한다
+        }
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!menu.hidden && event.target instanceof Node && !root.contains(event.target)) close(false);
+    });
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-lang-picker]')) setup(root);
+</script>

@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../i18n/config';
+import type { TranslationKey } from '../i18n/ja';
+import { getAlternatePath, stripLang, useTranslations } from '../i18n/utils';
+import LanguagePicker from './LanguagePicker.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const currentPath = stripLang(Astro.url.pathname).replace(/\/$/, '');
+
+// ラベルはページタイトルのキーを流用し、メニューと見出しの表記を一致させる / 라벨은 페이지 제목 키를 재사용해 메뉴와 제목 표기를 일치시킨다
+const navItems: { path: string; label: TranslationKey }[] = [
+  { path: '', label: 'home.title' },
+  { path: 'about', label: 'about.title' },
+  { path: 'skills', label: 'skills.title' },
+  { path: 'projects', label: 'projects.title' },
+  { path: 'contact', label: 'contact.title' },
+];
+---
+
+<header class="flex flex-wrap items-center justify-between gap-4 p-4">
+  <nav aria-label={t('nav.label')}>
+    <ul class="flex flex-wrap gap-x-4 gap-y-2">
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={getAlternatePath(lang, item.path)} aria-current={item.path === currentPath ? 'page' : undefined}>
+              {t(item.label)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <LanguagePicker lang={lang} />
+</header>

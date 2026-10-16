@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
 import { defaultLocale, htmlLang, locales, type Lang } from '../i18n/config';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
 
@@ -32,6 +33,7 @@ const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
+    <Header lang={lang} />
     <slot />
   </body>
 </html>
