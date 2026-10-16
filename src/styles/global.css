@@ -113,3 +113,42 @@
     outline-offset: 2px;
   }
 }
+
+/*
+ * 動きは OS の「動きを減らす」設定がオフのときだけ付ける / 움직임은 OS의 "동작 줄이기" 설정이 꺼져 있을 때만 적용한다
+ */
+@media (prefers-reduced-motion: no-preference) {
+  /* ページ遷移はブラウザ標準の View Transitions で行う (JS 不要。非対応ブラウザは通常の遷移) / 페이지 전환은 브라우저 표준 View Transitions로 한다 (JS 불필요. 미지원 브라우저는 일반 이동) */
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 200ms;
+  }
+
+  a,
+  button {
+    transition: color 150ms ease;
+  }
+
+  /* スクロールで表示されるときに少し浮き上がる (対応ブラウザのみ) / 스크롤로 보일 때 살짝 떠오른다 (지원 브라우저만) */
+  @supports (animation-timeline: view()) {
+    /* shorthand にまとめられると animation-timeline が無効になるため、個別プロパティで書く / shorthand로 합쳐지면 animation-timeline이 무효가 되므로 개별 속성으로 쓴다 */
+    .reveal {
+      animation-name: reveal;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}

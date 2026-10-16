@@ -65,8 +65,10 @@ const navItems: { path: string; label: TranslationKey }[] = [
     transform: none;
   }
 
+  /* ページ遷移時にヘッダーを固定し、本文だけを切り替える / 페이지 전환 시 헤더는 고정하고 본문만 바꾼다 */
   .site-header {
     border-bottom: 1px solid var(--border);
+    view-transition-name: site-header;
   }
 
   /* 狭い画面: 1行目にサイト名と言語、2行目にナビ / 좁은 화면: 1행에 사이트 이름과 언어, 2행에 내비 */

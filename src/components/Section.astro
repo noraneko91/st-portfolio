@@ -11,7 +11,7 @@ const number = String(index).padStart(2, '0');
 ---
 
 {/* 誌面型: 広い画面では左に見出し、右に本文の2段組 / 지면형: 넓은 화면에서는 왼쪽에 제목, 오른쪽에 본문의 2단 구성 */}
-<section class="section" aria-labelledby={id}>
+<section class="section reveal" aria-labelledby={id}>
   <h2 id={id} class="section-label">
     {/* 番号と区切りは装飾なので読み上げない / 번호와 구분 기호는 장식이므로 읽지 않는다 */}
     <span class="font-mono" aria-hidden="true">{number} —</span>
