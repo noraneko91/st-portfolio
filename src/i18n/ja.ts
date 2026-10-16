@@ -43,6 +43,17 @@ export const ja = {
 
   'career.duties': '担当業務',
 
+  'skills.section.skills': '技術スキル',
+  'skills.section.certifications': '資格',
+  'skills.note': '経験年数は、経歴の期間から算出した目安です。',
+  'skillCategory.language': '言語',
+  'skillCategory.framework': 'フレームワーク',
+  'skillCategory.cloud': 'クラウド',
+  'skillCategory.database': 'データベース',
+  'skillCategory.tool': 'ツール',
+
+  'unit.years.one': '約1年',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

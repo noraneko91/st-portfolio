@@ -1,6 +1,8 @@
 ---
+import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import { formatYearMonth, formatYears, getCertifications, getSkillsWithMonths } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -8,8 +10,78 @@ export function getStaticPaths() {
 
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
+
+const categories = ['language', 'framework', 'cloud', 'database', 'tool'] as const;
+const skills = await getSkillsWithMonths();
+const groups = categories
+  .map((category) => ({ category, items: skills.filter(({ skill }) => skill.data.category === category) }))
+  .filter((group) => group.items.length > 0);
+const certifications = await getCertifications();
 ---
 
 <BaseLayout lang={lang} title={t('skills.title')} description={t('skills.description')}>
-  <h1 class="text-title">{t('skills.title')}</h1>
+  <h1 class="text-title mb-10">{t('skills.title')}</h1>
+
+  <Section index={1} label={t('skills.section.skills')} id="skills">
+    <div class="space-y-10">
+      {
+        groups.map(({ category, items }) => (
+          <div>
+            <h3 class="mb-2 font-bold">{t(`skillCategory.${category}`)}</h3>
+            <ul class="skill-list">
+              {items.map(({ skill, months }) => (
+                <li>
+                  <span>
+                    {skill.data.name}
+                    {skill.data.detail && <span class="skill-detail">{skill.data.detail}</span>}
+                  </span>
+                  {/* 経歴で使っていないスキルは年数を出さない / 경력에서 쓰지 않은 스킬은 연수를 표시하지 않는다 */}
+                  <span class="skill-years">{months > 0 ? formatYears(months, t) : '—'}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-6 text-sm text-muted">{t('skills.note')}</p>
+  </Section>
+
+  <Section index={2} label={t('skills.section.certifications')} id="certifications">
+    <ul class="skill-list">
+      {
+        certifications.map(({ data }) => (
+          <li>
+            <span>{data.name}</span>
+            <span class="skill-years">{data.date ? <time datetime={data.date}>{formatYearMonth(data.date, lang)}</time> : '—'}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 </BaseLayout>
+
+<style>
+  /* 名前と値を左右に置き、行ごとに細い罫線で区切る / 이름과 값을 좌우에 두고 행마다 가는 선으로 구분한다 */
+  .skill-list > li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    padding-block: 0.625rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-detail {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .skill-years {
+    font-size: 0.875rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+</style>

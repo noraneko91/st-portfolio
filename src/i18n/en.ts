@@ -44,6 +44,17 @@ export const en: Translation = {
 
   'career.duties': 'Responsibilities',
 
+  'skills.section.skills': 'Technical skills',
+  'skills.section.certifications': 'Certifications',
+  'skills.note': 'Years of experience are estimates calculated from the periods in my career history.',
+  'skillCategory.language': 'Languages',
+  'skillCategory.framework': 'Frameworks',
+  'skillCategory.cloud': 'Cloud',
+  'skillCategory.database': 'Databases',
+  'skillCategory.tool': 'Tools',
+
+  'unit.years.one': 'About 1 year',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

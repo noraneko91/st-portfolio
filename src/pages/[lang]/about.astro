@@ -3,7 +3,7 @@ import CareerItem from '../../components/CareerItem.astro';
 import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
-import { formatYearMonth, getCareers, getProfile, getSkillNames, getTotalCareerMonths, toYears } from '../../lib/content';
+import { formatYearMonth, formatYears, getCareers, getProfile, getSkillNames, getTotalCareerMonths } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -15,7 +15,7 @@ const t = useTranslations(lang);
 const profile = await getProfile();
 const careers = await getCareers();
 const skillNames = await getSkillNames();
-const totalYears = toYears(await getTotalCareerMonths());
+const totalMonths = await getTotalCareerMonths();
 const firstStart = careers.at(-1)?.data.start;
 ---
 
@@ -32,7 +32,7 @@ const firstStart = careers.at(-1)?.data.start;
       <div>
         <dt>{t('profile.experience')}</dt>
         <dd>
-          {t('unit.years', { n: totalYears })}
+          {formatYears(totalMonths, t)}
           {firstStart && <span class="ms-2 text-muted">{t('unit.since', { date: formatYearMonth(firstStart, lang) })}</span>}
         </dd>
       </div>

@@ -44,6 +44,17 @@ export const zh: Translation = {
 
   'career.duties': '负责内容',
 
+  'skills.section.skills': '技术技能',
+  'skills.section.certifications': '资格证书',
+  'skills.note': '经验年数是根据经历中的期间计算的参考值。',
+  'skillCategory.language': '编程语言',
+  'skillCategory.framework': '框架',
+  'skillCategory.cloud': '云',
+  'skillCategory.database': '数据库',
+  'skillCategory.tool': '工具',
+
+  'unit.years.one': '约1年',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

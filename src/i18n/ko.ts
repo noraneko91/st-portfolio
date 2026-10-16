@@ -44,6 +44,17 @@ export const ko: Translation = {
 
   'career.duties': '담당 업무',
 
+  'skills.section.skills': '기술 스킬',
+  'skills.section.certifications': '자격증',
+  'skills.note': '경험 연수는 경력 기간으로 산출한 기준값입니다.',
+  'skillCategory.language': '언어',
+  'skillCategory.framework': '프레임워크',
+  'skillCategory.cloud': '클라우드',
+  'skillCategory.database': '데이터베이스',
+  'skillCategory.tool': '도구',
+
+  'unit.years.one': '약 1년',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

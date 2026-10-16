@@ -1,5 +1,6 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { htmlLang, type Lang } from '../i18n/config';
+import type { useTranslations } from '../i18n/utils';
 
 /*
  * コンテンツの取得と計算をここにまとめ、ページは表示だけを担当する
@@ -38,6 +39,12 @@ export function totalMonths(periods: Period[]): number {
 // 0.5년 단위로 반올림한다. 정확히 중간이면 짧은 쪽으로 (경력 연수를 부풀려 보이지 않기 위해)
 export function toYears(months: number): number {
   return Math.max(0.5, Math.ceil(months / 6 - 0.5) / 2);
+}
+
+// 「約 n 年」の表記。英語の単数形のため 1 年だけ別の文を使う / "약 n년" 표기. 영어 단수형 때문에 1년만 다른 문장을 쓴다
+export function formatYears(months: number, t: ReturnType<typeof useTranslations>): string {
+  const years = toYears(months);
+  return years === 1 ? t('unit.years.one') : t('unit.years', { n: years });
 }
 
 export function formatYearMonth(yearMonth: string, lang: Lang): string {
@@ -88,13 +95,16 @@ export async function getSkillNames(): Promise<Map<string, string>> {
   return new Map(skills.map((skill) => [skill.id, skill.data.name]));
 }
 
-// スキルごとの経験月数。経歴の tech から計算する / 스킬별 경험 개월 수. 경력의 tech에서 계산한다
+// スキルごとの経験月数。経歴の tech から計算し、表示上の年数が長い順（同じなら名前順）に並べる
+// 스킬별 경험 개월 수. 경력의 tech에서 계산하고, 표시되는 연수가 긴 순 (같으면 이름순)으로 정렬한다
 export async function getSkillsWithMonths() {
   const { careers, skills } = await loadCareersAndSkills();
-  return skills.map((skill) => {
-    const used = careers.filter((career) => career.data.tech.some((ref) => ref.id === skill.id));
-    return { skill, months: totalMonths(used.map((career) => career.data)) };
-  });
+  return skills
+    .map((skill) => {
+      const used = careers.filter((career) => career.data.tech.some((ref) => ref.id === skill.id));
+      return { skill, months: totalMonths(used.map((career) => career.data)) };
+    })
+    .sort((a, b) => toYears(b.months) - toYears(a.months) || a.skill.data.name.localeCompare(b.skill.data.name));
 }
 
 // 新しい順。年月のないものは最後 / 최신순. 연월이 없는 것은 마지막
