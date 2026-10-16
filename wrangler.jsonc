@@ -5,6 +5,8 @@
   // ダッシュボードの Worker 名と一致しないと Workers Builds が失敗する / 대시보드의 Worker 이름과 다르면 Workers Builds가 실패한다
   "name": "st-portfolio",
   "compatibility_date": "2026-10-16",
+  // 明示しないとデプロイ時に workers.dev が無効のままになることがあったため / 명시하지 않으면 배포 시 workers.dev가 비활성 상태로 남는 일이 있었기 때문
+  "workers_dev": true,
   "assets": {
     "directory": "./dist",
     // 存在しないパスは dist/404.html を 404 ステータスで返す / 존재하지 않는 경로는 dist/404.html을 404 상태로 반환한다
