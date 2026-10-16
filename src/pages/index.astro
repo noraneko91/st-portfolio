@@ -1,16 +1,61 @@
 ---
+import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { defaultLocale, htmlLang, LANG_STORAGE_KEY, languageNames, locales } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+
+// ルートは言語が決まる前のページなので、原文の ja で表示する / 루트는 언어가 정해지기 전 페이지라 원문인 ja로 표시한다
+const t = useTranslations(defaultLocale);
+const paths = Object.fromEntries(locales.map((l) => [l, getRelativeLocaleUrl(l)]));
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang={htmlLang[defaultLocale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* 振り分け専用のページなので検索結果には出さない (x-default は /ja/ を指す) / 분기 전용 페이지라 검색 결과에 노출하지 않는다 (x-default는 /ja/를 가리킨다) */}
+    <meta name="robots" content="noindex" />
+    <title>{t('site.name')}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    {/* 本文の描画前に移動するため head 内でインライン実行する / 본문을 그리기 전에 이동하기 위해 head 안에서 인라인 실행한다 */}
+    <script is:inline define:vars={{ locales, defaultLocale, storageKey: LANG_STORAGE_KEY, paths }}>
+      // 保存した言語 → ブラウザの言語 → ja の順で決める (ADR 0003) / 저장한 언어 → 브라우저 언어 → ja 순서로 정한다 (ADR 0003)
+      function detectLang() {
+        try {
+          const saved = localStorage.getItem(storageKey);
+          if (locales.includes(saved)) return saved;
+        } catch {
+          // 読めない環境ではブラウザの言語で判定する / 읽을 수 없는 환경에서는 브라우저 언어로 판정한다
+        }
+        const preferred = navigator.languages?.length ? navigator.languages : [navigator.language];
+        for (const tag of preferred) {
+          // zh-TW なども zh とする（中国語のページは簡体字のみのため） / zh-TW 등도 zh로 처리한다 (중국어 페이지는 간체만 있으므로)
+          const base = String(tag).toLowerCase().split('-')[0];
+          if (locales.includes(base)) return base;
+        }
+        return defaultLocale;
+      }
+
+      location.replace(paths[detectLang()]);
+    </script>
+  </head>
+  <body>
+    <main class="p-4">
+      <h1>{t('site.name')}</h1>
+      {/* JS が無効な場合の移動手段 / JS가 꺼져 있을 때의 이동 수단 */}
+      <ul>
+        {
+          locales.map((l) => (
+            <li>
+              <a href={paths[l]} hreflang={htmlLang[l]} lang={htmlLang[l]}>
+                {languageNames[l]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </body>
 </html>
