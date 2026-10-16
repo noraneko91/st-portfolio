@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import { defaultLocale, htmlLang, locales, type Lang } from '../i18n/config';
+import { getAlternateUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  // 省略時はサイト名のみ（ホーム用） / 생략하면 사이트 이름만 (홈용)
+  title?: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = useTranslations(lang);
+const pathname = Astro.url.pathname;
+const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={getAlternateUrl(lang, pathname)} />
+    {locales.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={getAlternateUrl(l, pathname)} />)}
+    {/* x-default は原文の ja を指す (ルートは noindex のため) / x-default는 원문인 ja를 가리킨다 (루트는 noindex이므로) */}
+    <link rel="alternate" hreflang="x-default" href={getAlternateUrl(defaultLocale, pathname)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

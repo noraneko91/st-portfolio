@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return getLangStaticPaths();
+}
+
+const lang = toLang(Astro.params.lang);
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('contact.title')} description={t('contact.description')}>
+  <main>
+    <h1>{t('contact.title')}</h1>
+  </main>
+</BaseLayout>
