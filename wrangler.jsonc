@@ -1,0 +1,14 @@
+// Cloudflare Workers の設定。Worker スクリプトは使わず dist の静的ファイルだけを配信する (ADR 0004)
+// Cloudflare Workers 설정. Worker 스크립트 없이 dist의 정적 파일만 제공한다 (ADR 0004)
+{
+  // ダッシュボードの Worker 名と一致しないと Workers Builds が失敗する / 대시보드의 Worker 이름과 다르면 Workers Builds가 실패한다
+  "name": "st-portfolio",
+  "compatibility_date": "2026-10-16",
+  "assets": {
+    "directory": "./dist",
+    // 存在しないパスは dist/404.html を 404 ステータスで返す / 존재하지 않는 경로는 dist/404.html을 404 상태로 반환한다
+    "not_found_handling": "404-page",
+    // 既定値だが明示する: /ja/about → /ja/about/ に 307 リダイレクト / 기본값이지만 명시한다: /ja/about → /ja/about/로 307 리다이렉트
+    "html_handling": "auto-trailing-slash"
+  }
+}
