@@ -14,6 +14,13 @@ const currentPath = stripLang(Astro.url.pathname).replace(/\/$/, '');
 
 // ホームへはサイト名から移動するため、ナビには含めない / 홈은 사이트 이름으로 이동하므로 내비에는 넣지 않는다
 // ラベルはページタイトルのキーを流用し、メニューと見出しの表記を一致させる / 라벨은 페이지 제목 키를 재사용해 메뉴와 제목 표기를 일치시킨다
+// 一致するページは "page"、その配下（プロジェクト詳細など）は "true" で現在地を示す / 일치하는 페이지는 "page", 그 하위(프로젝트 상세 등)는 "true"로 현재 위치를 표시한다
+function ariaCurrent(path: string): 'page' | 'true' | undefined {
+  if (path === currentPath) return 'page';
+  if (currentPath.startsWith(`${path}/`)) return 'true';
+  return undefined;
+}
+
 const navItems: { path: string; label: TranslationKey }[] = [
   { path: 'about', label: 'about.title' },
   { path: 'skills', label: 'skills.title' },
@@ -33,7 +40,7 @@ const navItems: { path: string; label: TranslationKey }[] = [
         {
           navItems.map((item) => (
             <li>
-              <a href={getAlternatePath(lang, item.path)} aria-current={item.path === currentPath ? 'page' : undefined}>
+              <a href={getAlternatePath(lang, item.path)} aria-current={ariaCurrent(item.path)}>
                 {t(item.label)}
               </a>
             </li>
@@ -112,7 +119,7 @@ const navItems: { path: string; label: TranslationKey }[] = [
   }
 
   /* 色だけに頼らず下線でも現在地を示す / 색에만 의존하지 않고 밑줄로도 현재 위치를 표시한다 */
-  .nav a[aria-current='page'] {
+  .nav a[aria-current] {
     color: var(--text);
     text-decoration: underline 2px var(--accent);
     text-underline-offset: 0.5em;

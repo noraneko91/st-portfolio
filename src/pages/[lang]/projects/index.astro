@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../../i18n/utils';
+import { getProjects } from '../../../lib/content';
+
+export function getStaticPaths() {
+  return getLangStaticPaths();
+}
+
+const lang = toLang(Astro.params.lang);
+const t = useTranslations(lang);
+const projects = await getProjects();
+---
+
+<BaseLayout lang={lang} title={t('projects.title')} description={t('projects.description')}>
+  <h1 class="text-title mb-10">{t('projects.title')}</h1>
+
+  <ol class="project-list">
+    {
+      projects.map(({ id, data }, index) => (
+        <li class="project reveal">
+          <span class="project-number font-mono" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div class="project-body">
+            <h2 class="project-title">
+              {/* 準備中は詳細ページがないためリンクにしない / 준비 중은 상세 페이지가 없어서 링크로 만들지 않는다 */}
+              {data.status === 'published' ? (
+                <a href={getAlternatePath(lang, `projects/${id}`)}>{data.title[lang]}</a>
+              ) : (
+                data.title[lang]
+              )}
+              {data.status === 'wip' && <span class="project-badge">{t('projects.status.wip')}</span>}
+            </h2>
+            <p>{data.summary[lang]}</p>
+            {data.stack.length > 0 && <p class="project-stack font-mono">{data.stack.map((item) => item.name).join(' / ')}</p>}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>
+
+<style>
+  .project {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-number {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .project-body {
+    display: grid;
+    gap: 0.5rem;
+    max-width: var(--measure);
+  }
+
+  .project-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    font-size: 1.375rem;
+    line-height: 1.45;
+  }
+
+  .project-badge {
+    padding: 0.125rem 0.5rem;
+    border: 1px solid var(--border);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .project-stack {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 48rem) {
+    .project {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 2rem;
+    }
+  }
+</style>
