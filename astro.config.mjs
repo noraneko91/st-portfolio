@@ -1,13 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defaultLocale, locales } from './src/i18n/config.ts';
+import { defaultLocale, htmlLang, locales } from './src/i18n/config.ts';
+
+// canonical・hreflang を絶対 URL にするため。独自ドメイン決定時に変更する (ADR 0004) / canonical·hreflang을 절대 URL로 만들기 위해. 커스텀 도메인 결정 시 변경 (ADR 0004)
+const site = 'https://st-portfolio.ttvt11.workers.dev';
 
 // https://astro.build/config
 export default defineConfig({
-  // canonical・hreflang を絶対 URL にするため。独自ドメイン決定時に変更する (ADR 0004) / canonical·hreflang을 절대 URL로 만들기 위해. 커스텀 도메인 결정 시 변경 (ADR 0004)
-  site: 'https://st-portfolio.ttvt11.workers.dev',
+  site,
   i18n: {
     locales: [...locales],
     defaultLocale,
@@ -18,6 +21,14 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+  integrations: [
+    sitemap({
+      // 各 URL に4言語の hreflang 代替リンクを付ける / 각 URL에 4개 언어 hreflang 대체 링크를 붙인다
+      i18n: { defaultLocale, locales: htmlLang },
+      // ルート(/)は振り分け専用で noindex のため除外する / 루트(/)는 분기 전용이고 noindex라 제외한다
+      filter: (page) => page !== `${site}/`,
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()]
   }
