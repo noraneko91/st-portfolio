@@ -114,6 +114,43 @@
   }
 }
 
+@layer components {
+  /* 見出しと値の一覧（経歴・プロフィールなど）。狭い画面では縦に積む / 제목과 값 목록 (경력·프로필 등). 좁은 화면에서는 세로로 쌓는다 */
+  .kv {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .kv > div {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .kv dt {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 40rem) {
+    .kv > div {
+      grid-template-columns: 8rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  /* リセットされたリストの記号を戻す / 리셋된 목록 기호를 되돌린다 */
+  .bullets {
+    display: grid;
+    gap: 0.25rem;
+    padding-inline-start: 1.25em;
+    list-style: disc;
+  }
+
+  .bullets li::marker {
+    color: var(--muted);
+  }
+}
+
 /*
  * 動きは OS の「動きを減らす」設定がオフのときだけ付ける / 움직임은 OS의 "동작 줄이기" 설정이 꺼져 있을 때만 적용한다
  */

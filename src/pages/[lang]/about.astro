@@ -1,7 +1,9 @@
 ---
+import CareerItem from '../../components/CareerItem.astro';
 import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import { formatYearMonth, getCareers, getProfile, getSkillNames, getTotalCareerMonths, toYears } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -9,23 +11,72 @@ export function getStaticPaths() {
 
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
+
+const profile = await getProfile();
+const careers = await getCareers();
+const skillNames = await getSkillNames();
+const totalYears = toYears(await getTotalCareerMonths());
+const firstStart = careers.at(-1)?.data.start;
 ---
 
 <BaseLayout lang={lang} title={t('about.title')} description={t('about.description')}>
   <h1 class="text-title mb-10">{t('about.title')}</h1>
 
-  {/* 仮: レイアウト確認用。4-2 で本文に置き換える / 임시: 레이아웃 확인용. 4-2에서 본문으로 교체한다 */}
   <Section index={1} label={t('about.section.profile')} id="profile">
-    <div class="placeholder" aria-hidden="true"></div>
+    <p class="text-2xl font-bold">{profile.displayName}</p>
+    <p class="text-muted">{profile.title[lang]}</p>
+    <div class="mt-6 space-y-4">
+      {profile.intro.map((paragraph) => <p>{paragraph[lang]}</p>)}
+    </div>
+    <dl class="kv mt-8">
+      <div>
+        <dt>{t('profile.experience')}</dt>
+        <dd>
+          {t('unit.years', { n: totalYears })}
+          {firstStart && <span class="ms-2 text-muted">{t('unit.since', { date: formatYearMonth(firstStart, lang) })}</span>}
+        </dd>
+      </div>
+      <div>
+        <dt>{t('profile.location')}</dt>
+        <dd>{profile.location[lang]}</dd>
+      </div>
+      <div>
+        <dt>{t('profile.languages')}</dt>
+        <dd>
+          <ul>
+            {
+              profile.languages.map((language) => (
+                <li>{language.level ? `${language.name[lang]} — ${language.level[lang]}` : language.name[lang]}</li>
+              ))
+            }
+          </ul>
+        </dd>
+      </div>
+    </dl>
   </Section>
-  <Section index={2} label={t('about.section.career')} id="career">
-    <div class="placeholder" aria-hidden="true"></div>
+
+  <Section index={2} label={t('about.section.strengths')} id="strengths">
+    <ul class="bullets">
+      {profile.strengths.map((strength) => <li>{strength[lang]}</li>)}
+    </ul>
+  </Section>
+
+  <Section index={3} label={t('about.section.career')} id="career">
+    <ol class="career-list">
+      {
+        careers.map((career) => (
+          <li>
+            <CareerItem career={career} lang={lang} skillNames={skillNames} />
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 </BaseLayout>
 
 <style>
-  .placeholder {
-    height: 8rem;
-    border: 1px dashed var(--border);
+  .career-list {
+    display: grid;
+    gap: 3rem;
   }
 </style>

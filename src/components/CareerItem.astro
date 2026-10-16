@@ -1,0 +1,107 @@
+---
+import type { Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+import { formatNumber, formatYearMonth, totalMonths, type Career } from '../lib/content';
+import { sortPhases } from '../lib/phases';
+
+interface Props {
+  career: Career;
+  lang: Lang;
+  // skills.yaml の id → 表示名 / skills.yaml의 id → 표시명
+  skillNames: Map<string, string>;
+}
+
+const { career, lang, skillNames } = Astro.props;
+const { data } = career;
+const t = useTranslations(lang);
+
+const scale = [
+  data.scale.classes && t('scale.classes', { n: formatNumber(data.scale.classes, lang) }),
+  data.scale.tables && t('scale.tables', { n: formatNumber(data.scale.tables, lang) }),
+  data.scale.team && t('scale.team', { n: data.scale.team }),
+].filter(Boolean);
+const phases = sortPhases(data.phases).map((phase) => t(`phase.${phase}`));
+const tech = data.tech.map((ref) => skillNames.get(ref.id) ?? ref.id);
+---
+
+<article class="career">
+  <p class="career-period">
+    <time datetime={data.start}>{formatYearMonth(data.start, lang)}</time>
+    {' – '}
+    {data.end ? <time datetime={data.end}>{formatYearMonth(data.end, lang)}</time> : t('period.present')}
+    <span class="career-months">{t('unit.months', { n: totalMonths([data]) })}</span>
+  </p>
+  <h3 class="career-title">{data.title[lang]}</h3>
+  <p class="career-meta">{`${data.industry[lang]} · ${t(`role.${data.role}`)}`}</p>
+
+  {
+    data.summary.length > 0 && (
+      <ul class="career-summary">
+        {data.summary.map((item) => (
+          <li>{item[lang]}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  <dl class="kv">
+    <div>
+      <dt>{t('career.duties')}</dt>
+      <dd>
+        <ul class="bullets">
+          {data.duties.map((duty) => <li>{duty[lang]}</li>)}
+        </ul>
+      </dd>
+    </div>
+    {
+      phases.length > 0 && (
+        <div>
+          <dt>{t('career.phases')}</dt>
+          <dd>{phases.join(' / ')}</dd>
+        </div>
+      )
+    }
+    <div>
+      <dt>{t('career.tech')}</dt>
+      <dd>{tech.join(' / ')}</dd>
+    </div>
+    {
+      scale.length > 0 && (
+        <div>
+          <dt>{t('career.scale')}</dt>
+          <dd>{scale.join(' / ')}</dd>
+        </div>
+      )
+    }
+  </dl>
+</article>
+
+<style>
+  .career {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .career-period {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .career-months {
+    margin-inline-start: 0.75rem;
+  }
+
+  .career-title {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .career-meta {
+    color: var(--muted);
+  }
+
+  .career-summary {
+    display: grid;
+    gap: 0.25rem;
+  }
+</style>

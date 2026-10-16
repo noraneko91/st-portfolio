@@ -2,6 +2,7 @@ import { defineCollection, reference } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import type { Lang } from './i18n/config';
+import { phases } from './lib/phases';
 
 /*
  * コンテンツは YAML に置き、ページはこのスキーマに沿ったデータを表示するだけにする（内容の修正はデータだけで済む）
@@ -16,16 +17,6 @@ const localized = z.object({ ja: text, en: text, zh: text, ko: text } satisfies 
 // "2023-08" 形式。期間計算に使う / "2023-08" 형식. 기간 계산에 쓴다
 const yearMonth = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'YYYY-MM 形式で書く / YYYY-MM 형식으로 쓴다');
 
-// 担当工程。表示名は i18n ファイル (phase.*) で管理する / 담당 공정. 표시명은 i18n 파일 (phase.*)에서 관리한다
-export const phases = [
-  'requirements',
-  'research',
-  'basic-design',
-  'detailed-design',
-  'implementation',
-  'unit-test',
-  'integration-test',
-] as const;
 
 const profile = defineCollection({
   loader: file('src/content/profile.yaml'),

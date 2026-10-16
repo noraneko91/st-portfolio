@@ -7,8 +7,13 @@ import { zh } from './zh';
 
 const translations = { ja, en, zh, ko } satisfies Record<Lang, unknown>;
 
+// 文中の {name} を vars の値で置き換える（語順が言語ごとに違うため、数値は文の中に埋め込む）
+// 문장 속 {name}을 vars 값으로 바꾼다 (어순이 언어마다 달라서 숫자는 문장 안에 넣는다)
 export function useTranslations(lang: Lang) {
-  return (key: TranslationKey): string => translations[lang][key];
+  return (key: TranslationKey, vars?: Record<string, string | number>): string => {
+    const text = translations[lang][key];
+    return vars ? text.replace(/\{(\w+)\}/g, (match, name: string) => String(vars[name] ?? match)) : text;
+  };
 }
 
 // [lang] ページ共通の getStaticPaths / [lang] 페이지 공통 getStaticPaths
