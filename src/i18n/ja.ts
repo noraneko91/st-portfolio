@@ -13,6 +13,10 @@ export const ja = {
   'contact.title': 'お問い合わせ',
   'contact.description': '連絡先のご案内です。',
 
+  'notFound.title': 'ページが見つかりません',
+  'notFound.message': 'お探しのページは移動または削除された可能性があります。',
+  'notFound.home': 'ホームへ戻る',
+
   'nav.label': 'メインメニュー',
   'lang.label': '言語を選択',
 };

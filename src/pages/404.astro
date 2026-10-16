@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { defaultLocale, htmlLang, locales } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+
+// 静的ホスティングでは URL ごとに 404 の言語を出し分けられないため、4言語を並べて表示する / 정적 호스팅에서는 URL별로 404 언어를 나눠 보여줄 수 없어서 4개 언어를 나란히 표시한다
+const t = useTranslations(defaultLocale);
+const sections = locales.map((lang) => ({
+  lang,
+  t: useTranslations(lang),
+  Heading: lang === defaultLocale ? 'h1' : 'h2',
+}));
+---
+
+<!doctype html>
+<html lang={htmlLang[defaultLocale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t('notFound.title')} | {t('site.name')}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <main class="space-y-6 p-4">
+      {
+        sections.map(({ lang, t, Heading }) => (
+          <section lang={htmlLang[lang]}>
+            <Heading>{t('notFound.title')}</Heading>
+            <p>{t('notFound.message')}</p>
+            <a href={getRelativeLocaleUrl(lang)}>{t('notFound.home')}</a>
+          </section>
+        ))
+      }
+    </main>
+  </body>
+</html>

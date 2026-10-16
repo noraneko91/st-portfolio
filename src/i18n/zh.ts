@@ -14,6 +14,10 @@ export const zh: Translation = {
   'contact.title': '联系方式',
   'contact.description': '联系方式说明。',
 
+  'notFound.title': '找不到页面',
+  'notFound.message': '您要查找的页面可能已被移动或删除。',
+  'notFound.home': '返回首页',
+
   'nav.label': '主菜单',
   'lang.label': '选择语言',
 };

@@ -14,6 +14,10 @@ export const ko: Translation = {
   'contact.title': '문의',
   'contact.description': '연락처 안내입니다.',
 
+  'notFound.title': '페이지를 찾을 수 없습니다',
+  'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
+  'notFound.home': '홈으로 돌아가기',
+
   'nav.label': '메인 메뉴',
   'lang.label': '언어 선택',
 };
