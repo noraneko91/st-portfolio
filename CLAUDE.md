@@ -11,7 +11,7 @@
 - 스타일: Tailwind CSS (최신 안정판. 버전 기록)
 - 호스팅: Cloudflare (GitHub push 시 자동 배포)
 - 패키지 매니저: npm / Node.js: 짝수 LTS 버전 (`.nvmrc`로 고정)
-- 버전 기록: Astro [ ] / Tailwind CSS [ ] / Node.js [ ]
+- 버전 기록: Astro [7.4.0] / Tailwind CSS [4.3.3] (@tailwindcss/vite 4.3.3) / Node.js [24.16.0]
 
 ## 디렉터리 구성 / ディレクトリ構成
 ```
