@@ -78,6 +78,10 @@ export const zh: Translation = {
 
   'home.section.pages': '页面导览',
 
+  'contact.lead': '如有工作洽谈或疑问，请通过以下方式联系我。',
+  'contact.email': '邮箱',
+  'contact.github': 'GitHub',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

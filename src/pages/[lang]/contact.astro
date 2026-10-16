@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import { getProfile } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -8,8 +9,40 @@ export function getStaticPaths() {
 
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
+const { email, github } = await getProfile();
+const githubUrl = `https://github.com/${github}`;
 ---
 
 <BaseLayout lang={lang} title={t('contact.title')} description={t('contact.description')}>
-  <h1 class="text-title">{t('contact.title')}</h1>
+  <h1 class="text-title mb-6">{t('contact.title')}</h1>
+  <p class="mb-10 max-w-[var(--measure)]">{t('contact.lead')}</p>
+
+  {/* フォームは使わない: 外部 JS と個人情報の保管を避けるため / 폼은 쓰지 않는다: 외부 JS와 개인정보 보관을 피하기 위해 */}
+  <dl class="kv contact">
+    {
+      // メールアドレスが未設定の間はリンクを出さない / 메일 주소가 미설정인 동안은 링크를 표시하지 않는다
+      email && (
+        <div>
+          <dt>{t('contact.email')}</dt>
+          <dd>
+            <a href={`mailto:${email}`}>{email}</a>
+          </dd>
+        </div>
+      )
+    }
+    <div>
+      <dt>{t('contact.github')}</dt>
+      <dd>
+        <a href={githubUrl}>{githubUrl.replace(/^https:\/\//, '')}</a>
+      </dd>
+    </div>
+  </dl>
 </BaseLayout>
+
+<style>
+  .contact {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 1.125rem;
+  }
+</style>

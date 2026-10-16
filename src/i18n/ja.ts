@@ -77,6 +77,10 @@ export const ja = {
 
   'home.section.pages': 'ページ案内',
 
+  'contact.lead': 'お仕事のご相談やご質問は、以下の方法でご連絡ください。',
+  'contact.email': 'メール',
+  'contact.github': 'GitHub',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

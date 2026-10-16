@@ -78,6 +78,10 @@ export const en: Translation = {
 
   'home.section.pages': 'Explore',
 
+  'contact.lead': 'For work inquiries or questions, please get in touch using one of the options below.',
+  'contact.email': 'Email',
+  'contact.github': 'GitHub',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',
