@@ -6,6 +6,8 @@ import { defaultLocale, locales } from './src/i18n/config.ts';
 
 // https://astro.build/config
 export default defineConfig({
+  // canonical・hreflang を絶対 URL にするため。独自ドメイン決定時に変更する (ADR 0004) / canonical·hreflang을 절대 URL로 만들기 위해. 커스텀 도메인 결정 시 변경 (ADR 0004)
+  site: 'https://st-portfolio.ttvt11.workers.dev',
   i18n: {
     locales: [...locales],
     defaultLocale,
