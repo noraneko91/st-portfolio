@@ -1,0 +1,19 @@
+import type { Translation } from './ja';
+
+export const zh: Translation = {
+  'site.name': '作品集',
+
+  'home.title': '首页',
+  'home.description': '介绍我的经历、技能和个人开发项目的作品集网站。',
+  'about.title': '经历',
+  'about.description': '介绍我至今的工作经历。',
+  'skills.title': '技能',
+  'skills.description': '介绍我掌握的技术与技能。',
+  'projects.title': '项目',
+  'projects.description': '介绍个人开发项目。',
+  'contact.title': '联系方式',
+  'contact.description': '联系方式说明。',
+
+  'nav.label': '主菜单',
+  'lang.label': '选择语言',
+};
