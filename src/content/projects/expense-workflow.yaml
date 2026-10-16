@@ -1,0 +1,17 @@
+# 開発中断中のため一覧に「準備中」としてだけ出す。再開後に 概要 / AWS構成図 / 技術選定理由 / 工夫した点 を追加し、status を published にする
+# 개발 중단 중이라 목록에 "준비 중"으로만 표시한다. 재개 후 개요 / AWS 구성도 / 기술 선정 이유 / 신경 쓴 점을 추가하고 status를 published로 한다
+order: 2
+status: wip
+title:
+  ja: 経費精算・承認ワークフローシステム
+  en: Expense reimbursement and approval workflow system
+  zh: 费用报销与审批工作流系统
+  ko: 경비 정산·결재 워크플로 시스템
+summary:
+  ja: 経費の申請から承認までを扱うワークフローシステム（Python + AWS）
+  en: A workflow system covering expense requests through approval (Python + AWS)
+  zh: 处理从费用申请到审批流程的工作流系统（Python + AWS）
+  ko: 경비 신청부터 결재까지를 다루는 워크플로 시스템 (Python + AWS)
+stack:
+  - name: Python
+  - name: AWS

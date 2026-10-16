@@ -1,0 +1,22 @@
+# 資格。表示は取得年月の新しい順（年月なしは最後） / 자격. 표시는 취득 연월이 최신인 순 (연월 없음은 마지막)
+- id: aws-dva
+  name: AWS Certified Developer – Associate
+  date: "2025-04"
+- id: oracle-java-silver
+  name: Oracle Certified Java Programmer, Silver SE 8
+  date: "2024-07"
+- id: aws-saa
+  name: AWS Certified Solutions Architect – Associate
+  date: "2023-02"
+- id: lpic-1
+  name: LPIC-1
+  date: "2021-06"
+- id: jlpt-n1
+  name: JLPT N1
+  date: "2021-06"
+- id: aws-clf
+  name: AWS Certified Cloud Practitioner
+  date: "2021-03"
+# TODO: 取得年月（要確認） / 취득 연월 (확인 필요)
+- id: azure-fundamentals
+  name: Microsoft Azure Fundamentals

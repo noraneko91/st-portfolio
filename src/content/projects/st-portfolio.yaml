@@ -1,0 +1,180 @@
+order: 1
+status: published
+title:
+  ja: st-portfolio（本サイト）
+  en: st-portfolio (this site)
+  zh: st-portfolio（本网站）
+  ko: st-portfolio (이 사이트)
+summary:
+  ja: Astro + TypeScriptで構築した、4言語対応の静的ポートフォリオサイト
+  en: A static portfolio site in four languages, built with Astro and TypeScript
+  zh: 使用Astro + TypeScript构建、支持四种语言的静态作品集网站
+  ko: Astro + TypeScript로 구축한 4개 언어 지원 정적 포트폴리오 사이트
+start: "2026-10"
+# TODO: 担当工程の表記（個人開発のため全工程。表示する工程を要確認） / 담당 공정 표기 (개인 개발이라 전 공정. 표시할 공정 확인 필요)
+phases: [requirements, basic-design, detailed-design, implementation, integration-test]
+# TODO: バージョンは package.json・CLAUDE.md の「버전 기록」と合わせて更新する / 버전은 package.json·CLAUDE.md의 "버전 기록"과 맞춰 갱신한다
+stack:
+  - name: Astro
+    version: 7.4.0
+    purpose:
+      ja: 静的サイト生成・i18nルーティング
+      en: Static site generation and i18n routing
+      zh: 静态网站生成及i18n路由
+      ko: 정적 사이트 생성·i18n 라우팅
+  - name: TypeScript
+    version: 6.0.3 (strict)
+    purpose:
+      ja: 型による翻訳漏れの検出
+      en: Catching missing translations with types
+      zh: 通过类型检测翻译遗漏
+      ko: 타입으로 번역 누락 검출
+  - name: Tailwind CSS
+    version: 4.3.3
+    purpose:
+      ja: スタイル（CSS変数による配色とダークモード）
+      en: Styling (CSS-variable colors and dark mode)
+      zh: 样式（基于CSS变量的配色与深色模式）
+      ko: 스타일 (CSS 변수 기반 색 구성과 다크모드)
+  - name: Cloudflare Workers
+    version: Static Assets
+    purpose:
+      ja: ホスティング（GitHubへのpushで自動デプロイ）
+      en: Hosting (auto-deploy on push to GitHub)
+      zh: 托管（推送到GitHub后自动部署）
+      ko: 호스팅 (GitHub push 시 자동 배포)
+  - name: Node.js
+    version: 24.16.0
+    purpose:
+      ja: ビルド環境（.nvmrcで固定）
+      en: Build environment (pinned with .nvmrc)
+      zh: 构建环境（通过.nvmrc固定）
+      ko: 빌드 환경 (.nvmrc로 고정)
+overview:
+  - ja: 経歴・スキル・個人開発を紹介する、日本語・英語・中国語（簡体字）・韓国語の4言語に対応したポートフォリオサイトです。
+    en: "A portfolio site introducing my career, skills, and personal projects in four languages: Japanese, English, Simplified Chinese, and Korean."
+    zh: 介绍我的经历、技能和个人开发项目的作品集网站，支持日语、英语、简体中文和韩语四种语言。
+    ko: 경력·스킬·개인 개발을 소개하는 포트폴리오 사이트로, 일본어·영어·중국어(간체)·한국어 4개 언어를 지원합니다.
+  - ja: DBやサーバーを持たない静的サイトとして構築し、GitHubへのpushでCloudflare Workersに自動デプロイしています。設計判断はADRとしてリポジトリに記録しています。
+    en: It is built as a static site with no database or server, and deploys automatically to Cloudflare Workers on every push to GitHub. Design decisions are recorded as ADRs in the repository.
+    zh: 作为不使用数据库和服务器的静态网站构建，推送到GitHub后自动部署到Cloudflare Workers。设计决策以ADR形式记录在代码仓库中。
+    ko: DB나 서버가 없는 정적 사이트로 구축했고, GitHub에 push하면 Cloudflare Workers에 자동 배포됩니다. 설계 판단은 ADR로 리포지토리에 기록하고 있습니다.
+decisions:
+  - topic:
+      ja: 静的サイト
+      en: Static site
+      zh: 静态网站
+      ko: 정적 사이트
+    reason:
+      ja: 掲載内容にDB・サーバーが不要で、費用（ドメイン代のみ）・表示速度・セキュリティの面で有利なため
+      en: The content needs no database or server, and a static site wins on cost (domain only), speed, and security
+      zh: 内容不需要数据库和服务器，在成本（仅域名费用）、速度和安全性方面更有优势
+      ko: 게재 내용에 DB·서버가 필요 없고, 비용(도메인 비용만)·표시 속도·보안 면에서 유리하기 때문
+    alternatives:
+      ja: AWS上での直接構築
+      en: Building directly on AWS
+      zh: 直接在AWS上构建
+      ko: AWS에 직접 구축
+    adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0001-static-site.md
+  - topic:
+      ja: Astro
+      en: Astro
+      zh: Astro
+      ko: Astro
+    reason:
+      ja: 標準でクライアントにJSを出力せずLighthouseに有利で、i18nルーティングが組み込まれているため
+      en: It ships no client JavaScript by default, which helps Lighthouse scores, and has built-in i18n routing
+      zh: 默认不向客户端输出JS，有利于Lighthouse评分，并内置i18n路由
+      ko: 기본적으로 클라이언트에 JS를 출력하지 않아 Lighthouse에 유리하고, i18n 라우팅이 내장되어 있기 때문
+    alternatives:
+      ja: Next.js（静的エクスポート）
+      en: Next.js (static export)
+      zh: Next.js（静态导出）
+      ko: Next.js (정적 export)
+    adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0002-astro.md
+  - topic:
+      ja: 言語別パス（/ja/ /en/ /zh/ /ko/）
+      en: Per-language paths (/ja/ /en/ /zh/ /ko/)
+      zh: 按语言区分路径（/ja/ /en/ /zh/ /ko/）
+      ko: 언어별 경로 (/ja/ /en/ /zh/ /ko/)
+    reason:
+      ja: 言語ごとに独立したURLになり、検索・hreflang・リンク共有に有利なため
+      en: Each language gets its own URL, which works better for search, hreflang, and link sharing
+      zh: 每种语言拥有独立的URL，有利于搜索、hreflang和链接分享
+      ko: 언어마다 독립된 URL이 되어 검색·hreflang·링크 공유에 유리하기 때문
+    alternatives:
+      ja: クエリパラメータ・JSでの本文切替
+      en: Query parameters or switching content with JavaScript
+      zh: 查询参数或用JS切换正文
+      ko: 쿼리 파라미터·JS로 본문 전환
+    adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0003-i18n-path-routing.md
+  - topic:
+      ja: Cloudflare Workers（Static Assets）
+      en: Cloudflare Workers (Static Assets)
+      zh: Cloudflare Workers（Static Assets）
+      ko: Cloudflare Workers (Static Assets)
+    reason:
+      ja: Cloudflareが新規プロジェクトに推奨しており、アダプターなしで静的ファイルだけを配信できるため
+      en: Cloudflare recommends Workers for new projects, and it can serve static files alone without an adapter
+      zh: Cloudflare推荐新项目使用Workers，且无需适配器即可只托管静态文件
+      ko: Cloudflare가 신규 프로젝트에 권장하고, 어댑터 없이 정적 파일만 제공할 수 있기 때문
+    alternatives:
+      ja: Cloudflare Pages
+      en: Cloudflare Pages
+      zh: Cloudflare Pages
+      ko: Cloudflare Pages
+    adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0004-cloudflare-workers.md
+challenges:
+  - problem:
+      ja: 4言語の翻訳漏れを人の目だけで防ぐのは難しい
+      en: Catching missing translations across four languages by eye alone is hard
+      zh: 仅靠人工很难避免四种语言的翻译遗漏
+      ko: 4개 언어의 번역 누락을 사람의 눈만으로 막기는 어렵다
+    solution:
+      ja: 日本語を基準に他言語の型を定義し、キーが欠けるとビルドが失敗するようにした。コンテンツのYAMLも同じくスキーマで検証している
+      en: Other languages are typed against Japanese, so a missing key fails the build. Content YAML is validated by a schema in the same way
+      zh: 以日语为基准定义其他语言的类型，缺少键时构建会失败。内容YAML也同样通过模式进行验证
+      ko: 일본어를 기준으로 다른 언어의 타입을 정의해, 키가 빠지면 빌드가 실패하게 했다. 콘텐츠 YAML도 같은 방식으로 스키마 검증한다
+  - problem:
+      ja: ルート（/）の言語判定にはJSが必要で、JSが無効だと移動できない
+      en: Detecting the language at the root (/) needs JavaScript, so visitors without it could get stuck
+      zh: 根路径（/）的语言判断需要JS，禁用JS时无法跳转
+      ko: 루트(/)의 언어 판정에는 JS가 필요해서, JS가 꺼져 있으면 이동할 수 없다
+    solution:
+      ja: 保存した言語→ブラウザの言語→日本語の順で判定しつつ、ルートには4言語へのリンクを常に表示した
+      en: The root checks the saved language, then the browser language, then falls back to Japanese, and always shows links to all four languages
+      zh: 按已保存语言→浏览器语言→日语的顺序判断，同时在根页面始终显示四种语言的链接
+      ko: 저장한 언어→브라우저 언어→일본어 순서로 판정하면서, 루트에는 4개 언어 링크를 항상 표시했다
+  - problem:
+      ja: 言語メニューをキーボードやスクリーンリーダーでも使えるようにしたい
+      en: The language menu had to work with a keyboard and screen readers
+      zh: 语言菜单需要支持键盘和屏幕阅读器操作
+      ko: 언어 메뉴를 키보드와 스크린리더로도 쓸 수 있게 하고 싶었다
+    solution:
+      ja: WAI-ARIAのMenu Buttonパターンで実装し、JSが無効な環境では通常のリンク一覧として動くようにした
+      en: It follows the WAI-ARIA Menu Button pattern, and falls back to a plain list of links when JavaScript is off
+      zh: 按照WAI-ARIA的Menu Button模式实现，在禁用JS的环境中作为普通链接列表工作
+      ko: WAI-ARIA Menu Button 패턴으로 구현하고, JS가 꺼진 환경에서는 일반 링크 목록으로 동작하게 했다
+  - problem:
+      ja: 幅360pxの画面で、言語メニューが画面の外にはみ出していた（自動ブラウザテストで発見）
+      en: On 360px-wide screens, the language menu overflowed off-screen (found by automated browser testing)
+      zh: 在360px宽的屏幕上，语言菜单超出了屏幕（通过自动化浏览器测试发现）
+      ko: 폭 360px 화면에서 언어 메뉴가 화면 밖으로 나가 있었다 (자동 브라우저 테스트로 발견)
+    solution:
+      ja: ヘッダーをグリッドで組み直し、言語ボタンを常に右端に置くことで、右揃えのメニューが画面内に収まるようにした
+      en: The header was rebuilt as a grid that keeps the language button at the right edge, so the right-aligned menu stays on screen
+      zh: 用网格重新构建页眉，使语言按钮始终位于右端，让右对齐的菜单留在屏幕内
+      ko: 헤더를 그리드로 다시 짜서 언어 버튼을 항상 오른쪽 끝에 두어, 오른쪽 정렬 메뉴가 화면 안에 들어오게 했다
+  - problem:
+      ja: ビルド時のCSS圧縮で、スクロール連動アニメーションの指定が無効になっていた
+      en: CSS minification at build time silently disabled the scroll-driven animation
+      zh: 构建时的CSS压缩导致滚动驱动动画的设置失效
+      ko: 빌드 시 CSS 압축으로 스크롤 연동 애니메이션 지정이 무효가 되어 있었다
+    solution:
+      ja: ブラウザの計算済みスタイルを確認して原因を特定し、圧縮でまとめられないよう個別のプロパティで書き直した
+      en: Checking the browser's computed styles revealed the cause, and the rule was rewritten with individual properties so minification no longer merges them
+      zh: 通过检查浏览器的计算样式找到原因，并改用单独的属性书写，避免被压缩合并
+      ko: 브라우저의 계산된 스타일을 확인해 원인을 찾고, 압축 시 합쳐지지 않도록 개별 속성으로 다시 썼다
+links:
+  - kind: github
+    url: https://github.com/noraneko91/st-portfolio

@@ -1,0 +1,50 @@
+start: "2023-08"
+end: "2026-09"
+role: sl
+industry:
+  ja: 生命保険
+  en: Life insurance
+  zh: 人寿保险
+  ko: 생명보험
+title:
+  ja: 業務システムの運用保守・AWS開発
+  en: Business system maintenance and AWS development
+  zh: 业务系统运维及AWS开发
+  ko: 업무 시스템 운영·유지보수 및 AWS 개발
+summary:
+  - ja: 生命保険システムの各アプリケーションの運用・保守
+    en: Operation and maintenance of applications in a life insurance system
+    zh: 人寿保险系统各应用程序的运维
+    ko: 생명보험 시스템 각 애플리케이션의 운영·유지보수
+  - ja: システムのAWS移行に伴う、サーバーレス機能の設計・開発
+    en: Design and development of serverless features for the system's migration to AWS
+    zh: 随系统迁移至AWS，进行无服务器功能的设计与开发
+    ko: 시스템의 AWS 이전에 따른 서버리스 기능 설계·개발
+duties:
+  - ja: AWS Lambda・Lambda Layerの基本設計・詳細設計・開発
+    en: Basic design, detailed design, and development of AWS Lambda functions and Lambda Layers
+    zh: AWS Lambda及Lambda Layer的基本设计、详细设计与开发
+    ko: AWS Lambda·Lambda Layer 기본 설계·상세 설계·개발
+  - ja: CloudFormation・CodeBuildによるAWS環境の構築・デプロイ
+    en: Building and deploying AWS environments with CloudFormation and CodeBuild
+    zh: 使用CloudFormation和CodeBuild构建及部署AWS环境
+    ko: CloudFormation·CodeBuild를 이용한 AWS 환경 구축·배포
+  - ja: 単体テスト・結合テストの実施
+    en: Unit and integration testing
+    zh: 实施单元测试与集成测试
+    ko: 단위 테스트·통합 테스트 수행
+  - ja: 電子帳票システムの管理運用、要件定義書の作成
+    en: Managing the electronic forms system and writing requirements definitions
+    zh: 电子报表系统的管理运维及需求定义书编写
+    ko: 전자 장표 시스템 관리·운영, 요건 정의서 작성
+  - ja: VBAツールの作成、テスト仕様書・テストシナリオの作成
+    en: Building VBA tools and writing test specifications and scenarios
+    zh: 制作VBA工具，编写测试规格书及测试场景
+    ko: VBA 도구 제작, 테스트 사양서·테스트 시나리오 작성
+scale:
+  classes: 1000
+  tables: 200
+  team: 10
+tech: [python, php, laravel, vba, aws, oracle, git, uft-one]
+# TODO: 担当工程はスキルシートの○7個からの推定（要確認） / 담당 공정은 스킬 시트의 ○ 7개로부터 추정 (확인 필요)
+phases: [requirements, research, basic-design, detailed-design, implementation, unit-test, integration-test]

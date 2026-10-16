@@ -1,0 +1,37 @@
+# TODO: 期間（要確認） / 기간 (확인 필요)
+start: "2018-12"
+end: "2019-04"
+role: pg
+industry:
+  ja: 貿易
+  en: Trading
+  zh: 贸易
+  ko: 무역
+title:
+  ja: 在庫管理システムの開発・保守
+  en: Inventory management system development and maintenance
+  zh: 库存管理系统的开发与维护
+  ko: 재고 관리 시스템 개발·유지보수
+duties:
+  - ja: 機能追加
+    en: Adding features
+    zh: 功能追加
+    ko: 기능 추가
+  - ja: 在庫管理表の障害対応・項目追加
+    en: Fixing issues in and adding fields to inventory sheets
+    zh: 库存管理表的故障处理及项目追加
+    ko: 재고 관리표 장애 대응·항목 추가
+  - ja: 単体テスト仕様書の作成・実施
+    en: Writing and running unit test specifications
+    zh: 编写并执行单元测试规格书
+    ko: 단위 테스트 사양서 작성·수행
+  - ja: 結合テスト仕様書の作成
+    en: Writing integration test specifications
+    zh: 编写集成测试规格书
+    ko: 통합 테스트 사양서 작성
+scale:
+  classes: 100
+  team: 10
+tech: [java, spring, javascript, mysql, git]
+# TODO: 担当工程はスキルシートの○2個からの推定（要確認） / 담당 공정은 스킬 시트의 ○ 2개로부터 추정 (확인 필요)
+phases: [implementation, unit-test]

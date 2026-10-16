@@ -1,0 +1,37 @@
+# TODO: 案件4と5の期間の対応（要確認） / 안건 4와 5의 기간 대응 (확인 필요)
+start: "2019-05"
+end: "2019-10"
+role: pg
+industry:
+  ja: 人材派遣
+  en: Staffing
+  zh: 人才派遣
+  ko: 인력 파견
+title:
+  ja: 社員管理システムの開発
+  en: Employee management system development
+  zh: 员工管理系统开发
+  ko: 사원 관리 시스템 개발
+duties:
+  - ja: 詳細設計書の作成
+    en: Writing detailed design documents
+    zh: 编写详细设计书
+    ko: 상세 설계서 작성
+  - ja: 画面モックの修正
+    en: Revising screen mockups
+    zh: 修改画面原型
+    ko: 화면 목업 수정
+  - ja: 新規画面の実装
+    en: Implementing new screens
+    zh: 新画面的实现
+    ko: 신규 화면 구현
+  - ja: 単体テスト仕様書の作成・実施
+    en: Writing and running unit test specifications
+    zh: 编写并执行单元测试规格书
+    ko: 단위 테스트 사양서 작성·수행
+scale:
+  classes: 100
+  team: 10
+tech: [java, jsp, javascript, spring, mysql]
+# TODO: 担当工程はスキルシートの○3個からの推定（要確認） / 담당 공정은 스킬 시트의 ○ 3개로부터 추정 (확인 필요)
+phases: [detailed-design, implementation, unit-test]

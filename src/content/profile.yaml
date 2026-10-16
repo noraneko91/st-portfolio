@@ -1,0 +1,76 @@
+# プロフィール。Public リポジトリのため、氏名フルネーム・生年月日・国籍・最寄駅・顧客名は書かない
+# 프로필. Public 리포지토리이므로 이름 전체·생년월일·국적·가까운 역·고객사명은 쓰지 않는다
+main:
+  displayName: K.S
+  title:
+    ja: バックエンドエンジニア（Java / Python / AWS）
+    en: Backend Engineer (Java / Python / AWS)
+    zh: 后端工程师（Java / Python / AWS）
+    ko: 백엔드 엔지니어 (Java / Python / AWS)
+  location:
+    ja: 日本
+    en: Japan
+    zh: 日本
+    ko: 일본
+  intro:
+    - ja: Java/Springによる業務システム開発と、Python + AWSによるクラウド開発を経験してきました。
+      en: I have worked on business system development with Java/Spring and cloud development with Python and AWS.
+      zh: 我从事过基于Java/Spring的业务系统开发，以及基于Python + AWS的云开发。
+      ko: Java/Spring 기반 업무 시스템 개발과 Python + AWS 기반 클라우드 개발을 경험해 왔습니다.
+    - ja: 設計からテストまで一貫して担当し、直近ではサブリーダーとして生命保険システムのAWS化に携わりました。
+      en: I handle everything from design to testing, and most recently helped move a life insurance system to AWS as a sub-leader.
+      zh: 我负责从设计到测试的全流程，最近作为副组长参与了人寿保险系统的AWS迁移。
+      ko: 설계부터 테스트까지 일관되게 담당했으며, 최근에는 서브리더로서 생명보험 시스템의 AWS 전환에 참여했습니다.
+    - ja: 今後はバックエンドとクラウドを軸に、設計・構築の領域を広げていきます。
+      en: Going forward, I plan to expand my work in design and infrastructure, centered on backend and cloud.
+      zh: 今后将以后端和云为核心，继续拓展设计与构建领域的工作。
+      ko: 앞으로는 백엔드와 클라우드를 축으로 설계·구축 영역을 넓혀 갈 계획입니다.
+  strengths:
+    - ja: Javaを中心とした業務システム開発（金融・保険・CRMなど）
+      en: Business system development centered on Java (finance, insurance, CRM, etc.)
+      zh: 以Java为中心的业务系统开发（金融、保险、CRM等）
+      ko: Java 중심의 업무 시스템 개발 (금융·보험·CRM 등)
+    - ja: AWS（Lambda・CloudFormation・CodeBuild等）を活用したPythonでのクラウド開発
+      en: Cloud development in Python using AWS (Lambda, CloudFormation, CodeBuild, etc.)
+      zh: 运用AWS（Lambda、CloudFormation、CodeBuild等）的Python云开发
+      ko: AWS (Lambda·CloudFormation·CodeBuild 등)를 활용한 Python 클라우드 개발
+    - ja: サブリーダーとしてのチーム運営経験
+      en: Experience running a team as a sub-leader
+      zh: 作为副组长的团队管理经验
+      ko: 서브리더로서의 팀 운영 경험
+  languages:
+    - name:
+        ja: 韓国語
+        en: Korean
+        zh: 韩语
+        ko: 한국어
+      level:
+        ja: ネイティブ
+        en: Native
+        zh: 母语
+        ko: 모국어
+    - name:
+        ja: 日本語
+        en: Japanese
+        zh: 日语
+        ko: 일본어
+      level:
+        ja: JLPT N1
+        en: JLPT N1
+        zh: JLPT N1
+        ko: JLPT N1
+    # TODO: 英語・中国語のレベル（要確認） / 영어·중국어 레벨 (확인 필요)
+    - name:
+        ja: 英語
+        en: English
+        zh: 英语
+        ko: 영어
+    - name:
+        ja: 中国語
+        en: Chinese
+        zh: 中文
+        ko: 중국어
+  # TODO: ポートフォリオ用のメールアドレスを作成したら設定する。空の間は Contact にメールリンクを出さない
+  # TODO: 포트폴리오용 메일 주소를 만들면 설정한다. 비어 있는 동안은 Contact에 메일 링크를 표시하지 않는다
+  email: ""
+  github: noraneko91
