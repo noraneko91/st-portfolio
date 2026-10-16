@@ -21,5 +21,6 @@ export const ko: Translation = {
   'notFound.home': '홈으로 돌아가기',
 
   'nav.label': '메인 메뉴',
+  'nav.skip': '본문으로 건너뛰기',
   'lang.label': '언어 선택',
 };

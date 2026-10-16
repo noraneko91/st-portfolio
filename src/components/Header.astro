@@ -12,9 +12,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const currentPath = stripLang(Astro.url.pathname).replace(/\/$/, '');
 
+// ホームへはサイト名から移動するため、ナビには含めない / 홈은 사이트 이름으로 이동하므로 내비에는 넣지 않는다
 // ラベルはページタイトルのキーを流用し、メニューと見出しの表記を一致させる / 라벨은 페이지 제목 키를 재사용해 메뉴와 제목 표기를 일치시킨다
 const navItems: { path: string; label: TranslationKey }[] = [
-  { path: '', label: 'home.title' },
   { path: 'about', label: 'about.title' },
   { path: 'skills', label: 'skills.title' },
   { path: 'projects', label: 'projects.title' },
@@ -22,19 +22,114 @@ const navItems: { path: string; label: TranslationKey }[] = [
 ];
 ---
 
-<header class="flex flex-wrap items-center justify-between gap-4 p-4">
-  <nav aria-label={t('nav.label')}>
-    <ul class="flex flex-wrap gap-x-4 gap-y-2">
-      {
-        navItems.map((item) => (
-          <li>
-            <a href={getAlternatePath(lang, item.path)} aria-current={item.path === currentPath ? 'page' : undefined}>
-              {t(item.label)}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-  <LanguagePicker lang={lang} />
+<a href="#main" class="skip-link">{t('nav.skip')}</a>
+<header class="site-header">
+  <div class="wrapper header-inner">
+    <a href={getAlternatePath(lang, '')} class="brand" aria-current={currentPath === '' ? 'page' : undefined}>
+      {t('site.name')}
+    </a>
+    <nav class="nav" aria-label={t('nav.label')}>
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={getAlternatePath(lang, item.path)} aria-current={item.path === currentPath ? 'page' : undefined}>
+                {t(item.label)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    {/* 右端に固定し、右揃えの言語メニューが画面外にはみ出さないようにする / 오른쪽 끝에 고정해 오른쪽 정렬 언어 메뉴가 화면 밖으로 나가지 않게 한다 */}
+    <div class="lang">
+      <LanguagePicker lang={lang} />
+    </div>
+  </div>
 </header>
+
+<style>
+  /* キーボード操作時だけ表示する / 키보드 조작 시에만 표시한다 */
+  .skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: var(--gutter);
+    z-index: 20;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 狭い画面: 1行目にサイト名と言語、2行目にナビ / 좁은 화면: 1행에 사이트 이름과 언어, 2행에 내비 */
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'brand lang'
+      'nav nav';
+    align-items: center;
+    column-gap: 1.5rem;
+    padding-block: 0.5rem;
+  }
+
+  .brand {
+    grid-area: brand;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav {
+    grid-area: nav;
+  }
+
+  .nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.25rem;
+  }
+
+  .nav a {
+    display: inline-block;
+    padding-block: 0.625rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .nav a:hover {
+    color: var(--text);
+  }
+
+  /* 色だけに頼らず下線でも現在地を示す / 색에만 의존하지 않고 밑줄로도 현재 위치를 표시한다 */
+  .nav a[aria-current='page'] {
+    color: var(--text);
+    text-decoration: underline 2px var(--accent);
+    text-underline-offset: 0.5em;
+  }
+
+  .lang {
+    grid-area: lang;
+    justify-self: end;
+  }
+
+  @media (min-width: 48rem) {
+    .header-inner {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'brand nav lang';
+      padding-block: 0.75rem;
+    }
+
+    .nav ul {
+      justify-content: flex-end;
+    }
+  }
+</style>

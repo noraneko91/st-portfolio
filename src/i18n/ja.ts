@@ -20,6 +20,7 @@ export const ja = {
   'notFound.home': 'ホームへ戻る',
 
   'nav.label': 'メインメニュー',
+  'nav.skip': '本文へスキップ',
   'lang.label': '言語を選択',
 };
 

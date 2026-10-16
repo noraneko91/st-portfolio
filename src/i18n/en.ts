@@ -21,5 +21,6 @@ export const en: Translation = {
   'notFound.home': 'Back to home',
 
   'nav.label': 'Main menu',
+  'nav.skip': 'Skip to content',
   'lang.label': 'Select language',
 };

@@ -12,10 +12,11 @@ const pathname = Astro.url.pathname;
 ---
 
 {/* JS なしでは言語リンクの一覧として表示し、JS で WAI-ARIA の Menu Button に拡張する / JS 없이는 언어 링크 목록으로 표시하고, JS로 WAI-ARIA Menu Button으로 확장한다 */}
-{/* 狭い画面で折り返しても右端に置き、右揃えのメニューが画面外にはみ出さないようにする / 좁은 화면에서 줄바꿈되어도 오른쪽 끝에 두어, 오른쪽 정렬 메뉴가 화면 밖으로 나가지 않게 한다 */}
-<div class="relative ml-auto" data-lang-picker>
+{/* 右端への配置は Header 側のグリッドで行う / 오른쪽 끝 배치는 Header 쪽 그리드에서 한다 */}
+<div class="relative" data-lang-picker>
   <button
     type="button"
+    class="lang-button"
     id="lang-button"
     aria-haspopup="menu"
     aria-expanded="false"
@@ -58,13 +59,40 @@ const pathname = Astro.url.pathname;
     margin-top: 0.25rem;
     padding: 0.25rem 0;
     border: 1px solid;
-    background: Canvas;
-    color: CanvasText;
+    background: var(--bg);
+    border-color: var(--border);
   }
 
   [data-enhanced] [data-lang-menu] a {
     display: block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  [data-enhanced] [data-lang-menu] a:hover,
+  [data-enhanced] [data-lang-menu] a:focus-visible {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  [data-enhanced] [data-lang-menu] a[aria-checked='true'] {
+    color: var(--accent);
+  }
+
+  /* タップしやすい高さ (44px) を確保する / 탭하기 쉬운 높이(44px)를 확보한다 */
+  .lang-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-height: 2.75rem;
+    padding-inline: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--text);
+  }
+
+  .lang-button:hover {
+    color: var(--accent);
   }
 
   /* 選択状態は aria-checked で伝わるので、記号は読み上げない / 선택 상태는 aria-checked로 전달되므로 기호는 읽지 않는다 */

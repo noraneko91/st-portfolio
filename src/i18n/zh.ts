@@ -21,5 +21,6 @@ export const zh: Translation = {
   'notFound.home': '返回首页',
 
   'nav.label': '主菜单',
+  'nav.skip': '跳到正文',
   'lang.label': '选择语言',
 };
