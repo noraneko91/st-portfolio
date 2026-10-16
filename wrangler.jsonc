@@ -1,6 +1,7 @@
 // Cloudflare Workers の設定。Worker スクリプトは使わず dist の静的ファイルだけを配信する (ADR 0004)
 // Cloudflare Workers 설정. Worker 스크립트 없이 dist의 정적 파일만 제공한다 (ADR 0004)
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
   // ダッシュボードの Worker 名と一致しないと Workers Builds が失敗する / 대시보드의 Worker 이름과 다르면 Workers Builds가 실패한다
   "name": "st-portfolio",
   "compatibility_date": "2026-10-16",
