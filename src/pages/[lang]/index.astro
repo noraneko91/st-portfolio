@@ -1,6 +1,9 @@
 ---
+import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import type { TranslationKey } from '../../i18n/ja';
+import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import { getProfile } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -8,8 +11,49 @@ export function getStaticPaths() {
 
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
+const profile = await getProfile();
+
+// 案内文は各ページの meta description を流用し、表記を一か所で管理する / 안내 문구는 각 페이지의 meta description을 재사용해 표기를 한 곳에서 관리한다
+const pages: { path: string; title: TranslationKey; description: TranslationKey }[] = [
+  { path: 'about', title: 'about.title', description: 'about.description' },
+  { path: 'skills', title: 'skills.title', description: 'skills.description' },
+  { path: 'projects', title: 'projects.title', description: 'projects.description' },
+  { path: 'contact', title: 'contact.title', description: 'contact.description' },
+];
 ---
 
 <BaseLayout lang={lang} description={t('home.description')}>
-  <h1 class="text-display">{t('site.name')}</h1>
+  <p class="text-muted">{`${profile.displayName} — ${profile.title[lang]}`}</p>
+  <h1 class="text-display mt-4 mb-16 max-w-3xl">{profile.headline[lang]}</h1>
+
+  <Section index={1} label={t('home.section.pages')} id="pages">
+    <ul class="page-list">
+      {
+        pages.map((page) => (
+          <li>
+            <a href={getAlternatePath(lang, page.path)}>{t(page.title)}</a>
+            <p class="text-muted">{t(page.description)}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 </BaseLayout>
+
+<style>
+  .page-list > li {
+    display: grid;
+    gap: 0.25rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-list > li:first-child {
+    padding-top: 0;
+  }
+
+  .page-list a {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+</style>

@@ -76,6 +76,8 @@ export const en: Translation = {
   'project.link.demo': 'Demo',
   'project.link.zenn': 'Zenn article',
 
+  'home.section.pages': 'Explore',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

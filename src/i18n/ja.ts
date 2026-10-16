@@ -75,6 +75,8 @@ export const ja = {
   'project.link.demo': 'デモ',
   'project.link.zenn': 'Zenn記事',
 
+  'home.section.pages': 'ページ案内',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

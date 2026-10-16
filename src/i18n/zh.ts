@@ -76,6 +76,8 @@ export const zh: Translation = {
   'project.link.demo': '演示',
   'project.link.zenn': 'Zenn文章',
 
+  'home.section.pages': '页面导览',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

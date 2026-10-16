@@ -23,6 +23,8 @@ const profile = defineCollection({
   schema: z.object({
     displayName: text,
     title: localized,
+    // Home の冒頭に出す「何をする人か」の一文 / Home 첫머리에 표시하는 "무엇을 하는 사람인지" 한 문장
+    headline: localized,
     location: localized,
     intro: z.array(localized),
     strengths: z.array(localized),

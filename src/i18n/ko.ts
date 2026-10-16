@@ -76,6 +76,8 @@ export const ko: Translation = {
   'project.link.demo': '데모',
   'project.link.zenn': 'Zenn 글',
 
+  'home.section.pages': '페이지 안내',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',
