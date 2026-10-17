@@ -12,6 +12,8 @@
 - 호스팅: Cloudflare (GitHub push 시 자동 배포)
 - 패키지 매니저: npm / Node.js: 짝수 LTS 버전 (`.nvmrc`로 고정)
 - 버전 기록: Astro [7.4.0] / Tailwind CSS [4.3.3] (@tailwindcss/vite 4.3.3) / Node.js [24.16.0]
+  - TypeScript [6.0.3] (^6): TS 7은 @astrojs/check가 지원하지 않아(peer: ^5 || ^6) 6을 사용
+  - @astrojs/check [0.9.10] / wrangler [4.151.1] / @astrojs/sitemap [3.7.4]
 
 ## 디렉터리 구성 / ディレクトリ構成
 ```
