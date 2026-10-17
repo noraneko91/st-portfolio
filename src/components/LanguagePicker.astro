@@ -22,7 +22,6 @@ const pathname = Astro.url.pathname;
     aria-expanded="false"
     aria-controls="lang-menu"
     data-lang-button
-    hidden
   >
     <span>{lang.toUpperCase()}</span>
     <span class="sr-only">{t('lang.label')}</span>
@@ -48,6 +47,12 @@ const pathname = Astro.url.pathname;
 </div>
 
 <style>
+  /* 表示の切り替えは html.js で最初の描画から決める (スクリプト実行後に切り替えると高さが変わり CLS になる) / 표시 전환은 html.js로 첫 그리기부터 정한다 (스크립트 실행 후에 바꾸면 높이가 바뀌어 CLS가 된다) */
+  :global(html:not(.js)) [data-lang-button],
+  :global(html.js) [data-lang-picker]:not([data-enhanced]) [data-lang-menu] {
+    display: none;
+  }
+
   [data-enhanced] [data-lang-menu] {
     position: absolute;
     top: 100%;
