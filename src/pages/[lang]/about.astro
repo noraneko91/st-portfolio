@@ -62,11 +62,19 @@ const firstStart = careers.at(-1)?.data.start;
   </Section>
 
   <Section index={3} label={t('about.section.career')} id="career">
-    <ol class="career-list">
+    {/* 経歴を git log --graph に見立て、新しい順にノードと線でつなぐ (CSS のみ) / 경력을 git log --graph에 빗대어 최신순으로 노드와 선으로 잇는다 (CSS만) */}
+    <p class="graph-command font-mono" aria-hidden="true">$ git log --graph</p>
+    <ol class="graph">
       {
-        careers.map((career) => (
-          <li>
-            <CareerItem career={career} lang={lang} skillNames={skillNames} />
+        careers.map((career, index) => (
+          <li class="commit">
+            <span class="commit-node" aria-hidden="true" />
+            <CareerItem
+              career={career}
+              lang={lang}
+              skillNames={skillNames}
+              refLabel={index === 0 ? 'HEAD -> main' : index === careers.length - 1 ? 'root' : undefined}
+            />
           </li>
         ))
       }
@@ -75,8 +83,54 @@ const firstStart = careers.at(-1)?.data.start;
 </BaseLayout>
 
 <style>
-  .career-list {
-    display: grid;
-    gap: 3rem;
+  .graph-command {
+    margin-bottom: 1.25rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  /* 左の線がブランチ、丸がコミット。最新だけ塗りつぶす / 왼쪽 선이 브랜치, 원이 커밋. 최신만 채운다 */
+  .commit {
+    position: relative;
+    padding-inline-start: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .commit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0.6875rem;
+    width: 2px;
+    background: var(--control-border);
+  }
+
+  .commit:first-child::before {
+    top: 0.75rem;
+  }
+
+  .commit:last-child {
+    padding-bottom: 0;
+  }
+
+  .commit:last-child::before {
+    bottom: auto;
+    height: 0.75rem;
+  }
+
+  .commit-node {
+    position: absolute;
+    top: 0.3125rem;
+    left: 0.3125rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  .commit:first-child .commit-node {
+    background: var(--accent);
   }
 </style>

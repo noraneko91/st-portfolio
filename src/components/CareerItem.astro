@@ -1,4 +1,5 @@
 ---
+import { createHash } from 'node:crypto';
 import type { Lang } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
 import { formatNumber, formatYearMonth, totalMonths, type Career } from '../lib/content';
@@ -9,9 +10,11 @@ interface Props {
   lang: Lang;
   // skills.yaml の id → 表示名 / skills.yaml의 id → 표시명
   skillNames: Map<string, string>;
+  // git log の ref 表示 (例: "HEAD -> main") / git log의 ref 표시 (예: "HEAD -> main")
+  refLabel?: string;
 }
 
-const { career, lang, skillNames } = Astro.props;
+const { career, lang, skillNames, refLabel } = Astro.props;
 const { data } = career;
 const t = useTranslations(lang);
 
@@ -22,10 +25,15 @@ const scale = [
 ].filter(Boolean);
 const phases = sortPhases(data.phases).map((phase) => t(`phase.${phase}`));
 const tech = data.tech.map((ref) => skillNames.get(ref.id) ?? ref.id);
+// git log 風の短いハッシュ。経歴の id から計算するため、データが同じなら毎回同じ値 / git log 풍의 짧은 해시. 경력 id로 계산하므로 데이터가 같으면 항상 같은 값
+const hash = createHash('sha1').update(career.id).digest('hex').slice(0, 7);
 ---
 
 <article class="career">
-  <p class="career-period">
+  <p class="career-period font-mono">
+    {/* ハッシュと ref は装飾なので読み上げない / 해시와 ref는 장식이므로 읽지 않는다 */}
+    <span class="career-hash" aria-hidden="true">{hash}</span>
+    {refLabel && <span class="career-ref" aria-hidden="true">{`(${refLabel})`}</span>}
     <time datetime={data.start}>{formatYearMonth(data.start, lang)}</time>
     {' – '}
     {data.end ? <time datetime={data.end}>{formatYearMonth(data.end, lang)}</time> : t('period.present')}
@@ -83,8 +91,17 @@ const tech = data.tech.map((ref) => skillNames.get(ref.id) ?? ref.id);
   }
 
   .career-period {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     color: var(--muted);
+  }
+
+  .career-hash,
+  .career-ref {
+    margin-inline-end: 0.75rem;
+  }
+
+  .career-ref {
+    color: var(--accent);
   }
 
   .career-months {
