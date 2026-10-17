@@ -61,39 +61,53 @@ const firstStart = careers.at(-1)?.data.start;
     </ul>
   </Section>
 
-  <Section index={3} label={t('about.section.career')} id="career">
-    {/* 経歴を git log --graph に見立て、新しい順にノードと線でつなぐ (CSS のみ) / 경력을 git log --graph에 빗대어 최신순으로 노드와 선으로 잇는다 (CSS만) */}
-    <p class="graph-command font-mono" aria-hidden="true">$ git log --graph</p>
+  {/* 経歴は本文幅に収めず広げ、git log --graph に見立てたタイムラインで目立たせる / 경력은 본문 폭에 가두지 않고 넓혀, git log --graph에 빗댄 타임라인으로 눈에 띄게 한다 */}
+  <section class="block" aria-labelledby="career-label">
+    <h2 id="career-label" class="block-label">
+      <span class="font-mono" aria-hidden="true">03 —</span>
+      {t('about.section.career')}
+    </h2>
+    <p class="graph-command font-mono" aria-hidden="true"><span class="graph-prompt">$</span> git log --graph</p>
     <ol class="graph">
       {
         careers.map((career, index) => (
-          <li class="commit">
+          <li class="commit reveal">
             <span class="commit-node" aria-hidden="true" />
             <CareerItem
               career={career}
               lang={lang}
               skillNames={skillNames}
               refLabel={index === 0 ? 'HEAD -> main' : index === careers.length - 1 ? 'root' : undefined}
+              head={index === 0}
             />
           </li>
         ))
       }
     </ol>
-  </Section>
+  </section>
 </BaseLayout>
 
 <style>
   .graph-command {
-    margin-bottom: 1.25rem;
-    font-size: 0.8125rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
     color: var(--muted);
   }
 
-  /* 左の線がブランチ、丸がコミット。最新だけ塗りつぶす / 왼쪽 선이 브랜치, 원이 커밋. 최신만 채운다 */
+  .graph-prompt {
+    margin-inline-end: 0.5rem;
+    color: var(--accent);
+  }
+
+  .graph {
+    max-width: 56rem;
+  }
+
+  /* 左の線がブランチ、丸がコミット。線は新しいほどテーマ色が濃い / 왼쪽 선이 브랜치, 원이 커밋. 선은 최신일수록 포인트 컬러가 진하다 */
   .commit {
     position: relative;
-    padding-inline-start: 2rem;
-    padding-bottom: 3rem;
+    padding-inline-start: 2.75rem;
+    padding-bottom: 1.5rem;
   }
 
   .commit::before {
@@ -101,13 +115,13 @@ const firstStart = careers.at(-1)?.data.start;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0.6875rem;
-    width: 2px;
-    background: var(--control-border);
+    left: 0.875rem;
+    width: 3px;
+    background: linear-gradient(var(--accent), var(--control-border));
   }
 
   .commit:first-child::before {
-    top: 0.75rem;
+    top: 1.5rem;
   }
 
   .commit:last-child {
@@ -116,21 +130,38 @@ const firstStart = careers.at(-1)?.data.start;
 
   .commit:last-child::before {
     bottom: auto;
-    height: 0.75rem;
+    height: 1.5rem;
   }
 
   .commit-node {
     position: absolute;
-    top: 0.3125rem;
-    left: 0.3125rem;
-    width: 0.875rem;
-    height: 0.875rem;
-    border: 2px solid var(--accent);
+    top: 1.0625rem;
+    left: 0.4375rem;
+    z-index: 1;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 3px solid var(--accent);
     border-radius: 50%;
     background: var(--bg);
   }
 
   .commit:first-child .commit-node {
     background: var(--accent);
+  }
+
+  /* 最新 (HEAD) のノードだけ波紋を出す / 최신 (HEAD) 노드만 물결을 낸다 */
+  @media (prefers-reduced-motion: no-preference) {
+    .commit:first-child .commit-node {
+      animation: ripple 2.4s ease-out infinite;
+    }
+  }
+
+  @keyframes ripple {
+    from {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    to {
+      box-shadow: 0 0 0 0.75rem transparent;
+    }
   }
 </style>
