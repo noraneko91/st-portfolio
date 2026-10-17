@@ -102,6 +102,8 @@ const projects = defineCollection({
         }),
       )
       .default([]),
+    // 一覧のサムネイル。省略するとパスと技術から表紙を自動で作る / 목록 썸네일. 생략하면 경로와 기술로 표지를 자동으로 만든다
+    thumbnail: z.object({ src: text, alt: localized }).optional(),
     // AWS 構成図。画像は public/ 以下に置く / AWS 구성도. 이미지는 public/ 아래에 둔다
     diagram: z.object({ src: text, alt: localized }).optional(),
     overview: z.array(localized).default([]),
