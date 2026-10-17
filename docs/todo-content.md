@@ -39,24 +39,35 @@
 
 - [x] **영어·중국어 레벨**: 영어는 레벨 표기 없음, 중국어는 HSK 3급
 - [ ] **포트폴리오용 메일 주소**: 만든 뒤 `email` 에 설정. 비어 있는 동안은 Contact에 메일 링크가 나오지 않음
-- [ ] **자기소개 문장 확정**: `headline`(Home의 큰 한 문장), `intro`(About 소개 3문단), `strengths`(강점 분야 3개)
+- [ ] **자기소개 문장 확정**: `headline`(Home의 큰 한 문장), `intro`(About의 짧은 소개 1문단), `growth`(About "これから" 2문단, 핵심: 백엔드에서 시작해 클라우드를 포함한 풀스택으로), `strengths`(강점 분야 3개)
 
-## 4. 프로젝트 (`src/content/projects/`)
+## 4. 개인 개발 (`src/content/projects/`)
 
-- [ ] **st-portfolio 담당 공정**: 개인 개발이라 전 공정이지만, 무엇을 표시할지 결정. 지금은 요건 정의·기본 설계·상세 설계·구현·통합 테스트
-  → `st-portfolio.yaml` 의 `phases`
-- [ ] **st-portfolio 기술 버전**: 패키지를 업데이트할 때마다 `package.json`, `CLAUDE.md` "버전 기록"과 함께 갱신
-  → `st-portfolio.yaml` 의 `stack`
-- [ ] **경비정산 시스템**: 개발을 재개하면 개요 / AWS 구성도 / 기술 선정 이유 / 고민한 점을 추가하고 `status: published` 로 변경. 계속 쉬는 동안 숨기려면 `status: hidden`
-  → `expense-workflow.yaml`
+1 프로젝트 = 1 YAML입니다. 새 항목은 `npm run new:project <slug>` 로 템플릿을 만들고, 내용을 채운 뒤 `draft: false` 로 바꿉니다. 아래 초안은 각 리포의 README·코드·커밋 이력에 있는 사실만으로 썼습니다.
+
+### 공개 중
+
+- [ ] **st-portfolio**: 담당 공정 표기 결정(지금은 요건 정의·기본 설계·상세 설계·구현·통합 테스트). 기술 버전은 패키지를 올릴 때마다 `package.json`·CLAUDE.md "버전 기록"과 함께 갱신
+- [ ] **expense-workflow** (学習 / 進行中): README의 "학습 프로젝트" 표기를 근거로 学習 분류. 개요·고민한 점은 README 내용만 사용. 확인: 상태(進行中 맞는지), AWS 이전 계획 서술을 그대로 둘지, 기간(시작 2026-10)
+- [ ] **grab-market** (学習 / 完了): 리포 설명 "인프런 그랩마켓 React프로젝트"와 커밋 이력(2023-04~05)이 근거. client·server 2개 리포를 1건으로 묶음. 확인: **강의 내용에 직접 추가한 부분**(있으면 summary에 강조), 데모 URL(리포의 Vercel 주소는 현재 404)
+
+### 비공개 초안 (`draft: true`)
+
+- [ ] **studio-tama-site**: 서울의 공간 디자인 스튜디오 "STUDIO TAMA" 사이트(Next.js, GitHub Pages 배포 설정). 실제 업체의 연락처가 들어 있어 비공개로 둠. 확인: 의뢰받은 제작인지 연습인지, **게재 허가**, 상태(進行中/完了), 공개 URL(GitHub Pages는 현재 404)
+- [ ] **meme-maker**: Canvas API 그림 그리기 앱(2022-09). 확인: 강의를 따라 만든 것인지(学習/制作), 상태
+- [ ] **cone** ("코딩네컷"): 사진 4장을 즉석 사진 풍 프레임에 배치한 HTML·CSS 페이지(2023-04). 확인: 강의 기반인지, 만든 목적
+
+### 등록하지 않음
+
+- [ ] **login_and_register_app**, **dashboard**: 둘 다 다른 사람의 리포를 fork한 것이고, 커밋 이력에 본인(noraneko91)의 커밋이 0건이라 본인 작업으로 소개할 근거가 없음. 본인이 수정한 부분이 다른 브랜치·리포에 있으면 알려 주세요
+- [x] **github_test**: 요청대로 제외
 
 ## 5. 제가 대신 정한 것 (확인 후 그대로 두거나 수정)
 
 - [ ] **IDE 제외**: 재료에 있던 VS Code·Eclipse는 경력의 기술 목록에서 뺐음
 - [ ] **도구 경험 연수**: Git·SVN·Jenkins·Maven·UFT One도 경력 기간으로 계산해 표시 (재료에서는 "—"). 예: Git 약 5년
 - [ ] **스킬 레벨**: 스키마에 `level`(1~5) 필드만 있고 표시하지 않음. 표시할지 결정
-- [ ] **About 제목 중복**: ja에서 페이지 제목 "経歴"와 섹션 "03 — 経歴"가 겹침. 페이지 제목을 "プロフィール・経歴" 등으로 바꿀지
-  → `src/i18n/*.ts` 의 `about.title`
+- [x] **About 제목 중복**: 구조 변경으로 해결(About 제목은 "プロフィール", 경력은 Projects의 "業務経歴" 탭으로 이동)
 - [x] **사이트 이름**: "KIM SUNGTAE" + "ポートフォリオ / Portfolio / 作品集 / 포트폴리오" (언어별). 표시 이름은 `profile.yaml` 의 `displayName`
 
 ## 6. 번역 검토 (번역 단계)
@@ -66,7 +77,7 @@ en / zh / ko는 모두 초안 번역입니다. ja를 원문으로 두고 다음�
 - [ ] `src/i18n/en.ts` · `zh.ts` · `ko.ts` (UI 문구)
 - [ ] `src/content/profile.yaml`
 - [ ] `src/content/career/*.yaml` (5건)
-- [ ] `src/content/projects/*.yaml` (2건)
+- [ ] `src/content/projects/*.yaml` (공개 3건 + 비공개 초안 3건)
 
 ## 7. 직접 확인할 것 (품질 단계에서 남긴 항목)
 

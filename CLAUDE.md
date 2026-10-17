@@ -35,8 +35,15 @@ public/          # 이미지·favicon 등 정적 파일
 ```
 
 ## 페이지 구성 / ページ構成
-- Home / About(経歴) / Skills / Projects / Contact
-- Projects 상세: 概要 / AWS構成図 / 技術スタック(버전 명시) / 技術選定理由 /
+- Home / About(自己紹介・これから) / Skills / Projects / Contact (ADR 0006)
+- Projects는 경로 기반 탭 2개 / パスベースのタブ2つ:
+  - 業務経歴 /[lang]/projects/work/ (경력 + git log 풍 타임라인)
+  - 個人開発 /[lang]/projects/personal/ (목록), /[lang]/projects/personal/[slug]/ (상세)
+  - /[lang]/projects/ 는 業務経歴으로 리다이렉트
+- 個人開発는 1건 = 1 YAML. 추가는 `npm run new:project <slug>` (draft: true로 생성)
+  - 확인되지 않은 사실은 쓰지 않는다. 미확인 항목은 draft: true로 비공개
+  - fork이고 본인 커밋이 없는 리포는 등록하지 않는다
+- 個人開発 상세(overview가 있을 때만): 概要 / AWS構成図 / 技術スタック(버전 명시) / 技術選定理由 /
   担当工程 / 工夫した点・課題と解決 / 링크(GitHub・デモGIF・Zenn)
 
 ## 다국어 규칙 / 多言語ルール

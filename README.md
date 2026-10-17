@@ -40,6 +40,20 @@
 - [0003. 多言語対応に言語別パス方式を採用する](docs/adr/0003-i18n-path-routing.md)
 - [0004. Cloudflare Workers（Static Assets）でデプロイする](docs/adr/0004-cloudflare-workers.md)
 - [0005. 操作の多い部品だけに React islands と shadcn/ui を使う](docs/adr/0005-react-islands-shadcn.md)
+- [0006. 経歴を Projects に移し、「業務経歴」と「個人開発」のタブに分ける](docs/adr/0006-projects-work-personal.md)
+
+## ページ構成
+
+| ページ | URL | 内容 |
+|---|---|---|
+| Home | `/{lang}/` | 概要と各ページへの入口 |
+| About | `/{lang}/about/` | 自己紹介・得意分野・これから |
+| Skills | `/{lang}/skills/` | スキル（経験年数は経歴から自動計算）・資格 |
+| Projects: 業務経歴 | `/{lang}/projects/work/` | 経歴（git log 風タイムライン） |
+| Projects: 個人開発 | `/{lang}/projects/personal/` | 個人開発の一覧と詳細（`/{lang}/projects/personal/<slug>/`） |
+| Contact | `/{lang}/contact/` | 連絡先 |
+
+`/{lang}/projects/` は業務経歴へリダイレクトします。
 
 プロジェクトの目的・範囲は [docs/project-brief.md](docs/project-brief.md) を参照してください。
 
@@ -52,7 +66,7 @@ src/
     skills.yaml
     certifications.yaml
     career/           # 経歴（1件 = 1ファイル）
-    projects/         # プロジェクト（1件 = 1ファイル、ファイル名が URL の slug）
+    projects/         # 個人開発（1件 = 1ファイル、ファイル名が URL の slug）
   content.config.ts   # コンテンツのスキーマ（zod）
   i18n/               # UI の文言（ja.ts が基準）と言語のヘルパー
   lib/                # コンテンツの取得・期間計算
@@ -67,6 +81,7 @@ src/
 docs/                 # プロジェクト概要・ADR
 public/               # favicon・OGP 画像など
 scripts/brand/        # favicon・OGP 画像の原本（SVG）と生成スクリプト
+scripts/new-project.mjs  # 個人開発のひな形を作る（npm run new:project）
 wrangler.jsonc        # Cloudflare Workers の配信設定（404・トレイリングスラッシュ）
 ```
 
@@ -99,3 +114,11 @@ npm run brand      # Chrome の場所が異なる場合は CHROME_PATH で指定
 ## コンテンツの編集
 
 `src/content/` の YAML を編集します。言語別の文（`ja` / `en` / `zh` / `ko`）は4言語すべて必須で、1つでも欠けると `npm run build` が失敗します。
+
+### 個人開発を追加する
+
+```sh
+npm run new:project todo-app   # src/content/projects/todo-app.yaml を draft: true で作成
+```
+
+TODO を埋め、`tech` に `skills.yaml` の id を書いて `draft: false` にすると一覧に表示されます。`overview` を書くと詳細ページも作られます。`skills.yaml` にない id を書くと `npm run build` が失敗します。

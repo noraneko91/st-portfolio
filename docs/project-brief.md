@@ -14,7 +14,7 @@
 
 - 静的サイト（DB・サーバーなし）、モバイルファーストのレスポンシブ対応
 - 4言語対応: ja（デフォルト・原文） / en / zh（簡体字） / ko
-- ページ: Home / About（経歴） / Skills / Projects / Contact
+- ページ: Home / About（自己紹介・これから） / Skills / Projects（業務経歴・個人開発） / Contact（構成の理由は [ADR 0006](adr/0006-projects-work-personal.md)）
 - ダークモード、言語別フォント、hreflang・言語別 sitemap の出力
 
 ### 対象外
@@ -22,9 +22,16 @@
 - サイト自体のサーバーサイド処理・DB
 - サイト自体の AWS 構築（Python + AWS の実績は Projects ページで個人開発として紹介する。理由は [ADR 0001](adr/0001-static-site.md)）
 
-## Projects 詳細ページの構成
+## Projects の構成
 
-各プロジェクトを次の項目で紹介する。
+Projects は URL の異なる2つのタブに分ける。`/[lang]/projects/` は業務経歴へ移動する。
+
+| タブ | URL | 内容 |
+|---|---|---|
+| 業務経歴 | `/[lang]/projects/work/` | 経歴と git log 風のタイムライン |
+| 個人開発 | `/[lang]/projects/personal/` | 個人開発の一覧（分類: 学習 / 制作、状態: 進行中 / 完了） |
+
+個人開発のうち、詳細を書いたものは `/[lang]/projects/personal/<slug>/` に次の項目で紹介する。
 
 | 項目 | 内容 |
 |---|---|
