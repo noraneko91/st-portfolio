@@ -80,7 +80,7 @@ export const en: Translation = {
   'contact.email': 'Email',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'kim-sungtae portfolio — Backend Engineer (Java / Python / AWS)',
+  'og.imageAlt': 'KIM SUNGTAE portfolio — Backend Engineer (Java / Python / AWS)',
 
   'contact.emailPending': 'Coming soon',
 

@@ -80,7 +80,7 @@ export const zh: Translation = {
   'contact.email': '邮箱',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'kim-sungtae 的作品集 — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'KIM SUNGTAE 的作品集 — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '准备中',
 

@@ -79,7 +79,7 @@ export const ja = {
   'contact.email': 'メール',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'kim-sungtae のポートフォリオ — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'KIM SUNGTAE のポートフォリオ — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '準備中',
 
