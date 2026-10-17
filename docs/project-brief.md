@@ -43,6 +43,7 @@
 | 言語 | TypeScript（strict） | — |
 | フレームワーク | Astro | [0002](adr/0002-astro.md) |
 | スタイル | Tailwind CSS | — |
+| UI 部品 | React islands + shadcn/ui（コマンドパレットのみ） | [0005](adr/0005-react-islands-shadcn.md) |
 | ホスティング | Cloudflare Workers（GitHub への push で自動デプロイ） | [0001](adr/0001-static-site.md)・[0004](adr/0004-cloudflare-workers.md) |
 | 多言語 | 言語別パス（/ja/ /en/ /zh/ /ko/） | [0003](adr/0003-i18n-path-routing.md) |
 

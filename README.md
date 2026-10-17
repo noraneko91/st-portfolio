@@ -14,6 +14,7 @@
 - **4言語対応**: 言語ごとに独立したURL（`/ja/` `/en/` `/zh/` `/ko/`）。全ページで hreflang を出力し、sitemap の各 URL にも4言語の代替リンクを付与
 - **翻訳漏れをビルドで検出**: 日本語を基準に他言語を型で縛り、キーやコンテンツの訳が1つでも欠けるとビルドが失敗する
 - **データとページの分離**: 経歴・スキル・プロジェクトは YAML で管理し、ページは表示だけを担当。スキルの経験年数は経歴の期間から自動計算
+- **コマンドパレット**: Ctrl/⌘+K でページ移動・言語切替・GitHub を検索（React island + shadcn/ui）。React は初めて開くときだけ読み込む
 - **静的サイト**: DB・サーバーなし。GitHub への push で Cloudflare Workers に自動デプロイ
 - **アクセシビリティ**: キーボード操作・スクリーンリーダー対応の言語メニュー（WAI-ARIA Menu Button）、JS 無効時も言語を選べるリンク、`prefers-reduced-motion` の尊重
 - **パフォーマンス**: Lighthouse（モバイル）で Performance・Accessibility・Best Practices・SEO すべて 100（2026年10月時点）
@@ -25,6 +26,7 @@
 | フレームワーク | Astro | 7.4.0 |
 | 言語 | TypeScript（strict） | 6.0.3 |
 | スタイル | Tailwind CSS | 4.3.3 |
+| UI 部品 | React（islands）+ shadcn/ui（cmdk・Radix） | React 19.3.1 |
 | ホスティング | Cloudflare Workers（Static Assets） | wrangler 4.151.1 |
 | sitemap | @astrojs/sitemap | 3.7.4 |
 | ランタイム | Node.js | 24.16.0（`.nvmrc`） |
@@ -37,6 +39,7 @@
 - [0002. フレームワークに Astro を採用する](docs/adr/0002-astro.md)
 - [0003. 多言語対応に言語別パス方式を採用する](docs/adr/0003-i18n-path-routing.md)
 - [0004. Cloudflare Workers（Static Assets）でデプロイする](docs/adr/0004-cloudflare-workers.md)
+- [0005. 操作の多い部品だけに React islands と shadcn/ui を使う](docs/adr/0005-react-islands-shadcn.md)
 
 プロジェクトの目的・範囲は [docs/project-brief.md](docs/project-brief.md) を参照してください。
 
@@ -54,6 +57,8 @@ src/
   i18n/               # UI の文言（ja.ts が基準）と言語のヘルパー
   lib/                # コンテンツの取得・期間計算
   components/         # ヘッダー・言語メニュー・セクションなど
+    ui/               # shadcn/ui の部品（配色変数に合わせて調整）
+    command/          # コマンドパレット（React island）
   layouts/            # 共通レイアウト（hreflang・OGP）
   pages/
     index.astro       # ルート: 言語を判定して /{lang}/ へ移動

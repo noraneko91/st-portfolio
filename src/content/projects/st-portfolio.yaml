@@ -36,6 +36,13 @@ stack:
       en: Styling (CSS-variable colors and dark mode)
       zh: 样式（基于CSS变量的配色与深色模式）
       ko: 스타일 (CSS 변수 기반 색 구성과 다크모드)
+  - name: React + shadcn/ui
+    version: React 19.3.1
+    purpose:
+      ja: コマンドパレット（操作の多い部品だけを island にし、初めて開くときに読み込む）
+      en: Command palette (only interactive parts are islands, loaded on first open)
+      zh: 命令面板（只把交互多的部件做成 island，首次打开时加载）
+      ko: 커맨드 팔레트 (조작이 많은 부품만 island로 만들고 처음 열 때 불러온다)
   - name: Cloudflare Workers
     version: Static Assets
     purpose:
@@ -124,6 +131,22 @@ decisions:
       zh: Cloudflare Pages
       ko: Cloudflare Pages
     adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0004-cloudflare-workers.md
+  - topic:
+      ja: React islands + shadcn/ui
+      en: React islands + shadcn/ui
+      zh: React islands + shadcn/ui
+      ko: React islands + shadcn/ui
+    reason:
+      ja: キーボード操作や読み上げへの対応が難しいコマンドパレットだけを実績のある部品で作り、初めて開くときに読み込むことで、表示速度を落とさずに済むため
+      en: Only the command palette, whose keyboard and screen reader support is hard to get right, is built from proven components and loaded on first open, so page speed is unaffected
+      zh: 只有键盘操作和读屏支持较难实现的命令面板使用成熟组件，并在首次打开时加载，因此不会降低页面速度
+      ko: 키보드 조작·스크린리더 대응이 어려운 커맨드 팔레트만 검증된 부품으로 만들고 처음 열 때 불러와서, 표시 속도를 떨어뜨리지 않기 때문
+    alternatives:
+      ja: 素の JS での自作・Preact・Motion
+      en: Plain JavaScript, Preact, Motion
+      zh: 原生 JS 自行实现、Preact、Motion
+      ko: 순수 JS로 직접 구현·Preact·Motion
+    adr: https://github.com/noraneko91/st-portfolio/blob/main/docs/adr/0005-react-islands-shadcn.md
 challenges:
   - problem:
       ja: 4言語の翻訳漏れを人の目だけで防ぐのは難しい
@@ -175,6 +198,16 @@ challenges:
       en: Checking the browser's computed styles revealed the cause, and the rule was rewritten with individual properties so minification no longer merges them
       zh: 通过检查浏览器的计算样式找到原因，并改用单独的属性书写，避免被压缩合并
       ko: 브라우저의 계산된 스타일을 확인해 원인을 찾고, 압축 시 합쳐지지 않도록 개별 속성으로 다시 썼다
+  - problem:
+      ja: スクリプトで言語メニューを切り替えるときにヘッダーの高さが変わり、ページ全体がずれていた（CLS 0.24）
+      en: Switching the language menu with a script changed the header height and shifted the whole page (CLS 0.24)
+      zh: 用脚本切换语言菜单时页眉高度变化，导致整个页面发生偏移（CLS 0.24）
+      ko: 스크립트로 언어 메뉴를 전환할 때 헤더 높이가 바뀌어 페이지 전체가 밀렸다 (CLS 0.24)
+    solution:
+      ja: JS が動くかどうかを head で先に CSS へ伝え、最初の描画から表示を決めることで CLS を 0 にした
+      en: The head now tells CSS whether JavaScript runs before the first paint, so the layout is decided up front and CLS dropped to 0
+      zh: 在 head 中提前告知 CSS 是否运行 JS，从首次绘制起就确定显示方式，使 CLS 降为 0
+      ko: JS가 동작하는지를 head에서 먼저 CSS에 알리고 첫 그리기부터 표시를 정해 CLS를 0으로 만들었다
 links:
   - kind: github
     url: https://github.com/noraneko91/st-portfolio

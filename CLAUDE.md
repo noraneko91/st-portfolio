@@ -9,11 +9,13 @@
 - 언어: TypeScript (strict)
 - 프레임워크: Astro (최신 안정판. 설치 후 `npx astro --version`으로 확인해 아래에 기록)
 - 스타일: Tailwind CSS (최신 안정판. 버전 기록)
+- UI 부품: 조작이 많은 부품만 React island + shadcn/ui (지금은 커맨드 팔레트만. ADR 0005)
 - 호스팅: Cloudflare (GitHub push 시 자동 배포)
 - 패키지 매니저: npm / Node.js: 짝수 LTS 버전 (`.nvmrc`로 고정)
 - 버전 기록: Astro [7.4.0] / Tailwind CSS [4.3.3] (@tailwindcss/vite 4.3.3) / Node.js [24.16.0]
   - TypeScript [6.0.3] (^6): TS 7은 @astrojs/check가 지원하지 않아(peer: ^5 || ^6) 6을 사용
   - @astrojs/check [0.9.10] / wrangler [4.151.1] / @astrojs/sitemap [3.7.4]
+  - React [19.3.1] / @astrojs/react [7.1.0] / cmdk [1.1.1] / radix-ui [1.8.1] / cn [0.5.0] (shadcn/ui Command·Dialog)
 
 ## 디렉터리 구성 / ディレクトリ構成
 ```
@@ -21,7 +23,10 @@ src/
   i18n/          # 번역 파일(ja.ts, en.ts, zh.ts, ko.ts)과 헬퍼 / 翻訳ファイルとヘルパー
   content/       # Projects 등 콘텐츠(언어별) / コンテンツ(言語別)
   components/    # 재사용 컴포넌트 / 再利用コンポーネント
+    ui/          # shadcn/ui 부품 (사이트 색 변수에 맞춰 고쳐 쓴다) / shadcn/ui 部品 (配色変数に合わせて調整)
+    command/     # 커맨드 팔레트 (React island) / コマンドパレット
   layouts/       # 공통 레이아웃 / 共通レイアウト
+  lib/           # 콘텐츠 조회·기간 계산·빌드 정보 / コンテンツ取得・期間計算・ビルド情報
   pages/
     index.astro  # 루트: 언어 판별 후 /{lang}/ 로 이동 / ルート: 言語判定してリダイレクト
     [lang]/      # 언어별 페이지 / 言語別ページ
@@ -67,9 +72,11 @@ public/          # 이미지·favicon 등 정적 파일
 - 경력 기재 시 고객사명·기밀 정보는 업종 수준으로 익명화한다
 
 ## 디자인 원칙 / デザイン方針
-- 절제된 모던 디자인. 템플릿 같은 흔한 레이아웃은 피한다
-- 타이포그래피와 여백 중심, 색은 베이스 + 포인트 컬러 1개 (CSS 변수로 관리)
-- 다크모드 지원, 애니메이션은 은은하게 (페이지 전환·스크롤 정도, prefers-reduced-motion 존중)
+- 모던하고 인터랙티브하게. 단 성능·접근성은 유지한다 (Lighthouse 수치로 확인). 템플릿 같은 흔한 레이아웃은 피한다
+- 색은 베이스 + 포인트 컬러 1개 (CSS 변수로 관리). 조작 요소의 hover·열림·포커스도 변수로 통일하고, 색만으로 구분하지 않는다
+- JS는 필요한 부품에만. 정적 부분은 Astro, 상호작용이 많은 부품은 React island로 하고 처음 쓸 때 동적 import 한다 (ADR 0005)
+- 애니메이션은 CSS 우선 (스크롤 등장·hover·마이크로 인터랙션). prefers-reduced-motion 존중, 등장 애니메이션에 투명도 변화를 쓰지 않는다 (글자 대비 저하 방지)
+- 다크모드 지원
 - 언어별 폰트를 지정한다 (`html[lang]`으로 전환)
 - Lighthouse 각 항목 90점 이상 유지 (특히 Performance·Accessibility)
 
