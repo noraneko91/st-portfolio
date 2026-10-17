@@ -344,9 +344,9 @@
   }
 }
 
+/* 透明度は変えず位置だけ動かす。途中の半透明な状態で文字のコントラストが下がらないように / 투명도는 바꾸지 않고 위치만 움직인다. 중간의 반투명 상태에서 글자 대비가 떨어지지 않게 */
 @keyframes reveal {
   from {
-    opacity: 0;
-    transform: translateY(0.75rem);
+    transform: translateY(1.5rem);
   }
 }
