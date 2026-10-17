@@ -1,8 +1,9 @@
 ---
 import PageHero from '../../components/PageHero.astro';
+import SkillGraph from '../../components/SkillGraph.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
-import { formatYearMonth, formatYears, getCertifications, getSkillsWithMonths } from '../../lib/content';
+import { formatYearMonth, formatYears, getCareers, getCertifications, getProjects, getSkillsWithMonths } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -18,7 +19,7 @@ const maxMonths = Math.max(...skills.map(({ months }) => months), 1);
 const groups = categories
   .map((category) => ({ category, items: skills.filter(({ skill }) => skill.data.category === category) }))
   .filter((group) => group.items.length > 0);
-const certifications = await getCertifications();
+const [certifications, careers, projects] = await Promise.all([getCertifications(), getCareers(), getProjects()]);
 ---
 
 <BaseLayout lang={lang} title={t('skills.title')} description={t('skills.description')}>
@@ -77,9 +78,22 @@ const certifications = await getCertifications();
     </ul>
   </section>
 
+  {/* 線を JS で引くグラフなので、JS が動かない環境では出さない (スキルの一覧は 01 にある) / 선을 JS로 긋는 그래프라서, JS가 동작하지 않는 환경에서는 표시하지 않는다 (스킬 목록은 01에 있다) */}
+  <section class="block graph-section" aria-labelledby="graph-label">
+    <h2 id="graph-label" class="block-label">
+      <span class="font-mono" aria-hidden="true">03 —</span>
+      {t('skills.section.graph')}
+    </h2>
+    <p class="mb-6 max-w-[var(--measure)] text-muted">{t('skills.graph.help')}</p>
+    <SkillGraph lang={lang} careers={careers} projects={projects} skills={skills} />
+  </section>
 </BaseLayout>
 
 <style>
+  :global(html:not(.js)) .graph-section {
+    display: none;
+  }
+
   .skill-grid {
     display: grid;
     gap: 1rem;

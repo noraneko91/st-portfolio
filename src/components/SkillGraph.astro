@@ -1,0 +1,381 @@
+---
+import type { Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+import { formatYears, type Career, type Project, type Skill } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  careers: Career[];
+  projects: Project[];
+  skills: { skill: Skill; months: number }[];
+}
+
+const { lang, careers, projects, skills } = Astro.props;
+const t = useTranslations(lang);
+
+// 左: 経歴 (新しい順) と個人開発、右: そのどれかで使ったスキル。つながりは YAML の tech から作る
+// 왼쪽: 경력 (최신순)과 개인 개발, 오른쪽: 그중 어딘가에서 쓴 스킬. 연결은 YAML의 tech로 만든다
+const left = [
+  ...careers.map((career) => ({
+    id: `career-${career.id}`,
+    label: career.data.industry[lang],
+    sub: `${career.data.start.slice(0, 4)}–${career.data.end ? career.data.end.slice(2, 4) : ''}`,
+    tech: career.data.tech.map((ref) => ref.id),
+    personal: false,
+  })),
+  ...projects.map((project) => ({
+    id: `project-${project.id}`,
+    label: project.data.title[lang],
+    sub: t('skills.personalOnly'),
+    tech: project.data.tech.map((ref) => ref.id),
+    personal: true,
+  })),
+];
+
+const used = new Set(left.flatMap((node) => node.tech));
+const categories = ['language', 'framework', 'cloud', 'database', 'tool'] as const;
+const groups = categories
+  .map((category) => ({
+    category,
+    items: skills
+      .filter(({ skill }) => skill.data.category === category && used.has(skill.id))
+      .map(({ skill, months }) => ({
+        id: `skill-${skill.id}`,
+        label: skill.data.name,
+        sub: months > 0 ? formatYears(months, t) : t('skills.personalOnly'),
+        links: left.filter((node) => node.tech.includes(skill.id)).map((node) => node.id),
+      })),
+  }))
+  .filter((group) => group.items.length > 0);
+---
+
+{/*
+  線は描画後に JS で引く (ボタンの位置で決まるため)。読み上げでは選んだ項目のつながりを文で知らせる
+  선은 그린 뒤 JS로 긋는다 (버튼 위치로 정해지므로). 스크린리더에는 선택한 항목의 연결을 문장으로 알린다
+*/}
+<div
+  class="graph"
+  data-skill-graph
+  data-selected={t('skills.graph.selected')}
+  data-cleared={t('skills.graph.cleared')}
+  data-separator={t('skills.graph.separator')}
+>
+  <svg class="edges" aria-hidden="true"></svg>
+  <div class="col col-left">
+    <p class="col-head" id="graph-left">{t('skills.graph.experience')}</p>
+    <ul aria-labelledby="graph-left">
+      {
+        left.map((node, index) => (
+          <li>
+            <button
+              type="button"
+              class:list={['node', { 'node-personal': node.personal }]}
+              data-id={node.id}
+              data-links={node.tech.map((id) => `skill-${id}`).join(' ')}
+              aria-pressed="false"
+              tabindex={index === 0 ? 0 : -1}
+            >
+              <span class="node-label">{node.label}</span>
+              <span class="node-sub">{node.sub}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="col col-right">
+    <p class="col-head" id="graph-right">{t('skills.graph.skills')}</p>
+    {
+      groups.map((group, groupIndex) => (
+        <>
+          <p class="group-head" id={`graph-group-${group.category}`}>
+            {t(`skillCategory.${group.category}`)}
+          </p>
+          <ul aria-labelledby={`graph-group-${group.category}`}>
+            {group.items.map((node, index) => (
+              <li>
+                <button
+                  type="button"
+                  class="node"
+                  data-id={node.id}
+                  data-links={node.links.join(' ')}
+                  aria-pressed="false"
+                  tabindex={groupIndex === 0 && index === 0 ? 0 : -1}
+                >
+                  <span class="node-label">{node.label}</span>
+                  <span class="node-sub">{node.sub}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))
+    }
+  </div>
+</div>
+<p class="sr-only" aria-live="polite" data-skill-graph-live></p>
+
+<script>
+  // スキル × 経歴グラフ: 選ぶと線とつながる項目を強調する / 스킬 × 경력 그래프: 선택하면 선과 연결된 항목을 강조한다
+  const graph = document.querySelector<HTMLElement>('[data-skill-graph]');
+  const live = document.querySelector<HTMLElement>('[data-skill-graph-live]');
+
+  if (graph && live) {
+    const svg = graph.querySelector<SVGSVGElement>('.edges')!;
+    const nodes = [...graph.querySelectorAll<HTMLButtonElement>('.node')];
+    const leftNodes = [...graph.querySelectorAll<HTMLButtonElement>('.col-left .node')];
+    const rightNodes = [...graph.querySelectorAll<HTMLButtonElement>('.col-right .node')];
+    const byId = new Map(nodes.map((node) => [node.dataset.id!, node]));
+
+    // つながりは両方向で引けるようにする / 연결은 양방향으로 찾을 수 있게 한다
+    const links = new Map(nodes.map((node) => [node.dataset.id!, new Set<string>()]));
+    for (const node of leftNodes) {
+      for (const id of node.dataset.links!.split(' ').filter(Boolean)) {
+        links.get(node.dataset.id!)!.add(id);
+        links.get(id)?.add(node.dataset.id!);
+      }
+    }
+
+    const label = (node: HTMLElement) => node.querySelector('.node-label')!.textContent ?? '';
+    let selected: string | null = null;
+    let hovered: string | null = null;
+    let paths: SVGPathElement[] = [];
+
+    // ボタンの位置から曲線を引き直す (幅が変わるたび) / 버튼 위치로 곡선을 다시 긋는다 (폭이 바뀔 때마다)
+    const draw = () => {
+      const box = graph.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+      paths = [];
+      const fragment = document.createDocumentFragment();
+      for (const node of leftNodes) {
+        const a = node.getBoundingClientRect();
+        for (const id of links.get(node.dataset.id!)!) {
+          const b = byId.get(id)!.getBoundingClientRect();
+          const x1 = a.right - box.left;
+          const y1 = a.top + a.height / 2 - box.top;
+          const x2 = b.left - box.left;
+          const y2 = b.top + b.height / 2 - box.top;
+          const dx = (x2 - x1) / 2;
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', `M${x1} ${y1} C${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`);
+          path.setAttribute('class', 'edge');
+          path.dataset.from = node.dataset.id;
+          path.dataset.to = id;
+          paths.push(path);
+          fragment.append(path);
+        }
+      }
+      svg.replaceChildren(fragment);
+      update();
+    };
+
+    // 選択 (なければマウスで指している項目) を基準に強調する / 선택 (없으면 마우스로 가리킨 항목)을 기준으로 강조한다
+    const update = () => {
+      const active = selected ?? hovered;
+      const linked = active ? links.get(active)! : new Set<string>();
+      graph.classList.toggle('has-active', active !== null);
+      for (const node of nodes) {
+        node.classList.toggle('is-active', node.dataset.id === active);
+        node.classList.toggle('is-linked', linked.has(node.dataset.id!));
+        node.setAttribute('aria-pressed', String(node.dataset.id === selected));
+      }
+      for (const path of paths) {
+        path.classList.toggle('is-active', active !== null && (path.dataset.from === active || path.dataset.to === active));
+      }
+    };
+
+    const select = (id: string) => {
+      selected = selected === id ? null : id;
+      update();
+      if (selected) {
+        const items = [...links.get(selected)!].map((linkedId) => label(byId.get(linkedId)!));
+        live.textContent = graph.dataset.selected!
+          .replace('{name}', label(byId.get(selected)!))
+          .replace('{items}', items.join(graph.dataset.separator))
+          .replace('{n}', String(items.length));
+      } else {
+        live.textContent = graph.dataset.cleared!;
+      }
+    };
+
+    // 列ごとにタブ移動は 1 回。列の中は矢印キーで動く (roving tabindex) / 열마다 탭 이동은 1번. 열 안에서는 화살표 키로 움직인다 (roving tabindex)
+    const focusNode = (node: HTMLButtonElement) => {
+      const column = leftNodes.includes(node) ? leftNodes : rightNodes;
+      for (const item of column) item.tabIndex = item === node ? 0 : -1;
+      node.focus();
+    };
+
+    for (const node of nodes) {
+      node.addEventListener('click', () => select(node.dataset.id!));
+      node.addEventListener('pointerenter', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        hovered = node.dataset.id!;
+        update();
+      });
+      node.addEventListener('pointerleave', () => {
+        hovered = null;
+        update();
+      });
+      node.addEventListener('keydown', (event) => {
+        const column = leftNodes.includes(node) ? leftNodes : rightNodes;
+        const other = column === leftNodes ? rightNodes : leftNodes;
+        const index = column.indexOf(node);
+        let next: HTMLButtonElement | undefined;
+        if (event.key === 'ArrowDown') next = column[Math.min(index + 1, column.length - 1)];
+        else if (event.key === 'ArrowUp') next = column[Math.max(index - 1, 0)];
+        else if (event.key === 'Home') next = column[0];
+        else if (event.key === 'End') next = column.at(-1);
+        else if ((event.key === 'ArrowRight' && column === leftNodes) || (event.key === 'ArrowLeft' && column === rightNodes)) {
+          // 反対の列の、つながっている最初の項目へ移る (なければ同じ行) / 반대 열의 연결된 첫 항목으로 옮긴다 (없으면 같은 행)
+          next = other.find((item) => links.get(node.dataset.id!)!.has(item.dataset.id!)) ?? other[Math.min(index, other.length - 1)];
+        } else if (event.key === 'Escape' && selected) {
+          select(selected);
+          return;
+        } else return;
+        event.preventDefault();
+        if (next) focusNode(next);
+      });
+    }
+
+    new ResizeObserver(draw).observe(graph);
+  }
+</script>
+
+<style>
+  /* 2 列の間に線を引く余白を取る / 2열 사이에 선을 그을 여백을 둔다 */
+  .graph {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(2.5rem, 0.55fr) minmax(0, 1fr);
+  }
+
+  .edges {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .col {
+    position: relative;
+  }
+
+  .col-left {
+    grid-column: 1;
+  }
+
+  .col-right {
+    grid-column: 3;
+  }
+
+  .col ul {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .col-head,
+  .group-head {
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .group-head {
+    margin-top: 1rem;
+    font-weight: 400;
+  }
+
+  .col-head + .group-head {
+    margin-top: 0;
+  }
+
+  .node {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.375rem 0.625rem;
+    border: 1px solid var(--control-border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  /* 個人開発は点線で区別する (色だけに頼らない) / 개인 개발은 점선으로 구분한다 (색에만 의존하지 않는다) */
+  .node-personal {
+    border-style: dashed;
+  }
+
+  .node-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .node:hover {
+    border-color: var(--accent);
+  }
+
+  .node.is-active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .node.is-active .node-sub {
+    color: var(--bg);
+  }
+
+  .node.is-linked {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: inset 0 0 0 1px var(--accent);
+    font-weight: 700;
+  }
+
+  /* つながっていない項目は文字色だけ弱める (透明度は使わず、読める濃さを保つ) / 연결되지 않은 항목은 글자색만 약하게 (투명도는 쓰지 않고 읽을 수 있는 농도 유지) */
+  .has-active .node:not(.is-active, .is-linked) {
+    color: var(--muted);
+  }
+
+  .graph :global(.edge) {
+    fill: none;
+    stroke: var(--control-border);
+    stroke-width: 1.25;
+    opacity: 0.45;
+  }
+
+  .has-active :global(.edge) {
+    opacity: 0.08;
+  }
+
+  .has-active :global(.edge.is-active) {
+    stroke: var(--accent);
+    stroke-width: 2.25;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .graph :global(.edge) {
+      transition: opacity 180ms ease;
+    }
+  }
+
+  /* 狭い画面では名前と年数を縦に並べる / 좁은 화면에서는 이름과 연수를 세로로 둔다 */
+  @media (max-width: 30rem) {
+    .node {
+      flex-direction: column;
+      gap: 0;
+      padding: 0.3125rem 0.5rem;
+      font-size: 0.8125rem;
+    }
+  }
+</style>
