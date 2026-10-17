@@ -82,6 +82,8 @@ export const zh: Translation = {
   'contact.email': '邮箱',
   'contact.github': 'GitHub',
 
+  'og.imageAlt': 'K.S 的作品集 — Backend Engineer（Java / Python / AWS）',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

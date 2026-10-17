@@ -82,6 +82,8 @@ export const en: Translation = {
   'contact.email': 'Email',
   'contact.github': 'GitHub',
 
+  'og.imageAlt': 'K.S portfolio — Backend Engineer (Java / Python / AWS)',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

@@ -16,6 +16,8 @@ const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
 const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
 const canonical = getAlternateUrl(lang, pathname);
+// 全ページ共通の画像。原本は scripts/brand/og-image.svg / 모든 페이지 공통 이미지. 원본은 scripts/brand/og-image.svg
+const ogImage = new URL('/og-image.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -30,7 +32,8 @@ const canonical = getAlternateUrl(lang, pathname);
     {/* x-default は原文の ja を指す (ルートは noindex のため) / x-default는 원문인 ja를 가리킨다 (루트는 noindex이므로) */}
     <link rel="alternate" hreflang="x-default" href={getAlternateUrl(defaultLocale, pathname)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {/* SNS で共有されたときの表示 / SNS에 공유되었을 때의 표시 */}
     <meta property="og:type" content="website" />
@@ -40,7 +43,11 @@ const canonical = getAlternateUrl(lang, pathname);
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale[lang]} />
     {locales.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={ogLocale[l]} />)}
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t('og.imageAlt')} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>

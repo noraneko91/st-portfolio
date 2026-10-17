@@ -81,6 +81,8 @@ export const ja = {
   'contact.email': 'メール',
   'contact.github': 'GitHub',
 
+  'og.imageAlt': 'K.S のポートフォリオ — Backend Engineer（Java / Python / AWS）',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

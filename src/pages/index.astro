@@ -18,7 +18,7 @@ const paths = Object.fromEntries(locales.map((l) => [l, getRelativeLocaleUrl(l)]
     <meta name="robots" content="noindex" />
     <title>{t('site.name')}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     {/* 本文の描画前に移動するため head 内でインライン実行する / 본문을 그리기 전에 이동하기 위해 head 안에서 인라인 실행한다 */}
     <script is:inline define:vars={{ locales, defaultLocale, storageKey: LANG_STORAGE_KEY, paths }}>
       // 保存した言語 → ブラウザの言語 → ja の順で決める (ADR 0003) / 저장한 언어 → 브라우저 언어 → ja 순서로 정한다 (ADR 0003)
