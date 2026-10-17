@@ -2,6 +2,7 @@
 import type { Lang } from '../i18n/config';
 import type { TranslationKey } from '../i18n/ja';
 import { getAlternatePath, stripLang, useTranslations } from '../i18n/utils';
+import { getProfile } from '../lib/content';
 import LanguagePicker from './LanguagePicker.astro';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const { displayName } = await getProfile();
 const currentPath = stripLang(Astro.url.pathname).replace(/\/$/, '');
 
 // ホームへはサイト名から移動するため、ナビには含めない / 홈은 사이트 이름으로 이동하므로 내비에는 넣지 않는다
@@ -33,7 +35,7 @@ const navItems: { path: string; label: TranslationKey }[] = [
 <header class="site-header">
   <div class="wrapper header-inner">
     <a href={getAlternatePath(lang, '')} class="brand" aria-current={currentPath === '' ? 'page' : undefined}>
-      {t('site.name')}
+      {displayName}
     </a>
     <nav class="nav" aria-label={t('nav.label')}>
       <ul>
@@ -90,9 +92,13 @@ const navItems: { path: string; label: TranslationKey }[] = [
     padding-block: 0.5rem;
   }
 
+  /* 表示名 KST をロゴとして使う (4言語共通) / 표시 이름 KST를 로고로 쓴다 (4개 언어 공통) */
   .brand {
     grid-area: brand;
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
     font-weight: 700;
+    letter-spacing: 0.08em;
     color: var(--text);
     text-decoration: none;
   }

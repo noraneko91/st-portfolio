@@ -1,7 +1,8 @@
 # プロフィール。Public リポジトリのため、氏名フルネーム・生年月日・国籍・最寄駅・顧客名は書かない
 # 프로필. Public 리포지토리이므로 이름 전체·생년월일·국적·가까운 역·고객사명은 쓰지 않는다
 main:
-  displayName: K.S
+  # サイト名・ロゴとしても使う (4言語共通) / 사이트 이름·로고로도 쓴다 (4개 언어 공통)
+  displayName: KST
   title:
     ja: バックエンドエンジニア（Java / Python / AWS）
     en: Backend Engineer (Java / Python / AWS)

@@ -1,8 +1,6 @@
 import type { Translation } from './ja';
 
 export const en: Translation = {
-  'site.name': 'Portfolio',
-
   'home.title': 'Home',
   'home.description': 'A portfolio introducing my career, skills, and personal projects.',
   'about.title': 'About',
@@ -82,7 +80,7 @@ export const en: Translation = {
   'contact.email': 'Email',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'K.S portfolio — Backend Engineer (Java / Python / AWS)',
+  'og.imageAlt': 'KST portfolio — Backend Engineer (Java / Python / AWS)',
 
   'contact.emailPending': 'Coming soon',
 

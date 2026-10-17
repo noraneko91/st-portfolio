@@ -1,7 +1,5 @@
 // ja が原文。ここにキーを追加すると、他の言語で同じキーがない場合に型エラーになる / ja가 원문. 여기에 키를 추가하면 다른 언어에 같은 키가 없을 때 타입 에러가 난다
 export const ja = {
-  'site.name': 'ポートフォリオ',
-
   'home.title': 'ホーム',
   'home.description': '経歴・スキル・個人開発プロジェクトを紹介するポートフォリオサイトです。',
   'about.title': '経歴',
@@ -81,7 +79,7 @@ export const ja = {
   'contact.email': 'メール',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'K.S のポートフォリオ — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'KST のポートフォリオ — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '準備中',
 

@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { defaultLocale, htmlLang, locales, ogLocale, type Lang } from '../i18n/config';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
+import { getProfile } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -17,7 +18,9 @@ interface Props {
 const { lang, title, description, bodyClass } = Astro.props;
 const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
-const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
+// サイト名はプロフィールの表示名 (KST) を4言語共通で使う / 사이트 이름은 프로필 표시 이름 (KST)을 4개 언어 공통으로 쓴다
+const { displayName: siteName } = await getProfile();
+const documentTitle = title ? `${title} | ${siteName}` : siteName;
 const canonical = getAlternateUrl(lang, pathname);
 // 全ページ共通の画像。原本は scripts/brand/og-image.svg / 모든 페이지 공통 이미지. 원본은 scripts/brand/og-image.svg
 const ogImage = new URL('/og-image.png', Astro.site).href;
@@ -42,7 +45,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <link rel="sitemap" href="/sitemap-index.xml" />
     {/* SNS で共有されたときの表示 / SNS에 공유되었을 때의 표시 */}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={t('site.name')} />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

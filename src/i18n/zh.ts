@@ -1,8 +1,6 @@
 import type { Translation } from './ja';
 
 export const zh: Translation = {
-  'site.name': '作品集',
-
   'home.title': '首页',
   'home.description': '介绍我的经历、技能和个人开发项目的作品集网站。',
   'about.title': '经历',
@@ -82,7 +80,7 @@ export const zh: Translation = {
   'contact.email': '邮箱',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'K.S 的作品集 — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'KST 的作品集 — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '准备中',
 

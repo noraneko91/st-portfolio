@@ -2,11 +2,10 @@
 import '../styles/global.css';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLocale, htmlLang, LANG_STORAGE_KEY, languageNames, locales } from '../i18n/config';
-import { useTranslations } from '../i18n/utils';
+import { getProfile } from '../lib/content';
 
-// ルートは言語が決まる前のページなので、原文の ja で表示する / 루트는 언어가 정해지기 전 페이지라 원문인 ja로 표시한다
-const t = useTranslations(defaultLocale);
 const paths = Object.fromEntries(locales.map((l) => [l, getRelativeLocaleUrl(l)]));
+const { displayName } = await getProfile();
 ---
 
 <!doctype html>
@@ -16,7 +15,7 @@ const paths = Object.fromEntries(locales.map((l) => [l, getRelativeLocaleUrl(l)]
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* 振り分け専用のページなので検索結果には出さない (x-default は /ja/ を指す) / 분기 전용 페이지라 검색 결과에 노출하지 않는다 (x-default는 /ja/를 가리킨다) */}
     <meta name="robots" content="noindex" />
-    <title>{t('site.name')}</title>
+    <title>{displayName}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     {/* 本文の描画前に移動するため head 内でインライン実行する / 본문을 그리기 전에 이동하기 위해 head 안에서 인라인 실행한다 */}
@@ -43,7 +42,7 @@ const paths = Object.fromEntries(locales.map((l) => [l, getRelativeLocaleUrl(l)]
   </head>
   <body>
     <main class="p-4">
-      <h1>{t('site.name')}</h1>
+      <h1>{displayName}</h1>
       {/* JS が無効な場合の移動手段 / JS가 꺼져 있을 때의 이동 수단 */}
       <ul>
         {

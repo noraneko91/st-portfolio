@@ -1,8 +1,6 @@
 import type { Translation } from './ja';
 
 export const ko: Translation = {
-  'site.name': '포트폴리오',
-
   'home.title': '홈',
   'home.description': '경력·스킬·개인 개발 프로젝트를 소개하는 포트폴리오 사이트입니다.',
   'about.title': '경력',
@@ -82,7 +80,7 @@ export const ko: Translation = {
   'contact.email': '이메일',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'K.S 포트폴리오 — Backend Engineer (Java / Python / AWS)',
+  'og.imageAlt': 'KST 포트폴리오 — Backend Engineer (Java / Python / AWS)',
 
   'contact.emailPending': '준비 중',
 
