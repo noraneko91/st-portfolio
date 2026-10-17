@@ -79,6 +79,8 @@
 
 @layer base {
   html {
+    /* 固定ヘッダーの下にアンカーの移動先が隠れないようにする / 고정 헤더 아래로 앵커 이동 위치가 가려지지 않게 한다 */
+    scroll-padding-top: 7rem;
     background-color: var(--bg);
     color: var(--text);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

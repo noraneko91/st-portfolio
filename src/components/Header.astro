@@ -81,10 +81,30 @@ const navItems: { path: string; label: TranslationKey }[] = [
    * view-transition-name으로 헤더는 독립된 쌓임 순서가 되므로, 헤더째 본문보다 위에 둔다 (언어 메뉴가 본문에 가려져 눌리지 않게 되지 않도록)
    */
   .site-header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 20;
     border-bottom: 1px solid var(--border);
     view-transition-name: site-header;
+  }
+
+  /*
+   * 上部に固定し、すりガラスで本文と区別する。不透明度 85% は、暗い要素が後ろを通っても文字のコントラスト 4.5:1 を保てる値
+   * 상단에 고정하고 간유리 효과로 본문과 구분한다. 불투명도 85%는 어두운 요소가 뒤를 지나가도 글자 대비 4.5:1을 지킬 수 있는 값
+   */
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .site-header {
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      backdrop-filter: blur(14px) saturate(1.4);
+    }
+  }
+
+  /* すりガラスが使えないブラウザでは不透明な背景にする / 간유리를 쓸 수 없는 브라우저에서는 불투명 배경으로 한다 */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header {
+      background: var(--bg);
+    }
   }
 
   /* 狭い画面: 1行目にサイト名と言語、2行目にナビ / 좁은 화면: 1행에 사이트 이름과 언어, 2행에 내비 */
