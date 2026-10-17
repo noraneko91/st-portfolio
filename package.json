@@ -10,7 +10,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "brand": "node scripts/brand/generate.mjs"
+    "brand": "node scripts/brand/generate.mjs",
+    "new:project": "node scripts/new-project.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.0",
