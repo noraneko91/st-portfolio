@@ -60,7 +60,8 @@ src/
     [lang]/           # 言語別のページ
   styles/global.css   # 配色（CSS 変数）・フォント・余白
 docs/                 # プロジェクト概要・ADR
-public/               # favicon など
+public/               # favicon・OGP 画像など
+scripts/brand/        # favicon・OGP 画像の原本（SVG）と生成スクリプト
 wrangler.jsonc        # Cloudflare Workers の配信設定（404・トレイリングスラッシュ）
 ```
 
@@ -80,6 +81,14 @@ npm run preview    # ビルド結果の確認
 ```sh
 npm run build
 npx wrangler dev
+```
+
+## favicon・OGP 画像の再生成
+
+原本の SVG（`public/favicon.svg`、`scripts/brand/og-image.svg`）を編集したあと、ローカルの Chrome を使って PNG・ICO を生成します（追加パッケージは不要）。
+
+```sh
+npm run brand      # Chrome の場所が異なる場合は CHROME_PATH で指定
 ```
 
 ## コンテンツの編集

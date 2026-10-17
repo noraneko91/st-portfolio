@@ -57,7 +57,7 @@
 | 3 | デプロイ | Cloudflare への自動デプロイ設定 | 完了 |
 | 4 | ページ実装 | Home / About / Skills / Projects / Contact | 完了 |
 | 5 | 翻訳 | ja を原文として en / zh / ko を作成 | 未着手 |
-| 6 | 品質 | Lighthouse 各項目 90 点以上（特に Performance・Accessibility） | 未着手 |
+| 6 | 品質 | Lighthouse 各項目 90 点以上（特に Performance・Accessibility） | 完了（スクリーンリーダーでの確認は残り） |
 | 7 | README | リポジトリの説明、構成、ローカル実行方法 | 未着手 |
 
 デプロイを早い段階（3）に置くのは、本番環境でしか起きない問題（パス・リダイレクト・ヘッダーなど）を実装の初期に見つけるためである。
