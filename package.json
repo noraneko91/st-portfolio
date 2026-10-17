@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "brand": "node scripts/brand/generate.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
