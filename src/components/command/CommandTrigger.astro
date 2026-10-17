@@ -1,0 +1,162 @@
+---
+import { htmlLang, LANG_STORAGE_KEY, languageNames, locales, type Lang } from '../../i18n/config';
+import type { TranslationKey } from '../../i18n/ja';
+import { getAlternatePath, useTranslations } from '../../i18n/utils';
+import { repositoryUrl } from '../../lib/build-info';
+import { getProfile } from '../../lib/content';
+import type { PaletteData } from './CommandPalette';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const pathname = Astro.url.pathname;
+const { github } = await getProfile();
+
+const pageItems: { path: string; label: TranslationKey }[] = [
+  { path: '', label: 'home.title' },
+  { path: 'about', label: 'about.title' },
+  { path: 'skills', label: 'skills.title' },
+  { path: 'projects', label: 'projects.title' },
+  { path: 'contact', label: 'contact.title' },
+];
+
+const data: PaletteData = {
+  storageKey: LANG_STORAGE_KEY,
+  labels: {
+    title: t('command.title'),
+    description: t('command.description'),
+    placeholder: t('command.placeholder'),
+    empty: t('command.empty'),
+    close: t('command.close'),
+    pages: t('command.group.pages'),
+    language: t('command.group.language'),
+    links: t('command.group.links'),
+  },
+  pages: pageItems.map((item) => ({ label: t(item.label), href: getAlternatePath(lang, item.path) })),
+  languages: locales.map((l) => ({
+    code: l,
+    name: languageNames[l],
+    href: getAlternatePath(l, pathname),
+    htmlLang: htmlLang[l],
+    current: l === lang,
+  })),
+  links: [
+    { label: `GitHub — ${github}`, href: `https://github.com/${github}` },
+    { label: t('command.link.source'), href: repositoryUrl },
+  ],
+};
+---
+
+{/* パレット本体 (React) はここでは読み込まず、最初に開くときに取得する / 팔레트 본체 (React)는 여기서 불러오지 않고 처음 열 때 가져온다 */}
+<button
+  type="button"
+  class="command-trigger"
+  aria-haspopup="dialog"
+  aria-keyshortcuts="Control+K Meta+K"
+  data-command-trigger
+  data-palette={JSON.stringify(data)}
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <circle cx="11" cy="11" r="7"></circle>
+    <path d="m20 20-3.5-3.5"></path>
+  </svg>
+  <span class="command-label">{t('command.open')}</span>
+  <kbd class="command-kbd" aria-hidden="true" data-command-kbd>Ctrl K</kbd>
+</button>
+
+<script>
+  let loaded = false;
+
+  async function openPalette() {
+    if (loaded) {
+      document.dispatchEvent(new CustomEvent('command-palette:open'));
+      return;
+    }
+    loaded = true;
+    const trigger = document.querySelector<HTMLElement>('[data-command-trigger]');
+    if (!trigger?.dataset.palette) return;
+    const { mountCommandPalette } = await import('./mount');
+    mountCommandPalette(JSON.parse(trigger.dataset.palette));
+  }
+
+  document.querySelector('[data-command-trigger]')?.addEventListener('click', openPalette);
+
+  // 読み込み前の最初の Ctrl/⌘+K だけをここで受け、以降はパレット側が処理する / 로드 전 첫 Ctrl/⌘+K만 여기서 받고, 이후는 팔레트 쪽이 처리한다
+  document.addEventListener('keydown', (event) => {
+    if (!loaded && event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
+      event.preventDefault();
+      void openPalette();
+    }
+  });
+
+  if (/Mac|iPhone|iPad/.test(navigator.userAgent)) {
+    const kbd = document.querySelector('[data-command-kbd]');
+    if (kbd) kbd.textContent = '⌘K';
+  }
+</script>
+
+<style>
+  /* JS がないとパレットを開けないため、ボタンも出さない / JS가 없으면 팔레트를 열 수 없으므로 버튼도 표시하지 않는다 */
+  :global(html:not(.js)) .command-trigger {
+    display: none;
+  }
+
+  .command-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--control-border);
+    border-radius: 2px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .command-trigger:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .command-trigger:active {
+    transform: translateY(1px);
+  }
+
+  .command-trigger svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .command-kbd {
+    padding: 0.0625rem 0.375rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+
+  /* 狭い画面ではアイコンだけにする (名前は aria で残す) / 좁은 화면에서는 아이콘만 (이름은 aria로 남긴다) */
+  @media (max-width: 47.99rem) {
+    .command-trigger {
+      justify-content: center;
+      padding-inline: 0;
+    }
+
+    .command-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .command-kbd {
+      display: none;
+    }
+  }
+</style>

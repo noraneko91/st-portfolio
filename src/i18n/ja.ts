@@ -86,6 +86,17 @@ export const ja = {
   'footer.build': 'build',
   'console.greeting': '👋 ソースに興味を持ってくれてありがとう。',
 
+  'command.open': '検索',
+  'command.title': 'コマンドパレット',
+  'command.description': 'ページの移動、言語の切り替え、リンクを開く操作ができます。',
+  'command.placeholder': 'ページ・言語・リンクを検索…',
+  'command.empty': '見つかりませんでした',
+  'command.close': '閉じる',
+  'command.group.pages': 'ページ',
+  'command.group.language': '言語',
+  'command.group.links': 'リンク',
+  'command.link.source': 'このサイトのソースコード',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

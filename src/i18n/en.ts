@@ -87,6 +87,17 @@ export const en: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 Thanks for taking a look at the source.',
 
+  'command.open': 'Search',
+  'command.title': 'Command palette',
+  'command.description': 'Move between pages, switch languages, or open links.',
+  'command.placeholder': 'Search pages, languages, links…',
+  'command.empty': 'No results found',
+  'command.close': 'Close',
+  'command.group.pages': 'Pages',
+  'command.group.language': 'Language',
+  'command.group.links': 'Links',
+  'command.link.source': 'Source code of this site',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

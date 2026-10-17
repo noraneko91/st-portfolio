@@ -87,6 +87,17 @@ export const zh: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 感谢你对源码感兴趣。',
 
+  'command.open': '搜索',
+  'command.title': '命令面板',
+  'command.description': '可以切换页面、切换语言或打开链接。',
+  'command.placeholder': '搜索页面、语言、链接…',
+  'command.empty': '没有找到结果',
+  'command.close': '关闭',
+  'command.group.pages': '页面',
+  'command.group.language': '语言',
+  'command.group.links': '链接',
+  'command.link.source': '本网站的源代码',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

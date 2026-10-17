@@ -57,6 +57,9 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-surface: var(--surface);
+  --color-control-border: var(--control-border);
 }
 
 /* 見出しは画面幅に応じて滑らかに拡大する / 제목은 화면 폭에 따라 부드럽게 커진다 */
@@ -282,6 +285,31 @@
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
     }
+  }
+}
+
+/* コマンドパレットの開閉 (Radix の data-state を使う) / 커맨드 팔레트 열고 닫기 (Radix의 data-state를 쓴다) */
+@media (prefers-reduced-motion: no-preference) {
+  .dialog-overlay[data-state='open'] {
+    animation: fade-in 150ms ease;
+  }
+
+  .dialog-content[data-state='open'] {
+    animation: dialog-in 180ms ease;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* 中央寄せに translate を使っているため、動きは transform で付ける / 가운데 정렬에 translate를 쓰므로 움직임은 transform으로 준다 */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
   }
 }
 

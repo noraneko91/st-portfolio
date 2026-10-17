@@ -87,6 +87,17 @@ export const ko: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 소스에 관심 가져 주셔서 감사합니다.',
 
+  'command.open': '검색',
+  'command.title': '명령 팔레트',
+  'command.description': '페이지 이동, 언어 전환, 링크 열기를 할 수 있습니다.',
+  'command.placeholder': '페이지·언어·링크 검색…',
+  'command.empty': '결과가 없습니다',
+  'command.close': '닫기',
+  'command.group.pages': '페이지',
+  'command.group.language': '언어',
+  'command.group.links': '링크',
+  'command.link.source': '이 사이트의 소스 코드',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

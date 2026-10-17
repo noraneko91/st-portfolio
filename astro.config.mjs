@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defaultLocale, htmlLang, locales } from './src/i18n/config.ts';
@@ -28,8 +29,10 @@ export default defineConfig({
       // ルート(/)は振り分け専用で noindex のため除外する / 루트(/)는 분기 전용이고 noindex라 제외한다
       filter: (page) => page !== `${site}/`,
     }),
+    // React はコマンドパレットなど操作が多い部品だけに使う (ADR 0005) / React는 커맨드 팔레트 등 조작이 많은 부품에만 쓴다 (ADR 0005)
+    react(),
   ],
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });
