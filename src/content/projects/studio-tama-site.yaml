@@ -1,7 +1,4 @@
 # 出典: リポジトリのコード (Next.js・GitHub Pages のワークフロー・サイト情報) / 출처: 리포지토리 코드 (Next.js·GitHub Pages 워크플로·사이트 정보)
-# TODO: 実在のスタジオのサイトのため、依頼による制作か練習か・掲載の許可・状態 (進行中/完了)・公開 URL を確認してから draft: false にする
-# TODO: 실제 스튜디오의 사이트이므로, 의뢰받은 제작인지 연습인지·게재 허가·상태 (진행 중/완료)·공개 URL을 확인한 뒤 draft: false로 한다
-draft: true
 title:
   ja: STUDIO TAMA ウェブサイト
   en: STUDIO TAMA website

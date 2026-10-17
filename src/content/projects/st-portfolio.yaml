@@ -15,7 +15,6 @@ tech: [astro, typescript, tailwind, react, cloudflare]
 github:
   - https://github.com/noraneko91/st-portfolio
 demo: https://st-portfolio.st-kim.workers.dev
-# TODO: 担当工程の表記（個人開発のため全工程。表示する工程を要確認） / 담당 공정 표기 (개인 개발이라 전 공정. 표시할 공정 확인 필요)
 phases:
   [
     requirements,
@@ -24,7 +23,7 @@ phases:
     implementation,
     integration-test,
   ]
-# TODO: バージョンは package.json・CLAUDE.md の「버전 기록」と合わせて更新する / 버전은 package.json·CLAUDE.md의 "버전 기록"과 맞춰 갱신한다
+# バージョンは package.json・CLAUDE.md の「버전 기록」と合わせて更新する / 버전은 package.json·CLAUDE.md의 "버전 기록"과 맞춰 갱신한다
 stack:
   - name: Astro
     version: 7.4.0

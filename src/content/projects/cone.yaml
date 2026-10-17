@@ -1,6 +1,4 @@
 # 出典: リポジトリのコード (index.html) / 출처: 리포지토리 코드 (index.html)
-# TODO: 講座に沿って作ったものか (学習/制作)・作った目的を確認してから draft: false にする / 강의를 따라 만든 것인지 (학습/제작)·만든 목적을 확인한 뒤 draft: false로 한다
-draft: true
 title:
   ja: コーディング四コマ（코딩네컷）
   en: Coding Four-Cut (코딩네컷)

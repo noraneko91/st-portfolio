@@ -46,5 +46,4 @@ scale:
   tables: 200
   team: 10
 tech: [python, vba, aws, oracle, git, uft-one]
-# TODO: 担当工程はスキルシートの○7個からの推定（要確認） / 담당 공정은 스킬 시트의 ○ 7개로부터 추정 (확인 필요)
 phases: [requirements, research, basic-design, detailed-design, implementation, unit-test, integration-test]
