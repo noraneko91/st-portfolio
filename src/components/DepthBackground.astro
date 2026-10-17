@@ -1,0 +1,72 @@
+---
+interface Props {
+  // 床を流すのは Home だけ。本文を読むページでは動きで気が散らないように止める / 바닥을 흘리는 것은 Home만. 본문을 읽는 페이지에서는 움직임으로 산만하지 않게 멈춘다
+  animate?: boolean;
+}
+
+const { animate = false } = Astro.props;
+---
+
+{/* 奥行きのある背景 (装飾のみ。CSS の perspective だけで描き、JS・画像は使わない。ADR 0007) / 깊이감 있는 배경 (장식만. CSS perspective만으로 그리고 JS·이미지는 쓰지 않는다. ADR 0007) */}
+<div class:list={['depth', { 'depth-animate': animate }]} aria-hidden="true">
+  <div class="depth-sky"></div>
+  <div class="depth-floor"><div class="depth-lines"></div></div>
+</div>
+
+<style>
+  /* 本文の後ろに固定する。z-index: -1 でも html の背景色より手前に描かれる / 본문 뒤에 고정한다. z-index: -1이어도 html 배경색보다 앞에 그려진다 */
+  .depth {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* 地平線のあたりにテーマ色の光 / 지평선 근처에 포인트 컬러 빛 */
+  .depth-sky {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(70% 45% at 50% 55%, var(--glow), transparent 70%);
+  }
+
+  /* 画面の下半分に、奥へ倒した方眼の床。上端 (奥) はマスクで消す / 화면 아래 절반에 안쪽으로 눕힌 방안 바닥. 위쪽 끝 (안쪽)은 마스크로 지운다 */
+  .depth-floor {
+    position: absolute;
+    top: 52%;
+    left: -40%;
+    right: -40%;
+    height: 90%;
+    overflow: hidden;
+    transform: perspective(420px) rotateX(64deg);
+    transform-origin: 50% 0;
+    mask-image: linear-gradient(to bottom, transparent, #000 35%);
+  }
+
+  /* 本文を読むページでは床を薄くする (動かさない) / 본문을 읽는 페이지에서는 바닥을 옅게 한다 (움직이지 않는다) */
+  .depth:not(.depth-animate) .depth-floor {
+    opacity: 0.4;
+  }
+
+  /* 1 マス分だけ上にはみ出させておき、その分を動かして繰り返すと切れ目なく流れる / 한 칸만큼 위로 삐져나오게 두고, 그만큼 움직여 반복하면 끊김 없이 흐른다 */
+  .depth-lines {
+    position: absolute;
+    inset: -56px 0 0;
+    background-image:
+      linear-gradient(var(--floor-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--floor-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .depth-animate .depth-lines {
+      animation: depth-flow 6s linear infinite;
+    }
+  }
+
+  @keyframes depth-flow {
+    to {
+      transform: translateY(56px);
+    }
+  }
+</style>

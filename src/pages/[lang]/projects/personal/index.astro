@@ -1,5 +1,6 @@
 ---
 import ProjectCover from '../../../../components/ProjectCover.astro';
+import PageHero from '../../../../components/PageHero.astro';
 import ProjectTabs from '../../../../components/ProjectTabs.astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../../../i18n/utils';
@@ -15,9 +16,11 @@ const [projects, skillNames] = await Promise.all([getProjects(), getSkillNames()
 ---
 
 <BaseLayout lang={lang} title={t('projects.tab.personal')} description={t('projects.personal.description')}>
-  <h1 class="text-title mb-6">{t('projects.title')}</h1>
+  <PageHero tile="personal">
+    <h1 class="text-title mb-3">{t('projects.title')}</h1>
+    <p class="max-w-[var(--measure)] text-muted">{t('projects.personal.description')}</p>
+  </PageHero>
   <ProjectTabs lang={lang} current="personal" />
-  <p class="mb-8 max-w-[var(--measure)] text-muted">{t('projects.personal.description')}</p>
 
   <ul class="project-grid">
     {

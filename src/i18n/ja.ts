@@ -69,7 +69,6 @@ export const ja = {
   'project.link.demo': 'デモ',
   'project.link.zenn': 'Zenn記事',
 
-  'home.section.pages': 'ページ案内',
 
   'contact.lead': 'お仕事のご相談やご質問は、以下の方法でご連絡ください。',
   'contact.email': 'メール',
@@ -92,13 +91,6 @@ export const ja = {
   'command.group.links': 'リンク',
   'command.link.source': 'このサイトのソースコード',
 
-  'home.cta.projects': 'プロジェクトを見る',
-  'home.terminal.label': 'プロフィールの要約',
-  'home.terminal.experience': '経験',
-  'home.terminal.certifications': '資格',
-  'home.terminal.languages': '言語',
-  'home.terminal.current': '直近',
-  'home.card.latest': '直近の担当',
   'home.card.projects': '{n}件のプロジェクト',
 
   'site.suffix': 'ポートフォリオ',
@@ -118,6 +110,18 @@ export const ja = {
   'skills.personalOnly': '個人開発',
 
   'project.meta.type': '分類',
+
+  'home.tile.profileMore': 'プロフィールを見る',
+  'home.tile.work': '{n}件の経歴 · {years}',
+  'home.tile.skillsHint': 'スキル × 経歴のつながりも見られます',
+  'home.tile.contactLead': 'お仕事のご相談・ご質問はこちらから',
+  'skills.section.graph': 'スキル × 経歴',
+  'skills.graph.help': '経歴かスキルを選ぶと、つながりが強調されます。矢印キーで移動、Enter で選択、Esc で解除します。',
+  'skills.graph.experience': '経歴・個人開発',
+  'skills.graph.skills': 'スキル',
+  'skills.graph.selected': '{name}：{items}（{n}件）',
+  'skills.graph.cleared': '選択を解除しました',
+  'skills.graph.separator': '、',
 
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',

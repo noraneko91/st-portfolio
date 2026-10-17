@@ -70,7 +70,6 @@ export const en: Translation = {
   'project.link.demo': 'Demo',
   'project.link.zenn': 'Zenn article',
 
-  'home.section.pages': 'Explore',
 
   'contact.lead': 'For work inquiries or questions, please get in touch using one of the options below.',
   'contact.email': 'Email',
@@ -93,13 +92,6 @@ export const en: Translation = {
   'command.group.links': 'Links',
   'command.link.source': 'Source code of this site',
 
-  'home.cta.projects': 'View projects',
-  'home.terminal.label': 'Profile summary',
-  'home.terminal.experience': 'experience',
-  'home.terminal.certifications': 'certifications',
-  'home.terminal.languages': 'languages',
-  'home.terminal.current': 'latest',
-  'home.card.latest': 'Latest role',
   'home.card.projects': '{n} projects',
 
   'site.suffix': 'Portfolio',
@@ -119,6 +111,18 @@ export const en: Translation = {
   'skills.personalOnly': 'Personal projects',
 
   'project.meta.type': 'Type',
+
+  'home.tile.profileMore': 'View profile',
+  'home.tile.work': '{n} roles · {years}',
+  'home.tile.skillsHint': 'See how skills connect to each role',
+  'home.tile.contactLead': 'Get in touch for work inquiries or questions',
+  'skills.section.graph': 'Skills × experience',
+  'skills.graph.help': 'Select an experience or a skill to highlight its connections. Use the arrow keys to move, Enter to select, and Esc to clear.',
+  'skills.graph.experience': 'Experience & projects',
+  'skills.graph.skills': 'Skills',
+  'skills.graph.selected': '{name}: {items} ({n})',
+  'skills.graph.cleared': 'Selection cleared',
+  'skills.graph.separator': ', ',
 
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',

@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { formatYearMonth, formatYears, getCertifications, getSkillsWithMonths } from '../../lib/content';
@@ -21,8 +22,10 @@ const certifications = await getCertifications();
 ---
 
 <BaseLayout lang={lang} title={t('skills.title')} description={t('skills.description')}>
-  <h1 class="text-title mb-4">{t('skills.title')}</h1>
-  <p class="mb-10 text-muted">{t('skills.note')}</p>
+  <PageHero tile="skills">
+    <h1 class="text-title mb-3">{t('skills.title')}</h1>
+    <p class="max-w-[var(--measure)] text-muted">{t('skills.note')}</p>
+  </PageHero>
 
   <section class="block" aria-labelledby="skills-label">
     <h2 id="skills-label" class="block-label">
@@ -73,6 +76,7 @@ const certifications = await getCertifications();
       }
     </ul>
   </section>
+
 </BaseLayout>
 
 <style>

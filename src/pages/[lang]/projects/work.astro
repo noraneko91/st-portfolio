@@ -1,5 +1,6 @@
 ---
 import CareerGraph from '../../../components/CareerGraph.astro';
+import PageHero from '../../../components/PageHero.astro';
 import ProjectTabs from '../../../components/ProjectTabs.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../../i18n/utils';
@@ -15,10 +16,12 @@ const [careers, skillNames] = await Promise.all([getCareers(), getSkillNames()])
 ---
 
 <BaseLayout lang={lang} title={t('projects.tab.work')} description={t('projects.work.description')}>
-  <h1 class="text-title mb-6">{t('projects.title')}</h1>
+  <PageHero tile="work">
+    <h1 class="text-title mb-3">{t('projects.title')}</h1>
+    <p class="max-w-[var(--measure)] text-muted">{t('projects.work.description')}</p>
+  </PageHero>
   <ProjectTabs lang={lang} current="work" />
   {/* 画面ではタブが見出しの役割を持つため、見出しの階層だけを読み上げ用に補う / 화면에서는 탭이 제목 역할을 하므로 제목 계층만 스크린리더용으로 보충한다 */}
   <h2 class="sr-only">{t('projects.tab.work')}</h2>
-  <p class="mb-8 max-w-[var(--measure)] text-muted">{t('projects.work.description')}</p>
   <CareerGraph careers={careers} lang={lang} skillNames={skillNames} />
 </BaseLayout>

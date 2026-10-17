@@ -70,7 +70,6 @@ export const ko: Translation = {
   'project.link.demo': '데모',
   'project.link.zenn': 'Zenn 글',
 
-  'home.section.pages': '페이지 안내',
 
   'contact.lead': '업무 상담이나 문의는 아래 방법으로 연락해 주세요.',
   'contact.email': '이메일',
@@ -93,13 +92,6 @@ export const ko: Translation = {
   'command.group.links': '링크',
   'command.link.source': '이 사이트의 소스 코드',
 
-  'home.cta.projects': '프로젝트 보기',
-  'home.terminal.label': '프로필 요약',
-  'home.terminal.experience': '경력',
-  'home.terminal.certifications': '자격증',
-  'home.terminal.languages': '언어',
-  'home.terminal.current': '최근',
-  'home.card.latest': '최근 담당',
   'home.card.projects': '프로젝트 {n}건',
 
   'site.suffix': '포트폴리오',
@@ -119,6 +111,18 @@ export const ko: Translation = {
   'skills.personalOnly': '개인 개발',
 
   'project.meta.type': '분류',
+
+  'home.tile.profileMore': '프로필 보기',
+  'home.tile.work': '경력 {n}건 · {years}',
+  'home.tile.skillsHint': '스킬과 경력의 연결도 볼 수 있습니다',
+  'home.tile.contactLead': '업무 상담·문의는 여기에서',
+  'skills.section.graph': '스킬 × 경력',
+  'skills.graph.help': '경력이나 스킬을 선택하면 연결이 강조됩니다. 화살표 키로 이동, Enter로 선택, Esc로 해제합니다.',
+  'skills.graph.experience': '경력·개인 개발',
+  'skills.graph.skills': '스킬',
+  'skills.graph.selected': '{name}: {items} ({n}건)',
+  'skills.graph.cleared': '선택을 해제했습니다',
+  'skills.graph.separator': ', ',
 
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',

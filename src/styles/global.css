@@ -27,6 +27,10 @@
   --grid-strong: #e1dfd8;
   --glow: rgb(51 70 194 / 0.14);
 
+  /* 奥行きのある背景の床の線と、浮いた面の影 (装飾のみ。ADR 0007) / 깊이감 있는 배경의 바닥 선과 떠 있는 면의 그림자 (장식만. ADR 0007) */
+  --floor-line: rgb(51 70 194 / 0.2);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 0.5rem 1.5rem -0.75rem rgb(30 30 60 / 0.18);
+
   /* 画面幅に応じて左右の余白を広げる (360px で約 20px) / 화면 폭에 따라 좌우 여백을 넓힌다 (360px에서 약 20px) */
   --gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
   --page-max: 72rem;
@@ -47,6 +51,8 @@
     --grid: #1b1b1a;
     --grid-strong: #222220;
     --glow: rgb(154 166 255 / 0.12);
+    --floor-line: rgb(154 166 255 / 0.18);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 0.625rem 1.75rem -0.875rem rgb(0 0 0 / 0.7);
   }
 }
 
@@ -261,21 +267,26 @@
     outline-offset: 2px;
   }
 
-  /* 操作できないカード (準備中など)。点線と薄い文字で区別する / 조작할 수 없는 카드 (준비 중 등). 점선과 흐린 글자로 구분한다 */
-  /* 設計図のような方眼紙の背景 (Home のみ)。24px の細い線と 120px の太い線 / 설계도 같은 방안지 배경 (Home만). 24px 가는 선과 120px 굵은 선 */
-  .graph-paper {
-    background-image:
-      linear-gradient(var(--grid-strong) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size:
-      120px 120px,
-      120px 120px,
-      24px 24px,
-      24px 24px;
+  /*
+   * 背景の上に浮かぶ面 (Home のタイル・各ページの見出し)。すりガラスにするが、背景色を 72% 残して文字のコントラストは通常の背景と同じ水準に保つ
+   * 배경 위에 떠 있는 면 (Home 타일·각 페이지 제목). 간유리로 하되, 배경색을 72% 남겨 글자 대비는 일반 배경과 같은 수준으로 유지한다
+   */
+  .panel {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg);
+    box-shadow: var(--shadow);
   }
 
+  @supports (backdrop-filter: blur(1px)) {
+    .panel {
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(18px) saturate(1.3);
+    }
+  }
+
+  /* 操作できないカード (準備中など)。点線と薄い文字で区別する / 조작할 수 없는 카드 (준비 중 등). 점선과 흐린 글자로 구분한다 */
   .card-disabled {
     border: 1px dashed var(--border);
     border-radius: 2px;
@@ -295,6 +306,20 @@
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 200ms;
+  }
+
+  /* Home のタイルと各ページの見出しの面は同じ名前を持ち、タイルが広がってページになるように見せる (ADR 0007) / Home 타일과 각 페이지 제목 면은 같은 이름을 가져, 타일이 넓어져 페이지가 되는 것처럼 보이게 한다 (ADR 0007) */
+  ::view-transition-group(*) {
+    animation-duration: 380ms;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* 面の大きさが変わる間も中の文字を縦横に引き伸ばさない / 면 크기가 바뀌는 동안에도 안의 글자를 가로세로로 늘이지 않는다 */
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
   }
 
   a,

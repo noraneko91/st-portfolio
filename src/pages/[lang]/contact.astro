@@ -1,4 +1,5 @@
 ---
+import PageHero from '../../components/PageHero.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { getProfile } from '../../lib/content';
@@ -14,8 +15,10 @@ const githubUrl = `https://github.com/${github}`;
 ---
 
 <BaseLayout lang={lang} title={t('contact.title')} description={t('contact.description')}>
-  <h1 class="text-title mb-6">{t('contact.title')}</h1>
-  <p class="mb-10 max-w-[var(--measure)]">{t('contact.lead')}</p>
+  <PageHero tile="contact">
+    <h1 class="text-title mb-3">{t('contact.title')}</h1>
+    <p class="max-w-[var(--measure)]">{t('contact.lead')}</p>
+  </PageHero>
 
   {/* フォームは使わない: 外部 JS と個人情報の保管を避けるため / 폼은 쓰지 않는다: 외부 JS와 개인정보 보관을 피하기 위해 */}
   {/* 連絡手段は本文のリンクではなく、押せるカードとして目立たせる / 연락 수단은 본문 링크가 아니라 누를 수 있는 카드로 눈에 띄게 한다 */}

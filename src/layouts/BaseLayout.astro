@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import DepthBackground from '../components/DepthBackground.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { defaultLocale, htmlLang, locales, ogLocale, type Lang } from '../i18n/config';
@@ -11,11 +12,11 @@ interface Props {
   // 省略時はサイト名のみ（ホーム用） / 생략하면 사이트 이름만 (홈용)
   title?: string;
   description: string;
-  // ページ固有の背景など、body に付けるクラス / 페이지 고유 배경 등 body에 붙이는 클래스
-  bodyClass?: string;
+  // Home は 1 画面に収めるため余白を詰め、背景の床を動かす / Home은 한 화면에 담기 위해 여백을 줄이고 배경 바닥을 움직인다
+  home?: boolean;
 }
 
-const { lang, title, description, bodyClass } = Astro.props;
+const { lang, title, description, home = false } = Astro.props;
 const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
 // サイト名は「表示名 + ポートフォリオ (言語別)」 / 사이트 이름은 "표시 이름 + 포트폴리오 (언어별)"
@@ -60,9 +61,10 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta name="generator" content={Astro.generator} />
   </head>
   {/* 本文が短いページでもフッターを画面の下端に置く / 본문이 짧은 페이지에서도 푸터를 화면 아래 끝에 둔다 */}
-  <body class:list={['flex min-h-dvh flex-col', bodyClass]}>
+  <body class="flex min-h-dvh flex-col">
+    <DepthBackground animate={home} />
     <Header lang={lang} />
-    <main id="main" class="wrapper page-main flex-1">
+    <main id="main" class:list={['wrapper flex-1', home ? 'page-main-home' : 'page-main']}>
       <slot />
     </main>
     <Footer lang={lang} />
@@ -72,5 +74,9 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
 <style>
   .page-main {
     padding-block: clamp(2.5rem, 1.5rem + 5vw, 5rem) 5rem;
+  }
+
+  .page-main-home {
+    padding-block: 1.25rem 2.5rem;
   }
 </style>

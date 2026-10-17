@@ -1,10 +1,11 @@
 ---
+import MiniCareerGraph from '../../components/MiniCareerGraph.astro';
+import ProjectCover from '../../components/ProjectCover.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import {
   formatYears,
   getCareers,
-  getCertifications,
   getProfile,
   getProjects,
   getSkillsWithMonths,
@@ -18,462 +19,382 @@ export function getStaticPaths() {
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
 
-const [profile, careers, certifications, projects, skills, totalMonths] = await Promise.all([
+const [profile, careers, projects, skills, totalMonths] = await Promise.all([
   getProfile(),
   getCareers(),
-  getCertifications(),
   getProjects(),
   getSkillsWithMonths(),
   getTotalCareerMonths(),
 ]);
 
-// headline を強調語で区切り、該当部分だけ <em> にする (強調語はデータで管理) / headline를 강조어로 나눠 해당 부분만 <em>으로 한다 (강조어는 데이터로 관리)
-const headline = profile.headline[lang];
-const highlightPattern = profile.headlineHighlights.length
-  ? new RegExp(`(${profile.headlineHighlights.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`)
-  : undefined;
-const headlineParts = (highlightPattern ? headline.split(highlightPattern) : [headline]).map((part) => ({
-  text: part,
-  highlight: profile.headlineHighlights.includes(part),
-}));
-
-const experience = formatYears(totalMonths, t);
-const latestCareer = careers[0];
-const featuredSkills = skills.filter(({ skill }) => skill.data.featured).map(({ skill }) => skill.data.name);
+// バーの長さは代表スキルの中で最も長いものを 100% とする / 막대 길이는 대표 스킬 중 가장 긴 것을 100%로 한다
+const featured = skills.filter(({ skill }) => skill.data.featured);
+const maxMonths = Math.max(...featured.map(({ months }) => months), 1);
 const latestProject = projects[0];
-const githubUrl = `https://github.com/${profile.github}`;
-
-// ターミナル風の要約。値はすべてコンテンツから計算する / 터미널 풍 요약. 값은 모두 콘텐츠에서 계산한다
-const terminalLines = [
-  { key: t('home.terminal.experience'), value: experience },
-  { key: t('home.terminal.certifications'), value: String(certifications.length) },
-  { key: t('home.terminal.languages'), value: profile.languages.map((language) => language.name[lang]).join(' / ') },
-  { key: t('home.terminal.current'), value: latestCareer?.data.title[lang] ?? '' },
-];
+const growth = profile.growth[0]?.[lang];
 ---
 
-<BaseLayout lang={lang} description={t('home.description')} bodyClass="graph-paper">
-  <section class="hero" data-spotlight>
-    <div class="hero-text">
-      {/* 名前の行は背景の帯ではなくチップで示す (テキスト選択のように見えないように) / 이름 줄은 배경 띠가 아니라 칩으로 표시한다 (텍스트 선택처럼 보이지 않게) */}
-      <p class="eyebrow">
-        <span class="eyebrow-chip"><span class="eyebrow-dot" aria-hidden="true"></span>{profile.displayName}</span>
-        <span>{profile.title[lang]}</span>
-      </p>
-      <h1 class="text-display">
-        {headlineParts.map((part) => (part.highlight ? <em class="highlight">{part.text}</em> : part.text))}
-      </h1>
-      <div class="cta">
-        <a class="button button-primary" href={getAlternatePath(lang, 'projects/work')}>
-          {t('home.cta.projects')}
-          <span aria-hidden="true">→</span>
-        </a>
-        <a class="button button-secondary" href={getAlternatePath(lang, 'contact')}>{t('contact.title')}</a>
-      </div>
+<BaseLayout lang={lang} description={t('home.description')} home>
+  {/*
+    各ページの入口をタイルで並べる。タイルとページ見出しは同じ view-transition-name を持ち、押すとタイルが広がってページになる (ADR 0007)
+    각 페이지 입구를 타일로 배치한다. 타일과 페이지 제목은 같은 view-transition-name을 가져, 누르면 타일이 넓어져 페이지가 된다 (ADR 0007)
+  */}
+  <div class="bento">
+    <div class="tile panel tile-profile" style="view-transition-name: tile-profile">
+      <p class="tile-prompt font-mono" aria-hidden="true">~/whoami</p>
+      <h1 class="tile-name">{profile.displayName}</h1>
+      <p class="tile-role">{profile.title[lang]}</p>
+      {/* 要約の値はすべてコンテンツから計算する / 요약 값은 모두 콘텐츠에서 계산한다 */}
+      <dl class="tile-facts">
+        <div>
+          <dt>{t('profile.experience')}</dt>
+          <dd>{formatYears(totalMonths, t)}</dd>
+        </div>
+        <div>
+          <dt>{t('profile.location')}</dt>
+          <dd>{profile.location[lang]}</dd>
+        </div>
+        <div>
+          <dt>{t('profile.languages')}</dt>
+          <dd>{profile.languages.map((language) => language.name[lang]).join(' / ')}</dd>
+        </div>
+      </dl>
+      {growth && <p class="tile-growth">{growth}</p>}
+      <a class="card-link tile-more" href={getAlternatePath(lang, 'about')}>
+        {t('home.tile.profileMore')}<span aria-hidden="true"> →</span>
+      </a>
     </div>
 
-    <figure class="terminal" aria-label={t('home.terminal.label')}>
-      <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="terminal-body font-mono">
-        <p class="terminal-line" style="--i: 0">
-          <span class="terminal-prompt" aria-hidden="true">~ $</span> whoami --summary
-        </p>
-        <dl>
-          {
-            terminalLines.map((line, index) => (
-              <div class="terminal-line" style={`--i: ${index + 1}`}>
-                <dt>{line.key}</dt>
-                <dd>{line.value}</dd>
-              </div>
-            ))
-          }
-        </dl>
-        <p class="terminal-line" style={`--i: ${terminalLines.length + 1}`} aria-hidden="true">
-          <span class="terminal-prompt">~ $</span>
-          <span class="terminal-caret"></span>
-        </p>
-      </div>
-    </figure>
-  </section>
+    <div class="tile panel tile-work" style="view-transition-name: tile-work">
+      <h2 class="tile-title"><a class="card-link" href={getAlternatePath(lang, 'projects/work')}>{t('projects.tab.work')}</a></h2>
+      <MiniCareerGraph careers={careers} />
+      <p class="tile-meta">{t('home.tile.work', { n: careers.length, years: formatYears(totalMonths, t) })}</p>
+      <span class="tile-arrow" aria-hidden="true">→</span>
+    </div>
 
-  {/* ベントーは本文幅に収めず、ページ幅いっぱいに広げる / 벤토는 본문 폭에 가두지 않고 페이지 폭 전체로 넓힌다 */}
-  <section class="pages" aria-labelledby="pages-label">
-    <h2 id="pages-label" class="pages-label">
-      <span class="font-mono" aria-hidden="true">01 —</span>
-      {t('home.section.pages')}
-    </h2>
-    {/* 各ページの中身の一部を見せるベントーグリッド。カード全体がリンク / 각 페이지 내용 일부를 보여주는 벤토 그리드. 카드 전체가 링크 */}
-    <ul class="bento">
-      <li class="bento-card card bento-wide reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'projects/work')}>{t('projects.tab.work')}</a></h3>
-        <p class="bento-metric">{experience}</p>
-        {latestCareer && <p class="text-muted">{`${t('home.card.latest')}: ${latestCareer.data.title[lang]}`}</p>}
-        <span class="bento-arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="bento-card card reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'skills')}>{t('skills.title')}</a></h3>
-        <ul class="chips">
-          {featuredSkills.map((name) => <li>{name}</li>)}
-        </ul>
-        <span class="bento-arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="bento-card card reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'contact')}>{t('contact.title')}</a></h3>
-        <p class="font-mono text-muted">{githubUrl.replace(/^https:\/\//, '')}</p>
-        <span class="bento-arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="bento-card card bento-wide reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'projects/personal')}>{t('projects.tab.personal')}</a></h3>
-        <p class="bento-metric">{t('home.card.projects', { n: projects.length })}</p>
-        {latestProject && <p class="text-muted">{latestProject.data.title[lang]}</p>}
-        <span class="bento-arrow" aria-hidden="true">→</span>
-      </li>
-    </ul>
-  </section>
+    <div class="tile panel tile-skills" style="view-transition-name: tile-skills">
+      <h2 class="tile-title"><a class="card-link" href={getAlternatePath(lang, 'skills')}>{t('skills.title')}</a></h2>
+      <ul class="bars">
+        {
+          featured.map(({ skill, months }, index) => (
+            <li>
+              <span>{skill.data.name}</span>
+              <span class="bar-years">{formatYears(months, t)}</span>
+              {/* 年数は文字で伝わるので、バーは装飾 / 연수는 글자로 전달되므로 막대는 장식 */}
+              <span class="bar" aria-hidden="true">
+                <span class="bar-fill" style={`--ratio: ${months / maxMonths}; --i: ${index}`} />
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="tile-meta">{t('home.tile.skillsHint')}</p>
+      <span class="tile-arrow" aria-hidden="true">→</span>
+    </div>
+
+    <div class="tile panel tile-personal" style="view-transition-name: tile-personal">
+      <h2 class="tile-title">
+        <a class="card-link" href={getAlternatePath(lang, 'projects/personal')}>{t('projects.tab.personal')}</a>
+        <span class="tile-count">{t('home.card.projects', { n: projects.length })}</span>
+      </h2>
+      {
+        latestProject && (
+          <>
+            <div class="tile-cover">
+              <ProjectCover project={latestProject} lang={lang} />
+            </div>
+            <p class="tile-project">{latestProject.data.title[lang]}</p>
+            <p class="tile-summary">{latestProject.data.summary[lang]}</p>
+          </>
+        )
+      }
+      <span class="tile-arrow" aria-hidden="true">→</span>
+    </div>
+
+    <div class="tile panel tile-contact" style="view-transition-name: tile-contact">
+      <h2 class="tile-title"><a class="card-link" href={getAlternatePath(lang, 'contact')}>{t('contact.title')}</a></h2>
+      <p class="tile-lead">{t('home.tile.contactLead')}</p>
+      <p class="tile-meta font-mono">
+        {profile.email && <span>{profile.email}</span>}
+        <span>{`github.com/${profile.github}`}</span>
+      </p>
+      <span class="tile-arrow" aria-hidden="true">→</span>
+    </div>
+  </div>
 </BaseLayout>
 
-<script>
-  // ポインター位置にスポットライトを追従させる。マウス等の精密なポインターで、動きを減らす設定がオフのときだけ
-  // 포인터 위치에 스포트라이트를 따라가게 한다. 마우스 등 정밀 포인터이고 동작 줄이기 설정이 꺼져 있을 때만
-  const hero = document.querySelector<HTMLElement>('[data-spotlight]');
-  if (hero && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let frame = 0;
-    hero.addEventListener('pointermove', (event) => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const rect = hero.getBoundingClientRect();
-        hero.style.setProperty('--spot-x', `${event.clientX - rect.left}px`);
-        hero.style.setProperty('--spot-y', `${event.clientY - rect.top}px`);
-      });
-    });
-  }
-</script>
-
 <style>
-  /* ---- ヒーロー / 히어로 ---- */
-  .hero {
-    position: relative;
-    isolation: isolate;
-    display: grid;
-    gap: 2.5rem;
-    align-items: center;
-    padding-block: 1rem 4rem;
-  }
-
-  /* 方眼紙の上にテーマ色のスポットライト。四辺で透明になるので形が切れない / 방안지 위에 포인트 컬러 스포트라이트. 네 변에서 투명해지므로 모양이 잘리지 않는다 */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: -4rem calc(var(--gutter) * -1) 0;
-    z-index: -1;
-    background: radial-gradient(28rem circle at var(--spot-x, 30%) var(--spot-y, 40%), var(--glow), transparent 70%);
-    pointer-events: none;
-  }
-
-  @media (min-width: 64rem) {
-    .hero {
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-      gap: 3rem;
-      padding-block: 2rem 5rem;
-    }
-  }
-
-  .eyebrow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-
-  .eyebrow-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid var(--control-border);
-    border-radius: 999px;
-    background: var(--bg);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--text);
-  }
-
-  .eyebrow-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .hero h1 {
-    margin-block: 1.25rem 2rem;
-  }
-
-  /* 強調語はテーマ色と下線で示す (背景の帯は使わない) / 강조어는 포인트 컬러와 밑줄로 표시한다 (배경 띠는 쓰지 않는다) */
-  .highlight {
-    font-style: normal;
-    color: var(--accent);
-    background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 100% 0.08em;
-  }
-
-  .cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 3rem;
-    padding-inline: 1.25rem;
-    border: 1px solid var(--accent);
-    border-radius: 2px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .button-primary {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .button-primary:hover {
-    background: var(--accent-strong);
-    border-color: var(--accent-strong);
-    color: var(--bg);
-  }
-
-  .button-secondary {
-    background: var(--bg);
-    color: var(--accent);
-  }
-
-  .button-secondary:hover {
-    background: var(--surface);
-  }
-
-  .button:active {
-    transform: translateY(1px);
-  }
-
-  /* ---- ターミナル (ライト・ダークとも暗い配色で、ページの中で目立たせる) / 터미널 (라이트·다크 모두 어두운 색으로 페이지에서 눈에 띄게) ---- */
-  .terminal {
-    --term-bg: #15161c;
-    --term-text: #e8e6e1;
-    --term-muted: #a3a19a;
-    --term-accent: #9aa6ff;
-
-    overflow: hidden;
-    border: 1px solid #2f3040;
-    border-radius: 6px;
-    background: var(--term-bg);
-    color: var(--term-text);
-    box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.45);
-  }
-
-  .terminal-bar {
-    display: flex;
-    gap: 0.375rem;
-    padding: 0.625rem 0.875rem;
-    border-bottom: 1px solid #2a2b36;
-  }
-
-  .terminal-bar span {
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: 50%;
-    background: #3a3b48;
-  }
-
-  .terminal-body {
-    display: grid;
-    gap: 0.5rem;
-    padding: 1.25rem;
-    font-size: 0.8125rem;
-    line-height: 1.6;
-  }
-
-  .terminal-prompt {
-    margin-inline-end: 0.5rem;
-    color: var(--term-accent);
-  }
-
-  .terminal dl {
-    display: grid;
-    gap: 0.375rem;
-  }
-
-  .terminal dl > div {
-    display: grid;
-    grid-template-columns: 7.5rem minmax(0, 1fr);
-    gap: 0.75rem;
-  }
-
-  .terminal dt {
-    color: var(--term-muted);
-  }
-
-  .terminal-caret {
-    display: inline-block;
-    width: 0.5rem;
-    height: 1em;
-    vertical-align: text-bottom;
-    background: var(--term-text);
-  }
-
-  /* ---- ページ案内 / 페이지 안내 ---- */
-  .pages {
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .pages-label {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--muted);
-  }
-
-  /* ---- ベントーグリッド / 벤토 그리드 ---- */
+  /* ---- 配置: スマートフォンは縦に積み、PC は 1 画面に収める / 배치: 스마트폰은 세로로 쌓고, PC는 한 화면에 담는다 ---- */
   .bento {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.875rem;
   }
 
   @media (min-width: 48rem) {
     .bento {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .bento-wide {
+    .tile-profile,
+    .tile-work,
+    .tile-contact {
       grid-column: span 2;
     }
   }
 
-  .bento-card {
-    display: grid;
-    align-content: start;
+  /* 高さが足りない画面では 1 画面に詰めず、縦に伸ばす / 높이가 부족한 화면에서는 한 화면에 채우지 않고 세로로 늘린다 */
+  @media (min-width: 64rem) and (min-height: 40rem) {
+    .bento {
+      height: calc(100dvh - 9rem);
+      min-height: 34rem;
+      max-height: 52rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.62fr);
+      grid-template-areas:
+        'profile profile work work'
+        'profile profile skills personal'
+        'contact contact skills personal';
+    }
+
+    .tile-profile {
+      grid-area: profile;
+      padding: 2rem;
+    }
+
+    .tile-work {
+      grid-area: work;
+    }
+
+    .tile-skills {
+      grid-area: skills;
+    }
+
+    .tile-personal {
+      grid-area: personal;
+    }
+
+    .tile-contact {
+      grid-area: contact;
+    }
+  }
+
+  /* ---- タイル。全体がリンク (.card-link を面いっぱいに広げる) / 타일. 전체가 링크 (.card-link를 면 전체로 넓힌다) ---- */
+  .tile {
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    min-height: 9rem;
-    padding: 1.5rem;
-    padding-right: 3rem;
-    background: var(--bg);
+    min-width: 0;
+    padding: 1.25rem;
+    overflow: hidden;
   }
 
-  .bento-card h3 {
-    font-size: 1.125rem;
+  .tile:has(.card-link:hover) {
+    border-color: var(--accent);
   }
 
-  .bento-card p {
-    overflow-wrap: anywhere;
+  .tile:has(.card-link:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
   }
 
-  .bento-card .card-link {
+  .tile .card-link {
     color: var(--text);
     text-decoration: none;
   }
 
-  .bento-metric {
-    font-size: 1.75rem;
-    font-weight: 700;
-    line-height: 1.3;
+  .tile-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0 1rem;
+    padding-right: 2rem;
+    font-size: 1rem;
   }
 
-  .bento-arrow {
+  .tile-count {
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .tile-arrow {
     position: absolute;
-    top: 1.375rem;
+    top: 1.125rem;
     right: 1.25rem;
     color: var(--accent);
     font-size: 1.25rem;
   }
 
-  .chips {
+  .tile-meta {
+    margin-top: auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem;
-  }
-
-  .chips li {
-    padding: 0.125rem 0.5rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    gap: 0.25rem 1rem;
     font-size: 0.8125rem;
+    color: var(--muted);
+    overflow-wrap: anywhere;
   }
 
-  /* ---- 動き (動きを減らす設定がオフのときだけ) / 움직임 (동작 줄이기 설정이 꺼져 있을 때만) ---- */
+  /* ---- プロフィール / 프로필 ---- */
+  .tile-prompt {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .tile-name {
+    font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+  }
+
+  .tile-role {
+    color: var(--muted);
+  }
+
+  .tile-facts {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .tile-facts div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .tile-facts dt {
+    font-family: var(--font-mono);
+    color: var(--muted);
+  }
+
+  /* 中心のメッセージ (バックエンドからクラウドを含むフルスタックへ) / 핵심 메시지 (백엔드에서 클라우드를 포함한 풀스택으로) */
+  .tile-growth {
+    margin-top: auto;
+    padding-left: 0.875rem;
+    border-left: 3px solid var(--accent);
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  }
+
+  .tile-profile .card-link {
+    margin-top: 0.75rem;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9375rem;
+  }
+
+  .tile-profile:has(.card-link:hover) .card-link {
+    text-decoration: underline;
+  }
+
+  /* ---- スキル / 스킬 ---- */
+  .bars {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .bars li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .bar-years {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .bar {
+    grid-column: 1 / -1;
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    display: block;
+    width: calc(var(--ratio) * 100%);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+    transform-origin: left;
+  }
+
+  /* ---- 個人開発 / 개인 개발 ---- */
+  .tile-cover {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .tile-cover :global(.cover-path) {
+    font-size: 0.9375rem;
+  }
+
+  .tile-project {
+    margin-top: 0.25rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .tile-summary {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* PC では表紙をタイルの残りの高さに合わせる / PC에서는 표지를 타일의 남은 높이에 맞춘다 */
+  @media (min-width: 64rem) and (min-height: 40rem) {
+    .tile-cover {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .tile-cover :global(.cover) {
+      height: 100%;
+      aspect-ratio: auto;
+      border-bottom: 0;
+    }
+  }
+
+  /* ---- お問い合わせ / 문의 ---- */
+  .tile-lead {
+    font-weight: 700;
+  }
+
+  /* ---- 動き (transform だけ。動きを減らす設定では付けない) / 움직임 (transform만. 동작 줄이기 설정에서는 넣지 않는다) ---- */
   @media (prefers-reduced-motion: no-preference) {
-    .highlight {
-      animation: draw-underline 700ms 300ms ease-out both;
-    }
-
-    .terminal-line {
-      animation: line-in 300ms ease-out both;
-      animation-delay: calc(var(--i) * 180ms + 400ms);
-    }
-
-    .terminal-caret {
-      animation: blink 1s steps(1) infinite;
-    }
-
-    .eyebrow-dot {
-      box-shadow: 0 0 0 0 var(--accent);
-      animation: pulse 2.4s ease-out infinite;
-    }
-
-    .bento-card {
+    .tile {
       transition:
         transform 200ms ease,
-        box-shadow 200ms ease,
-        border-color 150ms ease,
-        background-color 150ms ease;
+        border-color 150ms ease;
     }
 
-    .bento-card:hover {
+    .tile:has(.card-link:hover) {
       transform: translateY(-3px);
-      box-shadow: 0 1rem 2rem -1.25rem rgb(0 0 0 / 0.35);
     }
 
-    .bento-arrow {
-      transition: transform 200ms ease;
-    }
-
-    .bento-card:hover .bento-arrow {
-      transform: translateX(3px);
+    .bar-fill {
+      animation: fill 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(var(--i) * 90ms + 150ms);
     }
   }
 
-  @keyframes draw-underline {
+  @keyframes fill {
     from {
-      background-size: 0% 0.08em;
-    }
-  }
-
-  @keyframes line-in {
-    from {
-      opacity: 0;
-      transform: translateY(0.25rem);
-    }
-  }
-
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes pulse {
-    70% {
-      box-shadow: 0 0 0 0.5rem transparent;
-    }
-    100% {
-      box-shadow: 0 0 0 0 transparent;
+      transform: scaleX(0);
     }
   }
 </style>

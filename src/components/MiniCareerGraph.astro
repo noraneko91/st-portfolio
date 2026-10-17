@@ -1,0 +1,102 @@
+---
+import type { Career } from '../lib/content';
+
+interface Props {
+  careers: Career[];
+}
+
+const { careers } = Astro.props;
+
+// 古い順に並べ、期間を横軸 (月) に置く / 오래된 순으로 정렬하고 기간을 가로축 (월)에 둔다
+const toIndex = (yearMonth: string) => {
+  const [year, month] = yearMonth.split('-').map(Number);
+  return year * 12 + month - 1;
+};
+const now = new Date();
+const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+const items = [...careers]
+  .sort((a, b) => toIndex(a.data.start) - toIndex(b.data.start))
+  .map((career) => ({ start: toIndex(career.data.start), end: toIndex(career.data.end ?? currentMonth) + 1 }));
+
+const first = items[0]?.start ?? 0;
+const last = Math.max(...items.map((item) => item.end), first + 1);
+const x = (month: number) => 12 + ((month - first) / (last - first)) * 276;
+const baseline = 64;
+
+// 案件ごとに本線から枝を出して戻す (git のブランチの形)。重ならないよう上下 2 段に交互に置く
+// 안건마다 본선에서 가지를 내고 되돌린다 (git 브랜치 모양). 겹치지 않게 위아래 2단에 번갈아 둔다
+const branches = items.map((item, index) => {
+  const x1 = x(item.start);
+  const x2 = x(item.end);
+  const lane = index % 2 ? 44 : 22;
+  return { d: `M${x1} ${baseline} C${x1} ${lane + 6}, ${x1} ${lane}, ${x1 + 8} ${lane} L${x2 - 8} ${lane} C${x2} ${lane}, ${x2} ${lane + 6}, ${x2} ${baseline}`, x1, index };
+});
+
+// 2 年おきの目盛り / 2년 간격 눈금
+const firstYear = Math.ceil(first / 12);
+const years: number[] = [];
+for (let year = firstYear; year * 12 < last; year += 2) years.push(year);
+---
+
+{/* 期間は文字 (タイルの説明) でも伝えるので、図は装飾として読み上げない / 기간은 글자 (타일 설명)로도 전하므로 그림은 장식으로 읽지 않는다 */}
+<svg class="mini-graph" viewBox="0 0 300 90" aria-hidden="true">
+  <line class="main" x1="6" y1={baseline} x2="294" y2={baseline}></line>
+  {branches.map((branch) => <path class="branch" d={branch.d}></path>)}
+  {branches.map((branch) => <circle class="dot" style={`--i: ${branch.index}`} cx={branch.x1} cy={baseline} r="4"></circle>)}
+  <circle class="head" cx={x(last)} cy={baseline} r="5"></circle>
+  {years.map((year) => <text x={x(year * 12)} y="84">{year}</text>)}
+</svg>
+
+<style>
+  .mini-graph {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 8rem;
+  }
+
+  .main {
+    stroke: var(--control-border);
+    stroke-width: 2;
+  }
+
+  .branch {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+
+  .dot {
+    fill: var(--bg);
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .head {
+    fill: var(--accent);
+  }
+
+  text {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--muted);
+    text-anchor: middle;
+  }
+
+  /* 案件の始まりが古い順に現れる (大きさだけ変える) / 안건 시작점이 오래된 순으로 나타난다 (크기만 바꾼다) */
+  @media (prefers-reduced-motion: no-preference) {
+    .dot {
+      animation: pop 500ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+      animation-delay: calc(var(--i) * 110ms + 150ms);
+    }
+  }
+
+  @keyframes pop {
+    from {
+      transform: scale(0);
+    }
+  }
+</style>

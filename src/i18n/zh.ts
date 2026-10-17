@@ -70,7 +70,6 @@ export const zh: Translation = {
   'project.link.demo': '演示',
   'project.link.zenn': 'Zenn文章',
 
-  'home.section.pages': '页面导览',
 
   'contact.lead': '如有工作洽谈或疑问，请通过以下方式联系我。',
   'contact.email': '邮箱',
@@ -93,13 +92,6 @@ export const zh: Translation = {
   'command.group.links': '链接',
   'command.link.source': '本网站的源代码',
 
-  'home.cta.projects': '查看项目',
-  'home.terminal.label': '个人简介摘要',
-  'home.terminal.experience': '经验',
-  'home.terminal.certifications': '证书',
-  'home.terminal.languages': '语言',
-  'home.terminal.current': '最近',
-  'home.card.latest': '最近负责',
   'home.card.projects': '{n}个项目',
 
   'site.suffix': '作品集',
@@ -119,6 +111,18 @@ export const zh: Translation = {
   'skills.personalOnly': '个人开发',
 
   'project.meta.type': '类型',
+
+  'home.tile.profileMore': '查看个人简介',
+  'home.tile.work': '{n} 段经历 · {years}',
+  'home.tile.skillsHint': '还可以查看技能与经历的关联',
+  'home.tile.contactLead': '工作洽谈或咨询请从这里联系',
+  'skills.section.graph': '技能 × 经历',
+  'skills.graph.help': '选择经历或技能即可突出显示其关联。用方向键移动，按 Enter 选择，按 Esc 取消。',
+  'skills.graph.experience': '经历·个人开发',
+  'skills.graph.skills': '技能',
+  'skills.graph.selected': '{name}：{items}（{n} 项）',
+  'skills.graph.cleared': '已取消选择',
+  'skills.graph.separator': '、',
 
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
