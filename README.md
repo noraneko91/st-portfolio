@@ -14,6 +14,8 @@
 - **4言語対応**: 言語ごとに独立したURL（`/ja/` `/en/` `/zh/` `/ko/`）。全ページで hreflang を出力し、sitemap の各 URL にも4言語の代替リンクを付与
 - **翻訳漏れをビルドで検出**: 日本語を基準に他言語を型で縛り、キーやコンテンツの訳が1つでも欠けるとビルドが失敗する
 - **データとページの分離**: 経歴・スキル・プロジェクトは YAML で管理し、ページは表示だけを担当。スキルの経験年数は経歴の期間から自動計算
+- **Home のベントーと変形遷移**: Home の 1 画面に各ページの中身をタイルで並べ、タイルを押すとページの見出しへ形が変わって移る（ページ間 View Transitions。JS 不要、非対応ブラウザは通常の移動）。背景は CSS の perspective で描いた遠近グリッド
+- **スキル × 経歴グラフ**: 経歴・個人開発とスキルのつながりを線で示し、選ぶと強調する（TypeScript、キーボード操作・読み上げ対応）
 - **コマンドパレット**: Ctrl/⌘+K でページ移動・言語切替・GitHub を検索（React island + shadcn/ui）。React は初めて開くときだけ読み込む
 - **静的サイト**: DB・サーバーなし。GitHub への push で Cloudflare Workers に自動デプロイ
 - **アクセシビリティ**: キーボード操作・スクリーンリーダー対応の言語メニュー（WAI-ARIA Menu Button）、JS 無効時も言語を選べるリンク、`prefers-reduced-motion` の尊重
@@ -41,14 +43,15 @@
 - [0004. Cloudflare Workers（Static Assets）でデプロイする](docs/adr/0004-cloudflare-workers.md)
 - [0005. 操作の多い部品だけに React islands と shadcn/ui を使う](docs/adr/0005-react-islands-shadcn.md)
 - [0006. 経歴を Projects に移し、「業務経歴」と「個人開発」のタブに分ける](docs/adr/0006-projects-work-personal.md)
+- [0007. Home をベントーにし、奥行きのある背景とタイルからページへの変形遷移を入れる](docs/adr/0007-bento-depth-view-transitions.md)
 
 ## ページ構成
 
 | ページ | URL | 内容 |
 |---|---|---|
-| Home | `/{lang}/` | 概要と各ページへの入口 |
+| Home | `/{lang}/` | 各ページの中身をタイルで並べた入口（ベントーグリッド） |
 | About | `/{lang}/about/` | 自己紹介・得意分野・これから |
-| Skills | `/{lang}/skills/` | スキル（経験年数は経歴から自動計算）・資格 |
+| Skills | `/{lang}/skills/` | スキル（経験年数は経歴から自動計算）・資格・スキル × 経歴グラフ |
 | Projects: 業務経歴 | `/{lang}/projects/work/` | 経歴（git log 風タイムライン） |
 | Projects: 個人開発 | `/{lang}/projects/personal/` | 個人開発の一覧と詳細（`/{lang}/projects/personal/<slug>/`） |
 | Contact | `/{lang}/contact/` | 連絡先 |
