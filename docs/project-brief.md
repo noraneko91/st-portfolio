@@ -55,7 +55,7 @@
 | 1 | スキャフォールディング | Astro + TypeScript strict + Tailwind CSS、Node.js のバージョン固定 | 完了 |
 | 2 | 多言語基盤 | 翻訳ファイルと型チェック、言語別ルーティング、言語切替、ルートのリダイレクト | 完了 |
 | 3 | デプロイ | Cloudflare への自動デプロイ設定 | 完了 |
-| 4 | ページ実装 | Home / About / Skills / Projects / Contact | 未着手 |
+| 4 | ページ実装 | Home / About / Skills / Projects / Contact | 完了 |
 | 5 | 翻訳 | ja を原文として en / zh / ko を作成 | 未着手 |
 | 6 | 品質 | Lighthouse 各項目 90 点以上（特に Performance・Accessibility） | 未着手 |
 | 7 | README | リポジトリの説明、構成、ローカル実行方法 | 未着手 |
