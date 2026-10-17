@@ -86,7 +86,6 @@ export const ja = {
   'footer.build': 'build',
   'console.greeting': '👋 ソースに興味を持ってくれてありがとう。',
 
-  'command.open': '検索',
   'command.title': 'コマンドパレット',
   'command.description': 'ページの移動、言語の切り替え、リンクを開く操作ができます。',
   'command.placeholder': 'ページ・言語・リンクを検索…',
@@ -107,6 +106,8 @@ export const ja = {
   'home.card.projects': '{n}件のプロジェクト',
 
   'site.suffix': 'ポートフォリオ',
+
+  'command.hint': 'クイック移動',
 
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',

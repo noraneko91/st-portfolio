@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../i18n/config';
+import CommandTrigger from './command/CommandTrigger.astro';
 import { useTranslations } from '../i18n/utils';
 import { buildInfo, repositoryUrl } from '../lib/build-info';
 import { getProfile } from '../lib/content';
@@ -24,7 +25,10 @@ const greeting = t('console.greeting');
       <time datetime={buildInfo.date}>{buildInfo.date}</time>
       {` · ${Astro.generator}`}
     </p>
-    <p>{`© ${year} ${displayName}`}</p>
+    <div class="footer-end">
+      <CommandTrigger lang={lang} />
+      <p>{`© ${year} ${displayName}`}</p>
+    </div>
   </div>
 </footer>
 
@@ -41,11 +45,19 @@ const greeting = t('console.greeting');
   .footer-inner {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
     gap: 0.25rem 1.5rem;
     padding-block: 1.25rem;
     font-size: 0.75rem;
     color: var(--muted);
+  }
+
+  .footer-end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.25rem;
   }
 
   .footer-inner a {

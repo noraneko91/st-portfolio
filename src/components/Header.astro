@@ -3,7 +3,6 @@ import type { Lang } from '../i18n/config';
 import type { TranslationKey } from '../i18n/ja';
 import { getAlternatePath, stripLang, useTranslations } from '../i18n/utils';
 import { getProfile } from '../lib/content';
-import CommandTrigger from './command/CommandTrigger.astro';
 import LanguagePicker from './LanguagePicker.astro';
 
 interface Props {
@@ -54,7 +53,6 @@ const navItems: { path: string; label: TranslationKey }[] = [
     </nav>
     {/* 右端に固定し、右揃えの言語メニューが画面外にはみ出さないようにする / 오른쪽 끝에 고정해 오른쪽 정렬 언어 메뉴가 화면 밖으로 나가지 않게 한다 */}
     <div class="lang">
-      <CommandTrigger lang={lang} />
       <LanguagePicker lang={lang} />
     </div>
   </div>

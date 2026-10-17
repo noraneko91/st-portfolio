@@ -87,7 +87,6 @@ export const en: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 Thanks for taking a look at the source.',
 
-  'command.open': 'Search',
   'command.title': 'Command palette',
   'command.description': 'Move between pages, switch languages, or open links.',
   'command.placeholder': 'Search pages, languages, links…',
@@ -108,6 +107,8 @@ export const en: Translation = {
   'home.card.projects': '{n} projects',
 
   'site.suffix': 'Portfolio',
+
+  'command.hint': 'Quick navigation',
 
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',

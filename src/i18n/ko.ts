@@ -87,7 +87,6 @@ export const ko: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 소스에 관심 가져 주셔서 감사합니다.',
 
-  'command.open': '검색',
   'command.title': '명령 팔레트',
   'command.description': '페이지 이동, 언어 전환, 링크 열기를 할 수 있습니다.',
   'command.placeholder': '페이지·언어·링크 검색…',
@@ -108,6 +107,8 @@ export const ko: Translation = {
   'home.card.projects': '프로젝트 {n}건',
 
   'site.suffix': '포트폴리오',
+
+  'command.hint': '빠른 이동',
 
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',

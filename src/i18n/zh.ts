@@ -87,7 +87,6 @@ export const zh: Translation = {
   'footer.build': 'build',
   'console.greeting': '👋 感谢你对源码感兴趣。',
 
-  'command.open': '搜索',
   'command.title': '命令面板',
   'command.description': '可以切换页面、切换语言或打开链接。',
   'command.placeholder': '搜索页面、语言、链接…',
@@ -108,6 +107,8 @@ export const zh: Translation = {
   'home.card.projects': '{n}个项目',
 
   'site.suffix': '作品集',
+
+  'command.hint': '快速跳转',
 
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
