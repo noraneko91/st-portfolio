@@ -13,6 +13,15 @@
   --border: #deddd6;
   --accent: #3346c2;
 
+  /*
+   * 操作要素の状態。hover・開いた状態は背景とテーマ色の枠、ボタン・カードの枠は背景に対して 3:1 以上 (WCAG 1.4.11)
+   * 조작 요소의 상태. hover·열린 상태는 배경과 포인트 컬러 테두리, 버튼·카드 테두리는 배경 대비 3:1 이상 (WCAG 1.4.11)
+   */
+  --accent-strong: #2433a0;
+  --surface: #eef0fb;
+  --control-border: #8c8a82;
+  --focus-ring: 2px solid var(--accent);
+
   /* 画面幅に応じて左右の余白を広げる (360px で約 20px) / 화면 폭에 따라 좌우 여백을 넓힌다 (360px에서 약 20px) */
   --gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
   --page-max: 72rem;
@@ -27,6 +36,9 @@
     --muted: #a3a19a;
     --border: #2f2e2b;
     --accent: #9aa6ff;
+    --accent-strong: #c3caff;
+    --surface: #1d1f2e;
+    --control-border: #6f6d67;
   }
 }
 
@@ -111,8 +123,24 @@
     text-underline-offset: 0.2em;
   }
 
+  /* hover は色を濃くし下線を太く、押した瞬間は本文色にする / hover는 색을 진하게 하고 밑줄을 굵게, 누르는 순간은 본문 색으로 */
+  a:hover {
+    color: var(--accent-strong);
+    text-decoration-thickness: 2px;
+  }
+
+  a:active {
+    color: var(--text);
+  }
+
+  /* サイト外へのリンクは ↗ で示す。記号は読み上げない / 사이트 밖으로 가는 링크는 ↗로 표시한다. 기호는 읽지 않는다 */
+  a[href^="http"]:not([data-no-ext])::after {
+    content: "\00a0↗" / "";
+    font-size: 0.85em;
+  }
+
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: var(--focus-ring);
     outline-offset: 2px;
   }
 }
@@ -152,6 +180,49 @@
   .bullets li::marker {
     color: var(--muted);
   }
+
+  /* 単独で置くリンクやボタンのタップ領域 (44px) / 단독으로 두는 링크나 버튼의 탭 영역 (44px) */
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  /* 操作できるカード。全体がクリック領域であることを枠と hover で示す / 조작할 수 있는 카드. 전체가 클릭 영역임을 테두리와 hover로 보여준다 */
+  .card {
+    position: relative;
+    border: 1px solid var(--control-border);
+    border-radius: 2px;
+  }
+
+  .card:hover,
+  .card:has(.card-link:hover) {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+
+  /* カード内のリンクを全面に広げ、フォーカス枠はカード全体に出す / 카드 안의 링크를 전체로 넓히고, 포커스 테두리는 카드 전체에 표시한다 */
+  .card-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-link:focus-visible {
+    outline: none;
+  }
+
+  .card:has(.card-link:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* 操作できないカード (準備中など)。点線と薄い文字で区別する / 조작할 수 없는 카드 (준비 중 등). 점선과 흐린 글자로 구분한다 */
+  .card-disabled {
+    border: 1px dashed var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+  }
 }
 
 /*
@@ -169,8 +240,14 @@
   }
 
   a,
-  button {
-    transition: color 150ms ease;
+  button,
+  .card {
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease,
+      text-decoration-color 150ms ease,
+      transform 150ms ease;
   }
 
   /* スクロールで表示されるときに少し浮き上がる (対応ブラウザのみ) / 스크롤로 보일 때 살짝 떠오른다 (지원 브라우저만) */

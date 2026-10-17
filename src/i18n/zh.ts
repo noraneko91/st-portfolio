@@ -84,6 +84,8 @@ export const zh: Translation = {
 
   'og.imageAlt': 'K.S 的作品集 — Backend Engineer（Java / Python / AWS）',
 
+  'contact.emailPending': '准备中',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

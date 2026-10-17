@@ -83,6 +83,8 @@ export const ja = {
 
   'og.imageAlt': 'K.S のポートフォリオ — Backend Engineer（Java / Python / AWS）',
 
+  'contact.emailPending': '準備中',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

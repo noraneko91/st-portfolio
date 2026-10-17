@@ -18,31 +18,87 @@ const githubUrl = `https://github.com/${github}`;
   <p class="mb-10 max-w-[var(--measure)]">{t('contact.lead')}</p>
 
   {/* フォームは使わない: 外部 JS と個人情報の保管を避けるため / 폼은 쓰지 않는다: 외부 JS와 개인정보 보관을 피하기 위해 */}
-  <dl class="kv contact">
-    {
-      // メールアドレスが未設定の間はリンクを出さない / 메일 주소가 미설정인 동안은 링크를 표시하지 않는다
-      email && (
-        <div>
-          <dt>{t('contact.email')}</dt>
-          <dd>
-            <a href={`mailto:${email}`}>{email}</a>
-          </dd>
-        </div>
-      )
-    }
-    <div>
-      <dt>{t('contact.github')}</dt>
-      <dd>
-        <a href={githubUrl}>{githubUrl.replace(/^https:\/\//, '')}</a>
-      </dd>
-    </div>
-  </dl>
+  {/* 連絡手段は本文のリンクではなく、押せるカードとして目立たせる / 연락 수단은 본문 링크가 아니라 누를 수 있는 카드로 눈에 띄게 한다 */}
+  <ul class="methods">
+    <li>
+      <a class="method card" href={githubUrl} data-no-ext>
+        <span>
+          <span class="method-label">{t('contact.github')}</span>
+          <span class="method-value">{githubUrl.replace(/^https:\/\//, '')}</span>
+        </span>
+        <span class="method-icon" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    <li>
+      {
+        // メールアドレスが未設定の間は押せないカードにする / 메일 주소가 미설정인 동안은 누를 수 없는 카드로 한다
+        email ? (
+          <a class="method card" href={`mailto:${email}`}>
+            <span>
+              <span class="method-label">{t('contact.email')}</span>
+              <span class="method-value">{email}</span>
+            </span>
+            <span class="method-icon" aria-hidden="true">
+              →
+            </span>
+          </a>
+        ) : (
+          <div class="method card-disabled">
+            <span>
+              <span class="method-label">{t('contact.email')}</span>
+              <span>{t('contact.emailPending')}</span>
+            </span>
+          </div>
+        )
+      }
+    </li>
+  </ul>
 </BaseLayout>
 
 <style>
-  .contact {
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    font-size: 1.125rem;
+  .methods {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+
+  @media (min-width: 40rem) {
+    .methods {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .method {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4rem;
+    height: 100%;
+    padding: 0.75rem 1.25rem;
+  }
+
+  a.method,
+  a.method:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .method-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  a .method-value {
+    color: var(--accent);
+    text-decoration: underline 1px;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+  }
+
+  .method-icon {
+    font-size: 1.25rem;
+    color: var(--accent);
   }
 </style>

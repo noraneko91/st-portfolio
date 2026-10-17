@@ -107,22 +107,26 @@ const navItems: { path: string; label: TranslationKey }[] = [
     column-gap: 1.25rem;
   }
 
+  /* タップ領域 44px。下線は透明で用意しておき、hover で薄く出す / 탭 영역 44px. 밑줄은 투명하게 준비해 두고 hover 시 옅게 표시한다 */
   .nav a {
-    display: inline-block;
-    padding-block: 0.625rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     color: var(--muted);
-    text-decoration: none;
+    text-decoration: underline 1px transparent;
+    text-underline-offset: 0.5em;
   }
 
   .nav a:hover {
     color: var(--text);
+    text-decoration-color: var(--control-border);
   }
 
-  /* 色だけに頼らず下線でも現在地を示す / 색에만 의존하지 않고 밑줄로도 현재 위치를 표시한다 */
+  /* 現在地は太字とテーマ色の太い下線で示す (色だけに頼らない) / 현재 위치는 굵은 글자와 포인트 컬러의 굵은 밑줄로 표시한다 (색에만 의존하지 않는다) */
   .nav a[aria-current] {
     color: var(--text);
-    text-decoration: underline 2px var(--accent);
-    text-underline-offset: 0.5em;
+    font-weight: 700;
+    text-decoration: underline 3px var(--accent);
   }
 
   .lang {

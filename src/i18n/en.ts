@@ -84,6 +84,8 @@ export const en: Translation = {
 
   'og.imageAlt': 'K.S portfolio — Backend Engineer (Java / Python / AWS)',
 
+  'contact.emailPending': 'Coming soon',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',
