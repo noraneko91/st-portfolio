@@ -7,6 +7,6 @@
   <text x="80" y="300" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#1c1c1a">Backend Engineer</text>
   <text x="80" y="390" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" fill="#1c1c1a">Java / Python / AWS</text>
   <line x1="80" y1="500" x2="1120" y2="500" stroke="#deddd6" stroke-width="2" />
-  <text x="80" y="560" font-family="Consolas, Menlo, monospace" font-size="28" fill="#5f5e58">st-portfolio.ttvt11.workers.dev</text>
+  <text x="80" y="560" font-family="Consolas, Menlo, monospace" font-size="28" fill="#5f5e58">st-portfolio.st-kim.workers.dev</text>
   <text x="1120" y="560" text-anchor="end" font-family="Consolas, Menlo, monospace" font-size="28" fill="#5f5e58">JA / EN / ZH / KO</text>
 </svg>

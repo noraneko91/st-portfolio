@@ -2,7 +2,7 @@
 
 経歴・スキル・個人開発を紹介する、4言語（日本語・英語・中国語〔簡体字〕・韓国語）対応のポートフォリオサイトです。
 
-**公開URL**: https://st-portfolio.ttvt11.workers.dev
+**公開URL**: https://st-portfolio.st-kim.workers.dev
 
 <!-- TODO: デザイン調整後にスクリーンショットを追加する（PC・スマートフォン、ライト・ダーク） -->
 ## スクリーンショット
