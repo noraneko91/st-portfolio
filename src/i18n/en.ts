@@ -98,6 +98,15 @@ export const en: Translation = {
   'command.group.links': 'Links',
   'command.link.source': 'Source code of this site',
 
+  'home.cta.projects': 'View projects',
+  'home.terminal.label': 'Profile summary',
+  'home.terminal.experience': 'experience',
+  'home.terminal.certifications': 'certifications',
+  'home.terminal.languages': 'languages',
+  'home.terminal.current': 'latest',
+  'home.card.latest': 'Latest role',
+  'home.card.projects': '{n} projects',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

@@ -25,6 +25,8 @@ const profile = defineCollection({
     title: localized,
     // Home の冒頭に出す「何をする人か」の一文 / Home 첫머리에 표시하는 "무엇을 하는 사람인지" 한 문장
     headline: localized,
+    // headline の中で強調する語 (技術名なので4言語共通。各言語の headline にそのまま含める) / headline 안에서 강조할 말 (기술명이라 4개 언어 공통. 각 언어 headline에 그대로 넣는다)
+    headlineHighlights: z.array(text).default([]),
     location: localized,
     intro: z.array(localized),
     strengths: z.array(localized),
@@ -41,6 +43,8 @@ const skills = defineCollection({
     name: text,
     category: z.enum(['language', 'framework', 'cloud', 'database', 'tool']),
     detail: text.optional(),
+    // Home のカードに代表スキルとして出す / Home 카드에 대표 스킬로 표시한다
+    featured: z.boolean().default(false),
     // 自己評価は未定のため表示しない / 자기 평가는 미정이라 표시하지 않는다
     level: z.number().int().min(1).max(5).optional(),
   }),

@@ -98,6 +98,15 @@ export const ko: Translation = {
   'command.group.links': '링크',
   'command.link.source': '이 사이트의 소스 코드',
 
+  'home.cta.projects': '프로젝트 보기',
+  'home.terminal.label': '프로필 요약',
+  'home.terminal.experience': '경력',
+  'home.terminal.certifications': '자격증',
+  'home.terminal.languages': '언어',
+  'home.terminal.current': '최근',
+  'home.card.latest': '최근 담당',
+  'home.card.projects': '프로젝트 {n}건',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

@@ -98,6 +98,15 @@ export const zh: Translation = {
   'command.group.links': '链接',
   'command.link.source': '本网站的源代码',
 
+  'home.cta.projects': '查看项目',
+  'home.terminal.label': '个人简介摘要',
+  'home.terminal.experience': '经验',
+  'home.terminal.certifications': '证书',
+  'home.terminal.languages': '语言',
+  'home.terminal.current': '最近',
+  'home.card.latest': '最近负责',
+  'home.card.projects': '{n}个项目',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

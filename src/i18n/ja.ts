@@ -97,6 +97,15 @@ export const ja = {
   'command.group.links': 'リンク',
   'command.link.source': 'このサイトのソースコード',
 
+  'home.cta.projects': 'プロジェクトを見る',
+  'home.terminal.label': 'プロフィールの要約',
+  'home.terminal.experience': '経験',
+  'home.terminal.certifications': '資格',
+  'home.terminal.languages': '言語',
+  'home.terminal.current': '直近',
+  'home.card.latest': '直近の担当',
+  'home.card.projects': '{n}件のプロジェクト',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

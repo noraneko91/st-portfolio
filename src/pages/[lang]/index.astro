@@ -1,9 +1,15 @@
 ---
-import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import type { TranslationKey } from '../../i18n/ja';
 import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
-import { getProfile } from '../../lib/content';
+import {
+  formatYears,
+  getCareers,
+  getCertifications,
+  getProfile,
+  getProjects,
+  getSkillsWithMonths,
+  getTotalCareerMonths,
+} from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -11,72 +17,463 @@ export function getStaticPaths() {
 
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
-const profile = await getProfile();
 
-// 案内文は各ページの meta description を流用し、表記を一か所で管理する / 안내 문구는 각 페이지의 meta description을 재사용해 표기를 한 곳에서 관리한다
-const pages: { path: string; title: TranslationKey; description: TranslationKey }[] = [
-  { path: 'about', title: 'about.title', description: 'about.description' },
-  { path: 'skills', title: 'skills.title', description: 'skills.description' },
-  { path: 'projects', title: 'projects.title', description: 'projects.description' },
-  { path: 'contact', title: 'contact.title', description: 'contact.description' },
+const [profile, careers, certifications, projects, skills, totalMonths] = await Promise.all([
+  getProfile(),
+  getCareers(),
+  getCertifications(),
+  getProjects(),
+  getSkillsWithMonths(),
+  getTotalCareerMonths(),
+]);
+
+// headline を強調語で区切り、該当部分だけ <em> にする (強調語はデータで管理) / headline를 강조어로 나눠 해당 부분만 <em>으로 한다 (강조어는 데이터로 관리)
+const headline = profile.headline[lang];
+const highlightPattern = profile.headlineHighlights.length
+  ? new RegExp(`(${profile.headlineHighlights.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`)
+  : undefined;
+const headlineParts = (highlightPattern ? headline.split(highlightPattern) : [headline]).map((part) => ({
+  text: part,
+  highlight: profile.headlineHighlights.includes(part),
+}));
+
+const experience = formatYears(totalMonths, t);
+const latestCareer = careers[0];
+const featuredSkills = skills.filter(({ skill }) => skill.data.featured).map(({ skill }) => skill.data.name);
+const featuredProject = projects.find((project) => project.data.status === 'published');
+const githubUrl = `https://github.com/${profile.github}`;
+
+// ターミナル風の要約。値はすべてコンテンツから計算する / 터미널 풍 요약. 값은 모두 콘텐츠에서 계산한다
+const terminalLines = [
+  { key: t('home.terminal.experience'), value: experience },
+  { key: t('home.terminal.certifications'), value: String(certifications.length) },
+  { key: t('home.terminal.languages'), value: profile.languages.map((language) => language.name[lang]).join(' / ') },
+  { key: t('home.terminal.current'), value: latestCareer?.data.title[lang] ?? '' },
 ];
 ---
 
 <BaseLayout lang={lang} description={t('home.description')} bodyClass="graph-paper">
-  <div class="hero">
-    <p class="text-muted">{`${profile.displayName} — ${profile.title[lang]}`}</p>
-    <h1 class="text-display mt-4 mb-16 max-w-3xl">{profile.headline[lang]}</h1>
-  </div>
+  <section class="hero" data-spotlight>
+    <div class="hero-text">
+      {/* 名前の行は背景の帯ではなくチップで示す (テキスト選択のように見えないように) / 이름 줄은 배경 띠가 아니라 칩으로 표시한다 (텍스트 선택처럼 보이지 않게) */}
+      <p class="eyebrow">
+        <span class="eyebrow-chip"><span class="eyebrow-dot" aria-hidden="true"></span>{profile.displayName}</span>
+        <span>{profile.title[lang]}</span>
+      </p>
+      <h1 class="text-display">
+        {headlineParts.map((part) => (part.highlight ? <em class="highlight">{part.text}</em> : part.text))}
+      </h1>
+      <div class="cta">
+        <a class="button button-primary" href={getAlternatePath(lang, 'projects')}>
+          {t('home.cta.projects')}
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="button button-secondary" href={getAlternatePath(lang, 'contact')}>{t('contact.title')}</a>
+      </div>
+    </div>
 
-  <Section index={1} label={t('home.section.pages')} id="pages">
-    <ul class="page-list">
-      {
-        pages.map((page) => (
-          <li>
-            <a href={getAlternatePath(lang, page.path)}>{t(page.title)}</a>
-            <p class="text-muted">{t(page.description)}</p>
-          </li>
-        ))
-      }
+    <figure class="terminal" aria-label={t('home.terminal.label')}>
+      <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="terminal-body font-mono">
+        <p class="terminal-line" style="--i: 0">
+          <span class="terminal-prompt" aria-hidden="true">~/kst $</span> kst --summary
+        </p>
+        <dl>
+          {
+            terminalLines.map((line, index) => (
+              <div class="terminal-line" style={`--i: ${index + 1}`}>
+                <dt>{line.key}</dt>
+                <dd>{line.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="terminal-line" style={`--i: ${terminalLines.length + 1}`} aria-hidden="true">
+          <span class="terminal-prompt">~/kst $</span>
+          <span class="terminal-caret"></span>
+        </p>
+      </div>
+    </figure>
+  </section>
+
+  {/* ベントーは本文幅に収めず、ページ幅いっぱいに広げる / 벤토는 본문 폭에 가두지 않고 페이지 폭 전체로 넓힌다 */}
+  <section class="pages" aria-labelledby="pages-label">
+    <h2 id="pages-label" class="pages-label">
+      <span class="font-mono" aria-hidden="true">01 —</span>
+      {t('home.section.pages')}
+    </h2>
+    {/* 各ページの中身の一部を見せるベントーグリッド。カード全体がリンク / 각 페이지 내용 일부를 보여주는 벤토 그리드. 카드 전체가 링크 */}
+    <ul class="bento">
+      <li class="bento-card card bento-wide reveal">
+        <h3><a class="card-link" href={getAlternatePath(lang, 'about')}>{t('about.title')}</a></h3>
+        <p class="bento-metric">{experience}</p>
+        {latestCareer && <p class="text-muted">{`${t('home.card.latest')}: ${latestCareer.data.title[lang]}`}</p>}
+        <span class="bento-arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="bento-card card reveal">
+        <h3><a class="card-link" href={getAlternatePath(lang, 'skills')}>{t('skills.title')}</a></h3>
+        <ul class="chips">
+          {featuredSkills.map((name) => <li>{name}</li>)}
+        </ul>
+        <span class="bento-arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="bento-card card reveal">
+        <h3><a class="card-link" href={getAlternatePath(lang, 'contact')}>{t('contact.title')}</a></h3>
+        <p class="font-mono text-muted">{githubUrl.replace(/^https:\/\//, '')}</p>
+        <span class="bento-arrow" aria-hidden="true">→</span>
+      </li>
+      <li class="bento-card card bento-wide reveal">
+        <h3><a class="card-link" href={getAlternatePath(lang, 'projects')}>{t('projects.title')}</a></h3>
+        <p class="bento-metric">{t('home.card.projects', { n: projects.length })}</p>
+        {featuredProject && <p class="text-muted">{featuredProject.data.title[lang]}</p>}
+        <span class="bento-arrow" aria-hidden="true">→</span>
+      </li>
     </ul>
-  </Section>
+  </section>
 </BaseLayout>
 
+<script>
+  // ポインター位置にスポットライトを追従させる。マウス等の精密なポインターで、動きを減らす設定がオフのときだけ
+  // 포인터 위치에 스포트라이트를 따라가게 한다. 마우스 등 정밀 포인터이고 동작 줄이기 설정이 꺼져 있을 때만
+  const hero = document.querySelector<HTMLElement>('[data-spotlight]');
+  if (hero && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let frame = 0;
+    hero.addEventListener('pointermove', (event) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        hero.style.setProperty('--spot-x', `${event.clientX - rect.left}px`);
+        hero.style.setProperty('--spot-y', `${event.clientY - rect.top}px`);
+      });
+    });
+  }
+</script>
+
 <style>
-  /* 冒頭だけテーマ色をうっすら敷く。文字の後ろに置いて読みやすさは変えない / 첫머리에만 포인트 컬러를 옅게 깐다. 글자 뒤에 두어 가독성은 바꾸지 않는다 */
+  /* ---- ヒーロー / 히어로 ---- */
   .hero {
     position: relative;
     isolation: isolate;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    padding-block: 1rem 4rem;
   }
 
+  /* 方眼紙の上にテーマ色のスポットライト。四辺で透明になるので形が切れない / 방안지 위에 포인트 컬러 스포트라이트. 네 변에서 투명해지므로 모양이 잘리지 않는다 */
   .hero::before {
     content: '';
     position: absolute;
-    /* 右は本文幅まで、左は余白の端まで広げる (横スクロールを出さない) / 오른쪽은 본문 폭까지, 왼쪽은 여백 끝까지 넓힌다 (가로 스크롤을 만들지 않는다) */
-    inset: -3rem 0 auto calc(var(--gutter) * -1);
+    inset: -4rem calc(var(--gutter) * -1) 0;
     z-index: -1;
-    height: 18rem;
-    /* 中心を内側に置き、四辺で透明になるようにする (端で色が切れて四角く見えないように) / 중심을 안쪽에 두어 네 변에서 투명해지게 한다 (끝에서 색이 잘려 사각형으로 보이지 않게) */
-    background: radial-gradient(45% 50% at 40% 50%, var(--glow), transparent);
+    background: radial-gradient(28rem circle at var(--spot-x, 30%) var(--spot-y, 40%), var(--glow), transparent 70%);
     pointer-events: none;
   }
 
-  .page-list > li {
-    display: grid;
-    gap: 0.25rem;
-    padding-block: 1rem;
-    border-bottom: 1px solid var(--border);
+  @media (min-width: 64rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 3rem;
+      padding-block: 2rem 5rem;
+    }
   }
 
-  .page-list > li:first-child {
-    padding-top: 0;
+  .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--muted);
   }
 
-  .page-list a {
+  .eyebrow-chip {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
-    font-size: 1.25rem;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--control-border);
+    border-radius: 999px;
+    background: var(--bg);
+    font-family: var(--font-mono);
     font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+
+  .eyebrow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    margin-block: 1.25rem 2rem;
+  }
+
+  /* 強調語はテーマ色と下線で示す (背景の帯は使わない) / 강조어는 포인트 컬러와 밑줄로 표시한다 (배경 띠는 쓰지 않는다) */
+  .highlight {
+    font-style: normal;
+    color: var(--accent);
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 100% 0.08em;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .button-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .button-primary:hover {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+    color: var(--bg);
+  }
+
+  .button-secondary {
+    background: var(--bg);
+    color: var(--accent);
+  }
+
+  .button-secondary:hover {
+    background: var(--surface);
+  }
+
+  .button:active {
+    transform: translateY(1px);
+  }
+
+  /* ---- ターミナル (ライト・ダークとも暗い配色で、ページの中で目立たせる) / 터미널 (라이트·다크 모두 어두운 색으로 페이지에서 눈에 띄게) ---- */
+  .terminal {
+    --term-bg: #15161c;
+    --term-text: #e8e6e1;
+    --term-muted: #a3a19a;
+    --term-accent: #9aa6ff;
+
+    overflow: hidden;
+    border: 1px solid #2f3040;
+    border-radius: 6px;
+    background: var(--term-bg);
+    color: var(--term-text);
+    box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.45);
+  }
+
+  .terminal-bar {
+    display: flex;
+    gap: 0.375rem;
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid #2a2b36;
+  }
+
+  .terminal-bar span {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: #3a3b48;
+  }
+
+  .terminal-body {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .terminal-prompt {
+    margin-inline-end: 0.5rem;
+    color: var(--term-accent);
+  }
+
+  .terminal dl {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .terminal dl > div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .terminal dt {
+    color: var(--term-muted);
+  }
+
+  .terminal-caret {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1em;
+    vertical-align: text-bottom;
+    background: var(--term-text);
+  }
+
+  /* ---- ページ案内 / 페이지 안내 ---- */
+  .pages {
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .pages-label {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* ---- ベントーグリッド / 벤토 그리드 ---- */
+  .bento {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .bento {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bento-wide {
+      grid-column: span 2;
+    }
+  }
+
+  .bento-card {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    min-height: 9rem;
+    padding: 1.5rem;
+    padding-right: 3rem;
+    background: var(--bg);
+  }
+
+  .bento-card h3 {
+    font-size: 1.125rem;
+  }
+
+  .bento-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .bento-card .card-link {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .bento-metric {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .bento-arrow {
+    position: absolute;
+    top: 1.375rem;
+    right: 1.25rem;
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .chips li {
+    padding: 0.125rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+  }
+
+  /* ---- 動き (動きを減らす設定がオフのときだけ) / 움직임 (동작 줄이기 설정이 꺼져 있을 때만) ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .highlight {
+      animation: draw-underline 700ms 300ms ease-out both;
+    }
+
+    .terminal-line {
+      animation: line-in 300ms ease-out both;
+      animation-delay: calc(var(--i) * 180ms + 400ms);
+    }
+
+    .terminal-caret {
+      animation: blink 1s steps(1) infinite;
+    }
+
+    .eyebrow-dot {
+      box-shadow: 0 0 0 0 var(--accent);
+      animation: pulse 2.4s ease-out infinite;
+    }
+
+    .bento-card {
+      transition:
+        transform 200ms ease,
+        box-shadow 200ms ease,
+        border-color 150ms ease,
+        background-color 150ms ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem -1.25rem rgb(0 0 0 / 0.35);
+    }
+
+    .bento-arrow {
+      transition: transform 200ms ease;
+    }
+
+    .bento-card:hover .bento-arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  @keyframes draw-underline {
+    from {
+      background-size: 0% 0.08em;
+    }
+  }
+
+  @keyframes line-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.25rem);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 0.5rem transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
   }
 </style>

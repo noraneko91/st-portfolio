@@ -25,7 +25,7 @@
   /* Home の方眼紙の線と上部のテーマ色 (装飾のみ) / Home의 방안지 선과 상단 포인트 컬러 (장식만) */
   --grid: #e9e8e2;
   --grid-strong: #e1dfd8;
-  --glow: rgb(51 70 194 / 0.1);
+  --glow: rgb(51 70 194 / 0.14);
 
   /* 画面幅に応じて左右の余白を広げる (360px で約 20px) / 화면 폭에 따라 좌우 여백을 넓힌다 (360px에서 약 20px) */
   --gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
@@ -46,7 +46,7 @@
     --control-border: #6f6d67;
     --grid: #1b1b1a;
     --grid-strong: #222220;
-    --glow: rgb(154 166 255 / 0.1);
+    --glow: rgb(154 166 255 / 0.12);
   }
 }
 

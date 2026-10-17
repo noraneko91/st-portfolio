@@ -10,9 +10,10 @@ main:
     ko: 백엔드 엔지니어 (Java / Python / AWS)
   headline:
     ja: Java/Springによる業務システム開発と、Python + AWSによるクラウド開発を手がけるバックエンドエンジニアです。
-    en: I'm a backend engineer who builds business systems with Java/Spring and cloud applications with Python and AWS.
+    en: I'm a backend engineer who builds business systems with Java/Spring and cloud applications with Python + AWS.
     zh: 我是一名后端工程师，从事基于Java/Spring的业务系统开发，以及基于Python + AWS的云开发。
     ko: Java/Spring 기반 업무 시스템 개발과 Python + AWS 기반 클라우드 개발을 하는 백엔드 엔지니어입니다.
+  headlineHighlights: [Java/Spring, Python + AWS]
   location:
     ja: 日本
     en: Japan
