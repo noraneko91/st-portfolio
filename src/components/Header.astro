@@ -77,7 +77,13 @@ const navItems: { path: string; label: TranslationKey }[] = [
   }
 
   /* ページ遷移時にヘッダーを固定し、本文だけを切り替える / 페이지 전환 시 헤더는 고정하고 본문만 바꾼다 */
+  /*
+   * view-transition-name でヘッダーは独立した重なり順になるため、ヘッダーごと本文より上に置く (言語メニューが本文に隠れて押せなくならないように)
+   * view-transition-name으로 헤더는 독립된 쌓임 순서가 되므로, 헤더째 본문보다 위에 둔다 (언어 메뉴가 본문에 가려져 눌리지 않게 되지 않도록)
+   */
   .site-header {
+    position: relative;
+    z-index: 20;
     border-bottom: 1px solid var(--border);
     view-transition-name: site-header;
   }
