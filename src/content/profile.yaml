@@ -66,7 +66,7 @@ main:
         en: JLPT N1
         zh: JLPT N1
         ko: JLPT N1
-    # TODO: 英語・中国語のレベル（要確認） / 영어·중국어 레벨 (확인 필요)
+    # レベル表記なし (level を書かないと言語名だけを表示する) / 레벨 표기 없음 (level을 쓰지 않으면 언어 이름만 표시한다)
     - name:
         ja: 英語
         en: English
@@ -77,6 +77,11 @@ main:
         en: Chinese
         zh: 中文
         ko: 중국어
+      level:
+        ja: HSK 3級
+        en: HSK Level 3
+        zh: HSK 三级
+        ko: HSK 3급
   # TODO: ポートフォリオ用のメールアドレスを作成したら設定する。空の間は Contact にメールリンクを出さない
   # TODO: 포트폴리오용 메일 주소를 만들면 설정한다. 비어 있는 동안은 Contact에 메일 링크를 표시하지 않는다
   email: ""

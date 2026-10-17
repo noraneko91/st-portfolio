@@ -11,12 +11,12 @@
 - id: lpic-1
   name: LPIC-1
   date: "2021-06"
-- id: jlpt-n1
-  name: JLPT N1
+- id: azure-fundamentals
+  name: Microsoft Azure Fundamentals
   date: "2021-06"
 - id: aws-clf
   name: AWS Certified Cloud Practitioner
   date: "2021-03"
-# TODO: 取得年月（要確認） / 취득 연월 (확인 필요)
-- id: azure-fundamentals
-  name: Microsoft Azure Fundamentals
+- id: jlpt-n1
+  name: JLPT N1
+  date: "2018-12"

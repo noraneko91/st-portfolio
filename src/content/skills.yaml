@@ -6,14 +6,8 @@
   name: Java
   category: language
   featured: true
-# TODO: スキルシートでは2年、経歴の期間からの計算では約3年（要確認） / 스킬 시트는 2년, 경력 기간 계산으로는 약 3년 (확인 필요)
 - id: python
   name: Python
-  category: language
-  featured: true
-# TODO: 案件1での使用割合（要確認） / 안건 1에서의 사용 비율 (확인 필요)
-- id: php
-  name: PHP
   category: language
   featured: true
 - id: jsp
@@ -34,10 +28,6 @@
   category: framework
 - id: jpa
   name: JPA
-  category: framework
-# TODO: 使用期間（要確認） / 사용 기간 (확인 필요)
-- id: laravel
-  name: Laravel
   category: framework
 - id: aws
   name: AWS
