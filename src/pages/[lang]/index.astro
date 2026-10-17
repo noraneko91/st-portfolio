@@ -22,9 +22,11 @@ const pages: { path: string; title: TranslationKey; description: TranslationKey 
 ];
 ---
 
-<BaseLayout lang={lang} description={t('home.description')}>
-  <p class="text-muted">{`${profile.displayName} — ${profile.title[lang]}`}</p>
-  <h1 class="text-display mt-4 mb-16 max-w-3xl">{profile.headline[lang]}</h1>
+<BaseLayout lang={lang} description={t('home.description')} bodyClass="graph-paper">
+  <div class="hero">
+    <p class="text-muted">{`${profile.displayName} — ${profile.title[lang]}`}</p>
+    <h1 class="text-display mt-4 mb-16 max-w-3xl">{profile.headline[lang]}</h1>
+  </div>
 
   <Section index={1} label={t('home.section.pages')} id="pages">
     <ul class="page-list">
@@ -41,6 +43,24 @@ const pages: { path: string; title: TranslationKey; description: TranslationKey 
 </BaseLayout>
 
 <style>
+  /* 冒頭だけテーマ色をうっすら敷く。文字の後ろに置いて読みやすさは変えない / 첫머리에만 포인트 컬러를 옅게 깐다. 글자 뒤에 두어 가독성은 바꾸지 않는다 */
+  .hero {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    /* 右は本文幅まで、左は余白の端まで広げる (横スクロールを出さない) / 오른쪽은 본문 폭까지, 왼쪽은 여백 끝까지 넓힌다 (가로 스크롤을 만들지 않는다) */
+    inset: -3rem 0 auto calc(var(--gutter) * -1);
+    z-index: -1;
+    height: 18rem;
+    /* 中心を内側に置き、四辺で透明になるようにする (端で色が切れて四角く見えないように) / 중심을 안쪽에 두어 네 변에서 투명해지게 한다 (끝에서 색이 잘려 사각형으로 보이지 않게) */
+    background: radial-gradient(45% 50% at 40% 50%, var(--glow), transparent);
+    pointer-events: none;
+  }
+
   .page-list > li {
     display: grid;
     gap: 0.25rem;

@@ -10,9 +10,11 @@ interface Props {
   // 省略時はサイト名のみ（ホーム用） / 생략하면 사이트 이름만 (홈용)
   title?: string;
   description: string;
+  // ページ固有の背景など、body に付けるクラス / 페이지 고유 배경 등 body에 붙이는 클래스
+  bodyClass?: string;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, bodyClass } = Astro.props;
 const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
 const documentTitle = title ? `${title} | ${t('site.name')}` : t('site.name');
@@ -52,7 +54,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta name="generator" content={Astro.generator} />
   </head>
   {/* 本文が短いページでもフッターを画面の下端に置く / 본문이 짧은 페이지에서도 푸터를 화면 아래 끝에 둔다 */}
-  <body class="flex min-h-dvh flex-col">
+  <body class:list={['flex min-h-dvh flex-col', bodyClass]}>
     <Header lang={lang} />
     <main id="main" class="wrapper page-main flex-1">
       <slot />

@@ -22,6 +22,11 @@
   --control-border: #8c8a82;
   --focus-ring: 2px solid var(--accent);
 
+  /* Home の方眼紙の線と上部のテーマ色 (装飾のみ) / Home의 방안지 선과 상단 포인트 컬러 (장식만) */
+  --grid: #e9e8e2;
+  --grid-strong: #e1dfd8;
+  --glow: rgb(51 70 194 / 0.1);
+
   /* 画面幅に応じて左右の余白を広げる (360px で約 20px) / 화면 폭에 따라 좌우 여백을 넓힌다 (360px에서 약 20px) */
   --gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
   --page-max: 72rem;
@@ -39,6 +44,9 @@
     --accent-strong: #c3caff;
     --surface: #1d1f2e;
     --control-border: #6f6d67;
+    --grid: #1b1b1a;
+    --grid-strong: #222220;
+    --glow: rgb(154 166 255 / 0.1);
   }
 }
 
@@ -218,6 +226,20 @@
   }
 
   /* 操作できないカード (準備中など)。点線と薄い文字で区別する / 조작할 수 없는 카드 (준비 중 등). 점선과 흐린 글자로 구분한다 */
+  /* 設計図のような方眼紙の背景 (Home のみ)。24px の細い線と 120px の太い線 / 설계도 같은 방안지 배경 (Home만). 24px 가는 선과 120px 굵은 선 */
+  .graph-paper {
+    background-image:
+      linear-gradient(var(--grid-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:
+      120px 120px,
+      120px 120px,
+      24px 24px,
+      24px 24px;
+  }
+
   .card-disabled {
     border: 1px dashed var(--border);
     border-radius: 2px;
