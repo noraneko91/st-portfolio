@@ -9,18 +9,16 @@ interface Props {
 
 const { project, lang } = Astro.props;
 const { data } = project;
-const stack = data.stack.map((item) => item.name).join(' · ');
 ---
 
-{/* 画像があればそれを使い、なければパスと技術から表紙を描く (画像を作らなくても一覧が成り立つように) / 이미지가 있으면 그것을 쓰고, 없으면 경로와 기술로 표지를 그린다 (이미지를 만들지 않아도 목록이 성립하도록) */}
-<div class:list={['cover', { 'cover-wip': data.status === 'wip' }]}>
+{/* 画像があればそれを使い、なければパスから表紙を描く (技術はカードのチップで示す) (画像を作らなくても一覧が成り立つように) / 이미지가 있으면 그것을 쓰고, 없으면 경로로 표지를 그린다 (기술은 카드의 칩으로 표시한다) (이미지를 만들지 않아도 목록이 성립하도록) */}
+<div class="cover">
   {
     data.thumbnail ? (
       <img src={data.thumbnail.src} alt={data.thumbnail.alt[lang]} width="1200" height="675" loading="lazy" decoding="async" />
     ) : (
       <div class="cover-art" aria-hidden="true">
         <span class="cover-path font-mono">{`~/projects/${project.id}`}</span>
-        {stack && <span class="cover-stack font-mono">{stack}</span>}
       </div>
     )
   }
@@ -59,7 +57,7 @@ const stack = data.stack.map((item) => item.name).join(' · ');
       24px 24px;
   }
 
-  /* タイトルはカード本文にあるので、表紙はパスと技術だけにする / 제목은 카드 본문에 있으므로 표지는 경로와 기술만 둔다 */
+  /* タイトルと技術はカード本文にあるので、表紙はパスだけにする / 제목과 기술은 카드 본문에 있으므로 표지는 경로만 둔다 */
   .cover-path {
     font-size: clamp(1rem, 0.85rem + 0.8vw, 1.375rem);
     font-weight: 700;
@@ -67,23 +65,5 @@ const stack = data.stack.map((item) => item.name).join(' · ');
     overflow-wrap: anywhere;
   }
 
-  .cover-stack {
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
 
-  .cover-wip {
-    background-color: var(--bg);
-  }
-
-  .cover-wip .cover-art {
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  .cover-wip .cover-path {
-    color: var(--muted);
-  }
 </style>

@@ -12,6 +12,13 @@ const site = 'https://st-portfolio.st-kim.workers.dev';
 // https://astro.build/config
 export default defineConfig({
   site,
+  // 構造変更 (ADR 0006) で移動したページ。/projects/ は既定のタブ (業務経歴) へ / 구조 변경 (ADR 0006)으로 옮긴 페이지. /projects/는 기본 탭 (업무 경력)으로
+  redirects: Object.fromEntries(
+    locales.flatMap((lang) => [
+      [`/${lang}/projects`, `/${lang}/projects/work/`],
+      [`/${lang}/projects/st-portfolio`, `/${lang}/projects/personal/st-portfolio/`],
+    ]),
+  ),
   i18n: {
     locales: [...locales],
     defaultLocale,

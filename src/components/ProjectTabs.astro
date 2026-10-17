@@ -1,0 +1,70 @@
+---
+import type { Lang } from '../i18n/config';
+import { getAlternatePath, useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  current: 'work' | 'personal';
+}
+
+const { lang, current } = Astro.props;
+const t = useTranslations(lang);
+
+const tabs = [
+  { id: 'work', label: t('projects.tab.work'), href: getAlternatePath(lang, 'projects/work') },
+  { id: 'personal', label: t('projects.tab.personal'), href: getAlternatePath(lang, 'projects/personal') },
+] as const;
+---
+
+{/*
+  タブはページ（URL）で分けているので、見た目はタブでも中身はナビゲーション (role="tab" は同じページ内の切り替え用)。JS なしでも動く
+  탭은 페이지(URL)로 나누므로 모양은 탭이어도 내용은 내비게이션 (role="tab"은 같은 페이지 안 전환용). JS 없이도 동작한다
+*/}
+<nav class="tabs" aria-label={t('projects.tabs.label')}>
+  <ul>
+    {
+      tabs.map((tab) => (
+        <li>
+          <a href={tab.href} aria-current={tab.id === current ? 'page' : undefined}>
+            {tab.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .tabs {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabs ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .tabs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-bottom: -1px;
+    padding-inline: 1rem;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .tabs a:hover {
+    border-bottom-color: var(--control-border);
+    color: var(--text);
+  }
+
+  /* 現在のタブは太字・本文色・テーマ色の下線 (色だけに頼らない) / 현재 탭은 굵은 글자·본문 색·포인트 컬러 밑줄 (색에만 의존하지 않는다) */
+  .tabs a[aria-current='page'] {
+    border-bottom-color: var(--accent);
+    color: var(--text);
+    font-weight: 700;
+  }
+</style>

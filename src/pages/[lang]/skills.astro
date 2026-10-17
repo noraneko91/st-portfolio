@@ -39,7 +39,7 @@ const certifications = await getCertifications();
                 <li class:list={['skill', { 'skill-featured': skill.data.featured }]}>
                   <div class="skill-head">
                     <span class="skill-name">{skill.data.name}</span>
-                    <span class="skill-years">{months > 0 ? formatYears(months, t) : '—'}</span>
+                    <span class="skill-years">{months > 0 ? formatYears(months, t) : t('skills.personalOnly')}</span>
                   </div>
                   {skill.data.detail && <p class="skill-detail">{skill.data.detail}</p>}
                   {/* 年数は文字で伝わるので、バーは装飾として読み上げない / 연수는 글자로 전달되므로 막대는 장식으로 읽지 않는다 */}

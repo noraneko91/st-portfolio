@@ -3,14 +3,12 @@ import type { Translation } from './ja';
 export const zh: Translation = {
   'home.title': '首页',
   'home.description': '介绍我的经历、技能和个人开发项目的作品集网站。',
-  'about.title': '经历',
-  'about.description': '介绍我至今的工作经历。',
+  'about.title': '关于我',
+  'about.description': '简要介绍我的经历和今后的方向。',
   'about.section.profile': '个人简介',
-  'about.section.career': '工作经历',
   'skills.title': '技能',
   'skills.description': '介绍我掌握的技术与技能。',
   'projects.title': '项目',
-  'projects.description': '介绍个人开发项目。',
   'contact.title': '联系方式',
   'contact.description': '联系方式说明。',
 
@@ -22,7 +20,6 @@ export const zh: Translation = {
   'unit.months': '{n}个月',
   'unit.since': '{date}起',
   'period.present': '至今',
-  'career.role': '职责',
   'career.scale': '规模',
   'career.tech': '技术',
   'career.phases': '负责工序',
@@ -53,8 +50,7 @@ export const zh: Translation = {
 
   'unit.years.one': '约1年',
 
-  'projects.status.wip': '准备中',
-  'projects.backToList': '返回项目列表',
+  'projects.backToList': '返回个人开发列表',
   'project.section.overview': '概要',
   'project.section.diagram': 'AWS架构图',
   'project.section.stack': '技术栈',
@@ -109,6 +105,20 @@ export const zh: Translation = {
   'site.suffix': '作品集',
 
   'command.hint': '快速跳转',
+
+  'about.section.growth': '今后的方向',
+  'projects.tabs.label': '项目类型',
+  'projects.tab.work': '工作经历',
+  'projects.tab.personal': '个人开发',
+  'projects.work.description': '按时间倒序，以 git log 风格的时间线介绍我的业务系统开发经历。',
+  'projects.personal.description': '介绍我为学习和创作而进行的个人开发。',
+  'project.category.learning': '学习',
+  'project.category.build': '制作',
+  'project.status.in-progress': '进行中',
+  'project.status.completed': '已完成',
+  'skills.personalOnly': '个人开发',
+
+  'project.meta.type': '类型',
 
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',

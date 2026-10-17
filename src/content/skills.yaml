@@ -59,3 +59,43 @@
 - id: uft-one
   name: UFT One
   category: tool
+# ---- 個人開発で使った技術 (業務経歴にないため、年数の代わりに「個人開発」と表示) / 개인 개발에서 쓴 기술 (업무 경력에 없어서 연수 대신 "개인 개발"로 표시) ----
+- id: typescript
+  name: TypeScript
+  category: language
+- id: react
+  name: React
+  category: framework
+- id: nextjs
+  name: Next.js
+  category: framework
+- id: astro
+  name: Astro
+  category: framework
+- id: tailwind
+  name: Tailwind CSS
+  category: framework
+- id: express
+  name: Express
+  category: framework
+- id: fastapi
+  name: FastAPI
+  category: framework
+- id: sqlalchemy
+  name: SQLAlchemy
+  category: framework
+- id: postgresql
+  name: PostgreSQL
+  category: database
+- id: sqlite
+  name: SQLite
+  category: database
+- id: cloudflare
+  name: Cloudflare Workers
+  category: cloud
+- id: docker
+  name: Docker
+  category: tool
+- id: github-actions
+  name: GitHub Actions
+  category: tool

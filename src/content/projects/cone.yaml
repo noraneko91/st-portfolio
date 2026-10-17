@@ -1,0 +1,20 @@
+# 出典: リポジトリのコード (index.html) / 출처: 리포지토리 코드 (index.html)
+# TODO: 講座に沿って作ったものか (学習/制作)・作った目的を確認してから draft: false にする / 강의를 따라 만든 것인지 (학습/제작)·만든 목적을 확인한 뒤 draft: false로 한다
+draft: true
+title:
+  ja: コーディング四コマ（코딩네컷）
+  en: Coding Four-Cut (코딩네컷)
+  zh: 编程四格（코딩네컷）
+  ko: 코딩네컷
+summary:
+  ja: 4枚の写真をフォトブース風のフレームに並べた、HTML と CSS だけの静的ページ
+  en: A static page in plain HTML and CSS that arranges four photos in a photo-booth style frame
+  zh: 只用 HTML 和 CSS 制作的静态页面，把四张照片排列在大头贴风格的相框中
+  ko: 사진 4장을 즉석 사진 부스 풍 프레임에 배치한, HTML과 CSS만으로 만든 정적 페이지
+category: learning
+status: completed
+start: "2023-04"
+end: "2023-04"
+tech: [javascript]
+github:
+  - https://github.com/noraneko91/cone

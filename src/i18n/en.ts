@@ -4,13 +4,11 @@ export const en: Translation = {
   'home.title': 'Home',
   'home.description': 'A portfolio introducing my career, skills, and personal projects.',
   'about.title': 'About',
-  'about.description': 'An overview of my career so far.',
+  'about.description': 'A short summary of my career and where I am heading next.',
   'about.section.profile': 'Profile',
-  'about.section.career': 'Career',
   'skills.title': 'Skills',
   'skills.description': 'The technologies and skills I work with.',
   'projects.title': 'Projects',
-  'projects.description': 'Personal development projects.',
   'contact.title': 'Contact',
   'contact.description': 'How to get in touch.',
 
@@ -22,7 +20,6 @@ export const en: Translation = {
   'unit.months': '{n} mo',
   'unit.since': 'Since {date}',
   'period.present': 'Present',
-  'career.role': 'Role',
   'career.scale': 'Scale',
   'career.tech': 'Tech',
   'career.phases': 'Phases',
@@ -53,8 +50,7 @@ export const en: Translation = {
 
   'unit.years.one': 'About 1 year',
 
-  'projects.status.wip': 'Coming soon',
-  'projects.backToList': 'All projects',
+  'projects.backToList': 'All personal projects',
   'project.section.overview': 'Overview',
   'project.section.diagram': 'AWS architecture',
   'project.section.stack': 'Tech stack',
@@ -109,6 +105,20 @@ export const en: Translation = {
   'site.suffix': 'Portfolio',
 
   'command.hint': 'Quick navigation',
+
+  'about.section.growth': "What's next",
+  'projects.tabs.label': 'Project types',
+  'projects.tab.work': 'Work experience',
+  'projects.tab.personal': 'Personal projects',
+  'projects.work.description': 'My work experience in business system development, newest first, as a git log style timeline.',
+  'projects.personal.description': 'Personal projects I build for learning and as my own work.',
+  'project.category.learning': 'Learning',
+  'project.category.build': 'Build',
+  'project.status.in-progress': 'In progress',
+  'project.status.completed': 'Completed',
+  'skills.personalOnly': 'Personal projects',
+
+  'project.meta.type': 'Type',
 
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',

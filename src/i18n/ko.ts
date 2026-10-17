@@ -3,14 +3,12 @@ import type { Translation } from './ja';
 export const ko: Translation = {
   'home.title': '홈',
   'home.description': '경력·스킬·개인 개발 프로젝트를 소개하는 포트폴리오 사이트입니다.',
-  'about.title': '경력',
-  'about.description': '지금까지의 경력을 소개합니다.',
+  'about.title': '소개',
+  'about.description': '경력 요약과 앞으로 지향하는 방향을 소개합니다.',
   'about.section.profile': '프로필',
-  'about.section.career': '경력',
   'skills.title': '스킬',
   'skills.description': '다룰 수 있는 기술과 스킬을 소개합니다.',
   'projects.title': '프로젝트',
-  'projects.description': '개인 개발 프로젝트를 소개합니다.',
   'contact.title': '문의',
   'contact.description': '연락처 안내입니다.',
 
@@ -22,7 +20,6 @@ export const ko: Translation = {
   'unit.months': '{n}개월',
   'unit.since': '{date}~',
   'period.present': '현재',
-  'career.role': '역할',
   'career.scale': '규모',
   'career.tech': '기술',
   'career.phases': '담당 공정',
@@ -53,8 +50,7 @@ export const ko: Translation = {
 
   'unit.years.one': '약 1년',
 
-  'projects.status.wip': '준비 중',
-  'projects.backToList': '프로젝트 목록으로',
+  'projects.backToList': '개인 개발 목록으로',
   'project.section.overview': '개요',
   'project.section.diagram': 'AWS 구성도',
   'project.section.stack': '기술 스택',
@@ -109,6 +105,20 @@ export const ko: Translation = {
   'site.suffix': '포트폴리오',
 
   'command.hint': '빠른 이동',
+
+  'about.section.growth': '앞으로',
+  'projects.tabs.label': '프로젝트 종류',
+  'projects.tab.work': '업무 경력',
+  'projects.tab.personal': '개인 개발',
+  'projects.work.description': '업무 시스템 개발 경력을 최신순으로 git log 풍 타임라인으로 소개합니다.',
+  'projects.personal.description': '학습과 제작으로 진행하고 있는 개인 개발을 소개합니다.',
+  'project.category.learning': '학습',
+  'project.category.build': '제작',
+  'project.status.in-progress': '진행 중',
+  'project.status.completed': '완료',
+  'skills.personalOnly': '개인 개발',
+
+  'project.meta.type': '분류',
 
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',

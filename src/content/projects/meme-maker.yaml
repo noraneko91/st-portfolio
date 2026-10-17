@@ -1,0 +1,19 @@
+# 出典: リポジトリのコード (index.html・app.js) / 출처: 리포지토리 코드 (index.html·app.js)
+# TODO: 講座に沿って作ったものか (学習/制作)・状態を確認してから draft: false にする / 강의를 따라 만든 것인지 (학습/제작)·상태를 확인한 뒤 draft: false로 한다
+draft: true
+title:
+  ja: Meme Maker（お絵描きアプリ）
+  en: Meme Maker (drawing app)
+  zh: Meme Maker（绘图应用）
+  ko: Meme Maker (그림 그리기 앱)
+summary:
+  ja: Canvas API で線の描画・塗りつぶし・消しゴム・画像の読み込み・文字の追加・保存ができるブラウザのお絵描きアプリ
+  en: A browser drawing app built on the Canvas API with drawing, fill, eraser, image loading, text, and save
+  zh: 基于 Canvas API 的浏览器绘图应用，支持画线、填充、橡皮擦、加载图片、添加文字和保存
+  ko: Canvas API로 선 그리기·채우기·지우개·이미지 불러오기·글자 넣기·저장을 할 수 있는 브라우저 그림 그리기 앱
+category: learning
+status: completed
+start: "2022-09"
+tech: [javascript]
+github:
+  - https://github.com/noraneko91/meme-maker

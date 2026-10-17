@@ -40,7 +40,7 @@ const headlineParts = (highlightPattern ? headline.split(highlightPattern) : [he
 const experience = formatYears(totalMonths, t);
 const latestCareer = careers[0];
 const featuredSkills = skills.filter(({ skill }) => skill.data.featured).map(({ skill }) => skill.data.name);
-const featuredProject = projects.find((project) => project.data.status === 'published');
+const latestProject = projects[0];
 const githubUrl = `https://github.com/${profile.github}`;
 
 // ターミナル風の要約。値はすべてコンテンツから計算する / 터미널 풍 요약. 값은 모두 콘텐츠에서 계산한다
@@ -64,7 +64,7 @@ const terminalLines = [
         {headlineParts.map((part) => (part.highlight ? <em class="highlight">{part.text}</em> : part.text))}
       </h1>
       <div class="cta">
-        <a class="button button-primary" href={getAlternatePath(lang, 'projects')}>
+        <a class="button button-primary" href={getAlternatePath(lang, 'projects/work')}>
           {t('home.cta.projects')}
           <span aria-hidden="true">→</span>
         </a>
@@ -105,7 +105,7 @@ const terminalLines = [
     {/* 各ページの中身の一部を見せるベントーグリッド。カード全体がリンク / 각 페이지 내용 일부를 보여주는 벤토 그리드. 카드 전체가 링크 */}
     <ul class="bento">
       <li class="bento-card card bento-wide reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'about')}>{t('about.title')}</a></h3>
+        <h3><a class="card-link" href={getAlternatePath(lang, 'projects/work')}>{t('projects.tab.work')}</a></h3>
         <p class="bento-metric">{experience}</p>
         {latestCareer && <p class="text-muted">{`${t('home.card.latest')}: ${latestCareer.data.title[lang]}`}</p>}
         <span class="bento-arrow" aria-hidden="true">→</span>
@@ -123,9 +123,9 @@ const terminalLines = [
         <span class="bento-arrow" aria-hidden="true">→</span>
       </li>
       <li class="bento-card card bento-wide reveal">
-        <h3><a class="card-link" href={getAlternatePath(lang, 'projects')}>{t('projects.title')}</a></h3>
+        <h3><a class="card-link" href={getAlternatePath(lang, 'projects/personal')}>{t('projects.tab.personal')}</a></h3>
         <p class="bento-metric">{t('home.card.projects', { n: projects.length })}</p>
-        {featuredProject && <p class="text-muted">{featuredProject.data.title[lang]}</p>}
+        {latestProject && <p class="text-muted">{latestProject.data.title[lang]}</p>}
         <span class="bento-arrow" aria-hidden="true">→</span>
       </li>
     </ul>

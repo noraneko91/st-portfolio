@@ -26,7 +26,8 @@ function ariaCurrent(path: string): 'page' | 'true' | undefined {
 const navItems: { path: string; label: TranslationKey }[] = [
   { path: 'about', label: 'about.title' },
   { path: 'skills', label: 'skills.title' },
-  { path: 'projects', label: 'projects.title' },
+  // 既定のタブ (業務経歴) へ直接リンクする / 기본 탭 (업무 경력)으로 바로 링크한다
+  { path: 'projects/work', label: 'projects.title' },
   { path: 'contact', label: 'contact.title' },
 ];
 ---

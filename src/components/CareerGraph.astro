@@ -1,0 +1,111 @@
+---
+import type { Lang } from '../i18n/config';
+import type { Career } from '../lib/content';
+import CareerItem from './CareerItem.astro';
+
+interface Props {
+  careers: Career[];
+  lang: Lang;
+  skillNames: Map<string, string>;
+}
+
+const { careers, lang, skillNames } = Astro.props;
+---
+
+{/* 経歴を git log --graph に見立て、新しい順にノードと線でつなぐ (CSS のみ) / 경력을 git log --graph에 빗대어 최신순으로 노드와 선으로 잇는다 (CSS만) */}
+<p class="graph-command font-mono" aria-hidden="true"><span class="graph-prompt">$</span> git log --graph</p>
+<ol class="graph">
+  {
+    careers.map((career, index) => (
+      <li class="commit reveal">
+        <span class="commit-node" aria-hidden="true" />
+        <CareerItem
+          career={career}
+          lang={lang}
+          skillNames={skillNames}
+          refLabel={index === 0 ? 'HEAD -> main' : index === careers.length - 1 ? 'root' : undefined}
+          head={index === 0}
+        />
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .graph-command {
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .graph-prompt {
+    margin-inline-end: 0.5rem;
+    color: var(--accent);
+  }
+
+  .graph {
+    max-width: 56rem;
+  }
+
+  /* 左の線がブランチ、丸がコミット。線は新しいほどテーマ色が濃い / 왼쪽 선이 브랜치, 원이 커밋. 선은 최신일수록 포인트 컬러가 진하다 */
+  .commit {
+    position: relative;
+    padding-inline-start: 2.75rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .commit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0.875rem;
+    width: 3px;
+    background: linear-gradient(var(--accent), var(--control-border));
+  }
+
+  .commit:first-child::before {
+    top: 1.5rem;
+  }
+
+  .commit:last-child {
+    padding-bottom: 0;
+  }
+
+  .commit:last-child::before {
+    bottom: auto;
+    height: 1.5rem;
+  }
+
+  .commit-node {
+    position: absolute;
+    top: 1.0625rem;
+    left: 0.4375rem;
+    z-index: 1;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  .commit:first-child .commit-node {
+    background: var(--accent);
+  }
+
+  /* 最新 (HEAD) のノードだけ波紋を出す / 최신 (HEAD) 노드만 물결을 낸다 */
+  @media (prefers-reduced-motion: no-preference) {
+    .commit:first-child .commit-node {
+      animation: ripple 2.4s ease-out infinite;
+    }
+  }
+
+  @keyframes ripple {
+    from {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    to {
+      box-shadow: 0 0 0 0.75rem transparent;
+    }
+  }
+</style>

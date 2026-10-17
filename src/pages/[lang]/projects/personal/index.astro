@@ -1,0 +1,151 @@
+---
+import ProjectCover from '../../../../components/ProjectCover.astro';
+import ProjectTabs from '../../../../components/ProjectTabs.astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../../../i18n/utils';
+import { formatYearMonth, getProjects, getSkillNames, hasDetailPage } from '../../../../lib/content';
+
+export function getStaticPaths() {
+  return getLangStaticPaths();
+}
+
+const lang = toLang(Astro.params.lang);
+const t = useTranslations(lang);
+const [projects, skillNames] = await Promise.all([getProjects(), getSkillNames()]);
+---
+
+<BaseLayout lang={lang} title={t('projects.tab.personal')} description={t('projects.personal.description')}>
+  <h1 class="text-title mb-6">{t('projects.title')}</h1>
+  <ProjectTabs lang={lang} current="personal" />
+  <p class="mb-8 max-w-[var(--measure)] text-muted">{t('projects.personal.description')}</p>
+
+  <ul class="project-grid">
+    {
+      projects.map((project) => {
+        const { data } = project;
+        // 詳細ページがあればそこへ、なければ GitHub へ / 상세 페이지가 있으면 그곳으로, 없으면 GitHub로
+        const href = hasDetailPage(project) ? getAlternatePath(lang, `projects/personal/${project.id}`) : data.github[0];
+        return (
+          <li class="project card lift reveal">
+            <ProjectCover project={project} lang={lang} />
+            <div class="project-body">
+              <p class="project-meta font-mono">
+                <span class="badge">{t(`project.category.${data.category}`)}</span>
+                <span class:list={['badge', { 'badge-active': data.status === 'in-progress' }]}>
+                  {t(`project.status.${data.status}`)}
+                </span>
+                <time datetime={data.start}>{formatYearMonth(data.start, lang)}</time>
+              </p>
+              <h2 class="project-title">
+                <a class="card-link" href={href} data-no-ext>
+                  {data.title[lang]}
+                </a>
+                <span class="project-arrow" aria-hidden="true">
+                  {hasDetailPage(project) ? '→' : '↗'}
+                </span>
+              </h2>
+              <p>{data.summary[lang]}</p>
+              {data.tech.length > 0 && (
+                <ul class="chips">
+                  {data.tech.map((ref) => (
+                    <li>{skillNames.get(ref.id) ?? ref.id}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .project-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .project {
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .project-body {
+    display: grid;
+    gap: 0.625rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .badge {
+    padding: 0.0625rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
+  /* 進行中は枠をテーマ色に (文字でも状態を示している) / 진행 중은 테두리를 포인트 컬러로 (글자로도 상태를 표시한다) */
+  .badge-active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .project-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+
+  .project-arrow {
+    margin-inline-start: auto;
+    color: var(--accent);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .chips li {
+    padding: 0.0625rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+  }
+
+  /* hover で表紙を少し拡大し、矢印を動かす / hover 시 표지를 살짝 확대하고 화살표를 움직인다 */
+  @media (prefers-reduced-motion: no-preference) {
+    .project :global(.cover-art),
+    .project :global(.cover img),
+    .project-arrow {
+      transition: transform 300ms ease;
+    }
+
+    .project:hover :global(.cover-art),
+    .project:hover :global(.cover img) {
+      transform: scale(1.03);
+    }
+
+    .project:hover .project-arrow {
+      transform: translateX(3px);
+    }
+  }
+</style>

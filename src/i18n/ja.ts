@@ -2,14 +2,12 @@
 export const ja = {
   'home.title': 'ホーム',
   'home.description': '経歴・スキル・個人開発プロジェクトを紹介するポートフォリオサイトです。',
-  'about.title': '経歴',
-  'about.description': 'これまでの経歴を紹介します。',
+  'about.title': 'プロフィール',
+  'about.description': '経歴の要約と、これから目指す方向を紹介します。',
   'about.section.profile': 'プロフィール',
-  'about.section.career': '経歴',
   'skills.title': 'スキル',
   'skills.description': '扱える技術とスキルを紹介します。',
   'projects.title': 'プロジェクト',
-  'projects.description': '個人開発プロジェクトを紹介します。',
   'contact.title': 'お問い合わせ',
   'contact.description': '連絡先のご案内です。',
 
@@ -21,7 +19,6 @@ export const ja = {
   'unit.months': '{n}ヶ月',
   'unit.since': '{date}〜',
   'period.present': '現在',
-  'career.role': '役割',
   'career.scale': '規模',
   'career.tech': '技術',
   'career.phases': '担当工程',
@@ -52,8 +49,7 @@ export const ja = {
 
   'unit.years.one': '約1年',
 
-  'projects.status.wip': '準備中',
-  'projects.backToList': 'プロジェクト一覧へ',
+  'projects.backToList': '個人開発の一覧へ',
   'project.section.overview': '概要',
   'project.section.diagram': 'AWS構成図',
   'project.section.stack': '技術スタック',
@@ -108,6 +104,20 @@ export const ja = {
   'site.suffix': 'ポートフォリオ',
 
   'command.hint': 'クイック移動',
+
+  'about.section.growth': 'これから',
+  'projects.tabs.label': 'プロジェクトの種類',
+  'projects.tab.work': '業務経歴',
+  'projects.tab.personal': '個人開発',
+  'projects.work.description': '業務システム開発の経歴を、新しい順に git log 風のタイムラインで紹介します。',
+  'projects.personal.description': '学習や制作として取り組んでいる個人開発を紹介します。',
+  'project.category.learning': '学習',
+  'project.category.build': '制作',
+  'project.status.in-progress': '進行中',
+  'project.status.completed': '完了',
+  'skills.personalOnly': '個人開発',
+
+  'project.meta.type': '分類',
 
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',

@@ -1,17 +1,53 @@
-# 開発中断中のため一覧に「準備中」としてだけ出す。再開後に 概要 / AWS構成図 / 技術選定理由 / 工夫した点 を追加し、status を published にする
-# 개발 중단 중이라 목록에 "준비 중"으로만 표시한다. 재개 후 개요 / AWS 구성도 / 기술 선정 이유 / 신경 쓴 점을 추가하고 status를 published로 한다
-order: 2
-status: wip
+# 出典: リポジトリの README (2026-10-15 時点)。書かれていない事実は追加しない / 출처: 리포지토리 README (2026-10-15 시점). 적혀 있지 않은 사실은 추가하지 않는다
 title:
-  ja: 経費精算・承認ワークフローシステム
-  en: Expense reimbursement and approval workflow system
-  zh: 费用报销与审批工作流系统
-  ko: 경비 정산·결재 워크플로 시스템
+  ja: 経費精算・承認ワークフロー API
+  en: Expense approval workflow API
+  zh: 费用报销与审批工作流 API
+  ko: 경비 정산·결재 워크플로 API
 summary:
-  ja: 経費の申請から承認までを扱うワークフローシステム（Python + AWS）
-  en: A workflow system covering expense requests through approval (Python + AWS)
-  zh: 处理从费用申请到审批流程的工作流系统（Python + AWS）
-  ko: 경비 신청부터 결재까지를 다루는 워크플로 시스템 (Python + AWS)
+  ja: 経費の申請から多段階の承認までを扱うワークフロー API（FastAPI・PostgreSQL）の学習プロジェクト
+  en: A learning project — a workflow API that handles expense requests through multi-step approval (FastAPI, PostgreSQL)
+  zh: 处理从费用申请到多级审批流程的工作流 API（FastAPI・PostgreSQL）学习项目
+  ko: 경비 신청부터 다단계 결재까지 다루는 워크플로 API (FastAPI·PostgreSQL) 학습 프로젝트
+category: learning
+status: in-progress
+start: "2026-10"
+tech: [python, fastapi, sqlalchemy, postgresql, docker, github-actions]
+github:
+  - https://github.com/noraneko91/expense-workflow
+overview:
+  - ja: 申請者が経費申請書（明細・領収書）を作成して申請すると、承認ルートの順に承認・差し戻しが行われ、すべての状態遷移が履歴として残る経費精算・承認システムの API です。
+    en: "An API for an expense approval system: an applicant submits an expense report with items and receipts, it is approved or rejected along the approval route, and every state transition is kept as history."
+    zh: 这是一个费用报销与审批系统的 API：申请人提交包含明细和收据的报销单后，按审批路线依次批准或驳回，所有状态变化都会作为历史记录保存。
+    ko: 신청자가 경비 신청서(항목·영수증)를 작성해 상신하면 결재선 순서대로 승인·반려되고, 모든 상태 전이가 이력으로 남는 경비 정산·결재 시스템의 API입니다.
+  - ja: 状態遷移は遷移表の1か所で管理し、対象の行ロック（SELECT ... FOR UPDATE）と履歴の記録を1つのトランザクションで処理しています。承認ルートは申請時点でコピーし、その後の組織変更が進行中の書類に影響しないようにしています。
+    en: State transitions are managed in a single transition table, and each one locks the row (SELECT ... FOR UPDATE) and records history in one transaction. The approval route is copied at submission so later organization changes do not affect documents in progress.
+    zh: 状态转换集中在一张转换表中管理，行锁（SELECT ... FOR UPDATE）与历史记录在同一个事务中处理。审批路线在提交时复制，之后的组织变更不会影响进行中的单据。
+    ko: 상태 전이는 전이표 한 곳에서 관리하고, 대상 행 잠금(SELECT ... FOR UPDATE)과 이력 기록을 한 트랜잭션으로 처리합니다. 결재선은 상신 시점에 복사해서, 이후 조직 변경이 진행 중인 문서에 영향을 주지 않게 했습니다.
+  - ja: 領収書は S3 の署名付き URL でクライアントから直接アップロードする設計で、ローカルとテストでは S3 互換のモック（moto）を使っています。AWS（RDS・S3・ECS・CDK）への移行は今後の予定です。
+    en: Receipts are uploaded directly from the client with S3 presigned URLs; locally and in tests an S3-compatible mock (moto) is used. Moving to AWS (RDS, S3, ECS, CDK) is planned.
+    zh: 收据通过 S3 预签名 URL 由客户端直接上传，本地和测试中使用兼容 S3 的模拟服务（moto）。今后计划迁移到 AWS（RDS、S3、ECS、CDK）。
+    ko: 영수증은 S3 presigned URL로 클라이언트가 직접 업로드하는 설계이고, 로컬과 테스트에서는 S3 호환 목(moto)을 씁니다. AWS(RDS·S3·ECS·CDK)로의 이전은 앞으로의 계획입니다.
 stack:
   - name: Python
-  - name: AWS
+    version: "3.12"
+  - name: FastAPI
+  - name: SQLAlchemy
+    version: "2.0"
+  - name: Alembic
+  - name: PostgreSQL
+    version: "16"
+  - name: boto3 (S3)
+  - name: pytest / ruff / mypy
+  - name: Docker / GitHub Actions
+challenges:
+  - problem:
+      ja: 同じ書類に承認が同時に来ると、二重に承認されるおそれがある
+      en: Simultaneous approvals of the same document could approve it twice
+      zh: 同一单据同时收到审批时，可能会被重复批准
+      ko: 같은 문서에 승인이 동시에 들어오면 이중으로 승인될 위험이 있다
+    solution:
+      ja: 対象の書類を行ロックしてから遷移させ、2つの要求が実際に重なる状況をテストで再現して、1件だけが成功することを検証した
+      en: The document row is locked before each transition, and a test reproduces truly overlapping requests to verify that exactly one succeeds
+      zh: 在状态转换前锁定单据行，并在测试中重现两个请求真正重叠的情况，验证只有一个请求成功
+      ko: 대상 문서를 행 잠금한 뒤 전이시키고, 두 요청이 실제로 겹치는 상황을 테스트로 재현해 정확히 1건만 성공하는 것을 검증했다
