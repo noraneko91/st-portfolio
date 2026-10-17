@@ -12,6 +12,14 @@ export const htmlLang: Record<Lang, string> = {
   ko: 'ko',
 };
 
+// OGP の og:locale は「言語_地域」形式で指定する / OGP의 og:locale은 "언어_지역" 형식으로 지정한다
+export const ogLocale: Record<Lang, string> = {
+  ja: 'ja_JP',
+  en: 'en_US',
+  zh: 'zh_CN',
+  ko: 'ko_KR',
+};
+
 // 言語名は閲覧中の言語に関係なく自国語で表示する（自分の言語を見つけやすくするため） / 언어 이름은 보고 있는 언어와 관계없이 자국어로 표시한다 (자기 언어를 찾기 쉽게)
 export const languageNames: Record<Lang, string> = {
   ja: '日本語',
