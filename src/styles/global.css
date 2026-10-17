@@ -192,6 +192,37 @@
     color: var(--muted);
   }
 
+  /* ページ幅いっぱいを使うセクション (カードのグリッドなど)。見出しは番号付きの小さなラベル / 페이지 폭 전체를 쓰는 섹션 (카드 그리드 등). 제목은 번호가 붙은 작은 라벨 */
+  .block {
+    padding-block: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .block-label {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* カードが浮き上がる hover (動きを減らす設定では位置を変えない) / 카드가 떠오르는 hover (동작 줄이기 설정에서는 위치를 바꾸지 않는다) */
+  @media (prefers-reduced-motion: no-preference) {
+    .lift {
+      transition:
+        transform 200ms ease,
+        box-shadow 200ms ease,
+        border-color 150ms ease,
+        background-color 150ms ease;
+    }
+
+    .lift:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem -1.25rem rgb(0 0 0 / 0.35);
+    }
+  }
+
   /* 単独で置くリンクやボタンのタップ領域 (44px) / 단독으로 두는 링크나 버튼의 탭 영역 (44px) */
   .tap {
     display: inline-flex;

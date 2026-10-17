@@ -1,5 +1,4 @@
 ---
-import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { formatYearMonth, formatYears, getCertifications, getSkillsWithMonths } from '../../lib/content';
@@ -13,6 +12,8 @@ const t = useTranslations(lang);
 
 const categories = ['language', 'framework', 'cloud', 'database', 'tool'] as const;
 const skills = await getSkillsWithMonths();
+// バーの長さは最も長いスキルを 100% とした割合 / 막대 길이는 가장 긴 스킬을 100%로 한 비율
+const maxMonths = Math.max(...skills.map(({ months }) => months), 1);
 const groups = categories
   .map((category) => ({ category, items: skills.filter(({ skill }) => skill.data.category === category) }))
   .filter((group) => group.items.length > 0);
@@ -20,23 +21,31 @@ const certifications = await getCertifications();
 ---
 
 <BaseLayout lang={lang} title={t('skills.title')} description={t('skills.description')}>
-  <h1 class="text-title mb-10">{t('skills.title')}</h1>
+  <h1 class="text-title mb-4">{t('skills.title')}</h1>
+  <p class="mb-10 text-muted">{t('skills.note')}</p>
 
-  <Section index={1} label={t('skills.section.skills')} id="skills">
-    <div class="space-y-10">
+  <section class="block" aria-labelledby="skills-label">
+    <h2 id="skills-label" class="block-label">
+      <span class="font-mono" aria-hidden="true">01 —</span>
+      {t('skills.section.skills')}
+    </h2>
+    <div class="skill-grid">
       {
         groups.map(({ category, items }) => (
-          <div>
-            <h3 class="mb-2 font-bold">{t(`skillCategory.${category}`)}</h3>
-            <ul class="skill-list">
+          <div class="skill-card reveal">
+            <h3>{t(`skillCategory.${category}`)}</h3>
+            <ul>
               {items.map(({ skill, months }) => (
-                <li>
-                  <span>
-                    {skill.data.name}
-                    {skill.data.detail && <span class="skill-detail">{skill.data.detail}</span>}
+                <li class:list={['skill', { 'skill-featured': skill.data.featured }]}>
+                  <div class="skill-head">
+                    <span class="skill-name">{skill.data.name}</span>
+                    <span class="skill-years">{months > 0 ? formatYears(months, t) : '—'}</span>
+                  </div>
+                  {skill.data.detail && <p class="skill-detail">{skill.data.detail}</p>}
+                  {/* 年数は文字で伝わるので、バーは装飾として読み上げない / 연수는 글자로 전달되므로 막대는 장식으로 읽지 않는다 */}
+                  <span class="skill-bar" aria-hidden="true">
+                    <span class="skill-fill" style={`--ratio: ${months / maxMonths}`} />
                   </span>
-                  {/* 経歴で使っていないスキルは年数を出さない / 경력에서 쓰지 않은 스킬은 연수를 표시하지 않는다 */}
-                  <span class="skill-years">{months > 0 ? formatYears(months, t) : '—'}</span>
                 </li>
               ))}
             </ul>
@@ -44,44 +53,152 @@ const certifications = await getCertifications();
         ))
       }
     </div>
-    <p class="mt-6 text-sm text-muted">{t('skills.note')}</p>
-  </Section>
+  </section>
 
-  <Section index={2} label={t('skills.section.certifications')} id="certifications">
-    <ul class="skill-list">
+  <section class="block" aria-labelledby="certifications-label">
+    <h2 id="certifications-label" class="block-label">
+      <span class="font-mono" aria-hidden="true">02 —</span>
+      {t('skills.section.certifications')}
+    </h2>
+    <ul class="cert-grid">
       {
         certifications.map(({ data }) => (
-          <li>
-            <span>{data.name}</span>
-            <span class="skill-years">{data.date ? <time datetime={data.date}>{formatYearMonth(data.date, lang)}</time> : '—'}</span>
+          <li class="cert reveal">
+            <span class="cert-date font-mono">
+              {data.date ? <time datetime={data.date}>{formatYearMonth(data.date, lang)}</time> : '—'}
+            </span>
+            <span class="cert-name">{data.name}</span>
           </li>
         ))
       }
     </ul>
-  </Section>
+  </section>
 </BaseLayout>
 
 <style>
-  /* 名前と値を左右に置き、行ごとに細い罫線で区切る / 이름과 값을 좌우에 두고 행마다 가는 선으로 구분한다 */
-  .skill-list > li {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.25rem 1rem;
-    padding-block: 0.625rem;
-    border-bottom: 1px solid var(--border);
+  .skill-grid {
+    display: grid;
+    gap: 1rem;
   }
 
-  .skill-detail {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--muted);
+  @media (min-width: 48rem) {
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+
+  .skill-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .skill-card ul {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .skill-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .skill-years {
     font-size: 0.875rem;
     color: var(--muted);
     white-space: nowrap;
+  }
+
+  .skill-detail {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .skill-bar {
+    display: block;
+    height: 0.375rem;
+    margin-top: 0.375rem;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    display: block;
+    width: calc(var(--ratio) * 100%);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--control-border);
+    transform-origin: left;
+  }
+
+  /* 代表スキルはバーをテーマ色にし、名前も太字にする (色だけに頼らない) / 대표 스킬은 막대를 포인트 컬러로 하고 이름도 굵게 한다 (색에만 의존하지 않는다) */
+  .skill-featured .skill-fill {
+    background: var(--accent);
+  }
+
+  .skill-featured .skill-name {
+    font-weight: 700;
+  }
+
+  .cert-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 40rem) {
+    .cert-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .cert-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .cert {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  .cert-date {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .cert-name {
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  /* バーは表示されたときに左から伸びる (対応ブラウザのみ) / 막대는 보일 때 왼쪽에서 늘어난다 (지원 브라우저만) */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .skill-fill {
+        animation-name: grow;
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+      }
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scaleX(0);
+    }
   }
 </style>
