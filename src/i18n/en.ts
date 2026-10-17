@@ -80,7 +80,7 @@ export const en: Translation = {
   'contact.email': 'Email',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'KST portfolio — Backend Engineer (Java / Python / AWS)',
+  'og.imageAlt': 'kim-sungtae portfolio — Backend Engineer (Java / Python / AWS)',
 
   'contact.emailPending': 'Coming soon',
 
@@ -106,6 +106,8 @@ export const en: Translation = {
   'home.terminal.current': 'latest',
   'home.card.latest': 'Latest role',
   'home.card.projects': '{n} projects',
+
+  'site.suffix': 'Portfolio',
 
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',

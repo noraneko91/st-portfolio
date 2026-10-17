@@ -80,7 +80,7 @@ export const ko: Translation = {
   'contact.email': '이메일',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'KST 포트폴리오 — Backend Engineer (Java / Python / AWS)',
+  'og.imageAlt': 'kim-sungtae 포트폴리오 — Backend Engineer (Java / Python / AWS)',
 
   'contact.emailPending': '준비 중',
 
@@ -106,6 +106,8 @@ export const ko: Translation = {
   'home.terminal.current': '최근',
   'home.card.latest': '최근 담당',
   'home.card.projects': '프로젝트 {n}건',
+
+  'site.suffix': '포트폴리오',
 
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',

@@ -79,7 +79,7 @@ export const ja = {
   'contact.email': 'メール',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'KST のポートフォリオ — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'kim-sungtae のポートフォリオ — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '準備中',
 
@@ -105,6 +105,8 @@ export const ja = {
   'home.terminal.current': '直近',
   'home.card.latest': '直近の担当',
   'home.card.projects': '{n}件のプロジェクト',
+
+  'site.suffix': 'ポートフォリオ',
 
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',

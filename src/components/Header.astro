@@ -36,7 +36,8 @@ const navItems: { path: string; label: TranslationKey }[] = [
 <header class="site-header">
   <div class="wrapper header-inner">
     <a href={getAlternatePath(lang, '')} class="brand" aria-current={currentPath === '' ? 'page' : undefined}>
-      {displayName}
+      <span class="brand-name">{displayName}</span>
+      <span class="brand-suffix">{t('site.suffix')}</span>
     </a>
     <nav class="nav" aria-label={t('nav.label')}>
       <ul>
@@ -100,15 +101,32 @@ const navItems: { path: string; label: TranslationKey }[] = [
     padding-block: 0.5rem;
   }
 
-  /* 表示名 KST をロゴとして使う (4言語共通) / 표시 이름 KST를 로고로 쓴다 (4개 언어 공통) */
+  /* 表示名 (固定幅・太字) + ポートフォリオ (言語別) をロゴとして使う / 표시 이름 (고정폭·굵은 글자) + 포트폴리오 (언어별)를 로고로 쓴다 */
   .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
     grid-area: brand;
-    font-family: var(--font-mono);
-    font-size: 1.125rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
     color: var(--text);
     text-decoration: none;
+  }
+
+  .brand-name {
+    font-family: var(--font-mono);
+    font-size: 1.0625rem;
+    font-weight: 700;
+  }
+
+  .brand-suffix {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  /* 狭い画面ではボタンと1行に収めるため、表示名だけにする / 좁은 화면에서는 버튼과 한 줄에 들어가도록 표시 이름만 둔다 */
+  @media (max-width: 47.99rem) {
+    .brand-suffix {
+      display: none;
+    }
   }
 
   .nav {

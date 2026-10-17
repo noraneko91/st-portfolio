@@ -3,7 +3,7 @@
   <!-- ドメインを変えたら URL の行を直して generate.mjs で再生成する / 도메인을 바꾸면 URL 줄을 고치고 generate.mjs로 다시 생성한다 -->
   <rect width="1200" height="630" fill="#fafaf7" />
   <rect x="80" y="80" width="64" height="8" fill="#3346c2" />
-  <text x="80" y="200" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="40" fill="#5f5e58">KST — Portfolio</text>
+  <text x="80" y="200" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="40" fill="#5f5e58">kim-sungtae — Portfolio</text>
   <text x="80" y="300" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#1c1c1a">Backend Engineer</text>
   <text x="80" y="390" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" fill="#1c1c1a">Java / Python / AWS</text>
   <line x1="80" y1="500" x2="1120" y2="500" stroke="#deddd6" stroke-width="2" />

@@ -13,6 +13,8 @@ const sections = locales.map((lang) => ({
   Heading: lang === defaultLocale ? 'h1' : 'h2',
 }));
 const { displayName } = await getProfile();
+// ルートと 404 は言語が決まる前のページなので、原文の ja で表示する / 루트와 404는 언어가 정해지기 전 페이지라 원문인 ja로 표시한다
+const siteName = `${displayName} ${useTranslations(defaultLocale)('site.suffix')}`;
 ---
 
 <!doctype html>
@@ -20,7 +22,7 @@ const { displayName } = await getProfile();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{`${t('notFound.title')} | ${displayName}`}</title>
+    <title>{`${t('notFound.title')} | ${siteName}`}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
   </head>

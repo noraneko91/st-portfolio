@@ -80,7 +80,7 @@ export const zh: Translation = {
   'contact.email': '邮箱',
   'contact.github': 'GitHub',
 
-  'og.imageAlt': 'KST 的作品集 — Backend Engineer（Java / Python / AWS）',
+  'og.imageAlt': 'kim-sungtae 的作品集 — Backend Engineer（Java / Python / AWS）',
 
   'contact.emailPending': '准备中',
 
@@ -106,6 +106,8 @@ export const zh: Translation = {
   'home.terminal.current': '最近',
   'home.card.latest': '最近负责',
   'home.card.projects': '{n}个项目',
+
+  'site.suffix': '作品集',
 
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
