@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { defaultLocale, htmlLang, locales, ogLocale, type Lang } from '../i18n/config';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
@@ -50,11 +51,13 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body>
+  {/* 本文が短いページでもフッターを画面の下端に置く / 본문이 짧은 페이지에서도 푸터를 화면 아래 끝에 둔다 */}
+  <body class="flex min-h-dvh flex-col">
     <Header lang={lang} />
-    <main id="main" class="wrapper page-main">
+    <main id="main" class="wrapper page-main flex-1">
       <slot />
     </main>
+    <Footer lang={lang} />
   </body>
 </html>
 

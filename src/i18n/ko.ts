@@ -86,6 +86,9 @@ export const ko: Translation = {
 
   'contact.emailPending': '준비 중',
 
+  'footer.build': 'build',
+  'console.greeting': '👋 소스에 관심 가져 주셔서 감사합니다.',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

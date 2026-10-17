@@ -85,6 +85,9 @@ export const ja = {
 
   'contact.emailPending': '準備中',
 
+  'footer.build': 'build',
+  'console.greeting': '👋 ソースに興味を持ってくれてありがとう。',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

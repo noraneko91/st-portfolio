@@ -86,6 +86,9 @@ export const zh: Translation = {
 
   'contact.emailPending': '准备中',
 
+  'footer.build': 'build',
+  'console.greeting': '👋 感谢你对源码感兴趣。',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

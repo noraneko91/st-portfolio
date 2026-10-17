@@ -86,6 +86,9 @@ export const en: Translation = {
 
   'contact.emailPending': 'Coming soon',
 
+  'footer.build': 'build',
+  'console.greeting': '👋 Thanks for taking a look at the source.',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

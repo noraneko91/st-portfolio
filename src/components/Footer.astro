@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
+import { buildInfo, repositoryUrl } from '../lib/build-info';
+import { getProfile } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { displayName } = await getProfile();
+const year = buildInfo.date.slice(0, 4);
+const greeting = t('console.greeting');
+---
+
+<footer class="site-footer">
+  <div class="wrapper footer-inner font-mono">
+    <p>
+      {`${t('footer.build')} `}
+      {buildInfo.commitUrl ? <a href={buildInfo.commitUrl}>{buildInfo.shortSha}</a> : buildInfo.shortSha}
+      {' · '}
+      <time datetime={buildInfo.date}>{buildInfo.date}</time>
+      {` · ${Astro.generator}`}
+    </p>
+    <p>{`© ${year} ${displayName}`}</p>
+  </div>
+</footer>
+
+{/* 開発者ツールを開いた人への一言。ページの表示には影響しない / 개발자 도구를 연 사람에게 하는 한마디. 페이지 표시에는 영향이 없다 */}
+<script is:inline define:vars={{ greeting, repositoryUrl }}>
+  console.log('%c' + greeting, 'font-weight:bold', repositoryUrl);
+</script>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-block: 1.25rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer-inner a {
+    color: var(--muted);
+  }
+
+  .footer-inner a:hover {
+    color: var(--text);
+  }
+</style>
