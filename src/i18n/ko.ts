@@ -53,7 +53,6 @@ export const ko: Translation = {
   'project.section.links': '링크',
   'project.meta.period': '기간',
   'project.meta.stack': '기술',
-  'project.meta.repository': '리포지토리',
   'project.decision.reason': '이유',
   'project.decision.alternatives': '검토한 대안',
   'project.decision.adr': 'ADR 읽기',

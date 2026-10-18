@@ -53,7 +53,6 @@ export const zh: Translation = {
   'project.section.links': '链接',
   'project.meta.period': '期间',
   'project.meta.stack': '技术',
-  'project.meta.repository': '代码仓库',
   'project.decision.reason': '理由',
   'project.decision.alternatives': '考虑过的替代方案',
   'project.decision.adr': '阅读ADR',

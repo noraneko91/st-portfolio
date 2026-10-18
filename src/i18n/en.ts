@@ -53,7 +53,6 @@ export const en: Translation = {
   'project.section.links': 'Links',
   'project.meta.period': 'Period',
   'project.meta.stack': 'Stack',
-  'project.meta.repository': 'Repository',
   'project.decision.reason': 'Why',
   'project.decision.alternatives': 'Alternatives considered',
   'project.decision.adr': 'Read the ADR',

@@ -52,7 +52,6 @@ export const ja = {
   'project.section.links': 'リンク',
   'project.meta.period': '期間',
   'project.meta.stack': '技術',
-  'project.meta.repository': 'リポジトリ',
   'project.decision.reason': '理由',
   'project.decision.alternatives': '検討した代替案',
   'project.decision.adr': 'ADRを読む',
