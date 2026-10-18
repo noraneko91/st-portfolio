@@ -25,6 +25,10 @@ duties:
     en: Unit and integration testing
     zh: 单元测试与集成测试
     ko: 단위 테스트·통합 테스트
+  - ja: 構成管理
+    en: Configuration management
+    zh: 配置管理
+    ko: 형상 관리
   - ja: POM（Maven）のバージョン管理
     en: Version management of POM (Maven) files
     zh: POM（Maven）版本管理

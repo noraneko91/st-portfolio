@@ -12,37 +12,19 @@ interface Props {
 const { careers, lang, skillNames } = Astro.props;
 ---
 
-{/* 経歴を git log --graph に見立て、新しい順にノードと線でつなぐ (CSS のみ) / 경력을 git log --graph에 빗대어 최신순으로 노드와 선으로 잇는다 (CSS만) */}
-<p class="graph-command font-mono" aria-hidden="true"><span class="graph-prompt">$</span> git log --graph</p>
+{/* 経歴を新しい順にノードと線でつなぐタイムライン (CSS のみ) / 경력을 최신순으로 노드와 선으로 잇는 타임라인 (CSS만) */}
 <ol class="graph">
   {
-    careers.map((career, index) => (
+    careers.map((career) => (
       <li class="commit reveal">
         <span class="commit-node" aria-hidden="true" />
-        <CareerItem
-          career={career}
-          lang={lang}
-          skillNames={skillNames}
-          refLabel={index === 0 ? 'HEAD -> main' : index === careers.length - 1 ? 'root' : undefined}
-          head={index === 0}
-        />
+        <CareerItem career={career} lang={lang} skillNames={skillNames} />
       </li>
     ))
   }
 </ol>
 
 <style>
-  .graph-command {
-    margin-bottom: 1.5rem;
-    font-size: 0.875rem;
-    color: var(--muted);
-  }
-
-  .graph-prompt {
-    margin-inline-end: 0.5rem;
-    color: var(--accent);
-  }
-
   .graph {
     max-width: 56rem;
   }

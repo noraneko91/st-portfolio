@@ -1,5 +1,4 @@
 ---
-import { createHash } from 'node:crypto';
 import type { Lang } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
 import { formatYearMonth, totalMonths, type Career } from '../lib/content';
@@ -10,13 +9,9 @@ interface Props {
   lang: Lang;
   // skills.yaml の id → 表示名 / skills.yaml의 id → 표시명
   skillNames: Map<string, string>;
-  // git log の ref 表示 (例: "HEAD -> main") / git log의 ref 표시 (예: "HEAD -> main")
-  refLabel?: string;
-  // 最新の経歴 (HEAD) は ref を塗りつぶしのチップにする / 최신 경력 (HEAD)은 ref를 채운 칩으로 한다
-  head?: boolean;
 }
 
-const { career, lang, skillNames, refLabel, head = false } = Astro.props;
+const { career, lang, skillNames } = Astro.props;
 const { data } = career;
 const t = useTranslations(lang);
 
@@ -24,22 +19,17 @@ const t = useTranslations(lang);
 const role = [data.role].flat().map((id) => t(`role.${id}`)).join(' → ');
 const phases = sortPhases(data.phases).map((phase) => t(`phase.${phase}`));
 const tech = data.tech.map((ref) => skillNames.get(ref.id) ?? ref.id);
-// git log 風の短いハッシュ。経歴の id から計算するため、データが同じなら毎回同じ値 / git log 풍의 짧은 해시. 경력 id로 계산하므로 데이터가 같으면 항상 같은 값
-const hash = createHash('sha1').update(career.id).digest('hex').slice(0, 7);
 ---
 
 <article class="career">
   <p class="career-period font-mono">
-    {/* ハッシュと ref は装飾なので読み上げない / 해시와 ref는 장식이므로 읽지 않는다 */}
-    <span class="career-hash" aria-hidden="true">{hash}</span>
-    {refLabel && <span class:list={['career-ref', { 'career-ref-head': head }]} aria-hidden="true">{refLabel}</span>}
     <time datetime={data.start}>{formatYearMonth(data.start, lang)}</time>
     {' – '}
     {data.end ? <time datetime={data.end}>{formatYearMonth(data.end, lang)}</time> : t('period.present')}
     <span class="career-months">{t('unit.months', { n: totalMonths([data]) })}</span>
   </p>
   <h3 class="career-title">{data.title[lang]}</h3>
-  <p class="career-meta">{`${data.industry[lang]} · ${role}`}</p>
+  <p class="career-meta">{role}</p>
 
   {
     data.summary.length > 0 && (
@@ -96,23 +86,6 @@ const hash = createHash('sha1').update(career.id).digest('hex').slice(0, 7);
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem 0.5rem;
-  }
-
-  .career-hash,
-  .career-ref {
-    padding: 0 0.375rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-  }
-
-  .career-ref {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .career-ref-head {
-    background: var(--accent);
-    color: var(--bg);
   }
 
   .career-months::before {
