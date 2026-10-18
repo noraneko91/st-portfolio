@@ -7,10 +7,10 @@ interface Props {
 
 const { id, name } = Astro.props;
 
-// src/assets/skills/<id>.svg があればロゴ、なければ頭文字のバッジ (Devicon にないスキル用)
-// src/assets/skills/<id>.svg가 있으면 로고, 없으면 머리글자 배지 (Devicon에 없는 스킬용)
-const logos = import.meta.glob<string>('../assets/skills/*.svg', { eager: true, query: '?url', import: 'default' });
-const src = logos[`../assets/skills/${id}.svg`];
+// src/assets/skills/<id>.svg (Devicon) か <id>.png (Devicon にないもの) があればロゴ、どちらもなければ頭文字のバッジ
+// src/assets/skills/<id>.svg (Devicon)나 <id>.png (Devicon에 없는 것)가 있으면 로고, 둘 다 없으면 머리글자 배지
+const logos = import.meta.glob<string>('../assets/skills/*.{svg,png}', { eager: true, query: '?url', import: 'default' });
+const src = logos[`../assets/skills/${id}.svg`] ?? logos[`../assets/skills/${id}.png`];
 const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 3);
 ---
 
@@ -32,9 +32,11 @@ const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 3);
     background: #fff;
   }
 
+  /* 横長のロゴ (HiRDB) も枠に収める / 가로로 긴 로고 (HiRDB)도 틀에 맞춘다 */
   .logo img {
     width: 1.25rem;
     height: 1.25rem;
+    object-fit: contain;
   }
 
   .initials {
