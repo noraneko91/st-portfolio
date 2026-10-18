@@ -10,14 +10,27 @@ summary:
   zh: 首尔空间设计工作室“STUDIO TAMA”的网站。使用 Next.js 静态导出，并自动部署到 GitHub Pages
   ko: 서울의 공간 디자인 스튜디오 "STUDIO TAMA"의 웹사이트. Next.js로 정적 export하고 GitHub Pages에 자동 배포
 category: build
-status: in-progress
+status: completed
+# 期間はコミット履歴 (2026-06〜2026-10)。duration は AI を使わずに作った場合の作業量の見積もり
+# 기간은 커밋 이력 (2026-06~2026-10). duration은 AI 없이 만들었을 경우의 작업량 추정
 start: "2026-06"
+end: "2026-10"
+duration:
+  ja: 作業 約1か月
+  en: about a month of work
+  zh: 工作量约 1 个月
+  ko: 작업 약 1개월
 tech: [nextjs, react, typescript, tailwind, github-actions]
 github:
   - https://github.com/noraneko91/studio-tama-site
+demo: https://noraneko91.github.io/studio-tama-site/
 
 # 詳細の出典: リポジトリのコード (app/・next.config.ts・lib/asset.ts)・package.json・GitHub Actions のワークフロー / 상세 출처: 리포지토리 코드 (app/·next.config.ts·lib/asset.ts)·package.json·GitHub Actions 워크플로
 overview:
+  - ja: "友人が空間デザインの会社を立ち上げたものの、まだホームページがなかったため、代わりに制作しました。"
+    en: "A friend started a spatial design company that had no website yet, so I built one for them."
+    zh: "朋友创办了一家空间设计公司，但还没有网站，于是我为他们制作了这个网站。"
+    ko: "친구가 공간 디자인 회사를 차렸는데 아직 홈페이지가 없어서, 대신 만들어 주었습니다."
   - ja: "ソウルの空間デザインスタジオ「STUDIO TAMA」のウェブサイトです。トップ・About・Services・Projects・Contact のページで構成しています。"
     en: "A website for STUDIO TAMA, a spatial design studio in Seoul, with Home, About, Services, Projects, and Contact pages."
     zh: "这是首尔空间设计工作室“STUDIO TAMA”的网站，由首页、About、Services、Projects、Contact 页面组成。"
