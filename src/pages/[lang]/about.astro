@@ -2,7 +2,7 @@
 import PageHero from '../../components/PageHero.astro';
 import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
+import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { formatYearMonth, formatYears, getCareers, getProfile, getTotalCareerMonths } from '../../lib/content';
 
 export function getStaticPaths() {
@@ -61,9 +61,6 @@ const firstStart = careers.at(-1)?.data.start;
     <div class="growth space-y-4">
       {profile.growth.map((paragraph) => <p>{paragraph[lang]}</p>)}
     </div>
-    <p class="mt-6">
-      <a class="tap" href={getAlternatePath(lang, 'projects/personal')}>{`${t('projects.tab.personal')} →`}</a>
-    </p>
   </Section>
 </BaseLayout>
 
