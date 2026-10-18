@@ -108,7 +108,7 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
   .skill-card {
     padding: 1.5rem;
     border: 1px solid var(--border);
-    border-radius: 2px;
+    border-radius: var(--radius);
   }
 
   .skill-card h3 {
@@ -188,7 +188,7 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
     padding: 1rem 1.25rem;
     border: 1px solid var(--border);
     border-left: 3px solid var(--accent);
-    border-radius: 2px;
+    border-radius: var(--radius);
   }
 
   .cert-date {

@@ -245,7 +245,7 @@
   .card {
     position: relative;
     border: 1px solid var(--control-border);
-    border-radius: 2px;
+    border-radius: var(--radius);
   }
 
   .card:hover,
@@ -292,7 +292,7 @@
   /* 操作できないカード (準備中など)。点線と薄い文字で区別する / 조작할 수 없는 카드 (준비 중 등). 점선과 흐린 글자로 구분한다 */
   .card-disabled {
     border: 1px dashed var(--border);
-    border-radius: 2px;
+    border-radius: var(--radius);
     color: var(--muted);
   }
 }
