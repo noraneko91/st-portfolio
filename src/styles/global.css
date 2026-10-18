@@ -36,6 +36,9 @@
   --page-max: 72rem;
   /* 本文の最大幅。CJK で 1 行およそ 40 字 / 본문 최대 폭. CJK로 한 줄 약 40자 */
   --measure: 40rem;
+
+  /* 浮かぶ面と、それに並ぶ操作要素 (言語ボタンなど) の角の丸み / 떠 있는 면과, 그와 나란히 놓이는 조작 요소 (언어 버튼 등)의 모서리 둥글기 */
+  --radius: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -274,7 +277,7 @@
   .panel {
     position: relative;
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--radius);
     background: var(--bg);
     box-shadow: var(--shadow);
   }
