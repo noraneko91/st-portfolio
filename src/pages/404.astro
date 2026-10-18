@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ThemeInit from '../components/ThemeInit.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLocale, htmlLang, locales } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
@@ -20,6 +21,7 @@ const siteName = `${displayName} ${useTranslations(defaultLocale)('site.suffix')
 <!doctype html>
 <html lang={htmlLang[defaultLocale]}>
   <head>
+    <ThemeInit />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{`${t('notFound.title')} | ${siteName}`}</title>

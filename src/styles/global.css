@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /*
- * 色はすべて :root の変数で管理する。将来 [data-theme] で手動切替を足すときは、ここに同じ変数の上書きを追加するだけで済む
- * 색은 모두 :root 변수로 관리한다. 나중에 [data-theme]로 수동 전환을 추가할 때는 여기에 같은 변수의 덮어쓰기만 추가하면 된다
+ * 色はすべて :root の変数で管理する。普段は OS の設定に従い、ヘッダーのボタンで選ぶと html[data-theme] で上書きする
+ * 색은 모두 :root 변수로 관리한다. 평소에는 OS 설정을 따르고, 헤더 버튼으로 고르면 html[data-theme]로 덮어쓴다
  */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   --bg: #fafaf7;
   --text: #1c1c1a;
@@ -41,8 +41,11 @@
   --radius: 14px;
 }
 
+/* ダーク: OS がダークで「ライト」を選んでいないとき、または「ダーク」を選んだとき / 다크: OS가 다크이고 "라이트"를 고르지 않았을 때, 또는 "다크"를 골랐을 때 */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
     --bg: #131312;
     --text: #e8e6e1;
     --muted: #a3a19a;
@@ -57,6 +60,24 @@
     --floor-line: rgb(154 166 255 / 0.18);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 0.625rem 1.75rem -0.875rem rgb(0 0 0 / 0.7);
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #131312;
+  --text: #e8e6e1;
+  --muted: #a3a19a;
+  --border: #2f2e2b;
+  --accent: #9aa6ff;
+  --accent-strong: #c3caff;
+  --surface: #1d1f2e;
+  --control-border: #6f6d67;
+  --grid: #1b1b1a;
+  --grid-strong: #222220;
+  --glow: rgb(154 166 255 / 0.12);
+  --floor-line: rgb(154 166 255 / 0.18);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 0.625rem 1.75rem -0.875rem rgb(0 0 0 / 0.7);
 }
 
 /* inline: ユーティリティが var(--bg) などを直接参照し、ダークモードの上書きがそのまま効く / inline: 유틸리티가 var(--bg) 등을 직접 참조해 다크모드 덮어쓰기가 그대로 적용된다 */

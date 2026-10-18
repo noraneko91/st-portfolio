@@ -126,6 +126,8 @@ export const ja = {
   'home.path.frontend': 'フロントエンド',
   'home.path.now': '挑戦中',
 
+  'theme.dark': 'ダークモード',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

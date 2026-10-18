@@ -127,6 +127,8 @@ export const en: Translation = {
   'home.path.frontend': 'Frontend',
   'home.path.now': 'In progress',
 
+  'theme.dark': 'Dark mode',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

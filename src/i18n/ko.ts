@@ -127,6 +127,8 @@ export const ko: Translation = {
   'home.path.frontend': '프런트엔드',
   'home.path.now': '도전 중',
 
+  'theme.dark': '다크 모드',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

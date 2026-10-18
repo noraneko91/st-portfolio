@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ThemeInit from '../components/ThemeInit.astro';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLocale, htmlLang, LANG_STORAGE_KEY, languageNames, locales } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
@@ -14,6 +15,7 @@ const siteName = `${displayName} ${useTranslations(defaultLocale)('site.suffix')
 <!doctype html>
 <html lang={htmlLang[defaultLocale]}>
   <head>
+    <ThemeInit />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* 振り分け専用のページなので検索結果には出さない (x-default は /ja/ を指す) / 분기 전용 페이지라 검색 결과에 노출하지 않는다 (x-default는 /ja/를 가리킨다) */}

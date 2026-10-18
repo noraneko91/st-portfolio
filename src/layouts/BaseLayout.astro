@@ -3,6 +3,7 @@ import '../styles/global.css';
 import DepthBackground from '../components/DepthBackground.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ThemeInit from '../components/ThemeInit.astro';
 import { defaultLocale, htmlLang, locales, ogLocale, type Lang } from '../i18n/config';
 import { getAlternateUrl, useTranslations } from '../i18n/utils';
 import { getProfile } from '../lib/content';
@@ -35,6 +36,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* JS が動く環境かを描画前に CSS へ伝え、言語メニューの切り替えでレイアウトがずれないようにする / JS가 동작하는 환경인지 그리기 전에 CSS에 알려, 언어 메뉴 전환으로 레이아웃이 밀리지 않게 한다 */}
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <ThemeInit />
     <title>{documentTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

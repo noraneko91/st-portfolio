@@ -127,6 +127,8 @@ export const zh: Translation = {
   'home.path.frontend': '前端',
   'home.path.now': '挑战中',
 
+  'theme.dark': '深色模式',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',
