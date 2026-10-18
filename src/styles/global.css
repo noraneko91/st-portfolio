@@ -7,10 +7,10 @@
 :root {
   color-scheme: light;
 
-  --bg: #fafaf7;
+  --bg: #f1f1ec;
   --text: #1c1c1a;
   --muted: #5f5e58;
-  --border: #deddd6;
+  --border: #d6d5cd;
   --accent: #3346c2;
 
   /*
@@ -18,13 +18,13 @@
    * 조작 요소의 상태. hover·열린 상태는 배경과 포인트 컬러 테두리, 버튼·카드 테두리는 배경 대비 3:1 이상 (WCAG 1.4.11)
    */
   --accent-strong: #2433a0;
-  --surface: #eef0fb;
+  --surface: #e5e8f6;
   --control-border: #8c8a82;
   --focus-ring: 2px solid var(--accent);
 
   /* Home の方眼紙の線と上部のテーマ色 (装飾のみ) / Home의 방안지 선과 상단 포인트 컬러 (장식만) */
-  --grid: #e9e8e2;
-  --grid-strong: #e1dfd8;
+  --grid: #e3e2db;
+  --grid-strong: #dad8d0;
   --glow: rgb(51 70 194 / 0.14);
 
   /* 奥行きのある背景の床の線と、浮いた面の影 (装飾のみ。ADR 0007) / 깊이감 있는 배경의 바닥 선과 떠 있는 면의 그림자 (장식만. ADR 0007) */
@@ -46,16 +46,16 @@
   :root:not([data-theme='light']) {
     color-scheme: dark;
 
-    --bg: #131312;
-    --text: #e8e6e1;
+    --bg: #1c1c1b;
+    --text: #e4e2dc;
     --muted: #a3a19a;
-    --border: #2f2e2b;
+    --border: #383733;
     --accent: #9aa6ff;
     --accent-strong: #c3caff;
-    --surface: #1d1f2e;
-    --control-border: #6f6d67;
-    --grid: #1b1b1a;
-    --grid-strong: #222220;
+    --surface: #262939;
+    --control-border: #7a7871;
+    --grid: #242422;
+    --grid-strong: #2b2b28;
     --glow: rgb(154 166 255 / 0.12);
     --floor-line: rgb(154 166 255 / 0.18);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 0.625rem 1.75rem -0.875rem rgb(0 0 0 / 0.7);
@@ -65,16 +65,16 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #131312;
-  --text: #e8e6e1;
+  --bg: #1c1c1b;
+  --text: #e4e2dc;
   --muted: #a3a19a;
-  --border: #2f2e2b;
+  --border: #383733;
   --accent: #9aa6ff;
   --accent-strong: #c3caff;
-  --surface: #1d1f2e;
-  --control-border: #6f6d67;
-  --grid: #1b1b1a;
-  --grid-strong: #222220;
+  --surface: #262939;
+  --control-border: #7a7871;
+  --grid: #242422;
+  --grid-strong: #2b2b28;
   --glow: rgb(154 166 255 / 0.12);
   --floor-line: rgb(154 166 255 / 0.18);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 0.625rem 1.75rem -0.875rem rgb(0 0 0 / 0.7);
