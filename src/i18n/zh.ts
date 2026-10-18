@@ -36,7 +36,7 @@ export const zh: Translation = {
 
   'skills.section.skills': '技术技能',
   'skills.section.certifications': '资格证书',
-  'skills.note': '经验年数是根据经历中的期间计算的参考值。',
+  'skills.note': '每项技能旁显示使用过它的经历和个人开发的数量。具体用在哪里可在下方的图中查看。',
   'skillCategory.language': '编程语言',
   'skillCategory.framework': '框架',
   'skillCategory.cloud': '云',
@@ -118,6 +118,9 @@ export const zh: Translation = {
   'skills.graph.selected': '{name}：{items}（{n} 项）',
   'skills.graph.cleared': '已取消选择',
   'skills.graph.separator': '、',
+
+  'skills.usage.careers': '经历 {n} 段',
+  'skills.usage.projects': '个人开发 {n} 项',
 
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',

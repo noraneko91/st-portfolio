@@ -97,23 +97,36 @@ export async function getSkillNames(): Promise<Map<string, string>> {
   return new Map(skills.map((skill) => [skill.id, skill.data.name]));
 }
 
-// スキルごとの経験月数。経歴の tech から計算し、表示上の年数が長い順（同じなら名前順）に並べる
-// 스킬별 경험 개월 수. 경력의 tech에서 계산하고, 표시되는 연수가 긴 순 (같으면 이름순)으로 정렬한다
-export async function getSkillsWithMonths() {
+// スキルごとに、使った経歴・個人開発の件数を数える。年数は出さない (経歴の期間を足すと実際の習熟度より長く見えるため)
+// 스킬별로 사용한 경력·개인 개발 건수를 센다. 연수는 표시하지 않는다 (경력 기간을 더하면 실제 숙련도보다 길어 보이기 때문)
+export type SkillUsage = { skill: Skill; careers: number; projects: number };
+
+export async function getSkillsWithUsage(): Promise<SkillUsage[]> {
   const { careers, skills, projects } = await loadCareersAndSkills();
+  const uses = (tech: { id: string }[], id: string) => tech.some((ref) => ref.id === id);
   return skills
-    .map((skill) => {
-      const used = careers.filter((career) => career.data.tech.some((ref) => ref.id === skill.id));
-      // 業務経歴にない技術は、公開中の個人開発で使っていれば「個人開発」として示す / 업무 경력에 없는 기술은 공개 중인 개인 개발에서 썼으면 "개인 개발"로 표시한다
-      const personal = projects.some((project) => project.data.tech.some((ref) => ref.id === skill.id));
-      return { skill, months: totalMonths(used.map((career) => career.data)), personal };
-    })
-    .filter(({ months, personal }) => months > 0 || personal)
+    .map((skill) => ({
+      skill,
+      careers: careers.filter((career) => uses(career.data.tech, skill.id)).length,
+      projects: projects.filter((project) => uses(project.data.tech, skill.id)).length,
+    }))
+    .filter(({ careers, projects }) => careers + projects > 0)
     .sort(
       (a, b) =>
-        (b.months > 0 ? toYears(b.months) : 0) - (a.months > 0 ? toYears(a.months) : 0) ||
+        Number(b.skill.data.featured) - Number(a.skill.data.featured) ||
+        b.careers + b.projects - (a.careers + a.projects) ||
         a.skill.data.name.localeCompare(b.skill.data.name),
     );
+}
+
+// 「経歴 4件 · 個人開発 1件」の表記 / "경력 4건 · 개인 개발 1건" 표기
+export function formatUsage({ careers, projects }: SkillUsage, t: ReturnType<typeof useTranslations>): string {
+  return [
+    careers > 0 && t('skills.usage.careers', { n: careers }),
+    projects > 0 && t('skills.usage.projects', { n: projects }),
+  ]
+    .filter(Boolean)
+    .join(' · ');
 }
 
 // 新しい順。年月のないものは最後 / 최신순. 연월이 없는 것은 마지막

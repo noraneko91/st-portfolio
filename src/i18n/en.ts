@@ -36,7 +36,7 @@ export const en: Translation = {
 
   'skills.section.skills': 'Technical skills',
   'skills.section.certifications': 'Certifications',
-  'skills.note': 'Years of experience are estimates calculated from the periods in my career history.',
+  'skills.note': 'Each skill shows how many roles and personal projects used it. See where in the graph below.',
   'skillCategory.language': 'Languages',
   'skillCategory.framework': 'Frameworks',
   'skillCategory.cloud': 'Cloud',
@@ -118,6 +118,9 @@ export const en: Translation = {
   'skills.graph.selected': '{name}: {items} ({n})',
   'skills.graph.cleared': 'Selection cleared',
   'skills.graph.separator': ', ',
+
+  'skills.usage.careers': 'Work: {n}',
+  'skills.usage.projects': 'Personal: {n}',
 
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',

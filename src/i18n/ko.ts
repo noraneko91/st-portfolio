@@ -36,7 +36,7 @@ export const ko: Translation = {
 
   'skills.section.skills': '기술 스킬',
   'skills.section.certifications': '자격증',
-  'skills.note': '경험 연수는 경력 기간으로 산출한 기준값입니다.',
+  'skills.note': '각 스킬을 사용한 경력·개인 개발 건수입니다. 어디에서 썼는지는 아래 그래프에서 볼 수 있습니다.',
   'skillCategory.language': '언어',
   'skillCategory.framework': '프레임워크',
   'skillCategory.cloud': '클라우드',
@@ -118,6 +118,9 @@ export const ko: Translation = {
   'skills.graph.selected': '{name}: {items} ({n}건)',
   'skills.graph.cleared': '선택을 해제했습니다',
   'skills.graph.separator': ', ',
+
+  'skills.usage.careers': '경력 {n}건',
+  'skills.usage.projects': '개인 개발 {n}건',
 
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',

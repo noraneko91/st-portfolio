@@ -1,13 +1,13 @@
 ---
 import type { Lang } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
-import { formatYears, type Career, type Project, type Skill } from '../lib/content';
+import type { Career, Project, SkillUsage } from '../lib/content';
 
 interface Props {
   lang: Lang;
   careers: Career[];
   projects: Project[];
-  skills: { skill: Skill; months: number }[];
+  skills: SkillUsage[];
 }
 
 const { lang, careers, projects, skills } = Astro.props;
@@ -39,10 +39,9 @@ const groups = categories
     category,
     items: skills
       .filter(({ skill }) => skill.data.category === category && used.has(skill.id))
-      .map(({ skill, months }) => ({
+      .map(({ skill }) => ({
         id: `skill-${skill.id}`,
         label: skill.data.name,
-        sub: months > 0 ? formatYears(months, t) : t('skills.personalOnly'),
         links: left.filter((node) => node.tech.includes(skill.id)).map((node) => node.id),
       })),
   }))
@@ -103,7 +102,6 @@ const groups = categories
                   tabindex={groupIndex === 0 && index === 0 ? 0 : -1}
                 >
                   <span class="node-label">{node.label}</span>
-                  <span class="node-sub">{node.sub}</span>
                 </button>
               </li>
             ))}

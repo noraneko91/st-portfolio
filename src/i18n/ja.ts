@@ -35,7 +35,7 @@ export const ja = {
 
   'skills.section.skills': '技術スキル',
   'skills.section.certifications': '資格',
-  'skills.note': '経験年数は、経歴の期間から算出した目安です。',
+  'skills.note': '各スキルを使った経歴・個人開発の件数です。どこで使ったかは下のグラフで確認できます。',
   'skillCategory.language': '言語',
   'skillCategory.framework': 'フレームワーク',
   'skillCategory.cloud': 'クラウド',
@@ -117,6 +117,9 @@ export const ja = {
   'skills.graph.selected': '{name}：{items}（{n}件）',
   'skills.graph.cleared': '選択を解除しました',
   'skills.graph.separator': '、',
+
+  'skills.usage.careers': '経歴 {n}件',
+  'skills.usage.projects': '個人開発 {n}件',
 
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
