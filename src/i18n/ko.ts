@@ -93,7 +93,6 @@ export const ko: Translation = {
 
   'command.hint': '빠른 이동',
 
-  'about.section.growth': '앞으로',
   'projects.tabs.label': '프로젝트 종류',
   'projects.tab.work': '업무 경력',
   'projects.tab.personal': '개인 개발',

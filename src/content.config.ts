@@ -29,8 +29,6 @@ const profile = defineCollection({
     headlineHighlights: z.array(text).default([]),
     location: localized,
     intro: z.array(localized),
-    // About の「これから」: 目指す方向 / About의 "앞으로": 지향하는 방향
-    growth: z.array(localized).default([]),
     languages: z.array(z.object({ name: localized, level: localized.optional() })),
     // 空文字の間はメールリンクを表示しない / 빈 문자열인 동안은 메일 링크를 표시하지 않는다
     email: z.union([z.literal(''), z.email()]),

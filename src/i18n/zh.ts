@@ -93,7 +93,6 @@ export const zh: Translation = {
 
   'command.hint': '快速跳转',
 
-  'about.section.growth': '今后的方向',
   'projects.tabs.label': '项目类型',
   'projects.tab.work': '工作经历',
   'projects.tab.personal': '个人开发',

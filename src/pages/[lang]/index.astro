@@ -30,7 +30,7 @@ const [profile, careers, projects, skills, totalMonths] = await Promise.all([
 
 const featured = skills.filter(({ skill }) => skill.data.featured);
 const latestProject = projects[0];
-const growth = profile.growth[0]?.[lang];
+const growth = profile.intro[0]?.[lang];
 ---
 
 <BaseLayout lang={lang} description={t('home.description')} home>

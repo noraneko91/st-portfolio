@@ -92,7 +92,6 @@ export const ja = {
 
   'command.hint': 'クイック移動',
 
-  'about.section.growth': 'これから',
   'projects.tabs.label': 'プロジェクトの種類',
   'projects.tab.work': '業務経歴',
   'projects.tab.personal': '個人開発',

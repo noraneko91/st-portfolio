@@ -50,7 +50,7 @@
 | ページ | URL | 内容 |
 |---|---|---|
 | Home | `/{lang}/` | 各ページの中身をタイルで並べた入口（ベントーグリッド） |
-| About | `/{lang}/about/` | 自己紹介・得意分野・これから |
+| About | `/{lang}/about/` | 自己紹介（経歴の土台と、クラウドを含むフルスタックへの方向） |
 | Skills | `/{lang}/skills/` | スキル（使った経歴・個人開発の件数）・資格・スキル × 経歴グラフ |
 | Projects: 業務経歴 | `/{lang}/projects/work/` | 経歴（git log 風タイムライン） |
 | Projects: 個人開発 | `/{lang}/projects/personal/` | 個人開発の一覧と詳細（`/{lang}/projects/personal/<slug>/`） |

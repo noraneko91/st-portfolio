@@ -14,7 +14,7 @@
 
 - 静的サイト（DB・サーバーなし）、モバイルファーストのレスポンシブ対応
 - 4言語対応: ja（デフォルト・原文） / en / zh（簡体字） / ko
-- ページ: Home / About（自己紹介・これから） / Skills / Projects（業務経歴・個人開発） / Contact（構成の理由は [ADR 0006](adr/0006-projects-work-personal.md)）
+- ページ: Home / About（自己紹介） / Skills / Projects（業務経歴・個人開発） / Contact（構成の理由は [ADR 0006](adr/0006-projects-work-personal.md)）
 - ダークモード、言語別フォント、hreflang・言語別 sitemap の出力
 
 ### 対象外

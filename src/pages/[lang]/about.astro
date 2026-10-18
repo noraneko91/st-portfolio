@@ -56,17 +56,4 @@ const firstStart = careers.at(-1)?.data.start;
       </div>
     </dl>
   </Section>
-
-  <Section index={2} label={t('about.section.growth')} id="growth">
-    <div class="growth space-y-4">
-      {profile.growth.map((paragraph) => <p>{paragraph[lang]}</p>)}
-    </div>
-  </Section>
 </BaseLayout>
-
-<style>
-  /* 中心のメッセージなので、本文より少し大きく / 핵심 메시지라서 본문보다 조금 크게 */
-  .growth {
-    font-size: 1.125rem;
-  }
-</style>

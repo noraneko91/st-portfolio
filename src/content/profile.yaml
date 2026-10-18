@@ -19,14 +19,9 @@ main:
     en: Japan
     zh: 日本
     ko: 일본
-  # About の短い自己紹介 / About의 짧은 자기소개
+  # About の自己紹介。中心のメッセージ: バックエンドから始め、クラウドを含むフルスタックへ (1 段落目は Home のプロフィールにも出る)
+  # About의 자기소개. 핵심 메시지: 백엔드에서 시작해 클라우드를 포함한 풀스택으로 (1문단은 Home 프로필에도 표시)
   intro:
-    - ja: Java/Spring による業務システム開発からキャリアを始め、直近では Python と AWS を使った生命保険システムのクラウド移行に携わりました。
-      en: I started my career building business systems with Java/Spring, and most recently worked on moving a life insurance system to the cloud with Python and AWS.
-      zh: 我从基于 Java/Spring 的业务系统开发开始职业生涯，最近参与了使用 Python 和 AWS 将人寿保险系统迁移到云端的工作。
-      ko: Java/Spring 기반 업무 시스템 개발로 경력을 시작해, 최근에는 Python과 AWS를 이용한 생명보험 시스템의 클라우드 이전에 참여했습니다.
-  # About の「これから」。中心のメッセージ: バックエンドから始め、クラウドを含むフルスタックへ / About의 "앞으로". 핵심 메시지: 백엔드에서 시작해 클라우드를 포함한 풀스택으로
-  growth:
     - ja: バックエンド開発から始まったキャリアを土台に、いまはクラウドを含めたフルスタックエンジニアを目指して歩みを進めています。
       en: Building on a career that began in backend development, I am now working toward becoming a full-stack engineer, cloud included.
       zh: 以从后端开发起步的经历为基础，我正朝着包括云在内的全栈工程师稳步前进。

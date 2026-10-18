@@ -93,7 +93,6 @@ export const en: Translation = {
 
   'command.hint': 'Quick navigation',
 
-  'about.section.growth': "What's next",
   'projects.tabs.label': 'Project types',
   'projects.tab.work': 'Work experience',
   'projects.tab.personal': 'Personal projects',

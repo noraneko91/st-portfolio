@@ -35,7 +35,7 @@ public/          # 이미지·favicon 등 정적 파일
 ```
 
 ## 페이지 구성 / ページ構成
-- Home / About(自己紹介・これから) / Skills / Projects / Contact (ADR 0006)
+- Home / About(自己紹介) / Skills / Projects / Contact (ADR 0006)
 - Projects는 경로 기반 탭 2개 / パスベースのタブ2つ:
   - 業務経歴 /[lang]/projects/work/ (경력 + git log 풍 타임라인)
   - 個人開発 /[lang]/projects/personal/ (목록), /[lang]/projects/personal/[slug]/ (상세)
