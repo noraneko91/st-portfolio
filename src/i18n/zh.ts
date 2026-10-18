@@ -58,7 +58,6 @@ export const zh: Translation = {
   'project.decision.adr': '阅读ADR',
   'project.challenge.problem': '问题',
   'project.challenge.solution': '解决',
-  'project.link.github': 'GitHub',
   'project.link.demo': '演示',
   'project.link.zenn': 'Zenn文章',
 

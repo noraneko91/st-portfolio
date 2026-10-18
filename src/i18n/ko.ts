@@ -58,7 +58,6 @@ export const ko: Translation = {
   'project.decision.adr': 'ADR 읽기',
   'project.challenge.problem': '과제',
   'project.challenge.solution': '해결',
-  'project.link.github': 'GitHub',
   'project.link.demo': '데모',
   'project.link.zenn': 'Zenn 글',
 

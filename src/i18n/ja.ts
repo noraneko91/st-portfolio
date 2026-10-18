@@ -57,7 +57,6 @@ export const ja = {
   'project.decision.adr': 'ADRを読む',
   'project.challenge.problem': '課題',
   'project.challenge.solution': '解決',
-  'project.link.github': 'GitHub',
   'project.link.demo': 'デモ',
   'project.link.zenn': 'Zenn記事',
 

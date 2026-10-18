@@ -20,9 +20,9 @@ const { project } = Astro.props;
 const { data } = project;
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
-// リンク欄は GitHub (複数可)・デモ・Zenn の順で、種類と URL を並べる / 링크 칸은 GitHub (여러 개 가능)·데모·Zenn 순서로 종류와 URL을 나란히 둔다
+// リンク欄は公開先 (デモ)・Zenn だけ。GitHub のリポジトリは載せない / 링크 칸은 공개 주소 (데모)·Zenn만. GitHub 리포지토리는 싣지 않는다
+// 概要のすぐ後 (02) に置き、動くものを先に見せる / 개요 바로 뒤 (02)에 두어, 동작하는 것을 먼저 보여준다
 const links = [
-  ...data.github.map((url) => ({ kind: 'github' as const, url })),
   ...(data.demo ? [{ kind: 'demo' as const, url: data.demo }] : []),
   ...(data.zenn ? [{ kind: 'zenn' as const, url: data.zenn }] : []),
 ];
@@ -83,6 +83,27 @@ const next = () => ++sectionNumber;
             <p>{paragraph[lang]}</p>
           ))}
         </div>
+      </Section>
+    )
+  }
+
+  {
+    links.length > 0 && (
+      <Section index={next()} label={t('project.section.links')} id="links">
+        <dl class="kv">
+          {links.map((link) => (
+            <div>
+              <dt>{t(`project.link.${link.kind}`)}</dt>
+              <dd>
+                {/* サイトの外は新しいタブで開き、読み上げでもそれを伝える / 사이트 밖은 새 탭에서 열고, 스크린리더에도 그것을 알린다 */}
+                <a class="tap font-mono" href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.url.replace(/^https:\/\//, '').replace(/\/$/, '')}
+                  <span class="sr-only">{t('link.newTab')}</span>
+                </a>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </Section>
     )
   }
@@ -178,26 +199,6 @@ const next = () => ++sectionNumber;
     )
   }
 
-  {
-    links.length > 0 && (
-      <Section index={next()} label={t('project.section.links')} id="links">
-        <dl class="kv">
-          {links.map((link) => (
-            <div>
-              <dt>{t(`project.link.${link.kind}`)}</dt>
-              <dd>
-                {/* サイトの外は新しいタブで開き、読み上げでもそれを伝える / 사이트 밖은 새 탭에서 열고, 스크린리더에도 그것을 알린다 */}
-                <a class="tap font-mono" href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.url.replace(/^https:\/\//, '').replace(/\/$/, '')}
-                  <span class="sr-only">{t('link.newTab')}</span>
-                </a>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-    )
-  }
 </BaseLayout>
 
 <style>

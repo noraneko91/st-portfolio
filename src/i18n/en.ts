@@ -58,7 +58,6 @@ export const en: Translation = {
   'project.decision.adr': 'Read the ADR',
   'project.challenge.problem': 'Problem',
   'project.challenge.solution': 'Solution',
-  'project.link.github': 'GitHub',
   'project.link.demo': 'Demo',
   'project.link.zenn': 'Zenn article',
 
