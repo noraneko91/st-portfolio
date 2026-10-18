@@ -129,6 +129,8 @@ export const en: Translation = {
 
   'theme.dark': 'Dark mode',
 
+  'link.newTab': ' (opens in a new tab)',
+
   'notFound.title': 'Page not found',
   'notFound.message': 'The page you are looking for may have been moved or deleted.',
   'notFound.home': 'Back to home',

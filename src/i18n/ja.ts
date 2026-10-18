@@ -128,6 +128,8 @@ export const ja = {
 
   'theme.dark': 'ダークモード',
 
+  'link.newTab': '（新しいタブで開きます）',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

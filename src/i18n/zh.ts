@@ -129,6 +129,8 @@ export const zh: Translation = {
 
   'theme.dark': '深色模式',
 
+  'link.newTab': '（在新标签页中打开）',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

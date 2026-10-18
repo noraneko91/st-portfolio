@@ -11,9 +11,9 @@ summary:
   ko: 서울의 공간 디자인 스튜디오 "STUDIO TAMA"의 웹사이트. Next.js로 정적 export하고 GitHub Pages에 자동 배포
 category: build
 status: completed
-# 期間はコミット履歴 (2026-06〜2026-10)。duration は AI を使わずに作った場合の作業量の見積もり
-# 기간은 커밋 이력 (2026-06~2026-10). duration은 AI 없이 만들었을 경우의 작업량 추정
-start: "2026-06"
+# 期間は本人の指定 (2026-09〜2026-10)。duration は AI を使わずに作った場合の作業量の見積もり
+# 기간은 본인 지정 (2026-09~2026-10). duration은 AI 없이 만들었을 경우의 작업량 추정
+start: "2026-09"
 end: "2026-10"
 duration:
   ja: 作業 約1か月

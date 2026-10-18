@@ -78,8 +78,9 @@ const next = () => ++sectionNumber;
       <dd class="font-mono">
         {
           data.github.map((url) => (
-            <a class="block" href={url}>
+            <a class="block" href={url} target="_blank" rel="noopener noreferrer">
               {url.replace(/^https:\/\//, '')}
+              <span class="sr-only">{t('link.newTab')}</span>
             </a>
           ))
         }
@@ -146,7 +147,10 @@ const next = () => ++sectionNumber;
               </dl>
               {decision.adr && (
                 <p class="text-sm">
-                  <a class="tap" href={decision.adr}>{t('project.decision.adr')}</a>
+                  <a class="tap" href={decision.adr} target="_blank" rel="noopener noreferrer">
+                    {t('project.decision.adr')}
+                    <span class="sr-only">{t('link.newTab')}</span>
+                  </a>
                 </p>
               )}
             </article>
@@ -193,7 +197,11 @@ const next = () => ++sectionNumber;
         <ul class="space-y-2">
           {links.map((link) => (
             <li>
-              <a class="tap" href={link.url}>{t(`project.link.${link.kind}`)}</a>
+              {/* サイトの外は新しいタブで開き、読み上げでもそれを伝える / 사이트 밖은 새 탭에서 열고, 스크린리더에도 그것을 알린다 */}
+              <a class="tap" href={link.url} target="_blank" rel="noopener noreferrer">
+                {t(`project.link.${link.kind}`)}
+                <span class="sr-only">{t('link.newTab')}</span>
+              </a>
             </li>
           ))}
         </ul>
