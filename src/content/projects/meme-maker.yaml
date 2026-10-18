@@ -15,3 +15,31 @@ start: "2022-09"
 tech: [javascript]
 github:
   - https://github.com/noraneko91/meme-maker
+
+# 詳細の出典: リポジトリのコード (index.html・app.js) / 상세 출처: 리포지토리 코드 (index.html·app.js)
+overview:
+  - ja: "Canvas API を使った、ブラウザで動くお絵描きアプリです。800×800 のキャンバスに線を描き、塗りつぶし・消しゴム・全消去ができます。"
+    en: "A drawing app that runs in the browser, built on the Canvas API. You can draw lines on an 800×800 canvas, fill it, erase, and clear everything."
+    zh: "这是一个基于 Canvas API、在浏览器中运行的绘图应用。可以在 800×800 的画布上画线，也可以填充、擦除和全部清除。"
+    ko: "Canvas API를 사용한, 브라우저에서 동작하는 그림 그리기 앱입니다. 800×800 캔버스에 선을 그리고, 채우기·지우개·전체 지우기를 할 수 있습니다."
+  - ja: "12 色のパレットとカラーピッカーで色を選び、スライダーで線の太さを変えられます。画像ファイルを読み込んでキャンバスに描いたり、ダブルクリックで入力した文字を置いたりできます。"
+    en: "You pick colors from a 12-color palette or a color picker and change the line width with a slider. You can also load an image file onto the canvas and place typed text with a double-click."
+    zh: "可以从 12 色调色板或取色器中选择颜色，并用滑块调整线条粗细。还可以把图片文件载入画布，或双击放置输入的文字。"
+    ko: "12색 팔레트와 컬러 피커로 색을 고르고, 슬라이더로 선 굵기를 바꿀 수 있습니다. 이미지 파일을 불러와 캔버스에 그리거나, 더블클릭으로 입력한 글자를 넣을 수 있습니다."
+  - ja: "描いた絵は PNG 画像として保存できます。ライブラリは使わず、HTML・CSS・JavaScript だけで作りました。"
+    en: "Drawings can be saved as PNG images. It uses no libraries, only HTML, CSS, and JavaScript."
+    zh: "画好的图可以保存为 PNG 图片。没有使用任何库，只用 HTML、CSS 和 JavaScript 制作。"
+    ko: "그린 그림은 PNG 이미지로 저장할 수 있습니다. 라이브러리 없이 HTML·CSS·JavaScript만으로 만들었습니다."
+stack:
+  - name: "JavaScript"
+    purpose:
+      ja: "描画・塗りつぶし・保存などの処理（Canvas API）"
+      en: "Drawing, filling, and saving (Canvas API)"
+      zh: "绘制、填充、保存等处理（Canvas API）"
+      ko: "그리기·채우기·저장 등의 처리 (Canvas API)"
+  - name: "HTML / CSS"
+    purpose:
+      ja: "パレット・ボタン・キャンバスの画面"
+      en: "Palette, buttons, and canvas layout"
+      zh: "调色板、按钮和画布的界面"
+      ko: "팔레트·버튼·캔버스 화면"

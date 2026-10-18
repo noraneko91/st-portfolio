@@ -14,7 +14,81 @@ category: learning
 status: completed
 start: "2023-04"
 end: "2023-05"
-tech: [react, javascript, express, sqlite]
+tech: [react, javascript, express, sqlite, docker]
 github:
   - https://github.com/noraneko91/grab-market-client
   - https://github.com/noraneko91/grab-market-server
+
+# 詳細の出典: 2 つのリポジトリの package.json・ソースコード・Dockerfile・fly.toml・コミット履歴 / 상세 출처: 두 리포지토리의 package.json·소스 코드·Dockerfile·fly.toml·커밋 이력
+overview:
+  - ja: "オンライン講座（Inflearn）に沿って作った中古取引マーケットです。画面（React）と API サーバー（Express）を別々のリポジトリで作りました。"
+    en: "A second-hand marketplace built while following an online course (Inflearn). The frontend (React) and the API server (Express) live in separate repositories."
+    zh: "这是跟随在线课程（Inflearn）制作的二手交易市场。前端（React）和 API 服务器（Express）分别放在不同的仓库中。"
+    ko: "온라인 강의(인프런)를 따라 만든 중고 거래 마켓입니다. 화면(React)과 API 서버(Express)를 각각 다른 리포지토리로 만들었습니다."
+  - ja: "画面: 商品一覧（登録からの経過時間を dayjs で表示）、商品詳細と購入、商品登録（antd の Form・Upload で画像を送信）、スライドするバナー（antd の Carousel）。"
+    en: "Frontend: product list (time since posting shown with dayjs), product detail and purchase, product upload (images sent via antd Form and Upload), and a sliding banner (antd Carousel)."
+    zh: "前端：商品列表（用 dayjs 显示发布后经过的时间）、商品详情与购买、商品发布（通过 antd 的 Form 和 Upload 上传图片）、轮播横幅（antd 的 Carousel）。"
+    ko: "화면: 상품 목록 (등록 후 경과 시간을 dayjs로 표시), 상품 상세와 구매, 상품 등록 (antd의 Form·Upload로 이미지 전송), 슬라이드 배너 (antd의 Carousel)."
+  - ja: "サーバー: 商品の一覧・詳細・登録・購入とバナー取得の API、multer による画像の保存、Sequelize + SQLite によるデータの保存。"
+    en: "Server: APIs for listing, viewing, creating, and purchasing products and for fetching banners; image storage with multer; data storage with Sequelize and SQLite."
+    zh: "服务器：商品列表、详情、发布、购买以及获取横幅的 API，用 multer 保存图片，用 Sequelize + SQLite 保存数据。"
+    ko: "서버: 상품 목록·상세·등록·구매와 배너 조회 API, multer로 이미지 저장, Sequelize + SQLite로 데이터 저장."
+  - ja: "サーバーを Docker イメージにして Fly.io（東京リージョン）へデプロイする設定を追加しました。"
+    en: "I added configuration to package the server as a Docker image and deploy it to Fly.io (Tokyo region)."
+    zh: "添加了把服务器打包成 Docker 镜像并部署到 Fly.io（东京区域）的配置。"
+    ko: "서버를 Docker 이미지로 만들어 Fly.io(도쿄 리전)에 배포하는 설정을 추가했습니다."
+stack:
+  - name: "React"
+    version: "18.2"
+    purpose:
+      ja: "画面（Create React App）"
+      en: "Frontend (Create React App)"
+      zh: "前端（Create React App）"
+      ko: "화면 (Create React App)"
+  - name: "React Router"
+    version: "5"
+    purpose:
+      ja: "一覧・詳細・登録のページ切り替え"
+      en: "Routing between list, detail, and upload pages"
+      zh: "列表、详情、发布页面之间的切换"
+      ko: "목록·상세·등록 페이지 전환"
+  - name: "Ant Design"
+    version: "5.4"
+    purpose:
+      ja: "フォーム・画像アップロード・バナー・ボタン"
+      en: "Forms, image upload, banner, and buttons"
+      zh: "表单、图片上传、横幅、按钮"
+      ko: "폼·이미지 업로드·배너·버튼"
+  - name: "axios / dayjs"
+    purpose:
+      ja: "API の呼び出しと日時の表示"
+      en: "Calling the API and formatting dates"
+      zh: "调用 API 与显示日期时间"
+      ko: "API 호출과 날짜 표시"
+  - name: "Express"
+    version: "4.18"
+    purpose:
+      ja: "API サーバー"
+      en: "API server"
+      zh: "API 服务器"
+      ko: "API 서버"
+  - name: "Sequelize + SQLite"
+    version: "6.31"
+    purpose:
+      ja: "商品・バナーのデータ"
+      en: "Product and banner data"
+      zh: "商品与横幅数据"
+      ko: "상품·배너 데이터"
+  - name: "multer"
+    version: "1.4"
+    purpose:
+      ja: "画像ファイルの受け取りと保存"
+      en: "Receiving and storing image files"
+      zh: "接收并保存图片文件"
+      ko: "이미지 파일 수신과 저장"
+  - name: "Docker / Fly.io"
+    purpose:
+      ja: "サーバーのデプロイ設定"
+      en: "Server deployment configuration"
+      zh: "服务器的部署配置"
+      ko: "서버 배포 설정"

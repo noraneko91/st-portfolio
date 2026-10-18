@@ -5,10 +5,10 @@ title:
   zh: 编程四格
   ko: 코딩네컷
 summary:
-  ja: 4枚の写真をフォトブース風のフレームに並べた、HTML と CSS だけの静的ページ
-  en: A static page in plain HTML and CSS that arranges four photos in a photo-booth style frame
-  zh: 只用 HTML 和 CSS 制作的静态页面，把四张照片排列在大头贴风格的相框中
-  ko: 사진 4장을 즉석 사진 부스 풍 프레임에 배치한, HTML과 CSS만으로 만든 정적 페이지
+  ja: "4枚の写真をフォトブース風のフレームに並べた、HTML・CSS と少しの JavaScript で作ったページ"
+  en: "A page that arranges four photos in a photo-booth style frame, built with HTML, CSS, and a little JavaScript"
+  zh: "把四张照片排列在大头贴风格相框中的页面，用 HTML、CSS 和少量 JavaScript 制作"
+  ko: "사진 4장을 즉석 사진 부스 풍 프레임에 배치한, HTML·CSS와 약간의 JavaScript로 만든 페이지"
 category: learning
 status: completed
 start: "2023-04"
@@ -16,3 +16,27 @@ end: "2023-04"
 tech: [javascript]
 github:
   - https://github.com/noraneko91/cone
+
+# 詳細の出典: リポジトリのコード (index.html) / 상세 출처: 리포지토리 코드 (index.html)
+overview:
+  - ja: "4枚の写真を縦に並べ、フォトブース（四コマ写真）のフレームのように見せる 1 ページのサイトです。"
+    en: "A single-page site that stacks four photos vertically so they look like a photo-booth strip."
+    zh: "这是一个单页网站，把四张照片竖向排列，看起来像大头贴相框。"
+    ko: "사진 4장을 세로로 배치해 즉석 사진(네컷) 프레임처럼 보여주는 한 페이지 사이트입니다."
+  - ja: "写真にマウスを乗せると説明が表示され、クリックするとメッセージが出ます（JavaScript）。Web フォントは CDN から読み込んでいます。"
+    en: "Hovering over a photo shows its caption, and clicking it shows a message (JavaScript). The web font is loaded from a CDN."
+    zh: "鼠标移到照片上会显示说明，点击会弹出消息（JavaScript）。网页字体从 CDN 加载。"
+    ko: "사진에 마우스를 올리면 설명이 나타나고, 클릭하면 메시지가 나옵니다 (JavaScript). 웹 폰트는 CDN에서 불러옵니다."
+stack:
+  - name: "HTML / CSS"
+    purpose:
+      ja: "フレームと写真の配置、説明の表示・非表示"
+      en: "Frame and photo layout, showing and hiding captions"
+      zh: "相框与照片的布局，说明的显示与隐藏"
+      ko: "프레임과 사진 배치, 설명 표시·숨김"
+  - name: "JavaScript"
+    purpose:
+      ja: "マウス操作に合わせた説明の切り替えとメッセージ"
+      en: "Switching captions on hover and showing messages"
+      zh: "根据鼠标操作切换说明并显示消息"
+      ko: "마우스 조작에 맞춘 설명 전환과 메시지"

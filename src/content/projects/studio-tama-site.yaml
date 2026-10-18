@@ -15,3 +15,88 @@ start: "2026-06"
 tech: [nextjs, react, typescript, tailwind, github-actions]
 github:
   - https://github.com/noraneko91/studio-tama-site
+
+# 詳細の出典: リポジトリのコード (app/・next.config.ts・lib/asset.ts)・package.json・GitHub Actions のワークフロー / 상세 출처: 리포지토리 코드 (app/·next.config.ts·lib/asset.ts)·package.json·GitHub Actions 워크플로
+overview:
+  - ja: "ソウルの空間デザインスタジオ「STUDIO TAMA」のウェブサイトです。トップ・About・Services・Projects・Contact のページで構成しています。"
+    en: "A website for STUDIO TAMA, a spatial design studio in Seoul, with Home, About, Services, Projects, and Contact pages."
+    zh: "这是首尔空间设计工作室“STUDIO TAMA”的网站，由首页、About、Services、Projects、Contact 页面组成。"
+    ko: "서울의 공간 디자인 스튜디오 \"STUDIO TAMA\"의 웹사이트입니다. 메인·About·Services·Projects·Contact 페이지로 구성했습니다."
+  - ja: "Projects はカテゴリ（Retail / F&B）と年で絞り込めます。プロジェクトの詳細では写真を絵はがきの束のように重ねて表示し、マウスホイール・スワイプ・キーボードで 1 枚ずつめくれます。"
+    en: "Projects can be filtered by category (Retail / F&B) and year. On each project page, photos are stacked like a pile of postcards and can be flipped one at a time with the mouse wheel, swipes, or the keyboard."
+    zh: "Projects 可以按类别（Retail / F&B）和年份筛选。项目详情页把照片像一叠明信片一样叠放，可用鼠标滚轮、滑动或键盘一张张翻看。"
+    ko: "Projects는 카테고리(Retail / F&B)와 연도로 거를 수 있습니다. 프로젝트 상세에서는 사진을 엽서 더미처럼 겹쳐 보여주고, 마우스 휠·스와이프·키보드로 한 장씩 넘길 수 있습니다."
+  - ja: "初めて訪れたときだけイントロのアニメーションを流します（動きを減らす設定では省略）。お問い合わせフォームは、入力内容を入れたメールアプリを開く方式です。"
+    en: "An intro animation plays only on the first visit (skipped when reduced motion is on). The contact form opens the mail app with the entered details filled in."
+    zh: "只在首次访问时播放开场动画（开启减少动态效果时省略）。联系表单会打开已填好内容的邮件应用。"
+    ko: "처음 방문했을 때만 인트로 애니메이션을 보여줍니다 (동작 줄이기 설정에서는 생략). 문의 폼은 입력한 내용을 채운 메일 앱을 여는 방식입니다."
+  - ja: "Next.js の静的書き出しで HTML を作り、main ブランチへの push で GitHub Actions が GitHub Pages にデプロイします。"
+    en: "Next.js static export generates the HTML, and GitHub Actions deploys it to GitHub Pages on every push to main."
+    zh: "用 Next.js 的静态导出生成 HTML，推送到 main 分支时由 GitHub Actions 部署到 GitHub Pages。"
+    ko: "Next.js의 정적 export로 HTML을 만들고, main 브랜치에 push하면 GitHub Actions가 GitHub Pages에 배포합니다."
+stack:
+  - name: "Next.js"
+    version: "16.2.9"
+    purpose:
+      ja: "静的書き出し（output: export）とページ構成"
+      en: "Static export (output: export) and page structure"
+      zh: "静态导出（output: export）与页面结构"
+      ko: "정적 export (output: export)와 페이지 구성"
+  - name: "React"
+    version: "19.2.4"
+    purpose:
+      ja: "イントロ・写真ギャラリー・絞り込み・フォームの部品"
+      en: "Intro, photo gallery, filters, and form components"
+      zh: "开场动画、照片画廊、筛选和表单组件"
+      ko: "인트로·사진 갤러리·필터·폼 컴포넌트"
+  - name: "TypeScript"
+    version: "5"
+    purpose:
+      ja: "プロジェクトデータとコンポーネントの型"
+      en: "Types for project data and components"
+      zh: "项目数据与组件的类型"
+      ko: "프로젝트 데이터와 컴포넌트의 타입"
+  - name: "Tailwind CSS"
+    version: "4"
+    purpose:
+      ja: "スタイル"
+      en: "Styling"
+      zh: "样式"
+      ko: "스타일"
+  - name: "GitHub Actions / GitHub Pages"
+    purpose:
+      ja: "push ごとの自動ビルドと公開"
+      en: "Automatic build and publishing on every push"
+      zh: "每次推送自动构建并发布"
+      ko: "push마다 자동 빌드와 공개"
+challenges:
+  - problem:
+      ja: "GitHub Pages ではサイトが /studio-tama-site/ の下に置かれるため、画像のパスがずれる"
+      en: "On GitHub Pages the site lives under /studio-tama-site/, so image paths broke"
+      zh: "在 GitHub Pages 上网站位于 /studio-tama-site/ 之下，导致图片路径出错"
+      ko: "GitHub Pages에서는 사이트가 /studio-tama-site/ 아래에 놓여 이미지 경로가 어긋난다"
+    solution:
+      ja: "デプロイ時だけ basePath を設定し、画像のパスに前置きを付ける関数（asset）を通すようにした"
+      en: "Set basePath only for deployment and route image paths through a helper (asset) that adds the prefix"
+      zh: "只在部署时设置 basePath，并让图片路径经过一个添加前缀的函数（asset）"
+      ko: "배포할 때만 basePath를 설정하고, 이미지 경로에 앞부분을 붙이는 함수(asset)를 거치게 했다"
+  - problem:
+      ja: "サーバーのない GitHub Pages では、カテゴリ・年の絞り込みをサーバーで処理できない"
+      en: "GitHub Pages has no server, so filtering by category and year cannot run server-side"
+      zh: "GitHub Pages 没有服务器，无法在服务器端处理按类别和年份的筛选"
+      ko: "서버가 없는 GitHub Pages에서는 카테고리·연도 필터를 서버에서 처리할 수 없다"
+    solution:
+      ja: "URL のクエリ（?category= ・?year=）をブラウザで読み、一覧をその場で絞り込むようにした"
+      en: "Read the URL query (?category=, ?year=) in the browser and filter the list there"
+      zh: "在浏览器中读取 URL 查询参数（?category=、?year=），当场筛选列表"
+      ko: "URL 쿼리(?category=·?year=)를 브라우저에서 읽어 목록을 바로 거르도록 했다"
+  - problem:
+      ja: "トラックパッドでは細かいスクロールが続けて届き、写真が一気に何枚もめくれてしまう"
+      en: "Trackpads send many small scroll events, flipping through several photos at once"
+      zh: "触控板会连续发送细小的滚动，导致照片一下子翻过好几张"
+      ko: "트랙패드에서는 잘게 나뉜 스크롤이 연달아 들어와 사진이 한꺼번에 여러 장 넘어간다"
+    solution:
+      ja: "ホイールの移動量を貯めて、一定量に達したときに 1 枚だけめくるようにした"
+      en: "Accumulate the wheel delta and flip exactly one photo once it reaches a threshold"
+      zh: "累计滚轮的移动量，达到一定量时只翻一张"
+      ko: "휠 이동량을 모아서 일정량에 도달했을 때 한 장만 넘기도록 했다"
