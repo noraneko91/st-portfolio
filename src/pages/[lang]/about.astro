@@ -1,9 +1,8 @@
 ---
 import PageHero from '../../components/PageHero.astro';
-import Section from '../../components/Section.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
-import { formatYearMonth, formatYears, getCareers, getProfile, getTotalCareerMonths } from '../../lib/content';
+import { getProfile } from '../../lib/content';
 
 export function getStaticPaths() {
   return getLangStaticPaths();
@@ -13,31 +12,18 @@ const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
 
 const profile = await getProfile();
-const careers = await getCareers();
-const totalMonths = await getTotalCareerMonths();
-const firstStart = careers.at(-1)?.data.start;
 ---
 
 <BaseLayout lang={lang} title={t('about.title')} description={t('about.description')}>
+  {/* 見出しの面とプロフィールを 1 つにまとめる (Home のプロフィールタイルがそのまま広がる形) / 제목 면과 프로필을 하나로 합친다 (Home 프로필 타일이 그대로 넓어지는 모양) */}
   <PageHero tile="profile">
-    <h1 class="text-title mb-3">{t('about.title')}</h1>
-    <p class="max-w-[var(--measure)] text-muted">{t('about.description')}</p>
-  </PageHero>
-
-  <Section index={1} label={t('about.section.profile')} id="profile">
-    <p class="text-2xl font-bold">{profile.displayName}</p>
+    <p class="eyebrow font-mono">{t('about.title')}</p>
+    <h1 class="text-title">{profile.displayName}</h1>
     <p class="text-muted">{profile.title[lang]}</p>
-    <div class="mt-6 space-y-4">
+    <div class="intro mt-6 space-y-4">
       {profile.intro.map((paragraph) => <p>{paragraph[lang]}</p>)}
     </div>
     <dl class="kv mt-8">
-      <div>
-        <dt>{t('profile.experience')}</dt>
-        <dd>
-          {formatYears(totalMonths, t)}
-          {firstStart && <span class="ms-2 text-muted">{t('unit.since', { date: formatYearMonth(firstStart, lang) })}</span>}
-        </dd>
-      </div>
       <div>
         <dt>{t('profile.location')}</dt>
         <dd>{profile.location[lang]}</dd>
@@ -55,5 +41,20 @@ const firstStart = careers.at(-1)?.data.start;
         </dd>
       </div>
     </dl>
-  </Section>
+  </PageHero>
 </BaseLayout>
+
+<style>
+  .eyebrow {
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* 中心のメッセージなので、本文より少し大きく / 핵심 메시지라서 본문보다 조금 크게 */
+  .intro {
+    max-width: var(--measure);
+    font-size: 1.0625rem;
+  }
+</style>
