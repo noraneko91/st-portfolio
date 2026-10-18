@@ -3,9 +3,11 @@ interface Props {
   // skills.yaml の id / skills.yaml의 id
   id: string;
   name: string;
+  // sm: チップの中に入れる小さいサイズ / sm: 칩 안에 넣는 작은 크기
+  size?: 'md' | 'sm';
 }
 
-const { id, name } = Astro.props;
+const { id, name, size = 'md' } = Astro.props;
 
 // src/assets/skills/<id>.svg (Devicon) か <id>.png (Devicon にないもの) があればロゴ、どちらもなければ頭文字のバッジ
 // src/assets/skills/<id>.svg (Devicon)나 <id>.png (Devicon에 없는 것)가 있으면 로고, 둘 다 없으면 머리글자 배지
@@ -15,7 +17,7 @@ const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 3);
 ---
 
 {/* 名前は隣に文字で書くので、ロゴは装飾として読み上げない / 이름은 옆에 글자로 쓰므로 로고는 장식으로 읽지 않는다 */}
-<span class="logo" aria-hidden="true">
+<span class:list={['logo', { 'logo-sm': size === 'sm' }]} aria-hidden="true">
   {src ? <img src={src} alt="" width="20" height="20" loading="lazy" decoding="async" /> : <span class="initials">{initials}</span>}
 </span>
 
@@ -37,6 +39,21 @@ const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 3);
     width: 1.25rem;
     height: 1.25rem;
     object-fit: contain;
+  }
+
+  .logo-sm {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 6px;
+  }
+
+  .logo-sm img {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .logo-sm .initials {
+    font-size: 0.4375rem;
   }
 
   .initials {
