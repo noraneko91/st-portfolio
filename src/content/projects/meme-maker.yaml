@@ -20,8 +20,6 @@ duration:
   zh: "约 1 天"
   ko: "약 하루"
 tech: [javascript]
-github:
-  - https://github.com/noraneko91/meme-maker
 
 # 詳細の出典: リポジトリのコード (index.html・app.js) / 상세 출처: 리포지토리 코드 (index.html·app.js)
 overview:

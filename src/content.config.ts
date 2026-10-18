@@ -92,7 +92,8 @@ const projects = defineCollection({
     duration: localized.optional(),
     // skills.yaml の id を参照 / skills.yaml의 id를 참조
     tech: z.array(reference('skills')).default([]),
-    github: z.array(z.url()).min(1),
+    // 公開リポジトリがないもの (講座の練習など) は書かない / 공개 리포지토리가 없는 것 (강좌 연습 등)은 쓰지 않는다
+    github: z.array(z.url()).default([]),
     demo: z.url().optional(),
     // 一覧のサムネイル。省略するとパスから表紙を自動で作る / 목록 썸네일. 생략하면 경로로 표지를 자동으로 만든다
     thumbnail: z.object({ src: text, alt: localized }).optional(),

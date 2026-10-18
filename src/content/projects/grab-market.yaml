@@ -21,9 +21,6 @@ duration:
   zh: "约 1 周"
   ko: "약 1주일"
 tech: [react, javascript, express, sqlite, docker]
-github:
-  - https://github.com/noraneko91/grab-market-client
-  - https://github.com/noraneko91/grab-market-server
 
 # 詳細の出典: 2 つのリポジトリの package.json・ソースコード・Dockerfile・fly.toml・コミット履歴 / 상세 출처: 두 리포지토리의 package.json·소스 코드·Dockerfile·fly.toml·커밋 이력
 overview:
