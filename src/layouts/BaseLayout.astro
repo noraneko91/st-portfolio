@@ -12,7 +12,7 @@ interface Props {
   // 省略時はサイト名のみ（ホーム用） / 생략하면 사이트 이름만 (홈용)
   title?: string;
   description: string;
-  // Home は 1 画面に収めるため余白を詰め、背景の床を動かす / Home은 한 화면에 담기 위해 여백을 줄이고 배경 바닥을 움직인다
+  // Home は 1 画面に収めるため余白を詰める / Home은 한 화면에 담기 위해 여백을 줄인다
   home?: boolean;
 }
 
@@ -62,7 +62,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
   </head>
   {/* 本文が短いページでもフッターを画面の下端に置く / 본문이 짧은 페이지에서도 푸터를 화면 아래 끝에 둔다 */}
   <body class="flex min-h-dvh flex-col">
-    <DepthBackground animate={home} />
+    <DepthBackground />
     <Header lang={lang} />
     <main id="main" class:list={['wrapper flex-1', home ? 'page-main-home' : 'page-main']}>
       <slot />

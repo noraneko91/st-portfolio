@@ -1,14 +1,5 @@
----
-interface Props {
-  // 床を流すのは Home だけ。本文を読むページでは動きで気が散らないように止める / 바닥을 흘리는 것은 Home만. 본문을 읽는 페이지에서는 움직임으로 산만하지 않게 멈춘다
-  animate?: boolean;
-}
-
-const { animate = false } = Astro.props;
----
-
 {/* 奥行きのある背景 (装飾のみ。CSS の perspective だけで描き、JS・画像は使わない。ADR 0007) / 깊이감 있는 배경 (장식만. CSS perspective만으로 그리고 JS·이미지는 쓰지 않는다. ADR 0007) */}
-<div class:list={['depth', { 'depth-animate': animate }]} aria-hidden="true">
+<div class="depth" aria-hidden="true">
   <div class="depth-sky"></div>
   <div class="depth-floor"><div class="depth-lines"></div></div>
 </div>
@@ -43,11 +34,6 @@ const { animate = false } = Astro.props;
     mask-image: linear-gradient(to bottom, transparent, #000 35%);
   }
 
-  /* 本文を読むページでは床を薄くする (動かさない) / 본문을 읽는 페이지에서는 바닥을 옅게 한다 (움직이지 않는다) */
-  .depth:not(.depth-animate) .depth-floor {
-    opacity: 0.4;
-  }
-
   /* 1 マス分だけ上にはみ出させておき、その分を動かして繰り返すと切れ目なく流れる / 한 칸만큼 위로 삐져나오게 두고, 그만큼 움직여 반복하면 끊김 없이 흐른다 */
   .depth-lines {
     position: absolute;
@@ -59,7 +45,7 @@ const { animate = false } = Astro.props;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .depth-animate .depth-lines {
+    .depth-lines {
       animation: depth-flow 6s linear infinite;
     }
   }
