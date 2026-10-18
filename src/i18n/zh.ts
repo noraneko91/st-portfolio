@@ -12,7 +12,6 @@ export const zh: Translation = {
   'contact.title': '联系方式',
   'contact.description': '联系方式说明。',
 
-  'about.section.strengths': '擅长领域',
   'profile.experience': '工作年限',
   'profile.location': '所在地',
   'profile.languages': '语言',

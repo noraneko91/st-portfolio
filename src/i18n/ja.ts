@@ -11,7 +11,6 @@ export const ja = {
   'contact.title': 'お問い合わせ',
   'contact.description': '連絡先のご案内です。',
 
-  'about.section.strengths': '得意分野',
   'profile.experience': '経験年数',
   'profile.location': '拠点',
   'profile.languages': '言語',

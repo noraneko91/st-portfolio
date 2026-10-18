@@ -12,7 +12,6 @@ export const ko: Translation = {
   'contact.title': '문의',
   'contact.description': '연락처 안내입니다.',
 
-  'about.section.strengths': '강점 분야',
   'profile.experience': '경력 연수',
   'profile.location': '거점',
   'profile.languages': '언어',

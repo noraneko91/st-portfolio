@@ -12,7 +12,6 @@ export const en: Translation = {
   'contact.title': 'Contact',
   'contact.description': 'How to get in touch.',
 
-  'about.section.strengths': 'Strengths',
   'profile.experience': 'Experience',
   'profile.location': 'Based in',
   'profile.languages': 'Languages',

@@ -57,13 +57,7 @@ const firstStart = careers.at(-1)?.data.start;
     </dl>
   </Section>
 
-  <Section index={2} label={t('about.section.strengths')} id="strengths">
-    <ul class="bullets">
-      {profile.strengths.map((strength) => <li>{strength[lang]}</li>)}
-    </ul>
-  </Section>
-
-  <Section index={3} label={t('about.section.growth')} id="growth">
+  <Section index={2} label={t('about.section.growth')} id="growth">
     <div class="growth space-y-4">
       {profile.growth.map((paragraph) => <p>{paragraph[lang]}</p>)}
     </div>
