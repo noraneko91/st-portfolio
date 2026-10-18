@@ -119,6 +119,8 @@ export const ko: Translation = {
   'skills.usage.careers': '경력 {n}건',
   'skills.usage.projects': '개인 개발 {n}건',
 
+  'about.terminal': '프로필 요약',
+
   'notFound.title': '페이지를 찾을 수 없습니다',
   'notFound.message': '찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다.',
   'notFound.home': '홈으로 돌아가기',

@@ -17,34 +17,70 @@ const profile = await getProfile();
 <BaseLayout lang={lang} title={t('about.title')} description={t('about.description')}>
   {/* 見出しの面とプロフィールを 1 つにまとめる (Home のプロフィールタイルがそのまま広がる形) / 제목 면과 프로필을 하나로 합친다 (Home 프로필 타일이 그대로 넓어지는 모양) */}
   <PageHero tile="profile">
-    <p class="eyebrow font-mono">{t('about.title')}</p>
-    <h1 class="text-title">{profile.displayName}</h1>
-    <p class="text-muted">{profile.title[lang]}</p>
-    <div class="intro mt-6 space-y-4">
-      {profile.intro.map((paragraph) => <p>{paragraph[lang]}</p>)}
+    <div class="profile">
+      <div>
+        <p class="eyebrow font-mono">{t('about.title')}</p>
+        <h1 class="text-title">{profile.displayName}</h1>
+        <p class="text-muted">{profile.title[lang]}</p>
+        <div class="intro mt-6 space-y-4">
+          {profile.intro.map((paragraph) => <p>{paragraph[lang]}</p>)}
+        </div>
+      </div>
+
+      {/*
+        拠点・言語をターミナル風に見せる (画像を使わず文字で描くので、読み上げ・翻訳・ダークモードにそのまま対応)
+        거점·언어를 터미널 풍으로 보여준다 (이미지 없이 글자로 그리므로 스크린리더·번역·다크모드에 그대로 대응)
+      */}
+      <figure class="terminal" aria-label={t('about.terminal')}>
+        <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="terminal-body font-mono">
+          <p class="line" style="--i: 0" aria-hidden="true"><span class="prompt">~ $</span> whoami</p>
+          <p class="line output" style="--i: 1" aria-hidden="true">{profile.displayName.toLowerCase().replace(' ', '-')}</p>
+          <p class="line" style="--i: 2" aria-hidden="true"><span class="prompt">~ $</span> cat profile.yaml</p>
+          <dl class="line output" style="--i: 3">
+            <div>
+              <dt>{t('profile.location')}:</dt>
+              <dd>{profile.location[lang]}</dd>
+            </div>
+            <div>
+              <dt>{t('profile.languages')}:</dt>
+              <dd>
+                <ul>
+                  {
+                    profile.languages.map((language) => (
+                      <li>
+                        <span aria-hidden="true">- </span>
+                        {language.name[lang]}
+                        {language.level && <span class="level">{` (${language.level[lang]})`}</span>}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </dd>
+            </div>
+          </dl>
+          <p class="line" style="--i: 4" aria-hidden="true"><span class="prompt">~ $</span> <span class="caret"></span></p>
+        </div>
+      </figure>
     </div>
-    <dl class="kv mt-8">
-      <div>
-        <dt>{t('profile.location')}</dt>
-        <dd>{profile.location[lang]}</dd>
-      </div>
-      <div>
-        <dt>{t('profile.languages')}</dt>
-        <dd>
-          <ul>
-            {
-              profile.languages.map((language) => (
-                <li>{language.level ? `${language.name[lang]} — ${language.level[lang]}` : language.name[lang]}</li>
-              ))
-            }
-          </ul>
-        </dd>
-      </div>
-    </dl>
   </PageHero>
 </BaseLayout>
 
 <style>
+  .profile {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* PC では自己紹介とターミナルを左右に並べ、面の右側の空白を埋める / PC에서는 자기소개와 터미널을 좌우로 배치해 면 오른쪽 여백을 채운다 */
+  @media (min-width: 64rem) {
+    .profile {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 3rem;
+    }
+  }
+
   .eyebrow {
     margin-bottom: 0.5rem;
     font-size: 0.8125rem;
@@ -52,9 +88,104 @@ const profile = await getProfile();
     color: var(--muted);
   }
 
-  /* 中心のメッセージなので、本文より少し大きく / 핵심 메시지라서 본문보다 조금 크게 */
   .intro {
     max-width: var(--measure);
     font-size: 1.0625rem;
+  }
+
+  /* ---- ターミナル (ライト・ダークとも暗い配色で、面の中で目立たせる) / 터미널 (라이트·다크 모두 어두운 색으로 면 안에서 눈에 띄게) ---- */
+  .terminal {
+    --term-bg: #15161c;
+    --term-text: #e8e6e1;
+    --term-muted: #a3a19a;
+    --term-accent: #9aa6ff;
+
+    overflow: hidden;
+    border: 1px solid #2f3040;
+    border-radius: var(--radius);
+    background: var(--term-bg);
+    color: var(--term-text);
+    box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.45);
+  }
+
+  .terminal-bar {
+    display: flex;
+    gap: 0.375rem;
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid #2a2b36;
+  }
+
+  .terminal-bar span {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: #3a3b48;
+  }
+
+  .terminal-body {
+    display: grid;
+    gap: 0.375rem;
+    padding: 1.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+
+  .prompt {
+    margin-inline-end: 0.25rem;
+    color: var(--term-accent);
+  }
+
+  .output {
+    padding-inline-start: 1rem;
+  }
+
+  .terminal dl {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .terminal dt {
+    color: var(--term-accent);
+  }
+
+  .terminal dd {
+    padding-inline-start: 1rem;
+  }
+
+  .level {
+    color: var(--term-muted);
+  }
+
+  .caret {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1em;
+    vertical-align: text-bottom;
+    background: var(--term-text);
+  }
+
+  /* 行が順に流れ込む (位置だけ動かし、文字の濃さは変えない) / 행이 차례로 흘러들어온다 (위치만 움직이고 글자 농도는 바꾸지 않는다) */
+  @media (prefers-reduced-motion: no-preference) {
+    .line {
+      animation: line-in 400ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(var(--i) * 140ms + 250ms);
+    }
+
+    .caret {
+      animation: blink 1s steps(1) infinite;
+    }
+  }
+
+  @keyframes line-in {
+    from {
+      transform: translateX(-0.75rem);
+    }
+  }
+
+  /* カーソルは装飾なので点滅させてよい / 커서는 장식이므로 깜박여도 된다 */
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
 </style>

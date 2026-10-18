@@ -119,6 +119,8 @@ export const zh: Translation = {
   'skills.usage.careers': '经历 {n} 段',
   'skills.usage.projects': '个人开发 {n} 项',
 
+  'about.terminal': '个人简介摘要',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',

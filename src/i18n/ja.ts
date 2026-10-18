@@ -118,6 +118,8 @@ export const ja = {
   'skills.usage.careers': '経歴 {n}件',
   'skills.usage.projects': '個人開発 {n}件',
 
+  'about.terminal': 'プロフィールの要約',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',
