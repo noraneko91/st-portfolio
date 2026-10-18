@@ -13,6 +13,12 @@ category: learning
 status: completed
 start: "2023-04"
 end: "2023-04"
+# 実際にかかった期間の目安 / 실제로 걸린 기간의 기준
+duration:
+  ja: "1日"
+  en: "one day"
+  zh: "1 天"
+  ko: "하루"
 tech: [javascript]
 github:
   - https://github.com/noraneko91/cone

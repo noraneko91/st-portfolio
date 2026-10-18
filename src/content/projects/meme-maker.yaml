@@ -1,23 +1,34 @@
-# 出典: リポジトリのコード (index.html・app.js) / 출처: 리포지토리 코드 (index.html·app.js)
+# 出典: リポジトリのコード (index.html・app.js)。ノマドコーダーの YouTube 講座に沿って作った (本人の説明) / 출처: 리포지토리 코드 (index.html·app.js). 노마드 코더의 YouTube 강좌를 따라 만들었다 (본인 설명)
 title:
   ja: Meme Maker（お絵描きアプリ）
   en: Meme Maker (drawing app)
   zh: Meme Maker（绘图应用）
   ko: Meme Maker (그림 그리기 앱)
 summary:
-  ja: Canvas API で線の描画・塗りつぶし・消しゴム・画像の読み込み・文字の追加・保存ができるブラウザのお絵描きアプリ
-  en: A browser drawing app built on the Canvas API with drawing, fill, eraser, image loading, text, and save
-  zh: 基于 Canvas API 的浏览器绘图应用，支持画线、填充、橡皮擦、加载图片、添加文字和保存
-  ko: Canvas API로 선 그리기·채우기·지우개·이미지 불러오기·글자 넣기·저장을 할 수 있는 브라우저 그림 그리기 앱
+  ja: ノマドコーダー（Nomad Coders）の YouTube 講座に沿って作った、Canvas API のお絵描きアプリ。線の描画・塗りつぶし・消しゴム・画像の読み込み・文字の追加・保存ができる
+  en: A Canvas API drawing app built while following a Nomad Coders YouTube course, with drawing, fill, eraser, image loading, text, and save
+  zh: 跟随 Nomad Coders 的 YouTube 课程制作的 Canvas API 绘图应用，支持画线、填充、橡皮擦、加载图片、添加文字和保存
+  ko: 노마드 코더(Nomad Coders)의 YouTube 강좌를 따라 만든 Canvas API 그림 그리기 앱. 선 그리기·채우기·지우개·이미지 불러오기·글자 넣기·저장을 할 수 있다
 category: learning
 status: completed
 start: "2022-09"
+end: "2022-09"
+# 実際にかかった期間の目安 / 실제로 걸린 기간의 기준
+duration:
+  ja: "約1日"
+  en: "about a day"
+  zh: "约 1 天"
+  ko: "약 하루"
 tech: [javascript]
 github:
   - https://github.com/noraneko91/meme-maker
 
 # 詳細の出典: リポジトリのコード (index.html・app.js) / 상세 출처: 리포지토리 코드 (index.html·app.js)
 overview:
+  - ja: "YouTube チャンネル「ノマドコーダー」の講座を見ながら、学習用に作りました。"
+    en: "I built this for practice while following a course on the Nomad Coders YouTube channel."
+    zh: "这是我边看 YouTube 频道“Nomad Coders”的课程边做的练习项目。"
+    ko: "YouTube 채널 \"노마드 코더\"의 강좌를 보면서 공부용으로 만들었습니다."
   - ja: "Canvas API を使った、ブラウザで動くお絵描きアプリです。800×800 のキャンバスに線を描き、塗りつぶし・消しゴム・全消去ができます。"
     en: "A drawing app that runs in the browser, built on the Canvas API. You can draw lines on an 800×800 canvas, fill it, erase, and clear everything."
     zh: "这是一个基于 Canvas API、在浏览器中运行的绘图应用。可以在 800×800 的画布上画线，也可以填充、擦除和全部清除。"

@@ -88,6 +88,8 @@ const projects = defineCollection({
     draft: z.boolean().default(false),
     start: yearMonth,
     end: yearMonth.optional(),
+    // 期間が年月では表せないほど短いとき (例: 約1日) に添える / 기간이 연월로는 나타낼 수 없을 만큼 짧을 때 (예: 약 하루) 덧붙인다
+    duration: localized.optional(),
     // skills.yaml の id を参照 / skills.yaml의 id를 참조
     tech: z.array(reference('skills')).default([]),
     github: z.array(z.url()).min(1),
