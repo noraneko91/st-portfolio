@@ -1,6 +1,6 @@
 ---
 import MiniCareerGraph from '../../components/MiniCareerGraph.astro';
-import ProjectCover from '../../components/ProjectCover.astro';
+import SkillLogo from '../../components/SkillLogo.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAlternatePath, getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import {
@@ -31,7 +31,7 @@ const [profile, careers, projects, skills, totalMonths, skillNames] = await Prom
 ]);
 
 const featured = skills.filter(({ skill }) => skill.data.featured);
-const latestProject = projects[0];
+const latestProjects = projects.slice(0, 2);
 
 // 成長の流れ: バックエンド → クラウド → フロントエンド (挑戦中)。技術名は skills.yaml から引く
 // 성장 경로: 백엔드 → 클라우드 → 프런트엔드 (도전 중). 기술명은 skills.yaml에서 가져온다
@@ -97,17 +97,28 @@ const path = [
         <a class="card-link" href={getAlternatePath(lang, 'projects/personal')}>{t('projects.tab.personal')}</a>
         <span class="tile-count">{t('home.card.projects', { n: projects.length })}</span>
       </h2>
-      {
-        latestProject && (
-          <>
-            <div class="tile-cover">
-              <ProjectCover project={latestProject} lang={lang} />
-            </div>
-            <p class="tile-project">{latestProject.data.title[lang]}</p>
-            <p class="tile-summary">{latestProject.data.summary[lang]}</p>
-          </>
-        )
-      }
+      {/* 個人開発の一覧と同じ「ターミナルの小さなウィンドウ」で新しい 2 件を見せる (タイル全体が一覧へのリンク) / 개인 개발 목록과 같은 "터미널의 작은 창"으로 최신 2건을 보여준다 (타일 전체가 목록 링크) */}
+      <ul class="mini-windows">
+        {
+          latestProjects.map((project) => (
+            <li class="mini-window">
+              <div class="window-bar" aria-hidden="true">
+                <span class="dots"><span /><span /><span /></span>
+                <span class="window-path font-mono">{`~/projects/${project.id}`}</span>
+              </div>
+              <div class="window-body">
+                <p class="tile-project">{project.data.title[lang]}</p>
+                <p class="tile-summary">{project.data.summary[lang]}</p>
+                <p class="window-logos">
+                  {project.data.tech.slice(0, 5).map((ref) => (
+                    <SkillLogo id={ref.id} name={skillNames.get(ref.id) ?? ref.id} size="sm" />
+                  ))}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
       <span class="tile-arrow" aria-hidden="true">→</span>
     </div>
 
@@ -375,19 +386,62 @@ const path = [
     white-space: nowrap;
   }
 
-  /* ---- 個人開発 / 개인 개발 ---- */
-  .tile-cover {
+  /* ---- 個人開発 (一覧と同じウィンドウ型) / 개인 개발 (목록과 같은 창 모양) ---- */
+  .mini-windows {
+    display: grid;
+    gap: 0.625rem;
+  }
+
+  .mini-window {
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: 10px;
+    background: var(--bg);
   }
 
-  .tile-cover :global(.cover-path) {
-    font-size: 0.9375rem;
+  .window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.375rem 0.75rem;
+    background: #15161c;
+    color: #a3a19a;
+  }
+
+  .dots {
+    display: flex;
+    flex: none;
+    gap: 0.25rem;
+  }
+
+  .dots span {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%;
+    background: #3a3b48;
+  }
+
+  .window-path {
+    overflow: hidden;
+    font-size: 0.6875rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .window-body {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.625rem 0.75rem 0.75rem;
+  }
+
+  .window-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
   }
 
   .tile-project {
-    margin-top: 0.25rem;
     font-weight: 700;
     line-height: 1.5;
   }
@@ -400,20 +454,6 @@ const path = [
     color: var(--muted);
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-  }
-
-  /* PC では表紙をタイルの残りの高さに合わせる / PC에서는 표지를 타일의 남은 높이에 맞춘다 */
-  @media (min-width: 64rem) and (min-height: 40rem) {
-    .tile-cover {
-      flex: 1;
-      min-height: 0;
-    }
-
-    .tile-cover :global(.cover) {
-      height: 100%;
-      aspect-ratio: auto;
-      border-bottom: 0;
-    }
   }
 
   /* ---- お問い合わせ / 문의 ---- */
