@@ -22,14 +22,18 @@ main:
   # About の自己紹介。中心のメッセージ: バックエンドから始め、クラウドを含むフルスタックへ (1 段落目は Home のプロフィールにも出る)
   # About의 자기소개. 핵심 메시지: 백엔드에서 시작해 클라우드를 포함한 풀스택으로 (1문단은 Home 프로필에도 표시)
   intro:
-    - ja: バックエンド開発から始まったキャリアを土台に、いまはクラウドを含めたフルスタックエンジニアを目指して歩みを進めています。
-      en: Building on a career that began in backend development, I am now working toward becoming a full-stack engineer, cloud included.
-      zh: 以从后端开发起步的经历为基础，我正朝着包括云在内的全栈工程师稳步前进。
-      ko: 백엔드 개발로 시작한 경력을 바탕으로, 지금은 클라우드를 포함한 풀스택 엔지니어를 향해 나아가고 있습니다.
-    - ja: 業務では AWS のサーバーレス開発を、個人開発ではフロントエンドやインフラまで自分で設計・構築し、学んだことをこのサイトとプロジェクトに形として残しています。
-      en: At work I build serverless systems on AWS, and in personal projects I design and build everything from the frontend to the infrastructure myself, leaving what I learn in shape on this site and in my projects.
-      zh: 在工作中我从事 AWS 无服务器开发，在个人开发中则从前端到基础设施都亲自设计和构建，并把学到的东西留在这个网站和项目中。
-      ko: 업무에서는 AWS 서버리스 개발을, 개인 개발에서는 프런트엔드부터 인프라까지 직접 설계·구축하며, 배운 것을 이 사이트와 프로젝트에 형태로 남기고 있습니다.
+    - ja: Java・Pythonを中心としたバックエンド開発や、AWSを活用したクラウド開発など、さまざまなシステム開発に携わってきました。
+      en: I have worked on a wide range of system development, centered on backend development with Java and Python and cloud development using AWS.
+      zh: 我参与过以 Java 和 Python 为中心的后端开发、运用 AWS 的云开发等多种系统开发。
+      ko: Java·Python을 중심으로 한 백엔드 개발과 AWS를 활용한 클라우드 개발 등 다양한 시스템 개발에 참여해 왔습니다.
+    - ja: チームリーダーとしての経験も活かし、メンバーとのコミュニケーションや協力を大切にしながら、課題解決とプロジェクトの円滑な推進に取り組んでいます。
+      en: Drawing on my experience as a team leader, I value communication and collaboration with team members while working to solve problems and keep projects moving smoothly.
+      zh: 我也会发挥担任团队负责人的经验，重视与成员的沟通与协作，致力于解决问题并推动项目顺利进行。
+      ko: 팀 리더로서의 경험도 살려, 멤버와의 소통과 협력을 소중히 하며 과제 해결과 프로젝트의 원활한 추진에 힘쓰고 있습니다.
+    - ja: また、新しい技術を積極的に学び、実践することを大切にしています。これまで培ってきたバックエンド・クラウド領域の経験を強みに、フロントエンドにも挑戦し、システム全体を見渡せるフルスタックエンジニアを目指しています。
+      en: I also make a point of actively learning new technologies and putting them into practice. Building on my experience in backend and cloud, I am taking on frontend development as well, aiming to become a full-stack engineer who can see the whole system.
+      zh: 此外，我重视积极学习并实践新技术。以积累至今的后端与云领域经验为优势，我也在挑战前端开发，目标是成为能够通观整个系统的全栈工程师。
+      ko: 또한 새로운 기술을 적극적으로 배우고 실천하는 것을 중요하게 여깁니다. 지금까지 쌓아 온 백엔드·클라우드 분야의 경험을 강점으로 프런트엔드에도 도전하며, 시스템 전체를 볼 수 있는 풀스택 엔지니어를 목표로 하고 있습니다.
   languages:
     - name:
         ja: 韓国語
