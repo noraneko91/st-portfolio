@@ -15,6 +15,7 @@
 - **翻訳漏れをビルドで検出**: 日本語を基準に他言語を型で縛り、キーやコンテンツの訳が1つでも欠けるとビルドが失敗する
 - **データとページの分離**: 経歴・スキル・プロジェクトは YAML で管理し、ページは表示だけを担当。スキルごとに使った経歴・個人開発の件数を自動で数える
 - **Home のベントーと変形遷移**: Home の 1 画面に各ページの中身をタイルで並べ、タイルを押すとページの見出しへ形が変わって移る（ページ間 View Transitions。JS 不要、非対応ブラウザは通常の移動）。背景は CSS の perspective で描いた遠近グリッド
+- **ダークモード切り替え**: 普段は OS の設定に従い、ヘッダーのボタンで選ぶと保存して次回以降も保つ（描画前に適用するので読み込み時に点滅しない）
 - **スキル × 経歴グラフ**: 経歴・個人開発とスキルのつながりを線で示し、選ぶと強調する（TypeScript、キーボード操作・読み上げ対応）
 - **コマンドパレット**: Ctrl/⌘+K でページ移動・言語切替・GitHub を検索（React island + shadcn/ui）。React は初めて開くときだけ読み込む
 - **静的サイト**: DB・サーバーなし。GitHub への push で Cloudflare Workers に自動デプロイ
@@ -31,6 +32,7 @@
 | UI 部品 | React（islands）+ shadcn/ui（cmdk・Radix） | React 19.3.1 |
 | ホスティング | Cloudflare Workers（Static Assets） | wrangler 4.151.1 |
 | sitemap | @astrojs/sitemap | 3.7.4 |
+| スキルのロゴ | Devicon（SVG を `src/assets/skills/` に複製、MIT） | 2.16.0 |
 | ランタイム | Node.js | 24.16.0（`.nvmrc`） |
 
 ## 設計判断（ADR）
@@ -50,9 +52,9 @@
 | ページ | URL | 内容 |
 |---|---|---|
 | Home | `/{lang}/` | 各ページの中身をタイルで並べた入口（ベントーグリッド） |
-| About | `/{lang}/about/` | 自己紹介（経歴の土台と、クラウドを含むフルスタックへの方向） |
-| Skills | `/{lang}/skills/` | スキル（使った経歴・個人開発の件数）・資格・スキル × 経歴グラフ |
-| Projects: 業務経歴 | `/{lang}/projects/work/` | 経歴（git log 風タイムライン） |
+| About | `/{lang}/about/` | 自己紹介と、拠点・言語（ターミナル風の表示） |
+| Skills | `/{lang}/skills/` | スキル（ロゴと、使った経歴・個人開発の件数）・資格・スキル × 経歴グラフ |
+| Projects: 業務経歴 | `/{lang}/projects/work/` | 経歴のタイムライン |
 | Projects: 個人開発 | `/{lang}/projects/personal/` | 個人開発の一覧と詳細（`/{lang}/projects/personal/<slug>/`） |
 | Contact | `/{lang}/contact/` | 連絡先 |
 
@@ -71,8 +73,9 @@ src/
     career/           # 経歴（1件 = 1ファイル）
     projects/         # 個人開発（1件 = 1ファイル、ファイル名が URL の slug）
   content.config.ts   # コンテンツのスキーマ（zod）
+  assets/skills/      # スキルのロゴ（出典・ライセンスは同じフォルダの README.md）
   i18n/               # UI の文言（ja.ts が基準）と言語のヘルパー
-  lib/                # コンテンツの取得・期間計算
+  lib/                # コンテンツの取得・期間計算・ページ見出しのドット絵・テーマ
   components/         # ヘッダー・言語メニュー・セクションなど
     ui/               # shadcn/ui の部品（配色変数に合わせて調整）
     command/          # コマンドパレット（React island）
@@ -80,7 +83,7 @@ src/
   pages/
     index.astro       # ルート: 言語を判定して /{lang}/ へ移動
     [lang]/           # 言語別のページ
-  styles/global.css   # 配色（CSS 変数）・フォント・余白
+  styles/global.css   # 配色（ライト・ダークの CSS 変数）・フォント・余白
 docs/                 # プロジェクト概要・ADR
 public/               # favicon・OGP 画像など
 scripts/brand/        # favicon・OGP 画像の原本（SVG）と生成スクリプト
@@ -124,4 +127,4 @@ npm run brand      # Chrome の場所が異なる場合は CHROME_PATH で指定
 npm run new:project todo-app   # src/content/projects/todo-app.yaml を draft: true で作成
 ```
 
-TODO を埋め、`tech` に `skills.yaml` の id を書いて `draft: false` にすると一覧に表示されます。`overview` を書くと詳細ページも作られます。`skills.yaml` にない id を書くと `npm run build` が失敗します。
+ひな形の TODO を埋め、`tech` に `skills.yaml` の id を書いて `draft: false` にすると一覧に表示されます。`overview` を書くと詳細ページも作られます。講座に沿って作ったものは `category: learning` にし、期間が年月で表せないほど短いときは `duration`（例: 約1日）を添えます。`skills.yaml` にない id を書くと `npm run build` が失敗します。
