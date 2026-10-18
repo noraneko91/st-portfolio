@@ -1,6 +1,7 @@
 start: "2021-07"
 end: "2023-06"
-role: se
+# 最初は SE、約1年後からサブリーダー / 처음에는 SE, 약 1년 뒤부터 서브리더
+role: [se, sl]
 industry:
   ja: 住宅ローン
   en: Housing loans
@@ -33,9 +34,5 @@ duties:
     en: Unit testing
     zh: 单元测试
     ko: 단위 테스트
-scale:
-  classes: 500
-  tables: 100
-  team: 15
 tech: [java, jsp, struts, oracle, svn]
 phases: [basic-design, detailed-design, implementation, unit-test, integration-test]

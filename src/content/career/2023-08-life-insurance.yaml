@@ -1,6 +1,6 @@
 start: "2023-08"
 end: "2026-09"
-role: sl
+role: se
 industry:
   ja: 生命保険
   en: Life insurance
@@ -41,9 +41,5 @@ duties:
     en: Building VBA tools and writing test specifications and scenarios
     zh: 制作VBA工具，编写测试规格书及测试场景
     ko: VBA 도구 제작, 테스트 사양서·테스트 시나리오 작성
-scale:
-  classes: 1000
-  tables: 200
-  team: 10
 tech: [python, vba, aws, oracle, git, uft-one]
 phases: [requirements, research, basic-design, detailed-design, implementation, unit-test, integration-test]

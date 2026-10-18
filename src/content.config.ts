@@ -51,24 +51,20 @@ const skills = defineCollection({
   }),
 });
 
+const roles = ['sl', 'se', 'pg'] as const;
+
 const career = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/career' }),
   schema: z.object({
     start: yearMonth,
     // 省略すると「現在」 / 생략하면 "현재"
     end: yearMonth.optional(),
-    role: z.enum(['sl', 'se', 'pg']),
+    // 途中で役割が変わった場合は配列で古い順に書く (例: [se, sl]) / 도중에 역할이 바뀐 경우는 배열로 오래된 순으로 쓴다 (예: [se, sl])
+    role: z.union([z.enum(roles), z.array(z.enum(roles)).min(1)]),
     industry: localized,
     title: localized,
     summary: z.array(localized).default([]),
     duties: z.array(localized),
-    scale: z
-      .object({
-        classes: z.number().int().positive().optional(),
-        tables: z.number().int().positive().optional(),
-        team: z.number().int().positive().optional(),
-      })
-      .default({}),
     // skills.yaml の id を参照。存在しない id はビルドエラー / skills.yaml의 id를 참조. 없는 id는 빌드 에러
     tech: z.array(reference('skills')),
     phases: z.array(z.enum(phases)).default([]),

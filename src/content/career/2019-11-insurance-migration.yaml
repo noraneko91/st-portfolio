@@ -45,9 +45,5 @@ duties:
     en: Building VBA tools
     zh: 制作VBA工具
     ko: VBA 도구 제작
-scale:
-  classes: 1000
-  tables: 200
-  team: 15
 tech: [java, jpa, vba, oracle, hirdb, jenkins, maven, svn, git]
 phases: [implementation, unit-test, integration-test]

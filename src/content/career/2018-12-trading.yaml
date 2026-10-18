@@ -28,8 +28,5 @@ duties:
     en: Writing integration test specifications
     zh: 编写集成测试规格书
     ko: 통합 테스트 사양서 작성
-scale:
-  classes: 100
-  team: 10
 tech: [java, spring, javascript, mysql, git]
 phases: [implementation, unit-test]

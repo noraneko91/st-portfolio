@@ -54,10 +54,6 @@ export function formatYearMonth(yearMonth: string, lang: Lang): string {
   );
 }
 
-export function formatNumber(value: number, lang: Lang): string {
-  return new Intl.NumberFormat(htmlLang[lang]).format(value);
-}
-
 // 全経歴の合計（重複期間は1回） / 전체 경력 합계 (겹치는 기간은 1번)
 export async function getTotalCareerMonths(): Promise<number> {
   const { careers } = await loadCareersAndSkills();

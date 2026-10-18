@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import type { Lang } from '../i18n/config';
 import { useTranslations } from '../i18n/utils';
-import { formatNumber, formatYearMonth, totalMonths, type Career } from '../lib/content';
+import { formatYearMonth, totalMonths, type Career } from '../lib/content';
 import { sortPhases } from '../lib/phases';
 
 interface Props {
@@ -20,11 +20,8 @@ const { career, lang, skillNames, refLabel, head = false } = Astro.props;
 const { data } = career;
 const t = useTranslations(lang);
 
-const scale = [
-  data.scale.classes && t('scale.classes', { n: formatNumber(data.scale.classes, lang) }),
-  data.scale.tables && t('scale.tables', { n: formatNumber(data.scale.tables, lang) }),
-  data.scale.team && t('scale.team', { n: data.scale.team }),
-].filter(Boolean);
+// 役割が途中で変わった場合は「SE → サブリーダー」のように並べる / 역할이 도중에 바뀐 경우는 "SE → 서브리더"처럼 나열한다
+const role = [data.role].flat().map((id) => t(`role.${id}`)).join(' → ');
 const phases = sortPhases(data.phases).map((phase) => t(`phase.${phase}`));
 const tech = data.tech.map((ref) => skillNames.get(ref.id) ?? ref.id);
 // git log 風の短いハッシュ。経歴の id から計算するため、データが同じなら毎回同じ値 / git log 풍의 짧은 해시. 경력 id로 계산하므로 데이터가 같으면 항상 같은 값
@@ -42,7 +39,7 @@ const hash = createHash('sha1').update(career.id).digest('hex').slice(0, 7);
     <span class="career-months">{t('unit.months', { n: totalMonths([data]) })}</span>
   </p>
   <h3 class="career-title">{data.title[lang]}</h3>
-  <p class="career-meta">{`${data.industry[lang]} · ${t(`role.${data.role}`)}`}</p>
+  <p class="career-meta">{`${data.industry[lang]} · ${role}`}</p>
 
   {
     data.summary.length > 0 && (
@@ -75,14 +72,6 @@ const hash = createHash('sha1').update(career.id).digest('hex').slice(0, 7);
       <dt>{t('career.tech')}</dt>
       <dd>{tech.join(' / ')}</dd>
     </div>
-    {
-      scale.length > 0 && (
-        <div>
-          <dt>{t('career.scale')}</dt>
-          <dd>{scale.join(' / ')}</dd>
-        </div>
-      )
-    }
   </dl>
 </article>
 

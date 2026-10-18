@@ -28,8 +28,5 @@ duties:
     en: Writing and running unit test specifications
     zh: 编写并执行单元测试规格书
     ko: 단위 테스트 사양서 작성·수행
-scale:
-  classes: 100
-  team: 10
 tech: [java, jsp, javascript, spring, mysql]
 phases: [detailed-design, implementation, unit-test]
