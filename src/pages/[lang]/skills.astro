@@ -1,6 +1,7 @@
 ---
 import PageHero from '../../components/PageHero.astro';
 import SkillGraph from '../../components/SkillGraph.astro';
+import SkillLogo from '../../components/SkillLogo.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { formatUsage, formatYearMonth, getCareers, getCertifications, getProjects, getSkillsWithUsage } from '../../lib/content';
@@ -21,7 +22,7 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
 ---
 
 <BaseLayout lang={lang} title={t('skills.title')} description={t('skills.description')}>
-  <PageHero tile="skills">
+  <PageHero tile="skills" icon="skillbook">
     <h1 class="text-title mb-3">{t('skills.title')}</h1>
     <p class="max-w-[var(--measure)] text-muted">{t('skills.note')}</p>
   </PageHero>
@@ -40,7 +41,10 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
               {items.map((usage) => (
                 <li class:list={['skill', { 'skill-featured': usage.skill.data.featured }]}>
                   <div class="skill-head">
-                    <span class="skill-name">{usage.skill.data.name}</span>
+                    <span class="skill-name">
+                      <SkillLogo id={usage.skill.id} name={usage.skill.data.name} />
+                      {usage.skill.data.name}
+                    </span>
                     <span class="skill-usage">{formatUsage(usage, t)}</span>
                   </div>
                   {usage.skill.data.detail && <p class="skill-detail">{usage.skill.data.detail}</p>}
@@ -120,7 +124,7 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
   .skill-head {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -130,25 +134,22 @@ const [certifications, careers, projects] = await Promise.all([getCertifications
     white-space: nowrap;
   }
 
+  /* ロゴの幅だけ下げて、名前の下にそろえる / 로고 폭만큼 들여서 이름 아래에 맞춘다 */
   .skill-detail {
+    padding-inline-start: 2.375rem;
     font-size: 0.8125rem;
     color: var(--muted);
   }
 
-  /* 代表スキルは太字と点で示す (色だけに頼らない) / 대표 스킬은 굵은 글씨와 점으로 표시한다 (색에만 의존하지 않는다) */
-  .skill-featured .skill-name {
-    font-weight: 700;
+  .skill-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
   }
 
-  .skill-featured .skill-name::before {
-    content: '' / '';
-    display: inline-block;
-    width: 0.4375rem;
-    height: 0.4375rem;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    background: var(--accent);
-    vertical-align: 0.125em;
+  /* 代表スキルは太字で示す (色だけに頼らない) / 대표 스킬은 굵은 글씨로 표시한다 (색에만 의존하지 않는다) */
+  .skill-featured .skill-name {
+    font-weight: 700;
   }
 
   .cert-grid {

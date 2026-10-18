@@ -1,17 +1,23 @@
 ---
+import type { PixelIconName } from '../lib/pixel-icons';
+import PixelIcon from './PixelIcon.astro';
+
 // Home のタイルと同じ名前 (tile-*) を持つページ見出しの面 / Home 타일과 같은 이름 (tile-*)을 가진 페이지 제목 면
 export type TileName = 'profile' | 'work' | 'personal' | 'skills' | 'contact';
 
 interface Props {
   tile: TileName;
+  // 見出しの左に添えるドット絵 / 제목 왼쪽에 곁들이는 도트 그림
+  icon?: PixelIconName;
 }
 
-const { tile } = Astro.props;
+const { tile, icon } = Astro.props;
 ---
 
 {/* 同じ view-transition-name の要素どうしが遷移でつながる (1 ページに 1 つだけ) / 같은 view-transition-name 요소끼리 전환으로 이어진다 (한 페이지에 하나만) */}
-<div class="page-hero panel" style={`view-transition-name: tile-${tile}`}>
-  <slot />
+<div class:list={['page-hero panel', { 'has-icon': icon }]} style={`view-transition-name: tile-${tile}`}>
+  {icon && <PixelIcon name={icon} size={64} />}
+  <div class="page-hero-body"><slot /></div>
 </div>
 
 <style>
@@ -19,6 +25,17 @@ const { tile } = Astro.props;
   .page-hero {
     margin-bottom: 1.75rem;
     padding: clamp(0.875rem, 0.6rem + 1.1vw, 1.25rem) clamp(1rem, 0.6rem + 1.8vw, 1.75rem);
+  }
+
+  .has-icon {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.875rem, 0.5rem + 1.5vw, 1.5rem);
+  }
+
+  .page-hero-body {
+    min-width: 0;
+    flex: 1;
   }
 
   .page-hero :global(h1) {

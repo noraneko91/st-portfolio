@@ -16,7 +16,7 @@ const [careers, skillNames] = await Promise.all([getCareers(), getSkillNames()])
 ---
 
 <BaseLayout lang={lang} title={t('projects.tab.work')} description={t('projects.work.description')}>
-  <PageHero tile="work">
+  <PageHero tile="work" icon="board">
     <h1 class="text-title mb-3">{t('projects.title')}</h1>
     <p class="max-w-[var(--measure)] text-muted">{t('projects.work.description')}</p>
   </PageHero>

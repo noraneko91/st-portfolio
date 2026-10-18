@@ -1,0 +1,47 @@
+---
+interface Props {
+  // skills.yaml の id / skills.yaml의 id
+  id: string;
+  name: string;
+}
+
+const { id, name } = Astro.props;
+
+// src/assets/skills/<id>.svg があればロゴ、なければ頭文字のバッジ (Devicon にないスキル用)
+// src/assets/skills/<id>.svg가 있으면 로고, 없으면 머리글자 배지 (Devicon에 없는 스킬용)
+const logos = import.meta.glob<string>('../assets/skills/*.svg', { eager: true, query: '?url', import: 'default' });
+const src = logos[`../assets/skills/${id}.svg`];
+const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 3);
+---
+
+{/* 名前は隣に文字で書くので、ロゴは装飾として読み上げない / 이름은 옆에 글자로 쓰므로 로고는 장식으로 읽지 않는다 */}
+<span class="logo" aria-hidden="true">
+  {src ? <img src={src} alt="" width="20" height="20" loading="lazy" decoding="async" /> : <span class="initials">{initials}</span>}
+</span>
+
+<style>
+  /* 黒いロゴ (Next.js など) もダークモードで見えるよう、白い台に載せる / 검은 로고 (Next.js 등)도 다크모드에서 보이도록 흰 받침 위에 둔다 */
+  .logo {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .logo img {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .initials {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #3a3b48;
+  }
+</style>

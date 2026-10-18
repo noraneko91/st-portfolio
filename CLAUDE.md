@@ -88,6 +88,8 @@ public/          # 이미지·favicon 등 정적 파일
 - Home은 벤토 그리드 (PC는 한 화면, 모바일은 세로 쌓기). 배경은 원근 그리드 (CSS perspective, 모든 페이지에서 바닥이 흐른다), 타일·페이지 제목은 간유리 면 `.panel` (ADR 0007)
 - 타일 → 페이지 이동은 문서 간 View Transitions (같은 `view-transition-name: tile-*`). 미지원 브라우저는 일반 이동
 - 직접 쓰는 애니메이션은 transform만 쓴다. 3D 라이브러리(Three.js 등)는 쓰지 않는다
+- 스킬 로고는 Devicon(MIT) SVG를 `src/assets/skills/<skill id>.svg`로 복사해 쓴다 (패키지 의존 없음). 없는 스킬은 머리글자 배지
+- 페이지 제목의 그림은 오리지널 16×16 도트 그림 (`src/lib/pixel-icons.ts`). 다른 게임 등의 그림은 쓰지 않는다
 - 언어별 폰트를 지정한다 (`html[lang]`으로 전환)
 - Lighthouse 각 항목 90점 이상 유지 (특히 Performance·Accessibility)
 

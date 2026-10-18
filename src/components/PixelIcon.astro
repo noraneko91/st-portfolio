@@ -1,0 +1,40 @@
+---
+import { toRects, type PixelIconName } from '../lib/pixel-icons';
+
+interface Props {
+  name: PixelIconName;
+  // 表示サイズ (px)。16 の倍数だとドットがにじまない / 표시 크기 (px). 16의 배수면 도트가 번지지 않는다
+  size?: number;
+}
+
+const { name, size = 64 } = Astro.props;
+const rects = toRects(name);
+---
+
+{/* 見出しの飾りなので読み上げない / 제목 장식이므로 읽지 않는다 */}
+<span class="pixel-icon" aria-hidden="true">
+  <svg viewBox="0 0 16 16" width={size} height={size} shape-rendering="crispEdges">
+    {rects.map((rect) => <rect x={rect.x} y={rect.y} width={rect.w} height="1" fill={rect.fill} />)}
+  </svg>
+</span>
+
+<style>
+  .pixel-icon {
+    display: inline-block;
+    flex: none;
+    line-height: 0;
+  }
+
+  /* ゲームのアイテムのように、その場でふわふわ浮く (位置だけ動かす) / 게임 아이템처럼 제자리에서 둥실둥실 뜬다 (위치만 움직인다) */
+  @media (prefers-reduced-motion: no-preference) {
+    .pixel-icon svg {
+      animation: float 2.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes float {
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import PageHero from '../../components/PageHero.astro';
+import PixelIcon from '../../components/PixelIcon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangStaticPaths, toLang, useTranslations } from '../../i18n/utils';
 import { getProfile } from '../../lib/content';
@@ -19,7 +20,7 @@ const profile = await getProfile();
   <PageHero tile="profile">
     <div class="profile">
       <div>
-        <p class="eyebrow font-mono">{t('about.title')}</p>
+        <p class="eyebrow font-mono"><PixelIcon name="laptop" size={32} />{t('about.title')}</p>
         <h1 class="text-title">{profile.displayName}</h1>
         <p class="text-muted">{profile.title[lang]}</p>
         <div class="intro mt-6 space-y-4">
@@ -82,6 +83,9 @@ const profile = await getProfile();
   }
 
   .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 0.8125rem;
     font-weight: 700;
