@@ -69,12 +69,16 @@ main:
         en: JLPT N1
         zh: JLPT N1
         ko: JLPT N1
-    # レベル表記なし (level を書かないと言語名だけを表示する) / 레벨 표기 없음 (level을 쓰지 않으면 언어 이름만 표시한다)
     - name:
         ja: 英語
         en: English
         zh: 英语
         ko: 영어
+      level:
+        ja: 初級
+        en: Beginner
+        zh: 初级
+        ko: 초급
     - name:
         ja: 中国語
         en: Chinese
