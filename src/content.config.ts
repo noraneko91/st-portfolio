@@ -23,10 +23,8 @@ const profile = defineCollection({
   schema: z.object({
     displayName: text,
     title: localized,
-    // Home の冒頭に出す「何をする人か」の一文 / Home 첫머리에 표시하는 "무엇을 하는 사람인지" 한 문장
+    // Home のプロフィールタイルに出す、目指す方向の一文 / Home 프로필 타일에 표시하는 지향 방향 한 문장
     headline: localized,
-    // headline の中で強調する語 (技術名なので4言語共通。各言語の headline にそのまま含める) / headline 안에서 강조할 말 (기술명이라 4개 언어 공통. 각 언어 headline에 그대로 넣는다)
-    headlineHighlights: z.array(text).default([]),
     location: localized,
     intro: z.array(localized),
     languages: z.array(z.object({ name: localized, level: localized.optional() })),

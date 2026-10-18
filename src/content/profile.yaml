@@ -8,12 +8,13 @@ main:
     en: Backend Engineer
     zh: 后端工程师
     ko: 백엔드 엔지니어
+  # Home のプロフィールタイルに出す、目指す方向の一文 (About の自己紹介 3 段落目の 2 文目と同じ)
+  # Home 프로필 타일에 표시하는 지향 방향 한 문장 (About 자기소개 3문단 둘째 문장과 같다)
   headline:
-    ja: Java/Springによる業務システム開発と、Python + AWSによるクラウド開発を手がけるバックエンドエンジニアです。
-    en: I'm a backend engineer who builds business systems with Java/Spring and cloud applications with Python + AWS.
-    zh: 我是一名后端工程师，从事基于Java/Spring的业务系统开发，以及基于Python + AWS的云开发。
-    ko: Java/Spring 기반 업무 시스템 개발과 Python + AWS 기반 클라우드 개발을 하는 백엔드 엔지니어입니다.
-  headlineHighlights: [Java/Spring, Python + AWS]
+    ja: これまで培ってきたバックエンド・クラウド領域の経験を強みに、フロントエンドにも挑戦し、システム全体を見渡せるフルスタックエンジニアを目指しています。
+    en: Building on my experience in backend and cloud, I am taking on frontend development as well, aiming to become a full-stack engineer who can see the whole system.
+    zh: 以积累至今的后端与云领域经验为优势，我也在挑战前端开发，目标是成为能够通观整个系统的全栈工程师。
+    ko: 지금까지 쌓아 온 백엔드·클라우드 분야의 경험을 강점으로 프런트엔드에도 도전하며, 시스템 전체를 볼 수 있는 풀스택 엔지니어를 목표로 하고 있습니다.
   location:
     ja: 日本
     en: Japan

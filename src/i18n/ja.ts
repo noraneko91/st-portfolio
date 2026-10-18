@@ -120,6 +120,12 @@ export const ja = {
 
   'about.terminal': 'プロフィールの要約',
 
+  'home.path.label': '成長の流れ',
+  'home.path.backend': 'バックエンド',
+  'home.path.cloud': 'クラウド',
+  'home.path.frontend': 'フロントエンド',
+  'home.path.now': '挑戦中',
+
   'notFound.title': 'ページが見つかりません',
   'notFound.message': 'お探しのページは移動または削除された可能性があります。',
   'notFound.home': 'ホームへ戻る',

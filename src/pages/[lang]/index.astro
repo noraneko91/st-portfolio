@@ -9,6 +9,7 @@ import {
   getCareers,
   getProfile,
   getProjects,
+  getSkillNames,
   getSkillsWithUsage,
   getTotalCareerMonths,
 } from '../../lib/content';
@@ -20,17 +21,25 @@ export function getStaticPaths() {
 const lang = toLang(Astro.params.lang);
 const t = useTranslations(lang);
 
-const [profile, careers, projects, skills, totalMonths] = await Promise.all([
+const [profile, careers, projects, skills, totalMonths, skillNames] = await Promise.all([
   getProfile(),
   getCareers(),
   getProjects(),
   getSkillsWithUsage(),
   getTotalCareerMonths(),
+  getSkillNames(),
 ]);
 
 const featured = skills.filter(({ skill }) => skill.data.featured);
 const latestProject = projects[0];
-const growth = profile.intro[0]?.[lang];
+
+// 成長の流れ: バックエンド → クラウド → フロントエンド (挑戦中)。技術名は skills.yaml から引く
+// 성장 경로: 백엔드 → 클라우드 → 프런트엔드 (도전 중). 기술명은 skills.yaml에서 가져온다
+const path = [
+  { label: t('home.path.backend'), tech: ['java', 'python'], now: false },
+  { label: t('home.path.cloud'), tech: ['aws'], now: false },
+  { label: t('home.path.frontend'), tech: ['typescript', 'react'], now: true },
+].map((step) => ({ ...step, tech: step.tech.map((id) => skillNames.get(id) ?? id).join(' · ') }));
 ---
 
 <BaseLayout lang={lang} description={t('home.description')} home>
@@ -43,22 +52,18 @@ const growth = profile.intro[0]?.[lang];
       <p class="tile-prompt font-mono" aria-hidden="true">~/whoami</p>
       <h1 class="tile-name">{profile.displayName}</h1>
       <p class="tile-role">{profile.title[lang]}</p>
-      {/* 要約の値はすべてコンテンツから計算する / 요약 값은 모두 콘텐츠에서 계산한다 */}
-      <dl class="tile-facts">
-        <div>
-          <dt>{t('profile.experience')}</dt>
-          <dd>{formatYears(totalMonths, t)}</dd>
-        </div>
-        <div>
-          <dt>{t('profile.location')}</dt>
-          <dd>{profile.location[lang]}</dd>
-        </div>
-        <div>
-          <dt>{t('profile.languages')}</dt>
-          <dd>{profile.languages.map((language) => language.name[lang]).join(' / ')}</dd>
-        </div>
-      </dl>
-      {growth && <p class="tile-growth">{growth}</p>}
+      <ol class="path" aria-label={t('home.path.label')}>
+        {
+          path.map((step, index) => (
+            <li class:list={['step', { 'step-now': step.now }]} style={`--i: ${index}`}>
+              <span class="step-label">{step.label}</span>
+              <span class="step-tech font-mono">{step.tech}</span>
+              {step.now && <span class="step-badge">{t('home.path.now')}</span>}
+            </li>
+          ))
+        }
+      </ol>
+      <p class="tile-growth">{profile.headline[lang]}</p>
       <a class="card-link tile-more" href={getAlternatePath(lang, 'about')}>
         {t('home.tile.profileMore')}<span aria-hidden="true"> →</span>
       </a>
@@ -250,22 +255,79 @@ const growth = profile.intro[0]?.[lang];
     color: var(--muted);
   }
 
-  .tile-facts {
+  /* ---- 成長の流れ (矢印は装飾として読み上げない) / 성장 경로 (화살표는 장식으로 읽지 않는다) ---- */
+  .path {
     display: grid;
-    gap: 0.25rem;
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+    margin-block: 1.5rem 1.25rem;
   }
 
-  .tile-facts div {
+  .step {
+    position: relative;
     display: grid;
-    grid-template-columns: 6rem minmax(0, 1fr);
-    gap: 0.75rem;
+    align-content: start;
+    gap: 0.125rem;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid var(--control-border);
+    border-radius: 10px;
+    background: var(--bg);
   }
 
-  .tile-facts dt {
-    font-family: var(--font-mono);
+  .step:not(:last-child)::after {
+    content: '→' / '';
+    position: absolute;
+    top: 50%;
+    right: -1.375rem;
+    color: var(--accent);
+    transform: translateY(-50%);
+  }
+
+  .step-label {
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .step-tech {
+    font-size: 0.75rem;
     color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+
+  /* いま挑戦中の段階は点線と文字のバッジで示す (色だけに頼らない) / 지금 도전 중인 단계는 점선과 글자 배지로 표시한다 (색에만 의존하지 않는다) */
+  .step-now {
+    border-style: dashed;
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+
+  .step-badge {
+    justify-self: start;
+    margin-top: 0.25rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    color: var(--accent);
+  }
+
+  @media (max-width: 30rem) {
+    .path {
+      gap: 1rem;
+    }
+
+    .step {
+      padding: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .step-tech {
+      font-size: 0.6875rem;
+    }
+
+    .step:not(:last-child)::after {
+      right: -0.875rem;
+    }
   }
 
   /* 中心のメッセージ (バックエンドからクラウドを含むフルスタックへ) / 핵심 메시지 (백엔드에서 클라우드를 포함한 풀스택으로) */
@@ -369,6 +431,12 @@ const growth = profile.intro[0]?.[lang];
 
     .tile:has(.card-link:hover) {
       transform: translateY(-3px);
+    }
+
+    /* 成長の流れが左から順に現れる (位置だけ動かす) / 성장 경로가 왼쪽부터 차례로 나타난다 (위치만 움직인다) */
+    .step {
+      animation: slide-in 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(var(--i) * 120ms + 200ms);
     }
 
     /* 代表スキルが上から順に現れる (位置だけ動かす) / 대표 스킬이 위에서부터 차례로 나타난다 (위치만 움직인다) */

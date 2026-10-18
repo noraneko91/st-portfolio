@@ -121,6 +121,12 @@ export const zh: Translation = {
 
   'about.terminal': '个人简介摘要',
 
+  'home.path.label': '成长路径',
+  'home.path.backend': '后端',
+  'home.path.cloud': '云',
+  'home.path.frontend': '前端',
+  'home.path.now': '挑战中',
+
   'notFound.title': '找不到页面',
   'notFound.message': '您要查找的页面可能已被移动或删除。',
   'notFound.home': '返回首页',
