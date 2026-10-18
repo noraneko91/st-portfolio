@@ -94,7 +94,7 @@ export const en: Translation = {
   'projects.tabs.label': 'Project types',
   'projects.tab.work': 'Work experience',
   'projects.tab.personal': 'Personal projects',
-  'projects.work.description': 'My work experience in business system development, newest first, as a git log style timeline.',
+  'projects.work.description': 'I have built up experience and know-how through a variety of work and projects, and I keep learning through personal projects to sharpen my skills.',
   'projects.personal.description': 'Personal projects I build for learning and as my own work.',
   'project.category.learning': 'Learning',
   'project.category.build': 'Build',

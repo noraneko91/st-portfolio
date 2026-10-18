@@ -93,7 +93,7 @@ export const ja = {
   'projects.tabs.label': 'プロジェクトの種類',
   'projects.tab.work': '業務経歴',
   'projects.tab.personal': '個人開発',
-  'projects.work.description': '業務システム開発の経歴を、新しい順に git log 風のタイムラインで紹介します。',
+  'projects.work.description': 'さまざまな業務とプロジェクトを通じて、経験とノウハウを積み重ねてきました。スキルを高めるため、個人開発での学習にも取り組んでいます。',
   'projects.personal.description': '学習や制作として取り組んでいる個人開発を紹介します。',
   'project.category.learning': '学習',
   'project.category.build': '制作',

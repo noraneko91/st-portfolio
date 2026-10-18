@@ -94,7 +94,7 @@ export const ko: Translation = {
   'projects.tabs.label': '프로젝트 종류',
   'projects.tab.work': '업무 경력',
   'projects.tab.personal': '개인 개발',
-  'projects.work.description': '업무 시스템 개발 경력을 최신순으로 git log 풍 타임라인으로 소개합니다.',
+  'projects.work.description': '다양한 업무와 프로젝트를 통해 경험과 노하우를 쌓아 왔습니다. 스킬 향상을 위해 개인 개발을 통한 학습에도 힘쓰고 있습니다.',
   'projects.personal.description': '학습과 제작으로 진행하고 있는 개인 개발을 소개합니다.',
   'project.category.learning': '학습',
   'project.category.build': '제작',

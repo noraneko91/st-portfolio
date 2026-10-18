@@ -94,7 +94,7 @@ export const zh: Translation = {
   'projects.tabs.label': '项目类型',
   'projects.tab.work': '工作经历',
   'projects.tab.personal': '个人开发',
-  'projects.work.description': '按时间倒序，以 git log 风格的时间线介绍我的业务系统开发经历。',
+  'projects.work.description': '我通过各种业务和项目积累了经验与技巧。为了提升技能，我也在通过个人开发不断学习。',
   'projects.personal.description': '介绍我为学习和创作而进行的个人开发。',
   'project.category.learning': '学习',
   'project.category.build': '制作',
