@@ -1,8 +1,8 @@
 # 出典: リポジトリのコード (index.html) / 출처: 리포지토리 코드 (index.html)
 title:
-  ja: コーディング四コマ（코딩네컷）
-  en: Coding Four-Cut (코딩네컷)
-  zh: 编程四格（코딩네컷）
+  ja: コーディング四コマ
+  en: Coding Four-Cut
+  zh: 编程四格
   ko: 코딩네컷
 summary:
   ja: 4枚の写真をフォトブース風のフレームに並べた、HTML と CSS だけの静的ページ
