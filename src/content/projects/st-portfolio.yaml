@@ -9,8 +9,15 @@ summary:
   zh: 使用Astro + TypeScript构建、支持四种语言的静态作品集网站
   ko: Astro + TypeScript로 구축한 4개 언어 지원 정적 포트폴리오 사이트
 category: build
-status: in-progress
+status: completed
 start: "2026-10"
+end: "2026-10"
+# コミット履歴 (2026-10-16〜19) から / 커밋 이력 (2026-10-16~19)에서
+duration:
+  ja: 約4日
+  en: about 4 days
+  zh: 约 4 天
+  ko: 약 4일
 tech: [astro, typescript, tailwind, react, cloudflare]
 github:
   - https://github.com/noraneko91/st-portfolio
