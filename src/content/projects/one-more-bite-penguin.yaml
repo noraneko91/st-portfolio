@@ -1,20 +1,87 @@
 # 出典: リポジトリ (sosogames-studio/one-more-bite-penguin) のコード・CLAUDE.md・コミット履歴 / 출처: 리포지토리의 코드·CLAUDE.md·커밋 이력
 # 非公開リポジトリのため github は書かない / 비공개 리포지토리라 github는 쓰지 않는다
 title:
-  ja: 一口だけペンギン（モバイルゲーム）
-  en: One More Bite Penguin (mobile game)
-  zh: 再吃一口企鹅（手机游戏）
-  ko: 한입만 더 펭귄 (모바일 게임)
+  ja: "一口だけペンギン（モバイルゲーム）"
+  en: "One More Bite Penguin (mobile game)"
+  zh: "再吃一口企鹅（手机游戏）"
+  ko: "한입만 더 펭귄 (모바일 게임)"
 summary:
-  ja: 押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが魚を食べながら、海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発中
-  en: A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). In development with Godot 4
-  zh: 按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅一边吃鱼，一边从海面穿过 50 个区域潜到地心（6,371 公里）。正在使用 Godot 4 开发
-  ko: 누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 물고기를 먹으며 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발 중
+  ja: "押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが魚を食べながら、海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発中"
+  en: "A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). In development with Godot 4"
+  zh: "按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅一边吃鱼，一边从海面穿过 50 个区域潜到地心（6,371 公里）。正在使用 Godot 4 开发"
+  ko: "누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 물고기를 먹으며 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발 중"
 category: build
 status: in-progress
 # コミット履歴 (2026-10-19〜) から / 커밋 이력 (2026-10-19~)에서
 start: "2026-10"
 tech: [godot, python]
+# 画面・動画: Godot 4.7.2 で実際のゲームを動かして撮影 (自動操作、720×1280 を縮小) / 화면·영상: Godot 4.7.2로 실제 게임을 실행해 촬영 (자동 조작, 720×1280을 축소)
+thumbnail:
+  src: /projects/one-more-bite-penguin/thumbnail.webp
+  alt:
+    ja: "ホーム・深海・内核のゲーム画面 3 枚"
+    en: "Three game screens: home, deep sea, and inner core"
+    zh: "主页、深海、内核三张游戏画面"
+    ko: "홈·심해·내핵 게임 화면 3장"
+video:
+  src: /projects/one-more-bite-penguin/play.mp4
+  poster: /projects/one-more-bite-penguin/play-poster.webp
+  width: 360
+  height: 640
+  label:
+    ja: "プレイ動画（約 19 秒・音声なし）：1 エリア・13 エリア・45 エリアを潜る様子"
+    en: "Gameplay video (about 19 s, no sound): diving in zones 1, 13, and 45"
+    zh: "游戏视频（约 19 秒，无声音）：在第 1、13、45 区下潜"
+    ko: "플레이 영상 (약 19초·소리 없음): 1구역·13구역·45구역을 잠수하는 모습"
+screenshots:
+  - src: /projects/one-more-bite-penguin/home.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "ホーム画面。氷河の上の友だちペンギンとタイトルロゴ"
+      en: "Home screen with the title logo and friend penguins on the glacier"
+      zh: "主页画面，冰川上的企鹅伙伴与标题标志"
+      ko: "홈 화면. 빙하 위 친구 펭귄들과 제목 로고"
+  - src: /projects/one-more-bite-penguin/zone1.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "1 エリア「ペンギン海岸」で潜っているところ"
+      en: "Diving in zone 1, Penguin Beach"
+      zh: "在第 1 区“企鹅海滩”下潜"
+      ko: "1구역 \"펭귄 해변\"에서 잠수하는 모습"
+  - src: /projects/one-more-bite-penguin/zone13.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "13 エリア「深海平原」。ライトを付けたヘルメット姿のモグ"
+      en: "Zone 13, the abyssal plain, with Mogu wearing a helmet lamp"
+      zh: "第 13 区“深海平原”，戴着头灯头盔的 Mogu"
+      ko: "13구역 \"심해저 평원\". 램프 달린 헬멧을 쓴 모구"
+  - src: /projects/one-more-bite-penguin/zone26.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "26 エリア「マグマの川」"
+      en: "Zone 26, the magma river"
+      zh: "第 26 区“岩浆河”"
+      ko: "26구역 \"마그마 강\""
+  - src: /projects/one-more-bite-penguin/zone45.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "45 エリア「時間が止まった場所」。内核のイベントと危険物"
+      en: "Zone 45, where time stands still, with inner-core events and hazards"
+      zh: "第 45 区“时间停止之处”，内核事件与危险物"
+      ko: "45구역 \"시간이 멈춘 곳\". 내핵 이벤트와 위험물"
+  - src: /projects/one-more-bite-penguin/collection.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "図鑑画面。等級ごとの収集数と見つけた生き物"
+      en: "Collection screen with counts per rarity tier and discovered creatures"
+      zh: "图鉴画面，各稀有度的收集数与已发现的生物"
+      ko: "도감 화면. 등급별 모은 수와 발견한 생물"
 
 overview:
   - ja: "sosogames-studio の最初のワンタッチモバイルゲームです。画面のどこでも押している間はペンギン「モグ」が潜り、離すと浮かび、軽くタップすると羽ばたいて一気に上がります。"

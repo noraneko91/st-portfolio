@@ -23,8 +23,10 @@ const number = String(index).padStart(2, '0');
 </section>
 
 <style>
+  /* 1 段組でも列幅を画面に収め、横スクロールする中身がページを広げないようにする / 1단 구성에서도 열 너비를 화면에 맞춰, 가로 스크롤하는 내용이 페이지를 넓히지 않게 한다 */
   .section {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     padding-block: 2.5rem;
     border-top: 1px solid var(--border);

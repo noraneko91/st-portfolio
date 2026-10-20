@@ -113,6 +113,9 @@ const projects = defineCollection({
       .default([]),
     // AWS 構成図。画像は public/ 以下に置く / AWS 구성도. 이미지는 public/ 아래에 둔다
     diagram: z.object({ src: text, alt: localized }).optional(),
+    // 実際の画面 (スクリーンショット)・プレイ動画。ファイルは public/projects/<slug>/ に置く / 실제 화면 (스크린샷)·플레이 영상. 파일은 public/projects/<slug>/에 둔다
+    screenshots: z.array(z.object({ src: text, alt: localized, width: z.number().int(), height: z.number().int() })).default([]),
+    video: z.object({ src: text, poster: text, label: localized, width: z.number().int(), height: z.number().int() }).optional(),
     decisions: z
       .array(
         z.object({

@@ -109,6 +109,37 @@ const next = () => ++sectionNumber;
   }
 
   {
+    (data.video || data.screenshots.length > 0) && (
+      <Section index={next()} label={t('project.section.media')} id="media">
+        {/* 縦長の画面は横に並べてスクロールさせ、ページが長くなりすぎないようにする / 세로로 긴 화면은 가로로 늘어놓고 스크롤해, 페이지가 너무 길어지지 않게 한다 */}
+        <ul class="media-strip" tabindex="0" aria-label={t('project.section.media')}>
+          {data.video && (
+            <li>
+              {/* 自動再生しない (動きを減らす設定・通信量への配慮) / 자동 재생하지 않는다 (동작 줄이기 설정·데이터 사용량 배려) */}
+              <video
+                src={data.video.src}
+                poster={data.video.poster}
+                width={data.video.width}
+                height={data.video.height}
+                controls
+                muted
+                playsinline
+                preload="none"
+                aria-label={data.video.label[lang]}
+              />
+            </li>
+          )}
+          {data.screenshots.map((shot) => (
+            <li>
+              <img src={shot.src} alt={shot.alt[lang]} width={shot.width} height={shot.height} loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  {
     data.diagram && (
       <Section index={next()} label={t('project.section.diagram')} id="diagram">
         <img src={data.diagram.src} alt={data.diagram.alt[lang]} loading="lazy" decoding="async" />
@@ -234,5 +265,34 @@ const next = () => ++sectionNumber;
       grid-template-columns: 11rem minmax(0, 1fr);
       gap: 2rem;
     }
+  }
+  .media-strip {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+    border-radius: var(--radius);
+  }
+
+  .media-strip:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 4px;
+  }
+
+  .media-strip > li {
+    flex: 0 0 auto;
+    width: min(60vw, 15rem);
+    scroll-snap-align: start;
+  }
+
+  .media-strip img,
+  .media-strip video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #15161c;
   }
 </style>

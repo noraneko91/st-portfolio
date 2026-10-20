@@ -51,6 +51,7 @@ export const zh: Translation = {
   'project.section.phases': '负责工序',
   'project.section.challenges': '用心之处·问题与解决',
   'project.section.links': '链接',
+  'project.section.media': '截图与视频',
   'project.meta.period': '期间',
   'project.meta.stack': '技术',
   'project.decision.reason': '理由',

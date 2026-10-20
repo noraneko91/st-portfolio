@@ -51,6 +51,7 @@ export const en: Translation = {
   'project.section.phases': 'Phases',
   'project.section.challenges': 'Challenges and solutions',
   'project.section.links': 'Links',
+  'project.section.media': 'Screenshots & video',
   'project.meta.period': 'Period',
   'project.meta.stack': 'Stack',
   'project.decision.reason': 'Why',

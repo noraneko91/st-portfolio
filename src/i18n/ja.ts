@@ -50,6 +50,7 @@ export const ja = {
   'project.section.phases': '担当工程',
   'project.section.challenges': '工夫した点・課題と解決',
   'project.section.links': 'リンク',
+  'project.section.media': '画面・動画',
   'project.meta.period': '期間',
   'project.meta.stack': '技術',
   'project.decision.reason': '理由',
