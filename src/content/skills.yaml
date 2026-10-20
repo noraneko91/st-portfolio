@@ -99,3 +99,6 @@
 - id: github-actions
   name: GitHub Actions
   category: tool
+- id: godot
+  name: Godot / GDScript
+  category: framework
