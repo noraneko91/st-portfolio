@@ -51,6 +51,7 @@ export const ko: Translation = {
   'project.section.phases': '담당 공정',
   'project.section.challenges': '고민한 점·과제와 해결',
   'project.section.links': '링크',
+  'project.section.media': '화면·영상',
   'project.meta.period': '기간',
   'project.meta.stack': '기술',
   'project.decision.reason': '이유',
