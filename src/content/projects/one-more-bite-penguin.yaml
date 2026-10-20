@@ -1,0 +1,109 @@
+# 出典: リポジトリ (sosogames-studio/one-more-bite-penguin) のコード・CLAUDE.md・コミット履歴 / 출처: 리포지토리의 코드·CLAUDE.md·커밋 이력
+# 非公開リポジトリのため github は書かない / 비공개 리포지토리라 github는 쓰지 않는다
+title:
+  ja: 一口だけペンギン（モバイルゲーム）
+  en: One More Bite Penguin (mobile game)
+  zh: 再吃一口企鹅（手机游戏）
+  ko: 한입만 더 펭귄 (모바일 게임)
+summary:
+  ja: 押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが魚を食べながら、海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発中
+  en: A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). In development with Godot 4
+  zh: 按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅一边吃鱼，一边从海面穿过 50 个区域潜到地心（6,371 公里）。正在使用 Godot 4 开发
+  ko: 누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 물고기를 먹으며 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발 중
+category: build
+status: in-progress
+# コミット履歴 (2026-10-19〜) から / 커밋 이력 (2026-10-19~)에서
+start: "2026-10"
+tech: [godot, python]
+
+overview:
+  - ja: "sosogames-studio の最初のワンタッチモバイルゲームです。画面のどこでも押している間はペンギン「モグ」が潜り、離すと浮かび、軽くタップすると羽ばたいて一気に上がります。"
+    en: "The first one-touch mobile game from sosogames-studio. While you hold anywhere on the screen, the penguin Mogu dives; let go and it rises; a quick tap makes it flap upward."
+    zh: "这是 sosogames-studio 的第一款单键手机游戏。按住屏幕任意位置时企鹅“Mogu”下潜，松开就上浮，轻点一下会拍动翅膀快速上升。"
+    ko: "sosogames-studio의 첫 원터치 모바일 게임입니다. 화면 어디든 누르는 동안 펭귄 \"모구\"가 잠수하고, 떼면 떠오르며, 짧게 톡 치면 날갯짓으로 쭉 올라갑니다."
+  - ja: "魚は食べただけでは点にならず、基地（海面・潜水艇）に戻って初めてスコアが確定します。酸素が 0 になるとお腹の魚を失ってゲームオーバー。スコアが上がると床が開き、海から地殻・マントル・核まで 50 のエリアを降りていきます。"
+    en: "Fish only count once you bring them back to base (the surface or a submarine). If oxygen hits zero, you lose everything in your belly and the run ends. Raising your score opens the floor, leading down through 50 zones of ocean, crust, mantle, and core."
+    zh: "吃下的鱼要回到基地（海面或潜水艇）才会计分。氧气归零就会失去肚子里的鱼并结束游戏。分数提高后地面会打开，从海洋一路穿过地壳、地幔、地核共 50 个区域。"
+    ko: "물고기는 먹기만 해서는 점수가 되지 않고, 기지(수면·잠수정)로 돌아와야 확정됩니다. 산소가 0이 되면 배 속 물고기를 잃고 게임 오버. 점수가 오르면 바닥이 열리고 바다부터 지각·맨틀·핵까지 50개 구역을 내려갑니다."
+  - ja: "図鑑 373 種・10 段階のレア度、エリアごとの危険物と中ボス、外核・内核の環境イベント、ショップの永久強化、ランキング画面、日本語・英語・中国語・韓国語の 4 言語に対応しています。"
+    en: "It has a 373-species collection with 10 rarity tiers, per-zone hazards and mid-bosses, environmental events in the outer and inner core, permanent upgrades in a shop, a ranking screen, and four languages (Japanese, English, Chinese, Korean)."
+    zh: "包含 373 种图鉴与 10 级稀有度、各区域的危险物和中头目、外核与内核的环境事件、商店的永久强化、排行榜画面，并支持日语、英语、中文、韩语 4 种语言。"
+    ko: "도감 373종·10단계 등급, 구역별 위험물과 중간 보스, 외핵·내핵 환경 이벤트, 상점 영구 강화, 랭킹 화면, 한국어·영어·일본어·중국어 4개 언어를 지원합니다."
+  - ja: "グラフィック・BGM・効果音はすべてコードで作っています（描画は GDScript、音は Python で合成）。現在はストア公開前で、広告・課金・ランキング・クラウド保存はつなぎ込みの準備段階です。"
+    en: "All graphics, music, and sound effects are generated in code (drawing in GDScript, audio synthesized in Python). It is not yet on the stores; ads, in-app purchases, rankings, and cloud saves are prepared but not yet connected."
+    zh: "所有图像、背景音乐和音效都由代码生成（绘制用 GDScript，声音用 Python 合成）。目前尚未上架，广告、内购、排行榜和云存档处于接入准备阶段。"
+    ko: "그래픽·배경음악·효과음은 모두 코드로 만들었습니다 (그림은 GDScript, 소리는 Python으로 합성). 아직 스토어 출시 전이며, 광고·결제·랭킹·클라우드 저장은 연결 준비 단계입니다."
+phases: [requirements, basic-design, detailed-design, implementation, unit-test]
+stack:
+  - name: "Godot Engine"
+    version: "4.7.2"
+    purpose:
+      ja: "ゲームエンジン（Compatibility レンダラー、Web・Android 書き出し）"
+      en: "Game engine (Compatibility renderer, Web and Android export)"
+      zh: "游戏引擎（Compatibility 渲染器，导出 Web 与 Android）"
+      ko: "게임 엔진 (Compatibility 렌더러, 웹·Android 내보내기)"
+  - name: "GDScript"
+    purpose:
+      ja: "移動・酸素・生成・UI・キャラクター描画などゲーム全体"
+      en: "The whole game: movement, oxygen, spawning, UI, and character drawing"
+      zh: "整个游戏：移动、氧气、生成、UI 和角色绘制"
+      ko: "이동·산소·생성·UI·캐릭터 그리기 등 게임 전체"
+  - name: "Python"
+    purpose:
+      ja: "バランスデータ生成・効果音と BGM の合成・翻訳表のチェック"
+      en: "Balance data generation, music and sound synthesis, and translation checks"
+      zh: "生成平衡数据、合成音效与背景音乐、检查翻译表"
+      ko: "밸런스 데이터 생성·효과음과 음악 합성·번역표 검사"
+  - name: "Supabase (PostgreSQL)"
+    purpose:
+      ja: "アカウント・クラウド保存・ランキングのスキーマ設計（未デプロイ）"
+      en: "Schema design for accounts, cloud saves, and rankings (not yet deployed)"
+      zh: "账号、云存档和排行榜的表结构设计（尚未部署）"
+      ko: "계정·클라우드 저장·랭킹 스키마 설계 (미배포)"
+decisions:
+  - topic:
+      ja: "物理エンジンを使わず移動を自前で計算"
+      en: "Calculating movement by hand instead of using the physics engine"
+      zh: "不使用物理引擎，自行计算移动"
+      ko: "물리 엔진 없이 이동을 직접 계산"
+    reason:
+      ja: "押す・離すだけの操作なので、加速度・抵抗・お腹の重さによる浮き上がりの鈍さを数値で細かく調整できるようにした"
+      en: "With only press-and-release controls, I wanted to tune acceleration, drag, and how belly weight slows the rise precisely by numbers"
+      zh: "操作只有按下和松开，因此希望能用数值精细调整加速度、阻力以及肚子重量对上浮的影响"
+      ko: "누르기·떼기만 하는 조작이라 가속도·저항·배 무게에 따른 상승 둔화를 수치로 세밀하게 조정할 수 있게 했다"
+    alternatives:
+      ja: "RigidBody2D（物理エンジン）"
+      en: "RigidBody2D (physics engine)"
+      zh: "RigidBody2D（物理引擎）"
+      ko: "RigidBody2D (물리 엔진)"
+  - topic:
+      ja: "バランス数値を設定ファイルに分離"
+      en: "Keeping balance values in a config file"
+      zh: "把平衡数值放到配置文件中"
+      ko: "밸런스 수치를 설정 파일로 분리"
+    reason:
+      ja: "50 エリア・373 種のスコア・出現・重さを Python の生成スクリプトで一括計算し、コードを直さずに調整できるようにした"
+      en: "Scores, spawn rates, and weights for 50 zones and 373 species are computed in bulk by a Python generator, so tuning needs no code changes"
+      zh: "用 Python 生成脚本批量计算 50 个区域、373 种生物的分数、出现率和重量，调整时无需改代码"
+      ko: "50개 구역·373종의 점수·출현·무게를 Python 생성 스크립트로 한꺼번에 계산해, 코드를 고치지 않고 조정할 수 있게 했다"
+challenges:
+  - problem:
+      ja: "コードで描いた生き物は 1 匹あたりの描画が重く、数が増えるとフレームレートが落ちる"
+      en: "Code-drawn creatures are expensive to draw, so frame rate dropped as their number grew"
+      zh: "用代码绘制的生物每只绘制开销较大，数量一多帧率就下降"
+      ko: "코드로 그린 생물은 한 마리당 그리기가 무거워, 수가 늘면 프레임이 떨어진다"
+    solution:
+      ja: "画面の近くにいるものだけ、毎秒の描き直し回数を制限して更新するようにした（移動・当たり判定は毎フレーム維持）"
+      en: "Only creatures near the screen are redrawn, at a capped rate per second (movement and collision still run every frame)"
+      zh: "只重绘屏幕附近的生物，并限制每秒重绘次数（移动和碰撞判定仍每帧进行）"
+      ko: "화면 근처에 있는 것만, 초당 다시 그리는 횟수를 제한해 갱신하도록 했다 (이동·충돌 판정은 매 프레임 유지)"
+  - problem:
+      ja: "4 言語に対応すると、英語などの長い文言がボタンや画面からはみ出す"
+      en: "Supporting four languages meant longer strings, such as English, overflowed buttons and screens"
+      zh: "支持 4 种语言后，英语等较长的文字会超出按钮和画面"
+      ko: "4개 언어를 지원하니 영어처럼 긴 문구가 버튼·화면 밖으로 넘친다"
+    solution:
+      ja: "ボタンは自動で折り返し、横に並ぶボタンは文字サイズをそろえて縮めるようにし、翻訳キーの漏れは Python スクリプトで検査した"
+      en: "Buttons wrap automatically, side-by-side buttons shrink their font together, and a Python script checks for missing translation keys"
+      zh: "按钮自动换行，并排的按钮统一缩小字号，并用 Python 脚本检查遗漏的翻译键"
+      ko: "버튼은 자동 줄바꿈, 나란히 놓인 버튼은 글자 크기를 같이 줄이게 하고, 번역 키 누락은 Python 스크립트로 검사했다"
