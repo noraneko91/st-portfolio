@@ -1,28 +1,29 @@
-# 出典: リポジトリ (sosogames-studio/one-more-bite-penguin) のコード・CLAUDE.md・コミット履歴 / 출처: 리포지토리의 코드·CLAUDE.md·커밋 이력
+# 出典: リポジトリ (sosogames-studio/one-more-bite-penguin) のコード・CLAUDE.md・store/・コミット履歴、非公開テストの状況は本人の説明 / 출처: 리포지토리의 코드·CLAUDE.md·store/·커밋 이력, 비공개 테스트 상황은 본인 설명
 # 非公開リポジトリのため github は書かない / 비공개 리포지토리라 github는 쓰지 않는다
 title:
-  ja: "一口だけペンギン（モバイルゲーム）"
-  en: "One More Bite Penguin (mobile game)"
+  ja: "あと一口、ペンギン！（モバイルゲーム）"
+  en: "One More Bite, Penguin! (mobile game)"
   zh: "再吃一口企鹅（手机游戏）"
-  ko: "한입만 더 펭귄 (모바일 게임)"
+  ko: "한 입만 더, 펭귄! (모바일 게임)"
 summary:
-  ja: "押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが魚を食べながら、海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発中"
-  en: "A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). In development with Godot 4"
-  zh: "按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅一边吃鱼，一边从海面穿过 50 个区域潜到地心（6,371 公里）。正在使用 Godot 4 开发"
-  ko: "누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 물고기를 먹으며 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발 중"
+  ja: "押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発し、Google Play でクローズドテスト中"
+  en: "A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). Built with Godot 4 and now in closed testing on Google Play"
+  zh: "按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅从海面穿过 50 个区域潜到地心（6,371 公里）。使用 Godot 4 开发，目前正在 Google Play 封闭测试中"
+  ko: "누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발해 Google Play 비공개 테스트 진행 중"
 category: build
 status: in-progress
 # コミット履歴 (2026-10-19〜) から / 커밋 이력 (2026-10-19~)에서
 start: "2026-10"
 tech: [godot, python]
-# 画面・動画: Godot 4.7.2 で実際のゲームを動かして撮影 (自動操作、720×1280 を縮小) / 화면·영상: Godot 4.7.2로 실제 게임을 실행해 촬영 (자동 조작, 720×1280을 축소)
+# 画像: ストア掲載用に作った画像 (store/art) を縮小。動画: Godot 4.7.2 で実際のゲームを自動操作して撮影 (v0.1.0 時点)
+# 이미지: 스토어 등록용으로 만든 이미지 (store/art)를 축소. 영상: Godot 4.7.2로 실제 게임을 자동 조작해 촬영 (v0.1.0 시점)
 thumbnail:
   src: /projects/one-more-bite-penguin/thumbnail.webp
   alt:
-    ja: "ホーム・深海・内核のゲーム画面 3 枚"
-    en: "Three game screens: home, deep sea, and inner core"
-    zh: "主页、深海、内核三张游戏画面"
-    ko: "홈·심해·내핵 게임 화면 3장"
+    ja: "Google Play 用のフィーチャーグラフィック。海の中を泳ぐペンギンのモグとタイトル"
+    en: "Google Play feature graphic: Mogu the penguin swimming underwater with the title"
+    zh: "Google Play 宣传图：在海里游泳的企鹅 Mogu 与标题"
+    ko: "Google Play 피처 그래픽. 바닷속을 헤엄치는 펭귄 모구와 제목"
 video:
   src: /projects/one-more-bite-penguin/play.mp4
   poster: /projects/one-more-bite-penguin/play-poster.webp
@@ -38,10 +39,18 @@ screenshots:
     width: 540
     height: 960
     alt:
-      ja: "ホーム画面。氷河の上の友だちペンギンとタイトルロゴ"
-      en: "Home screen with the title logo and friend penguins on the glacier"
-      zh: "主页画面，冰川上的企鹅伙伴与标题标志"
-      ko: "홈 화면. 빙하 위 친구 펭귄들과 제목 로고"
+      ja: "ホーム画面"
+      en: "Home screen"
+      zh: "主页画面"
+      ko: "홈 화면"
+  - src: /projects/one-more-bite-penguin/howto.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "遊び方の画面（初回プレイ時に自動で表示）"
+      en: "How-to-play screen, shown automatically on the first run"
+      zh: "玩法说明画面（首次游玩时自动显示）"
+      ko: "게임 방법 화면 (처음 시작할 때 자동 표시)"
   - src: /projects/one-more-bite-penguin/zone1.webp
     width: 540
     height: 960
@@ -50,38 +59,38 @@ screenshots:
       en: "Diving in zone 1, Penguin Beach"
       zh: "在第 1 区“企鹅海滩”下潜"
       ko: "1구역 \"펭귄 해변\"에서 잠수하는 모습"
-  - src: /projects/one-more-bite-penguin/zone13.webp
+  - src: /projects/one-more-bite-penguin/zone40.webp
     width: 540
     height: 960
     alt:
-      ja: "13 エリア「深海平原」。ライトを付けたヘルメット姿のモグ"
-      en: "Zone 13, the abyssal plain, with Mogu wearing a helmet lamp"
-      zh: "第 13 区“深海平原”，戴着头灯头盔的 Mogu"
-      ko: "13구역 \"심해저 평원\". 램프 달린 헬멧을 쓴 모구"
-  - src: /projects/one-more-bite-penguin/zone26.webp
-    width: 540
-    height: 960
-    alt:
-      ja: "26 エリア「マグマの川」"
-      en: "Zone 26, the magma river"
-      zh: "第 26 区“岩浆河”"
-      ko: "26구역 \"마그마 강\""
+      ja: "40 エリア「鉄の渦」と巨大な危険生物"
+      en: "Zone 40, the iron vortex, with a giant hazard creature"
+      zh: "第 40 区“铁漩涡”与巨大的危险生物"
+      ko: "40구역 \"철 소용돌이 지대\"와 위험한 거대 생물"
   - src: /projects/one-more-bite-penguin/zone45.webp
     width: 540
     height: 960
     alt:
-      ja: "45 エリア「時間が止まった場所」。内核のイベントと危険物"
-      en: "Zone 45, where time stands still, with inner-core events and hazards"
-      zh: "第 45 区“时间停止之处”，内核事件与危险物"
-      ko: "45구역 \"시간이 멈춘 곳\". 내핵 이벤트와 위험물"
+      ja: "45 エリア「時間が止まった場所」と巨大な危険生物"
+      en: "Zone 45, where time stands still, with a giant hazard creature"
+      zh: "第 45 区“时间停止之处”与巨大的危险生物"
+      ko: "45구역 \"시간이 멈춘 곳\"과 위험한 거대 생물"
   - src: /projects/one-more-bite-penguin/collection.webp
     width: 540
     height: 960
     alt:
-      ja: "図鑑画面。等級ごとの収集数と見つけた生き物"
-      en: "Collection screen with counts per rarity tier and discovered creatures"
-      zh: "图鉴画面，各稀有度的收集数与已发现的生物"
-      ko: "도감 화면. 등급별 모은 수와 발견한 생물"
+      ja: "図鑑画面。等級ごとの収集数"
+      en: "Collection screen with counts per rarity tier"
+      zh: "图鉴画面，各稀有度的收集数"
+      ko: "도감 화면. 등급별 모은 수"
+  - src: /projects/one-more-bite-penguin/journey.webp
+    width: 540
+    height: 959
+    alt:
+      ja: "地球の中心までの旅を紹介するストア用イラスト"
+      en: "Store illustration of the journey to the center of the Earth"
+      zh: "介绍前往地心旅程的商店插图"
+      ko: "지구 중심까지의 여정을 소개하는 스토어용 그림"
 
 overview:
   - ja: "sosogames-studio の最初のワンタッチモバイルゲームです。画面のどこでも押している間はペンギン「モグ」が潜り、離すと浮かび、軽くタップすると羽ばたいて一気に上がります。"
@@ -92,23 +101,27 @@ overview:
     en: "Fish only count once you bring them back to base (the surface or a submarine). If oxygen hits zero, you lose everything in your belly and the run ends. Raising your score opens the floor, leading down through 50 zones of ocean, crust, mantle, and core."
     zh: "吃下的鱼要回到基地（海面或潜水艇）才会计分。氧气归零就会失去肚子里的鱼并结束游戏。分数提高后地面会打开，从海洋一路穿过地壳、地幔、地核共 50 个区域。"
     ko: "물고기는 먹기만 해서는 점수가 되지 않고, 기지(수면·잠수정)로 돌아와야 확정됩니다. 산소가 0이 되면 배 속 물고기를 잃고 게임 오버. 점수가 오르면 바닥이 열리고 바다부터 지각·맨틀·핵까지 50개 구역을 내려갑니다."
-  - ja: "図鑑 373 種・10 段階のレア度、エリアごとの危険物と中ボス、外核・内核の環境イベント、ショップの永久強化、ランキング画面、日本語・英語・中国語・韓国語の 4 言語に対応しています。"
-    en: "It has a 373-species collection with 10 rarity tiers, per-zone hazards and mid-bosses, environmental events in the outer and inner core, permanent upgrades in a shop, a ranking screen, and four languages (Japanese, English, Chinese, Korean)."
-    zh: "包含 373 种图鉴与 10 级稀有度、各区域的危险物和中头目、外核与内核的环境事件、商店的永久强化、排行榜画面，并支持日语、英语、中文、韩语 4 种语言。"
-    ko: "도감 373종·10단계 등급, 구역별 위험물과 중간 보스, 외핵·내핵 환경 이벤트, 상점 영구 강화, 랭킹 화면, 한국어·영어·일본어·중국어 4개 언어를 지원합니다."
-  - ja: "グラフィック・BGM・効果音はすべてコードで作っています（描画は GDScript、音は Python で合成）。現在はストア公開前で、広告・課金・ランキング・クラウド保存はつなぎ込みの準備段階です。"
-    en: "All graphics, music, and sound effects are generated in code (drawing in GDScript, audio synthesized in Python). It is not yet on the stores; ads, in-app purchases, rankings, and cloud saves are prepared but not yet connected."
-    zh: "所有图像、背景音乐和音效都由代码生成（绘制用 GDScript，声音用 Python 合成）。目前尚未上架，广告、内购、排行榜和云存档处于接入准备阶段。"
-    ko: "그래픽·배경음악·효과음은 모두 코드로 만들었습니다 (그림은 GDScript, 소리는 Python으로 합성). 아직 스토어 출시 전이며, 광고·결제·랭킹·클라우드 저장은 연결 준비 단계입니다."
-phases: [requirements, basic-design, detailed-design, implementation, unit-test]
+  - ja: "図鑑 394 枠・10 段階のレア度、エリアごとの危険物と巨大な危険生物、外核・内核の環境イベントと自然災害、ショップの永久強化、遊び方の画面があります。グラフィック・BGM・効果音はコードで作っています（描画は GDScript、音は Python で合成）。"
+    en: "It has a 394-slot collection with 10 rarity tiers, per-zone hazards and giant hazard creatures, environmental events and natural disasters deep in the Earth, permanent upgrades in a shop, and a how-to-play screen. In-game graphics, music, and sound effects are generated in code (drawing in GDScript, audio synthesized in Python)."
+    zh: "包含 394 格图鉴与 10 级稀有度、各区域的危险物和巨大危险生物、外核与内核的环境事件和自然灾害、商店的永久强化以及玩法说明画面。游戏内的图像、背景音乐和音效都由代码生成（绘制用 GDScript，声音用 Python 合成）。"
+    ko: "도감 394칸·10단계 등급, 구역별 위험물과 위험한 거대 생물, 외핵·내핵 환경 이벤트와 자연재해, 상점 영구 강화, 게임 방법 화면이 있습니다. 게임 속 그래픽·배경음악·효과음은 코드로 만들었습니다 (그림은 GDScript, 소리는 Python으로 합성)."
+  - ja: "Google Play Console にアプリを登録し、Android App Bundle（AAB）でアップロードして、現在はクローズドテストを行っています（現行バージョン 0.1.1）。ストア掲載文・フィーチャーグラフィック・スクリーンショット・プライバシーポリシーも用意しました。"
+    en: "The app is registered in Google Play Console and uploaded as an Android App Bundle (AAB), and it is now in closed testing (current version 0.1.1). I also prepared the store listing, feature graphic, screenshots, and privacy policy."
+    zh: "已在 Google Play Console 注册应用，以 Android App Bundle（AAB）上传，目前正在进行封闭测试（当前版本 0.1.1）。还准备了商店介绍文字、宣传图、截图和隐私政策。"
+    ko: "Google Play Console에 앱을 등록하고 Android App Bundle(AAB)로 올려, 지금은 비공개 테스트를 진행하고 있습니다 (현재 버전 0.1.1). 스토어 소개 글·피처 그래픽·스크린샷·개인정보 처리방침도 준비했습니다."
+  - ja: "収益化は AdMob の広告（復活・氷 2 倍のリワード広告、2 回に 1 回の全面広告）を組み込みました。最初の公開は韓国語・ゲストログインのみとし、課金ショップ・ソーシャルログイン・ランキングは公開後のアップデートでつなぐ予定です（英語・日本語・中国語の翻訳は用意済みで、ネイティブチェック後に公開）。"
+    en: "For monetization I integrated AdMob ads (rewarded ads for reviving and doubling ice, plus an interstitial every second run). The first release is Korean-only with guest login; the paid shop, social login, and rankings will be connected in later updates (English, Japanese, and Chinese translations are ready and will ship after native review)."
+    zh: "变现方面接入了 AdMob 广告（复活和冰块翻倍的激励广告，以及每两局一次的插页广告）。首次发布只提供韩语和游客登录，付费商店、社交登录和排行榜将在发布后的更新中接入（英语、日语、中文翻译已准备好，母语审校后公开）。"
+    ko: "수익화는 AdMob 광고(부활·얼음 2배 보상형 광고, 2판에 한 번 전면 광고)를 붙였습니다. 첫 출시는 한국어·게스트 로그인만 제공하고, 유료 상점·소셜 로그인·랭킹은 출시 후 업데이트로 연결할 예정입니다 (영어·일본어·중국어 번역은 준비해 두었고 원어민 검수 후 공개)."
+phases: [requirements, basic-design, detailed-design, implementation, unit-test, integration-test]
 stack:
   - name: "Godot Engine"
     version: "4.7.2"
     purpose:
-      ja: "ゲームエンジン（Compatibility レンダラー、Web・Android 書き出し）"
-      en: "Game engine (Compatibility renderer, Web and Android export)"
-      zh: "游戏引擎（Compatibility 渲染器，导出 Web 与 Android）"
-      ko: "게임 엔진 (Compatibility 렌더러, 웹·Android 내보내기)"
+      ja: "ゲームエンジン（Compatibility レンダラー、Android AAB・Web 書き出し）"
+      en: "Game engine (Compatibility renderer, Android AAB and Web export)"
+      zh: "游戏引擎（Compatibility 渲染器，导出 Android AAB 与 Web）"
+      ko: "게임 엔진 (Compatibility 렌더러, Android AAB·웹 내보내기)"
   - name: "GDScript"
     purpose:
       ja: "移動・酸素・生成・UI・キャラクター描画などゲーム全体"
@@ -121,12 +134,25 @@ stack:
       en: "Balance data generation, music and sound synthesis, and translation checks"
       zh: "生成平衡数据、合成音效与背景音乐、检查翻译表"
       ko: "밸런스 데이터 생성·효과음과 음악 합성·번역표 검사"
-  - name: "Supabase (PostgreSQL)"
+  - name: "Google AdMob（Poing Godot プラグイン）"
+    version: "5.1.0"
     purpose:
-      ja: "アカウント・クラウド保存・ランキングのスキーマ設計（未デプロイ）"
-      en: "Schema design for accounts, cloud saves, and rankings (not yet deployed)"
-      zh: "账号、云存档和排行榜的表结构设计（尚未部署）"
-      ko: "계정·클라우드 저장·랭킹 스키마 설계 (미배포)"
+      ja: "リワード広告・全面広告"
+      en: "Rewarded and interstitial ads"
+      zh: "激励广告与插页广告"
+      ko: "보상형 광고·전면 광고"
+  - name: "Google Play Console"
+    purpose:
+      ja: "アプリ登録・クローズドテスト・ストア掲載情報"
+      en: "App registration, closed testing, and store listing"
+      zh: "应用注册、封闭测试与商店信息"
+      ko: "앱 등록·비공개 테스트·스토어 등록정보"
+  - name: "Firebase / Supabase"
+    purpose:
+      ja: "アカウントとクラウドバックアップの検証（公開版では未使用）"
+      en: "Prototyping accounts and cloud backup (not used in the release build)"
+      zh: "账号与云备份的验证（发布版本中未使用）"
+      ko: "계정·클라우드 백업 검증 (출시 버전에서는 미사용)"
 decisions:
   - topic:
       ja: "物理エンジンを使わず移動を自前で計算"
@@ -174,3 +200,13 @@ challenges:
       en: "Buttons wrap automatically, side-by-side buttons shrink their font together, and a Python script checks for missing translation keys"
       zh: "按钮自动换行，并排的按钮统一缩小字号，并用 Python 脚本检查遗漏的翻译键"
       ko: "버튼은 자동 줄바꿈, 나란히 놓인 버튼은 글자 크기를 같이 줄이게 하고, 번역 키 누락은 Python 스크립트로 검사했다"
+  - problem:
+      ja: "広告 SDK の初期化が終わる前に広告を読み込むと、アプリが落ちてしまう"
+      en: "Loading an ad before the ad SDK had finished initializing crashed the app"
+      zh: "在广告 SDK 初始化完成前加载广告会导致应用崩溃"
+      ko: "광고 SDK 초기화가 끝나기 전에 광고를 불러오면 앱이 꺼진다"
+    solution:
+      ja: "起動時に先に初期化し、完了の通知を受けてから広告を読み込むようにした。開発ビルドは常にテスト広告、開発者の端末もテスト端末に登録して、誤って本番広告を押さないようにした"
+      en: "Initialize at startup and load ads only after the completion callback. Debug builds always use test ads, and the developer phone is registered as a test device so real ads are never clicked by mistake"
+      zh: "启动时先初始化，收到完成通知后再加载广告。开发版本始终使用测试广告，并把开发者手机登记为测试设备，避免误点正式广告"
+      ko: "시작할 때 미리 초기화하고, 완료 알림을 받은 뒤에 광고를 불러오도록 했다. 개발 빌드는 항상 테스트 광고, 개발자 폰도 테스트 기기로 등록해 실수로 실제 광고를 누르지 않게 했다"
