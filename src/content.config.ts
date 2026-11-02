@@ -87,6 +87,8 @@ const projects = defineCollection({
     status: z.enum(['in-progress', 'completed', 'ended']),
     // 内容を確認するまでサイトに出さない / 내용을 확인할 때까지 사이트에 표시하지 않는다
     draft: z.boolean().default(false),
+    // 一覧の先頭に固定する (同じ月に始めたものが並ぶときなど) / 목록 맨 앞에 고정한다 (같은 달에 시작한 것이 나란히 있을 때 등)
+    pinned: z.boolean().default(false),
     start: yearMonth,
     end: yearMonth.optional(),
     // 期間が年月では表せないほど短いとき (例: 約1日) に添える / 기간이 연월로는 나타낼 수 없을 만큼 짧을 때 (예: 약 하루) 덧붙인다

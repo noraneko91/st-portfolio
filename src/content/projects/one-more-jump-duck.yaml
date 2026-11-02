@@ -10,6 +10,8 @@ summary:
   en: "A portrait 3D one-touch endless climber: hold to charge, release to jump. A duckling hops from platform to platform, from the city all the way into outer space. Built with Godot 4 and now in internal testing on Google Play"
   zh: "长按蓄力、松开跳跃的竖屏 3D 单键无限上升游戏。小鸭在平台之间跳跃，从城市一路升到宇宙尽头。使用 Godot 4 开发，目前进行到 Google Play 内部测试"
   ko: "꾹 눌러 모으고 떼면 점프하는 세로 화면 3D 원터치 무한 상승 게임. 아기 오리가 발판에서 발판으로 뛰어 도시에서 우주 끝까지 올라간다. Godot 4로 개발해 Google Play 내부 테스트 진행 중"
+# 一覧の先頭に表示 (本人の指定) / 목록 맨 앞에 표시 (본인 지정)
+pinned: true
 category: build
 status: in-progress
 # コミット履歴 (2026-10-24〜) から / 커밋 이력 (2026-10-24~)에서
