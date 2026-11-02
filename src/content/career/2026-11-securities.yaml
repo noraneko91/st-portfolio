@@ -1,0 +1,37 @@
+# 2026-11 から参画。詳細は未確定のため本人提供の案件情報から簡潔に記載 / 2026-11부터 참여. 상세는 미정이라 본인이 준 안건 정보로 간단히 기재
+start: "2026-11"
+role: se
+industry:
+  ja: "証券"
+  en: "Securities"
+  zh: "证券"
+  ko: "증권"
+title:
+  ja: "オンライントレードシステムの開発"
+  en: "Online trading system development"
+  zh: "网上交易系统开发"
+  ko: "온라인 트레이드 시스템 개발"
+summary:
+  - ja: "大手証券会社向けオンライントレードシステムの開発（基本設計からリリースまで担当、進行中）"
+    en: "Development of an online trading system for a major securities company, from basic design through release (ongoing)"
+    zh: "为大型证券公司开发网上交易系统（负责从基本设计到发布，进行中）"
+    ko: "대형 증권사 대상 온라인 트레이드 시스템 개발 (기본 설계부터 릴리스까지 담당, 진행 중)"
+duties:
+  - ja: "自社フレームワークを使った Java による機能の設計・開発"
+    en: "Designing and developing features in Java on an in-house framework"
+    zh: "基于自研框架使用 Java 进行功能设计与开发"
+    ko: "자체 프레임워크 기반 Java 기능 설계·개발"
+  - ja: "SQL によるデータ処理、C シェルによるバッチ・運用スクリプトの作成"
+    en: "Data processing with SQL and batch/operations scripts in C shell"
+    zh: "使用 SQL 进行数据处理，用 C shell 编写批处理与运维脚本"
+    ko: "SQL을 이용한 데이터 처리, C 셸 배치·운용 스크립트 작성"
+  - ja: "SVN から GitLab へのバージョン管理環境の移行・構築"
+    en: "Migrating version control from SVN to GitLab and setting up the environment"
+    zh: "将版本管理从 SVN 迁移到 GitLab 并搭建环境"
+    ko: "SVN에서 GitLab으로 버전 관리 환경 이전·구축"
+  - ja: "テストとリリース対応"
+    en: "Testing and release support"
+    zh: "测试与发布支持"
+    ko: "테스트 및 릴리스 대응"
+tech: [java, csh, svn, gitlab]
+phases: [basic-design, detailed-design, implementation, unit-test, integration-test]

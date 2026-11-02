@@ -15,72 +15,87 @@ status: in-progress
 # コミット履歴 (2026-10-24〜) から / 커밋 이력 (2026-10-24~)에서
 start: "2026-10"
 tech: [godot, firebase, javascript, python, docker]
-# 画像: リポジトリの docs/images にある実際のゲーム画面 (v0.8〜v0.10 の開発中キャプチャ) / 이미지: 리포지토리 docs/images의 실제 게임 화면 (v0.8~v0.10 개발 중 캡처)
+# 画像: 最新コード (2026-10-29) をリポジトリのキャプチャ用シーンで 1080×1920 撮影し縮小 / 이미지: 최신 코드 (2026-10-29)를 리포지토리의 캡처용 씬으로 1080×1920 촬영해 축소
 thumbnail:
   src: /projects/one-more-jump-duck/thumbnail.webp
   alt:
-    ja: "ホーム・ジャンプ中・宇宙エリアのゲーム画面 3 枚"
-    en: "Three game screens: home, mid-jump, and outer space"
-    zh: "主页、跳跃中、宇宙区域三张游戏画面"
-    ko: "홈·점프 중·우주 구간 게임 화면 3장"
+    ja: "ホーム・PERFECT 着地・土星軌道のゲーム画面 3 枚"
+    en: "Three game screens: home, a PERFECT landing, and Saturn orbit"
+    zh: "主页、PERFECT 落地、土星轨道三张游戏画面"
+    ko: "홈·PERFECT 착지·토성 궤도 게임 화면 3장"
 screenshots:
   - src: /projects/one-more-jump-duck/home.webp
-    width: 405
-    height: 720
+    width: 540
+    height: 960
     alt:
       ja: "ホーム画面"
       en: "Home screen"
       zh: "主页画面"
       ko: "홈 화면"
   - src: /projects/one-more-jump-duck/charging.webp
-    width: 405
-    height: 720
+    width: 540
+    height: 960
     alt:
-      ja: "長押しでためている画面。軌道の点線と下のゲージ"
-      en: "Charging a jump, with the dotted trajectory and the gauge below"
-      zh: "长按蓄力的画面，虚线轨迹与下方的蓄力条"
-      ko: "꾹 눌러 힘을 모으는 화면. 점선 궤적과 아래 게이지"
+      ja: "長押しでためている画面。下のゲージと次の足場までの距離"
+      en: "Charging a jump, with the gauge below and distances to the next platform"
+      zh: "长按蓄力的画面，下方的蓄力条与到下一个平台的距离"
+      ko: "꾹 눌러 힘을 모으는 화면. 아래 게이지와 다음 발판까지의 거리"
   - src: /projects/one-more-jump-duck/airborne.webp
-    width: 405
-    height: 720
+    width: 540
+    height: 960
     alt:
       ja: "次の足場へ跳んでいるところ"
       en: "Jumping toward the next platform"
       zh: "跳向下一个平台"
       ko: "다음 발판으로 뛰어오르는 모습"
-  - src: /projects/one-more-jump-duck/space.webp
-    width: 405
-    height: 720
+  - src: /projects/one-more-jump-duck/perfect.webp
+    width: 540
+    height: 960
     alt:
-      ja: "高度 16,911m、衛星が浮かぶ宇宙エリア"
-      en: "16,911 m up, in the satellite zone of space"
-      zh: "高度 16,911 米，漂着卫星的宇宙区域"
-      ko: "고도 16,911m, 인공위성이 떠 있는 우주 구간"
-  - src: /projects/one-more-jump-duck/planet.webp
-    width: 405
-    height: 720
+      ja: "足場の中心に着地して PERFECT、コイン +1"
+      en: "A PERFECT landing in the center earns a coin"
+      zh: "落在平台中心获得 PERFECT，金币 +1"
+      ko: "발판 가운데에 착지해 PERFECT, 코인 +1"
+  - src: /projects/one-more-jump-duck/earth.webp
+    width: 540
+    height: 960
     alt:
-      ja: "高度 25,735m、惑星のそばの足場"
-      en: "25,735 m up, platforms beside a planet"
-      zh: "高度 25,735 米，行星旁的平台"
-      ko: "고도 25,735m, 행성 옆 발판"
+      ja: "成層圏のエリア。足元に地球"
+      en: "The stratosphere region, with Earth below"
+      zh: "平流层区域，脚下是地球"
+      ko: "성층권 구간. 발아래에 지구"
+  - src: /projects/one-more-jump-duck/saturn.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "土星軌道のエリア"
+      en: "The Saturn orbit region"
+      zh: "土星轨道区域"
+      ko: "토성 궤도 구간"
+  - src: /projects/one-more-jump-duck/black-hole.webp
+    width: 540
+    height: 960
+    alt:
+      ja: "次の宇宙へつながるブラックホールのそば"
+      en: "Near the black hole that leads to the next universe"
+      zh: "通往下一个宇宙的黑洞旁"
+      ko: "다음 우주로 이어지는 블랙홀 근처"
   - src: /projects/one-more-jump-duck/game-over.webp
-    width: 405
-    height: 720
+    width: 540
+    height: 960
     alt:
-      ja: "ゲームオーバー画面。到達高度と広告でコイン 2 倍"
-      en: "Game over screen with altitude reached and ad-doubled coins"
-      zh: "游戏结束画面，到达高度与看广告金币翻倍"
-      ko: "게임 오버 화면. 도달 고도와 광고로 코인 2배"
+      ja: "ゲームオーバー画面。到達高度と着地数"
+      en: "Game over screen with the altitude and landings reached"
+      zh: "游戏结束画面，到达高度与落地次数"
+      ko: "게임 오버 화면. 도달 고도와 착지 수"
   - src: /projects/one-more-jump-duck/wardrobe.webp
-    width: 405
-    height: 720
+    width: 540
+    height: 960
     alt:
-      ja: "アヒルの着せ替え（見た目だけのスキン）"
-      en: "Duck wardrobe (cosmetic-only skins)"
-      zh: "小鸭换装（仅外观的皮肤）"
-      ko: "오리 옷장 (외형만 바뀌는 스킨)"
-
+      ja: "アヒルの着せ替え（色・頭・服・スキン、見た目だけ）"
+      en: "Duck wardrobe: colors, headwear, outfits, and skins (cosmetic only)"
+      zh: "小鸭换装：颜色、头饰、衣服、皮肤（仅外观）"
+      ko: "오리 옷장: 색상·머리·옷·스킨 (외형만)"
 overview:
   - ja: "sosogames-studio の 2 作目のモバイルゲームです。最初の作品「あと一口、ペンギン！」の経験をもとに、今度は 3D で作っています。長押しで力をため、離すと子アヒルが次の足場へ跳びます。着地に失敗して落ちたら終わりです。"
     en: "The second mobile game from sosogames-studio, built in 3D this time on the experience of the first one, One More Bite, Penguin!. Hold to build power and release to send the duckling to the next platform; miss a landing and the run ends."

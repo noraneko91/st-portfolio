@@ -105,3 +105,9 @@
 - id: firebase
   name: Firebase
   category: cloud
+- id: csh
+  name: C shell
+  category: language
+- id: gitlab
+  name: GitLab
+  category: tool
