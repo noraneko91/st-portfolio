@@ -138,7 +138,10 @@ export async function getCertifications() {
 // 個人開発。draft を除き、開始が新しい順 / 개인 개발. draft를 빼고 시작이 최신인 순
 export async function getProjects(): Promise<Project[]> {
   const { projects } = await loadCareersAndSkills();
-  return projects.sort((a, b) => toMonthIndex(b.data.start) - toMonthIndex(a.data.start));
+  // 固定したものを先に、その後は開始が新しい順 / 고정한 것을 먼저, 그다음은 시작이 최근인 순
+  return projects.sort(
+    (a, b) => Number(b.data.pinned) - Number(a.data.pinned) || toMonthIndex(b.data.start) - toMonthIndex(a.data.start),
+  );
 }
 
 // 概要がある項目だけ詳細ページを作る (中身のない詳細ページを作らない) / 개요가 있는 항목만 상세 페이지를 만든다 (내용 없는 상세 페이지를 만들지 않는다)
