@@ -99,6 +99,7 @@ export const ko: Translation = {
   'project.category.build': '제작',
   'project.status.in-progress': '진행 중',
   'project.status.completed': '완료',
+  'project.status.ended': '종료',
   'skills.personalOnly': '개인 개발',
 
   'project.meta.type': '분류',

@@ -99,6 +99,7 @@ export const en: Translation = {
   'project.category.build': 'Build',
   'project.status.in-progress': 'In progress',
   'project.status.completed': 'Completed',
+  'project.status.ended': 'Ended',
   'skills.personalOnly': 'Personal projects',
 
   'project.meta.type': 'Type',

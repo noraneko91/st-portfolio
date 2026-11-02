@@ -83,7 +83,8 @@ const projects = defineCollection({
     summary: localized,
     // learning: 講座・学習用 / build: 自分で企画した制作物 / learning: 강의·학습용 / build: 직접 기획한 제작물
     category: z.enum(['learning', 'build']),
-    status: z.enum(['in-progress', 'completed']),
+    // ended: 公開せずに開発を終えたもの / ended: 출시하지 않고 개발을 마친 것
+    status: z.enum(['in-progress', 'completed', 'ended']),
     // 内容を確認するまでサイトに出さない / 내용을 확인할 때까지 사이트에 표시하지 않는다
     draft: z.boolean().default(false),
     start: yearMonth,
