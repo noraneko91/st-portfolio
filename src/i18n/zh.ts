@@ -99,6 +99,7 @@ export const zh: Translation = {
   'project.category.build': '制作',
   'project.status.in-progress': '进行中',
   'project.status.completed': '已完成',
+  'project.status.ended': '已结束',
   'skills.personalOnly': '个人开发',
 
   'project.meta.type': '类型',

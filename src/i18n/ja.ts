@@ -98,6 +98,7 @@ export const ja = {
   'project.category.build': '制作',
   'project.status.in-progress': '進行中',
   'project.status.completed': '完了',
+  'project.status.ended': '終了',
   'skills.personalOnly': '個人開発',
 
   'project.meta.type': '分類',

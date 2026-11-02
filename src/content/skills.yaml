@@ -102,3 +102,6 @@
 - id: godot
   name: Godot / GDScript
   category: framework
+- id: firebase
+  name: Firebase
+  category: cloud

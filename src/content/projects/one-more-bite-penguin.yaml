@@ -6,14 +6,15 @@ title:
   zh: "再吃一口企鹅（手机游戏）"
   ko: "한 입만 더, 펭귄! (모바일 게임)"
 summary:
-  ja: "押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発し、Google Play でクローズドテスト中"
-  en: "A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). Built with Godot 4 and now in closed testing on Google Play"
-  zh: "按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅从海面穿过 50 个区域潜到地心（6,371 公里）。使用 Godot 4 开发，目前正在 Google Play 封闭测试中"
-  ko: "누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발해 Google Play 비공개 테스트 진행 중"
+  ja: "押している間だけ潜り、離すと浮かぶワンタッチのモバイルゲーム。食いしん坊のペンギンが海面から地球の中心（6,371km）まで 50 のエリアを降りていく。Godot 4 で開発し、Google Play のクローズドテストまで進めたが、公開はせずに終了"
+  en: "A one-touch mobile game where you dive while holding and rise when you let go. A hungry penguin eats its way down 50 zones, from the sea surface to the center of the Earth (6,371 km). Built with Godot 4 and taken through closed testing on Google Play, then ended without release"
+  zh: "按住就下潜、松开就上浮的单键手机游戏。贪吃的企鹅从海面穿过 50 个区域潜到地心（6,371 公里）。使用 Godot 4 开发，进行到 Google Play 封闭测试后决定不上架并结束"
+  ko: "누르는 동안 잠수하고 떼면 떠오르는 원터치 모바일 게임. 먹보 펭귄이 바다 표층부터 지구 중심(6,371km)까지 50개 구역을 내려간다. Godot 4로 개발해 Google Play 비공개 테스트까지 진행했지만, 출시하지 않고 종료"
 category: build
-status: in-progress
-# コミット履歴 (2026-10-19〜) から / 커밋 이력 (2026-10-19~)에서
+status: ended
+# コミット履歴 (2026-10-19〜23) から。終了は本人の判断 / 커밋 이력 (2026-10-19~23)에서. 종료는 본인 판단
 start: "2026-10"
+end: "2026-10"
 tech: [godot, python]
 # 画像: ストア掲載用に作った画像 (store/art) を縮小。動画: Godot 4.7.2 で実際のゲームを自動操作して撮影 (v0.1.0 時点)
 # 이미지: 스토어 등록용으로 만든 이미지 (store/art)를 축소. 영상: Godot 4.7.2로 실제 게임을 자동 조작해 촬영 (v0.1.0 시점)
@@ -105,14 +106,18 @@ overview:
     en: "It has a 394-slot collection with 10 rarity tiers, per-zone hazards and giant hazard creatures, environmental events and natural disasters deep in the Earth, permanent upgrades in a shop, and a how-to-play screen. In-game graphics, music, and sound effects are generated in code (drawing in GDScript, audio synthesized in Python)."
     zh: "包含 394 格图鉴与 10 级稀有度、各区域的危险物和巨大危险生物、外核与内核的环境事件和自然灾害、商店的永久强化以及玩法说明画面。游戏内的图像、背景音乐和音效都由代码生成（绘制用 GDScript，声音用 Python 合成）。"
     ko: "도감 394칸·10단계 등급, 구역별 위험물과 위험한 거대 생물, 외핵·내핵 환경 이벤트와 자연재해, 상점 영구 강화, 게임 방법 화면이 있습니다. 게임 속 그래픽·배경음악·효과음은 코드로 만들었습니다 (그림은 GDScript, 소리는 Python으로 합성)."
-  - ja: "Google Play Console にアプリを登録し、Android App Bundle（AAB）でアップロードして、現在はクローズドテストを行っています（現行バージョン 0.1.1）。ストア掲載文・フィーチャーグラフィック・スクリーンショット・プライバシーポリシーも用意しました。"
-    en: "The app is registered in Google Play Console and uploaded as an Android App Bundle (AAB), and it is now in closed testing (current version 0.1.1). I also prepared the store listing, feature graphic, screenshots, and privacy policy."
-    zh: "已在 Google Play Console 注册应用，以 Android App Bundle（AAB）上传，目前正在进行封闭测试（当前版本 0.1.1）。还准备了商店介绍文字、宣传图、截图和隐私政策。"
-    ko: "Google Play Console에 앱을 등록하고 Android App Bundle(AAB)로 올려, 지금은 비공개 테스트를 진행하고 있습니다 (현재 버전 0.1.1). 스토어 소개 글·피처 그래픽·스크린샷·개인정보 처리방침도 준비했습니다."
-  - ja: "収益化は AdMob の広告（復活・氷 2 倍のリワード広告、2 回に 1 回の全面広告）を組み込みました。最初の公開は韓国語・ゲストログインのみとし、課金ショップ・ソーシャルログイン・ランキングは公開後のアップデートでつなぐ予定です（英語・日本語・中国語の翻訳は用意済みで、ネイティブチェック後に公開）。"
-    en: "For monetization I integrated AdMob ads (rewarded ads for reviving and doubling ice, plus an interstitial every second run). The first release is Korean-only with guest login; the paid shop, social login, and rankings will be connected in later updates (English, Japanese, and Chinese translations are ready and will ship after native review)."
-    zh: "变现方面接入了 AdMob 广告（复活和冰块翻倍的激励广告，以及每两局一次的插页广告）。首次发布只提供韩语和游客登录，付费商店、社交登录和排行榜将在发布后的更新中接入（英语、日语、中文翻译已准备好，母语审校后公开）。"
-    ko: "수익화는 AdMob 광고(부활·얼음 2배 보상형 광고, 2판에 한 번 전면 광고)를 붙였습니다. 첫 출시는 한국어·게스트 로그인만 제공하고, 유료 상점·소셜 로그인·랭킹은 출시 후 업데이트로 연결할 예정입니다 (영어·일본어·중국어 번역은 준비해 두었고 원어민 검수 후 공개)."
+  - ja: "Google Play Console にアプリを登録し、Android App Bundle（AAB）でアップロードし、クローズドテストまで行いました（最終バージョン 0.1.1）。ストア掲載文・フィーチャーグラフィック・スクリーンショット・プライバシーポリシーも用意しました。"
+    en: "The app is registered in Google Play Console and uploaded as an Android App Bundle (AAB), and taken through closed testing (final version 0.1.1). I also prepared the store listing, feature graphic, screenshots, and privacy policy."
+    zh: "已在 Google Play Console 注册应用，以 Android App Bundle（AAB）上传，并进行了封闭测试（最终版本 0.1.1）。还准备了商店介绍文字、宣传图、截图和隐私政策。"
+    ko: "Google Play Console에 앱을 등록하고 Android App Bundle(AAB)로 올려 비공개 테스트까지 진행했습니다 (최종 버전 0.1.1). 스토어 소개 글·피처 그래픽·스크린샷·개인정보 처리방침도 준비했습니다."
+  - ja: "収益化は AdMob の広告（復活・氷 2 倍のリワード広告、2 回に 1 回の全面広告）を組み込みました。最初の公開は韓国語・ゲストログインのみとし、課金ショップ・ソーシャルログイン・ランキングは公開後につなぐ計画でした（英語・日本語・中国語の翻訳も用意）。"
+    en: "For monetization I integrated AdMob ads (rewarded ads for reviving and doubling ice, plus an interstitial every second run). The first release was planned as Korean-only with guest login, with the paid shop, social login, and rankings to follow in later updates (English, Japanese, and Chinese translations were also prepared)."
+    zh: "变现方面接入了 AdMob 广告（复活和冰块翻倍的激励广告，以及每两局一次的插页广告）。首次发布计划只提供韩语和游客登录，付费商店、社交登录和排行榜计划在之后的更新中接入（也准备了英语、日语、中文翻译）。"
+    ko: "수익화는 AdMob 광고(부활·얼음 2배 보상형 광고, 2판에 한 번 전면 광고)를 붙였습니다. 첫 출시는 한국어·게스트 로그인만 제공하고, 유료 상점·소셜 로그인·랭킹은 출시 후 업데이트로 연결할 계획이었습니다 (영어·일본어·중국어 번역도 준비)."
+  - ja: "クローズドテストで遊んでもらった結果、ゲームとしての面白さが足りないと判断し、公開せずに開発を終えました。初めてのゲームアプリとして、企画から実装・ストア登録・クローズドテストまで一通り経験したことを次の作品に活かしています。"
+    en: "After closed testing, I judged that the game was not fun enough and ended development without releasing it. As my first game app, it gave me hands-on experience of the whole cycle from planning and implementation to store registration and closed testing, which I am applying to my next game."
+    zh: "封闭测试后，我判断游戏的趣味性不足，决定不上架并结束开发。作为第一款游戏应用，我完整经历了从策划、实现到商店注册和封闭测试的全过程，并把这些经验用在下一款作品中。"
+    ko: "비공개 테스트 결과 게임으로서의 재미가 부족하다고 판단해, 출시하지 않고 개발을 마무리했습니다. 첫 게임 앱으로 기획부터 구현·스토어 등록·비공개 테스트까지 한 바퀴를 직접 경험했고, 그 경험을 다음 작품에 활용하고 있습니다."
 phases: [requirements, basic-design, detailed-design, implementation, unit-test, integration-test]
 stack:
   - name: "Godot Engine"
