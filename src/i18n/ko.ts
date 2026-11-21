@@ -61,6 +61,7 @@ export const ko: Translation = {
   'project.challenge.solution': '해결',
   'project.link.demo': '데모',
   'project.link.zenn': 'Zenn 글',
+  'project.link.store': '스토어',
 
 
   'contact.lead': '업무 상담이나 문의는 아래 방법으로 연락해 주세요.',
@@ -98,6 +99,7 @@ export const ko: Translation = {
   'project.category.learning': '학습',
   'project.category.build': '제작',
   'project.status.in-progress': '진행 중',
+  'project.status.released': '출시',
   'project.status.completed': '완료',
   'project.status.ended': '종료',
   'skills.personalOnly': '개인 개발',

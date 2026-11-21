@@ -60,6 +60,7 @@ export const ja = {
   'project.challenge.solution': '解決',
   'project.link.demo': 'デモ',
   'project.link.zenn': 'Zenn記事',
+  'project.link.store': 'ストア',
 
 
   'contact.lead': 'お仕事のご相談やご質問は、以下の方法でご連絡ください。',
@@ -97,6 +98,7 @@ export const ja = {
   'project.category.learning': '学習',
   'project.category.build': '制作',
   'project.status.in-progress': '進行中',
+  'project.status.released': '公開中',
   'project.status.completed': '完了',
   'project.status.ended': '終了',
   'skills.personalOnly': '個人開発',

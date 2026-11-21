@@ -44,7 +44,7 @@ const [projects, skillNames] = await Promise.all([getProjects(), getSkillNames()
             <div class="project-body">
               <p class="project-meta font-mono">
                 <span class="badge">{t(`project.category.${data.category}`)}</span>
-                <span class:list={['badge', { 'badge-active': data.status === 'in-progress' }]}>
+                <span class:list={['badge', { 'badge-active': data.status === 'in-progress' || data.status === 'released' }]}>
                   {t(`project.status.${data.status}`)}
                 </span>
                 <time datetime={data.start}>{formatYearMonth(data.start, lang)}</time>

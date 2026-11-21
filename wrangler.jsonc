@@ -7,6 +7,8 @@
   "compatibility_date": "2026-10-16",
   // 明示しないとデプロイ時に workers.dev が無効のままになることがあったため / 명시하지 않으면 배포 시 workers.dev가 비활성 상태로 남는 일이 있었기 때문
   "workers_dev": true,
+  // PR ごとのプレビュー (npx wrangler preview) にはこのブロックが必要。空のままでよい / PR별 미리보기 (npx wrangler preview)에는 이 블록이 필요하다. 비어 있어도 된다
+  "previews": {},
   "assets": {
     "directory": "./dist",
     // 存在しないパスは dist/404.html を 404 ステータスで返す / 존재하지 않는 경로는 dist/404.html을 404 상태로 반환한다

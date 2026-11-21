@@ -1,4 +1,4 @@
-# 出典: リポジトリ (sosogames-studio/one-more-jump-duck) の README・docs/DEVELOPMENT.md・コード・コミット履歴 / 출처: 리포지토리의 README·docs/DEVELOPMENT.md·코드·커밋 이력
+# 出典: リポジトリ (sosogames-studio/one-more-jump-duck) の README・docs/DEVELOPMENT.md・docs/STORE_LISTING.md・コード・コミット履歴 / 출처: 리포지토리의 README·docs/DEVELOPMENT.md·docs/STORE_LISTING.md·코드·커밋 이력
 # 非公開リポジトリのため github は書かない / 비공개 리포지토리라 github는 쓰지 않는다
 title:
   ja: "もう一段、アヒル！（モバイル 3D ゲーム）"
@@ -6,115 +6,136 @@ title:
   zh: "小鸭，再跳一步！（3D 手机游戏）"
   ko: "한 칸만 더, 오리! (3D 모바일 게임)"
 summary:
-  ja: "長押しでためて離すとジャンプする、縦画面 3D のワンタッチ無限上昇ゲーム。子アヒルが足場から足場へ跳び、街から宇宙の果てまで昇っていく。Godot 4 で開発し、Google Play の内部テストまで進行中"
-  en: "A portrait 3D one-touch endless climber: hold to charge, release to jump. A duckling hops from platform to platform, from the city all the way into outer space. Built with Godot 4 and now in internal testing on Google Play"
-  zh: "长按蓄力、松开跳跃的竖屏 3D 单键无限上升游戏。小鸭在平台之间跳跃，从城市一路升到宇宙尽头。使用 Godot 4 开发，目前进行到 Google Play 内部测试"
-  ko: "꾹 눌러 모으고 떼면 점프하는 세로 화면 3D 원터치 무한 상승 게임. 아기 오리가 발판에서 발판으로 뛰어 도시에서 우주 끝까지 올라간다. Godot 4로 개발해 Google Play 내부 테스트 진행 중"
+  ja: "長押しでためて離すとジャンプする、縦画面 3D のワンタッチ上昇ゲーム。子アヒルが雲の足場を跳び、地上から宇宙の果てまで昇っていく。Godot 4 で開発し、2026 年 11 月に Google Play で 175 か国に公開"
+  en: "A portrait 3D one-touch climbing game: hold to charge, release to jump. A duckling hops across cloud platforms from the ground to the edge of the universe. Built with Godot 4 and released on Google Play in 175 countries in November 2026"
+  zh: "长按蓄力、松开跳跃的竖屏 3D 单键上升游戏。小鸭在云朵平台间跳跃，从地面一路升到宇宙尽头。使用 Godot 4 开发，2026 年 11 月在 Google Play 面向 175 个国家和地区上线"
+  ko: "꾹 눌러 모으고 떼면 점프하는 세로 화면 3D 원터치 상승 게임. 아기 오리가 구름 발판을 뛰어 지상에서 우주 끝까지 올라간다. Godot 4로 개발해 2026년 11월 Google Play에 175개국 출시"
 # 一覧の先頭に表示 (本人の指定) / 목록 맨 앞에 표시 (본인 지정)
 pinned: true
 category: build
-status: in-progress
-# コミット履歴 (2026-10-24〜) から / 커밋 이력 (2026-10-24~)에서
+# 2026-11-21 Google Play 本番公開 (1.0.0)。公開後も更新中なので終了月は書かない / 2026-11-21 Google Play 프로덕션 출시 (1.0.0). 출시 후에도 업데이트 중이라 종료월은 쓰지 않는다
+status: released
 start: "2026-10"
 tech: [godot, firebase, javascript, python, docker]
-# 画像: 最新コード (2026-10-29) をリポジトリのキャプチャ用シーンで 1080×1920 撮影し縮小 / 이미지: 최신 코드 (2026-10-29)를 리포지토리의 캡처용 씬으로 1080×1920 촬영해 축소
+store: https://play.google.com/store/apps/details?id=com.sosogames.onemorejumpduck
+# 動画: 最新コード (2026-11-21) をリポジトリの録画シーン (tests/capture_promo) で実際に動かして撮影し、場面を切り出して BGM を重ねた / 영상: 최신 코드를 리포지토리 녹화 씬으로 실제 실행해 촬영, 장면을 잘라 배경음악을 입힘
+# 画像: ストア掲載用に作った画像 (リポジトリの docs/images/store_listing) を縮小 / 이미지: 스토어 등록용으로 만든 이미지 (리포지토리 docs/images/store_listing)를 축소
 thumbnail:
   src: /projects/one-more-jump-duck/thumbnail.webp
   alt:
-    ja: "ホーム・PERFECT 着地・土星軌道のゲーム画面 3 枚"
-    en: "Three game screens: home, a PERFECT landing, and Saturn orbit"
-    zh: "主页、PERFECT 落地、土星轨道三张游戏画面"
-    ko: "홈·PERFECT 착지·토성 궤도 게임 화면 3장"
+    ja: "Google Play 用のフィーチャーグラフィック。笑顔の子アヒルとタイトル"
+    en: "Google Play feature graphic: a smiling duckling with the title"
+    zh: "Google Play 宣传图：微笑的小鸭与标题"
+    ko: "Google Play 피처 그래픽. 웃는 아기 오리와 제목"
+video:
+  src: /projects/one-more-jump-duck/play.mp4
+  poster: /projects/one-more-jump-duck/play-poster.webp
+  width: 540
+  height: 960
+  label:
+    ja: "プレイ動画（約 31 秒・効果音と BGM あり）：雲の上から地球・ブラックホール・銀河を通って着せ替えまで"
+    en: "Gameplay video (about 31 s, with sound): from the clouds past Earth, a black hole, and galaxies to the wardrobe"
+    zh: "游戏视频（约 31 秒，有音效和背景音乐）：从云端经过地球、黑洞、银河到换装"
+    ko: "플레이 영상 (약 31초·효과음과 배경음악 있음): 구름 위에서 지구·블랙홀·은하를 지나 옷장까지"
 screenshots:
-  - src: /projects/one-more-jump-duck/home.webp
+  - src: /projects/one-more-jump-duck/poster.webp
     width: 540
     height: 960
+    alt:
+      ja: "ストア用のポスター画像"
+      en: "Store poster image"
+      zh: "商店宣传海报"
+      ko: "스토어용 포스터 이미지"
+  - src: /projects/one-more-jump-duck/home.webp
+    width: 540
+    height: 785
     alt:
       ja: "ホーム画面"
       en: "Home screen"
       zh: "主页画面"
       ko: "홈 화면"
-  - src: /projects/one-more-jump-duck/charging.webp
+  - src: /projects/one-more-jump-duck/clouds.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "長押しでためている画面。下のゲージと次の足場までの距離"
-      en: "Charging a jump, with the gauge below and distances to the next platform"
-      zh: "长按蓄力的画面，下方的蓄力条与到下一个平台的距离"
-      ko: "꾹 눌러 힘을 모으는 화면. 아래 게이지와 다음 발판까지의 거리"
-  - src: /projects/one-more-jump-duck/airborne.webp
+      ja: "雲の足場へジャンプ。下の丸いボタンを長押し"
+      en: "Jumping to a cloud platform by holding the round button below"
+      zh: "跳向云朵平台，长按下方的圆形按钮"
+      ko: "구름 발판으로 점프. 아래 둥근 버튼을 꾹 누른다"
+  - src: /projects/one-more-jump-duck/rooftops.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "次の足場へ跳んでいるところ"
-      en: "Jumping toward the next platform"
-      zh: "跳向下一个平台"
-      ko: "다음 발판으로 뛰어오르는 모습"
-  - src: /projects/one-more-jump-duck/perfect.webp
-    width: 540
-    height: 960
-    alt:
-      ja: "足場の中心に着地して PERFECT、コイン +1"
-      en: "A PERFECT landing in the center earns a coin"
-      zh: "落在平台中心获得 PERFECT，金币 +1"
-      ko: "발판 가운데에 착지해 PERFECT, 코인 +1"
+      ja: "村の屋根の上の空"
+      en: "The sky above the village rooftops"
+      zh: "村庄屋顶上方的天空"
+      ko: "마을 지붕 위 하늘"
   - src: /projects/one-more-jump-duck/earth.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "成層圏のエリア。足元に地球"
-      en: "The stratosphere region, with Earth below"
-      zh: "平流层区域，脚下是地球"
-      ko: "성층권 구간. 발아래에 지구"
+      ja: "宇宙ステーションと地球のエリア"
+      en: "The space station and Earth region"
+      zh: "空间站与地球区域"
+      ko: "우주 정거장과 지구 구간"
   - src: /projects/one-more-jump-duck/saturn.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "土星軌道のエリア"
-      en: "The Saturn orbit region"
-      zh: "土星轨道区域"
-      ko: "토성 궤도 구간"
-  - src: /projects/one-more-jump-duck/black-hole.webp
+      ja: "カエルのスキンで土星のエリアへ"
+      en: "Reaching the Saturn region in the frog skin"
+      zh: "穿着青蛙皮肤来到土星区域"
+      ko: "개구리 스킨으로 토성 구간에"
+  - src: /projects/one-more-jump-duck/galaxy.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "次の宇宙へつながるブラックホールのそば"
-      en: "Near the black hole that leads to the next universe"
-      zh: "通往下一个宇宙的黑洞旁"
-      ko: "다음 우주로 이어지는 블랙홀 근처"
-  - src: /projects/one-more-jump-duck/game-over.webp
-    width: 540
-    height: 960
-    alt:
-      ja: "ゲームオーバー画面。到達高度と着地数"
-      en: "Game over screen with the altitude and landings reached"
-      zh: "游戏结束画面，到达高度与落地次数"
-      ko: "게임 오버 화면. 도달 고도와 착지 수"
+      ja: "クジラのスキンで銀河のエリアへ"
+      en: "Reaching the galaxy region in the whale skin"
+      zh: "穿着鲸鱼皮肤来到银河区域"
+      ko: "고래 스킨으로 은하 구간에"
   - src: /projects/one-more-jump-duck/wardrobe.webp
     width: 540
-    height: 960
+    height: 785
     alt:
-      ja: "アヒルの着せ替え（色・頭・服・スキン、見た目だけ）"
-      en: "Duck wardrobe: colors, headwear, outfits, and skins (cosmetic only)"
-      zh: "小鸭换装：颜色、头饰、衣服、皮肤（仅外观）"
-      ko: "오리 옷장: 색상·머리·옷·스킨 (외형만)"
+      ja: "アヒルの着せ替え（見た目だけ）"
+      en: "Duck wardrobe (cosmetic only)"
+      zh: "小鸭换装（仅外观）"
+      ko: "오리 옷장 (외형만)"
+  - src: /projects/one-more-jump-duck/revive.webp
+    width: 540
+    height: 785
+    alt:
+      ja: "落ちた後の「もう一回？」復活画面"
+      en: "The \"One more?\" revive screen after a fall"
+      zh: "掉落后的“再来一次？”复活画面"
+      ko: "떨어진 뒤 \"한 번 더?\" 부활 화면"
+
 overview:
-  - ja: "sosogames-studio の 2 作目のモバイルゲームです。最初の作品「あと一口、ペンギン！」の経験をもとに、今度は 3D で作っています。長押しで力をため、離すと子アヒルが次の足場へ跳びます。着地に失敗して落ちたら終わりです。"
-    en: "The second mobile game from sosogames-studio, built in 3D this time on the experience of the first one, One More Bite, Penguin!. Hold to build power and release to send the duckling to the next platform; miss a landing and the run ends."
-    zh: "这是 sosogames-studio 的第二款手机游戏。基于第一款作品《再吃一口企鹅》的经验，这次用 3D 制作。长按蓄力，松开后小鸭跳向下一个平台，落地失败掉下去就结束。"
-    ko: "sosogames-studio의 두 번째 모바일 게임입니다. 첫 작품 「한 입만 더, 펭귄!」의 경험을 바탕으로 이번에는 3D로 만들고 있습니다. 꾹 눌러 힘을 모으고 떼면 아기 오리가 다음 발판으로 뛰고, 착지에 실패해 떨어지면 끝납니다."
-  - ja: "足場は 360 度どの方向にもランダムに現れ、カメラが向きに合わせて回り込みます。街の屋上から大気圏・月・惑星・銀河まで 68 のエリアを昇り、50,000m ごとにブラックホールを通って次の宇宙へ続きます。"
-    en: "Platforms appear at random in any direction around 360 degrees, and the camera turns to follow. You climb through 68 regions, from city rooftops through the atmosphere, the Moon, planets, and galaxies, and every 50,000 m a black hole leads into the next universe."
-    zh: "平台会在 360 度任意方向随机出现，镜头随之转向。从城市屋顶经过大气层、月球、行星、银河共 68 个区域，每 50,000 米穿过黑洞进入下一个宇宙。"
-    ko: "발판은 360도 어느 방향으로든 무작위로 나타나고, 카메라가 방향에 맞춰 돌아갑니다. 도시 옥상부터 대기권·달·행성·은하까지 68개 구역을 올라가며, 50,000m마다 블랙홀을 지나 다음 우주로 이어집니다."
-  - ja: "PERFECT 着地でコインを集め、見た目だけが変わるスキンを買えます（お金で能力を買えない設計）。12 言語に対応し、ゲスト・Google・Apple のアカウント、端末間の保存データ同期も用意しています。"
-    en: "Perfect landings earn coins for cosmetic-only skins (no pay-to-win). It supports 12 languages, and includes guest, Google, and Apple accounts with save sync across devices."
-    zh: "完美落地可获得金币，用于购买仅改变外观的皮肤（无法花钱买能力）。支持 12 种语言，并提供游客、Google、Apple 账号以及跨设备存档同步。"
-    ko: "PERFECT 착지로 코인을 모아 외형만 바뀌는 스킨을 살 수 있습니다 (돈으로 능력을 살 수 없는 설계). 12개 언어를 지원하고, 게스트·Google·Apple 계정과 기기 간 저장 데이터 동기화도 준비했습니다."
-  - ja: "ランキングとコイン報酬の不正を防ぐため、Firebase（Authentication・Firestore・Cloud Functions・App Check）と Cloud Run のサーバーで、送られてきた入力からプレイをもう一度再現して検証する仕組みを作りました。Google Play Console で内部テストを始めており、広告・課金と公式ランキングの有効化はこれからです。"
-    en: "To keep rankings and coin rewards fair, I built server-side verification with Firebase (Authentication, Firestore, Cloud Functions, App Check) and Cloud Run that replays each run from the submitted inputs. Internal testing has started on Google Play Console; ads, purchases, and the official ranking are not switched on yet."
-    zh: "为了防止排行榜和金币奖励作弊，我用 Firebase（Authentication、Firestore、Cloud Functions、App Check）和 Cloud Run 搭建了服务器端验证，根据提交的输入重新再现一局游戏。已在 Google Play Console 开始内部测试，广告、内购和正式排行榜尚未启用。"
-    ko: "랭킹과 코인 보상의 부정을 막기 위해, Firebase(Authentication·Firestore·Cloud Functions·App Check)와 Cloud Run 서버에서 보내온 입력으로 한 판을 다시 재현해 검증하는 구조를 만들었습니다. Google Play Console에서 내부 테스트를 시작했고, 광고·결제와 공식 랭킹 활성화는 앞으로 할 일입니다."
+  - ja: "sosogames-studio の 2 作目のモバイルゲームで、2026 年 10 月 24 日に作り始め、約 4 週間後の 11 月 21 日に Google Play で正式公開しました（バージョン 1.0.0、175 か国、12 言語）。1 作目「あと一口、ペンギン！」は面白さが足りず公開を見送ったので、その経験を活かした初めての公開作品です。"
+    en: "The second mobile game from sosogames-studio. I started on October 24, 2026 and released it on Google Play about four weeks later, on November 21 (version 1.0.0, 175 countries, 12 languages). The first game, One More Bite, Penguin!, was not fun enough to release, so this is the first title I shipped, built on that experience."
+    zh: "这是 sosogames-studio 的第二款手机游戏。2026 年 10 月 24 日开始制作，约 4 周后的 11 月 21 日在 Google Play 正式上线（1.0.0 版，175 个国家和地区，12 种语言）。第一款作品《再吃一口企鹅》趣味性不足而没有上线，这是吸取那次经验后第一款正式发布的作品。"
+    ko: "sosogames-studio의 두 번째 모바일 게임으로, 2026년 10월 24일에 만들기 시작해 약 4주 뒤인 11월 21일에 Google Play에 정식 출시했습니다 (버전 1.0.0, 175개국, 12개 언어). 첫 작품 「한 입만 더, 펭귄!」은 재미가 부족해 출시하지 않았기 때문에, 그 경험을 살려 처음으로 출시한 작품입니다."
+  - ja: "画面下の丸いボタンを長押しして力をため、離すと子アヒルが次の雲の足場へ跳びます。足場の中心に着地すると PERFECT。落ちたら終わりです。地上から大気圏・地球・惑星・銀河を通り、ブラックホール・ワームホール・ホワイトホールを抜けて多元宇宙まで、56 のエリアと 20 段階の難易度があり、エリアごとに専用の背景イラストが付いています。"
+    en: "Hold the round button at the bottom to build power and release to send the duckling to the next cloud platform; land in the center for a PERFECT, fall and the run ends. The journey runs through 56 regions with 20 difficulty grades, from the ground through the atmosphere, Earth, planets, and galaxies, then through a black hole, wormhole, and white hole into the multiverse, each region with its own background illustration."
+    zh: "长按画面下方的圆形按钮蓄力，松开后小鸭跳向下一个云朵平台。落在平台中心即为 PERFECT，掉下去就结束。从地面经过大气层、地球、行星、银河，再穿过黑洞、虫洞、白洞到达多元宇宙，共 56 个区域、20 级难度，每个区域都有专属背景插画。"
+    ko: "화면 아래 둥근 버튼을 꾹 눌러 힘을 모으고 떼면 아기 오리가 다음 구름 발판으로 뜁니다. 발판 가운데에 착지하면 PERFECT, 떨어지면 끝입니다. 지상에서 대기권·지구·행성·은하를 지나 블랙홀·웜홀·화이트홀을 거쳐 다중 우주까지 56개 구간과 20단계 난이도가 있고, 구간마다 전용 배경 그림이 있습니다."
+  - ja: "PERFECT 着地で集めたコインで、帽子・服・セット・カエルやクジラのスキンなど見た目だけの着せ替えができます（お金で能力は買えません）。ゲスト・Google アカウントで、今週と全期間の高さランキング、週間 1〜3 位のコイン報酬があります。"
+    en: "Coins from PERFECT landings buy cosmetic-only items such as hats, outfits, sets, and frog or whale skins (no pay-to-win). With a guest or Google account you join weekly and all-time rankings, and the weekly top three earn coin rewards."
+    zh: "用 PERFECT 落地获得的金币，可以购买帽子、衣服、套装以及青蛙、鲸鱼皮肤等仅改变外观的装扮（无法花钱买能力）。使用游客或 Google 账号可参加本周和总排行榜，每周前三名可获得金币奖励。"
+    ko: "PERFECT 착지로 모은 코인으로 모자·옷·세트·개구리와 고래 스킨 같은 외형만 바뀌는 꾸미기를 할 수 있습니다 (돈으로 능력을 살 수 없음). 게스트·Google 계정으로 이번 주·전체 랭킹에 참여하고, 주간 1~3위에게는 코인 보상이 있습니다."
+  - ja: "収益化は AdMob の広告（全面広告、コイン 2 倍と復活のリワード広告）と Google Play 課金（広告削除・コイン 3 種）です。公開後すぐに AdMob のアプリ審査が通って広告配信を始め、app-ads.txt の認証、EU・米国州法向けの同意メッセージ、Play の手数料 15% プログラム登録、米国の税務情報（W-8BEN）の手続きまで自分で行いました。"
+    en: "Monetization comes from AdMob ads (interstitials, plus rewarded ads for double coins and revives) and Google Play Billing (ad removal and three coin packs). Right after launch the app passed AdMob review and started serving ads, and I handled app-ads.txt verification, consent messages for the EU and US state laws, enrollment in Play's 15% service fee program, and US tax information (W-8BEN) myself."
+    zh: "变现方式为 AdMob 广告（插页广告，以及金币翻倍和复活的激励广告）与 Google Play 结算（去广告和 3 种金币）。上线后很快通过 AdMob 应用审核并开始投放广告，app-ads.txt 验证、面向欧盟和美国州法的同意消息、Play 15% 服务费计划登记以及美国税务信息（W-8BEN）也都由我自己完成。"
+    ko: "수익화는 AdMob 광고(전면 광고, 코인 2배·부활 보상형 광고)와 Google Play 결제(광고 제거·코인 3종)입니다. 출시 직후 AdMob 앱 검토를 통과해 광고 송출을 시작했고, app-ads.txt 인증, EU·미국 주 규정용 동의 메시지, Play 수수료 15% 프로그램 등록, 미국 세금 정보(W-8BEN) 절차까지 직접 진행했습니다."
+  - ja: "宣伝もしています。Google 広告で韓国向けのアプリインストールキャンペーンを試験運用し（ストア画像から広告用の横・正方形・縦の画像を作成）、Reddit には実際のプレイ動画を投稿しました。ショート動画用の縦・正方形の宣伝動画も、ゲームの録画から自動で組み立てるツールを作って用意しています。"
+    en: "I am also promoting it: a trial Google Ads app-install campaign for Korea (with landscape, square, and portrait ad images made from the store art) and a real gameplay video posted on Reddit. I also built a tool that assembles vertical and square promo videos for shorts from gameplay recordings."
+    zh: "也在做推广：在 Google Ads 试运行面向韩国的应用安装广告系列（用商店图片制作横版、方形、竖版广告图），并在 Reddit 发布了实际游戏视频。还制作了从游戏录像自动组合竖版和方形短视频宣传片的工具。"
+    ko: "홍보도 하고 있습니다. Google Ads에서 한국 대상 앱 설치 캠페인을 시험 운영 중이고 (스토어 이미지로 광고용 가로·정사각·세로 이미지 제작), Reddit에는 실제 플레이 영상을 올렸습니다. 쇼츠용 세로·정사각 홍보 영상도 게임 녹화에서 자동으로 만들어 주는 도구를 만들어 준비했습니다."
+  - ja: "アカウント・ランキング・報酬は Firebase のサーバー関数で処理し、App Check（Play Integrity）で正規アプリからの要求だけを受け付けます。公開後も更新を続けています。"
+    en: "Accounts, rankings, and rewards are handled by Firebase server functions, and App Check (Play Integrity) only accepts requests from the genuine app. Updates continue after launch."
+    zh: "账号、排行榜和奖励由 Firebase 服务器函数处理，并通过 App Check（Play Integrity）只接受正版应用的请求。上线后也在持续更新。"
+    ko: "계정·랭킹·보상은 Firebase 서버 함수로 처리하고, App Check(Play Integrity)로 정식 앱에서 온 요청만 받습니다. 출시 후에도 계속 업데이트하고 있습니다."
 phases: [requirements, basic-design, detailed-design, implementation, unit-test, integration-test]
 stack:
   - name: "Godot Engine"
@@ -126,10 +147,10 @@ stack:
       ko: "게임 엔진 (3D·Compatibility 렌더러, Android AAB 내보내기)"
   - name: "GDScript"
     purpose:
-      ja: "ジャンプ計算・足場生成・カメラ・UI などゲーム全体"
-      en: "The whole game: jump physics, platform generation, camera, and UI"
-      zh: "整个游戏：跳跃计算、平台生成、镜头和 UI"
-      ko: "점프 계산·발판 생성·카메라·UI 등 게임 전체"
+      ja: "ジャンプ計算・足場生成・カメラ・UI・演出などゲーム全体"
+      en: "The whole game: jump physics, platform generation, camera, UI, and effects"
+      zh: "整个游戏：跳跃计算、平台生成、镜头、UI 和演出"
+      ko: "점프 계산·발판 생성·카메라·UI·연출 등 게임 전체"
   - name: "Firebase"
     purpose:
       ja: "Authentication・Firestore・Cloud Functions・App Check（アカウント・保存・ランキング・報酬）"
@@ -145,22 +166,34 @@ stack:
       ko: "Cloud Functions 서버 처리와 테스트"
   - name: "Cloud Run / Docker"
     purpose:
-      ja: "プレイを再現して検証する非公開サーバー（Godot をヘッドレスで実行）"
-      en: "Private verifier that replays runs (Godot running headless)"
-      zh: "重新再现游戏进行验证的私有服务器（无头运行 Godot）"
-      ko: "한 판을 재현해 검증하는 비공개 서버 (Godot를 화면 없이 실행)"
+      ja: "プレイを再現して検証する非公開サーバー（Godot をヘッドレスで実行、公開時点では無効）"
+      en: "Private verifier that replays runs with headless Godot (disabled at launch)"
+      zh: "重新再现游戏进行验证的私有服务器（无头运行 Godot，上线时未启用）"
+      ko: "한 판을 재현해 검증하는 비공개 서버 (Godot를 화면 없이 실행, 출시 시점에는 꺼 둠)"
+  - name: "Google AdMob / Google Play 課金"
+    purpose:
+      ja: "全面広告・リワード広告、広告削除とコインのアプリ内課金"
+      en: "Interstitial and rewarded ads, in-app purchases for ad removal and coins"
+      zh: "插页与激励广告，去广告和金币的应用内购买"
+      ko: "전면·보상형 광고, 광고 제거와 코인 인앱 결제"
+  - name: "Google Ads"
+    purpose:
+      ja: "アプリインストール広告キャンペーン（試験運用）"
+      en: "App-install ad campaign (trial)"
+      zh: "应用安装广告系列（试运行）"
+      ko: "앱 설치 광고 캠페인 (시험 운영)"
   - name: "Python"
     purpose:
-      ja: "リリース AAB のビルド・検査、効果音生成、翻訳表のチェック"
-      en: "Building and auditing release AABs, generating sound effects, and checking translations"
-      zh: "构建与检查发布 AAB、生成音效、检查翻译表"
-      ko: "출시용 AAB 빌드·검사, 효과음 생성, 번역표 검사"
+      ja: "リリース AAB のビルド・検査、ストア画像・宣伝動画の生成、翻訳チェック"
+      en: "Building and auditing release AABs, generating store images and promo videos, and checking translations"
+      zh: "构建与检查发布 AAB、生成商店图片与宣传视频、检查翻译"
+      ko: "출시용 AAB 빌드·검사, 스토어 이미지·홍보 영상 생성, 번역 검사"
   - name: "Google Play Console"
     purpose:
-      ja: "アプリ登録・内部テスト"
-      en: "App registration and internal testing"
-      zh: "应用注册与内部测试"
-      ko: "앱 등록·내부 테스트"
+      ja: "内部・クローズドテスト、本番公開（175 か国）"
+      en: "Internal and closed testing, production release (175 countries)"
+      zh: "内部与封闭测试，正式上线（175 个国家和地区）"
+      ko: "내부·비공개 테스트, 프로덕션 출시 (175개국)"
 decisions:
   - topic:
       ja: "ジャンプの軌道を 1 か所で計算"
@@ -168,20 +201,20 @@ decisions:
       zh: "只在一处计算跳跃轨迹"
       ko: "점프 궤적을 한 곳에서 계산"
     reason:
-      ja: "足場の生成も同じ計算式を使うことで、「届かない足場」が出ないようにした"
-      en: "Platform generation uses the same formula, so an unreachable platform can never appear"
-      zh: "平台生成也使用同一个公式，避免出现“够不到的平台”"
-      ko: "발판 생성도 같은 공식을 써서 \"닿을 수 없는 발판\"이 나오지 않게 했다"
+      ja: "足場の生成も同じ計算式を使うことで、「届かない足場」が出ないようにした。放物線の解析解で位置を出すので、フレームレートに関係なく同じため量なら同じ場所に着地する"
+      en: "Platform generation uses the same formula, so an unreachable platform can never appear. Positions come from the closed-form parabola, so the same charge always lands in the same place regardless of frame rate"
+      zh: "平台生成也使用同一个公式，避免出现“够不到的平台”。用抛物线解析解计算位置，因此无论帧率如何，相同蓄力总落在同一位置"
+      ko: "발판 생성도 같은 공식을 써서 \"닿을 수 없는 발판\"이 나오지 않게 했다. 포물선 해석해로 위치를 구해 프레임 속도와 상관없이 같은 충전량이면 같은 곳에 착지한다"
   - topic:
-      ja: "報酬・ランキングをサーバーでプレイ再現して検証"
-      en: "Verifying rewards and rankings by replaying runs on the server"
-      zh: "在服务器上重新再现游戏来验证奖励和排行榜"
-      ko: "보상·랭킹을 서버에서 한 판 재현으로 검증"
+      ja: "ランキングと報酬はサーバーで判定"
+      en: "Deciding rankings and rewards on the server"
+      zh: "排行榜和奖励由服务器判定"
+      ko: "랭킹과 보상은 서버에서 판정"
     reason:
-      ja: "端末から届いた結果をそのまま信じると改ざんできるため、入力とシードからゲームと同じ Godot のコードで再計算し、同じ結果になったときだけ記録・付与するようにした。応答が失われて同じ内容が再送されても二重に付与しない"
-      en: "Trusting results sent from devices would allow tampering, so the server recomputes each run from its inputs and seed with the same Godot code as the game, and only records or rewards it when the results match. Resubmissions after a lost response are not paid twice"
-      zh: "直接信任设备发来的结果可能被篡改，因此根据输入和种子用与游戏相同的 Godot 代码重新计算，只有结果一致时才记录或发放。即使响应丢失后重复提交也不会重复发放"
-      ko: "기기에서 온 결과를 그대로 믿으면 조작될 수 있어서, 입력과 시드로 게임과 같은 Godot 코드로 다시 계산해 결과가 같을 때만 기록·지급하도록 했다. 응답이 유실돼 같은 내용이 다시 와도 두 번 지급하지 않는다"
+      ja: "端末が自分でコインを足したり順位を書き込んだりすると改ざんできるため、記録の送信・順位・週間報酬・初回到達報酬は Cloud Functions で処理し、アカウントごとに 1 回だけ付与するようにした。入力からプレイを再現する検証サーバーも作ったが、公開時点では高さ・着地数・時間が妥当かの確認にとどめて段階的に導入する"
+      en: "If the device added its own coins or wrote its own rank, it could be tampered with, so submissions, rankings, weekly rewards, and first-arrival rewards run in Cloud Functions and are granted only once per account. I also built a verifier that replays runs from their inputs, but at launch the server only checks that height, landings, and time are plausible, rolling out full replay later"
+      zh: "如果由设备自己增加金币或写入排名就可能被篡改，因此记录提交、排名、每周奖励和首次到达奖励都在 Cloud Functions 中处理，每个账号只发放一次。也制作了根据输入重新再现游戏的验证服务器，但上线时只检查高度、落地数和时间是否合理，逐步引入"
+      ko: "기기가 스스로 코인을 더하거나 순위를 쓰면 조작될 수 있어서, 기록 제출·순위·주간 보상·첫 도착 보상은 Cloud Functions에서 처리하고 계정마다 한 번만 지급하도록 했다. 입력으로 한 판을 재현하는 검증 서버도 만들었지만, 출시 시점에는 높이·칸 수·시간이 말이 되는지만 확인하고 단계적으로 도입한다"
     alternatives:
       ja: "端末の結果をそのまま保存"
       en: "Storing results reported by the device as-is"
@@ -189,32 +222,32 @@ decisions:
       ko: "기기가 보낸 결과를 그대로 저장"
 challenges:
   - problem:
-      ja: "3D でランダムに足場を置くと、跳ぶ方向によっては手前の足場で次の着地点が隠れてしまう"
-      en: "With random 3D platforms, the next landing spot could be hidden behind nearer platforms depending on the direction"
-      zh: "在 3D 中随机放置平台时，根据跳跃方向，下一个落点可能被前面的平台挡住"
-      ko: "3D로 발판을 무작위로 놓으면 뛰는 방향에 따라 앞쪽 발판에 다음 착지 지점이 가려진다"
-    solution:
-      ja: "視線をさえぎる足場だけを半透明にし、着地点の輪郭と目印は見えるままにした（位置と当たり判定はそのまま）"
-      en: "Only platforms blocking the line of sight fade out, while the landing outline and marker stay visible (positions and collisions unchanged)"
-      zh: "只让挡住视线的平台变成半透明，落点轮廓和标记保持可见（位置和碰撞不变）"
-      ko: "시야를 가리는 발판만 반투명하게 하고, 착지 지점의 윤곽과 표시는 그대로 보이게 했다 (위치·충돌 판정은 유지)"
-  - problem:
       ja: "高く昇るほど座標の数値が大きくなり、3D の位置計算の精度が落ちる"
       en: "The higher you climb, the larger the coordinates get, and 3D position precision degrades"
       zh: "升得越高坐标数值越大，3D 位置计算精度会下降"
       ko: "높이 올라갈수록 좌표 숫자가 커져 3D 위치 계산의 정밀도가 떨어진다"
     solution:
-      ja: "一定距離ごとに世界の原点をアヒルの近くへずらし（フローティングオリジン）、画面に出す高度は別の値として管理した"
-      en: "Shift the world origin near the duck at intervals (floating origin) and keep the displayed altitude as a separate value"
-      zh: "每隔一段距离把世界原点移到小鸭附近（浮动原点），并把显示的高度作为单独的数值管理"
-      ko: "일정 거리마다 세계의 원점을 오리 근처로 옮기고 (플로팅 오리진), 화면에 보여 주는 고도는 별도 값으로 관리했다"
+      ja: "一定距離ごとに世界の原点をアヒルの近くへずらし（フローティングオリジン）、画面に出す高度やランキングの記録は 3D 座標とは別の値として管理した"
+      en: "Shift the world origin near the duck at intervals (floating origin) and keep displayed altitude and ranking records separate from 3D coordinates"
+      zh: "每隔一段距离把世界原点移到小鸭附近（浮动原点），显示的高度和排行榜记录与 3D 坐标分开管理"
+      ko: "일정 거리마다 세계의 원점을 오리 근처로 옮기고 (플로팅 오리진), 화면의 고도와 랭킹 기록은 3D 좌표와 별도 값으로 관리했다"
+  - problem:
+      ja: "アプリ内の「オープン記念 20% 割引」で、実際には販売したことのない元値に取り消し線を付けて表示していた"
+      en: "The in-app \"launch sale 20% off\" showed struck-through original prices that had never actually been charged"
+      zh: "应用内“开业 8 折”用删除线显示了从未实际售出的原价"
+      ko: "앱 안의 \"오픈 이벤트 20% 할인\"이 실제로 판 적 없는 원가에 취소선을 그어 보여 주고 있었다"
+    solution:
+      ja: "EU の価格表示ルールや韓国の表示広告法で不当な割引表示になりうると判断し、公開直後の更新で割引表示を消して実際の価格だけを出すようにした（価格そのものは変えていない）"
+      en: "Judging it could count as a misleading discount under EU price-indication rules and Korea's labeling and advertising law, I removed the discount display in an update right after launch and show only the real price (the prices themselves are unchanged)"
+      zh: "判断这在欧盟价格标示规则和韩国标示广告法下可能属于不当折扣标示，于是在上线后的更新中去掉折扣显示，只显示实际价格（价格本身未变）"
+      ko: "EU 가격 표시 지침이나 한국 표시광고법상 부당한 할인 표시가 될 수 있다고 판단해, 출시 직후 업데이트로 할인 표시를 없애고 실제 가격만 보이게 했다 (가격 자체는 그대로)"
   - problem:
       ja: "機能を足すたびに、以前の動きが壊れていないか確かめるのが大変になる"
       en: "As features piled up, checking that nothing earlier had broken became hard"
       zh: "每次添加功能，都越来越难确认之前的行为没有被破坏"
       ko: "기능을 더할 때마다 예전 동작이 깨지지 않았는지 확인하기가 어려워진다"
     solution:
-      ja: "自動テストと、タッチ操作で何百回も着地し続けるプレイボットを用意し、変更のたびに実行するようにした（現在 4 万件以上のチェック）"
-      en: "Built automated tests and a touch-driven play bot that lands hundreds of times in a row, and run them on every change (over 40,000 checks today)"
-      zh: "准备了自动测试和用触摸操作连续落地数百次的游戏机器人，每次修改都运行（目前超过 4 万项检查）"
-      ko: "자동 테스트와 터치 조작으로 수백 번 연속 착지하는 플레이 봇을 만들어 변경할 때마다 돌리도록 했다 (현재 4만 건 이상 검사)"
+      ja: "自動テストと、タッチ操作で何百回も着地し続けるプレイボット、実際の描画でのキャプチャテストを用意し、変更のたびに実行するようにした（公開時点で約 4 万 5 千件のチェック）"
+      en: "Built automated tests, a touch-driven play bot that lands hundreds of times in a row, and real-renderer capture tests, and run them on every change (about 45,000 checks at launch)"
+      zh: "准备了自动测试、用触摸操作连续落地数百次的游戏机器人以及真实渲染的截图测试，每次修改都运行（上线时约 4.5 万项检查）"
+      ko: "자동 테스트, 터치 조작으로 수백 번 연속 착지하는 플레이 봇, 실제 화면으로 찍는 캡처 테스트를 만들어 변경할 때마다 돌리도록 했다 (출시 시점 약 4만 5천 건 검사)"
