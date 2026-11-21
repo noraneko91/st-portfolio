@@ -18,6 +18,7 @@ status: released
 start: "2026-10"
 tech: [godot, firebase, javascript, python, docker]
 store: https://play.google.com/store/apps/details?id=com.sosogames.onemorejumpduck
+# 動画: 最新コード (2026-11-21) をリポジトリの録画シーン (tests/capture_promo) で実際に動かして撮影し、場面を切り出して BGM を重ねた / 영상: 최신 코드를 리포지토리 녹화 씬으로 실제 실행해 촬영, 장면을 잘라 배경음악을 입힘
 # 画像: ストア掲載用に作った画像 (リポジトリの docs/images/store_listing) を縮小 / 이미지: 스토어 등록용으로 만든 이미지 (리포지토리 docs/images/store_listing)를 축소
 thumbnail:
   src: /projects/one-more-jump-duck/thumbnail.webp
@@ -26,6 +27,16 @@ thumbnail:
     en: "Google Play feature graphic: a smiling duckling with the title"
     zh: "Google Play 宣传图：微笑的小鸭与标题"
     ko: "Google Play 피처 그래픽. 웃는 아기 오리와 제목"
+video:
+  src: /projects/one-more-jump-duck/play.mp4
+  poster: /projects/one-more-jump-duck/play-poster.webp
+  width: 540
+  height: 960
+  label:
+    ja: "プレイ動画（約 31 秒・効果音と BGM あり）：雲の上から地球・ブラックホール・銀河を通って着せ替えまで"
+    en: "Gameplay video (about 31 s, with sound): from the clouds past Earth, a black hole, and galaxies to the wardrobe"
+    zh: "游戏视频（约 31 秒，有音效和背景音乐）：从云端经过地球、黑洞、银河到换装"
+    ko: "플레이 영상 (약 31초·효과음과 배경음악 있음): 구름 위에서 지구·블랙홀·은하를 지나 옷장까지"
 screenshots:
   - src: /projects/one-more-jump-duck/poster.webp
     width: 540
@@ -113,10 +124,18 @@ overview:
     en: "Coins from PERFECT landings buy cosmetic-only items such as hats, outfits, sets, and frog or whale skins (no pay-to-win). With a guest or Google account you join weekly and all-time rankings, and the weekly top three earn coin rewards."
     zh: "用 PERFECT 落地获得的金币，可以购买帽子、衣服、套装以及青蛙、鲸鱼皮肤等仅改变外观的装扮（无法花钱买能力）。使用游客或 Google 账号可参加本周和总排行榜，每周前三名可获得金币奖励。"
     ko: "PERFECT 착지로 모은 코인으로 모자·옷·세트·개구리와 고래 스킨 같은 외형만 바뀌는 꾸미기를 할 수 있습니다 (돈으로 능력을 살 수 없음). 게스트·Google 계정으로 이번 주·전체 랭킹에 참여하고, 주간 1~3위에게는 코인 보상이 있습니다."
-  - ja: "収益化は AdMob の広告（全面広告、コイン 2 倍と復活のリワード広告）と Google Play 課金（広告削除・コイン）です。アカウント・ランキング・報酬は Firebase のサーバー関数で処理し、App Check（Play Integrity）で正規アプリからの要求だけを受け付けます。"
-    en: "Monetization comes from AdMob ads (interstitials, plus rewarded ads for double coins and revives) and Google Play Billing (ad removal and coins). Accounts, rankings, and rewards are handled by Firebase server functions, and App Check (Play Integrity) only accepts requests from the genuine app."
-    zh: "变现方式为 AdMob 广告（插页广告，以及金币翻倍和复活的激励广告）与 Google Play 结算（去广告和金币）。账号、排行榜和奖励由 Firebase 服务器函数处理，并通过 App Check（Play Integrity）只接受正版应用的请求。"
-    ko: "수익화는 AdMob 광고(전면 광고, 코인 2배·부활 보상형 광고)와 Google Play 결제(광고 제거·코인)입니다. 계정·랭킹·보상은 Firebase 서버 함수로 처리하고, App Check(Play Integrity)로 정식 앱에서 온 요청만 받습니다."
+  - ja: "収益化は AdMob の広告（全面広告、コイン 2 倍と復活のリワード広告）と Google Play 課金（広告削除・コイン 3 種）です。公開後すぐに AdMob のアプリ審査が通って広告配信を始め、app-ads.txt の認証、EU・米国州法向けの同意メッセージ、Play の手数料 15% プログラム登録、米国の税務情報（W-8BEN）の手続きまで自分で行いました。"
+    en: "Monetization comes from AdMob ads (interstitials, plus rewarded ads for double coins and revives) and Google Play Billing (ad removal and three coin packs). Right after launch the app passed AdMob review and started serving ads, and I handled app-ads.txt verification, consent messages for the EU and US state laws, enrollment in Play's 15% service fee program, and US tax information (W-8BEN) myself."
+    zh: "变现方式为 AdMob 广告（插页广告，以及金币翻倍和复活的激励广告）与 Google Play 结算（去广告和 3 种金币）。上线后很快通过 AdMob 应用审核并开始投放广告，app-ads.txt 验证、面向欧盟和美国州法的同意消息、Play 15% 服务费计划登记以及美国税务信息（W-8BEN）也都由我自己完成。"
+    ko: "수익화는 AdMob 광고(전면 광고, 코인 2배·부활 보상형 광고)와 Google Play 결제(광고 제거·코인 3종)입니다. 출시 직후 AdMob 앱 검토를 통과해 광고 송출을 시작했고, app-ads.txt 인증, EU·미국 주 규정용 동의 메시지, Play 수수료 15% 프로그램 등록, 미국 세금 정보(W-8BEN) 절차까지 직접 진행했습니다."
+  - ja: "宣伝もしています。Google 広告で韓国向けのアプリインストールキャンペーンを試験運用し（ストア画像から広告用の横・正方形・縦の画像を作成）、Reddit には実際のプレイ動画を投稿しました。ショート動画用の縦・正方形の宣伝動画も、ゲームの録画から自動で組み立てるツールを作って用意しています。"
+    en: "I am also promoting it: a trial Google Ads app-install campaign for Korea (with landscape, square, and portrait ad images made from the store art) and a real gameplay video posted on Reddit. I also built a tool that assembles vertical and square promo videos for shorts from gameplay recordings."
+    zh: "也在做推广：在 Google Ads 试运行面向韩国的应用安装广告系列（用商店图片制作横版、方形、竖版广告图），并在 Reddit 发布了实际游戏视频。还制作了从游戏录像自动组合竖版和方形短视频宣传片的工具。"
+    ko: "홍보도 하고 있습니다. Google Ads에서 한국 대상 앱 설치 캠페인을 시험 운영 중이고 (스토어 이미지로 광고용 가로·정사각·세로 이미지 제작), Reddit에는 실제 플레이 영상을 올렸습니다. 쇼츠용 세로·정사각 홍보 영상도 게임 녹화에서 자동으로 만들어 주는 도구를 만들어 준비했습니다."
+  - ja: "アカウント・ランキング・報酬は Firebase のサーバー関数で処理し、App Check（Play Integrity）で正規アプリからの要求だけを受け付けます。公開後も更新を続けています。"
+    en: "Accounts, rankings, and rewards are handled by Firebase server functions, and App Check (Play Integrity) only accepts requests from the genuine app. Updates continue after launch."
+    zh: "账号、排行榜和奖励由 Firebase 服务器函数处理，并通过 App Check（Play Integrity）只接受正版应用的请求。上线后也在持续更新。"
+    ko: "계정·랭킹·보상은 Firebase 서버 함수로 처리하고, App Check(Play Integrity)로 정식 앱에서 온 요청만 받습니다. 출시 후에도 계속 업데이트하고 있습니다."
 phases: [requirements, basic-design, detailed-design, implementation, unit-test, integration-test]
 stack:
   - name: "Godot Engine"
@@ -157,6 +176,12 @@ stack:
       en: "Interstitial and rewarded ads, in-app purchases for ad removal and coins"
       zh: "插页与激励广告，去广告和金币的应用内购买"
       ko: "전면·보상형 광고, 광고 제거와 코인 인앱 결제"
+  - name: "Google Ads"
+    purpose:
+      ja: "アプリインストール広告キャンペーン（試験運用）"
+      en: "App-install ad campaign (trial)"
+      zh: "应用安装广告系列（试运行）"
+      ko: "앱 설치 광고 캠페인 (시험 운영)"
   - name: "Python"
     purpose:
       ja: "リリース AAB のビルド・検査、ストア画像・宣伝動画の生成、翻訳チェック"
