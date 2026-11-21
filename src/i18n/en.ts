@@ -61,6 +61,7 @@ export const en: Translation = {
   'project.challenge.solution': 'Solution',
   'project.link.demo': 'Demo',
   'project.link.zenn': 'Zenn article',
+  'project.link.store': 'Store',
 
 
   'contact.lead': 'For work inquiries or questions, please get in touch using one of the options below.',
@@ -98,6 +99,7 @@ export const en: Translation = {
   'project.category.learning': 'Learning',
   'project.category.build': 'Build',
   'project.status.in-progress': 'In progress',
+  'project.status.released': 'Live',
   'project.status.completed': 'Completed',
   'project.status.ended': 'Ended',
   'skills.personalOnly': 'Personal projects',

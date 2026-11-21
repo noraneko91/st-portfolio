@@ -61,6 +61,7 @@ export const zh: Translation = {
   'project.challenge.solution': '解决',
   'project.link.demo': '演示',
   'project.link.zenn': 'Zenn文章',
+  'project.link.store': '应用商店',
 
 
   'contact.lead': '如有工作洽谈或疑问，请通过以下方式联系我。',
@@ -98,6 +99,7 @@ export const zh: Translation = {
   'project.category.learning': '学习',
   'project.category.build': '制作',
   'project.status.in-progress': '进行中',
+  'project.status.released': '已上线',
   'project.status.completed': '已完成',
   'project.status.ended': '已结束',
   'skills.personalOnly': '个人开发',
